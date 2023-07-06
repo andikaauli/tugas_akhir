@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('eksemplar', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('inventory_code');
-            $table->string('call_number');
+            $table->string('call_number')->unique();
             $table->string('item_code');
             $table->string('rfid_code')->unique();
             $table->timestamps();
