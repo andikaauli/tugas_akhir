@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignUuid('biblio_id')->constrained('biblio');
             $table->foreignid('book_status_id')->constrained('book_statuses');
+            $table->softDeletes();  //buat softdelete
         });
     }
 

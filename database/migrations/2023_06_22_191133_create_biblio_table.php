@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('edition');
-            $table->string('isbnissn');
+            $table->string('isbnissn')->unique();
             $table->string('publisher');
             $table->string('year');
             $table->string('place');
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('coll_type');
             $table->timestamps();
+            $table->softDeletes();  //buat softdelete
         });
     }
 

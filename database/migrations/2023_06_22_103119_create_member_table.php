@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('instituion');
             $table->string('image');
             $table->string('phone');
+            $table->softDeletes();  //buat softdelete
 
             $table->timestamps();
         });

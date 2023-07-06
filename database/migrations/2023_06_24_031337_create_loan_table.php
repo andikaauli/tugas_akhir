@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('status');
             $table->timestamps();
             $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
-            $table->foreignUuid('members_id')->constrained('members');
+            $table->foreignUuid('member_id')->constrained('members');
         });
     }
 
