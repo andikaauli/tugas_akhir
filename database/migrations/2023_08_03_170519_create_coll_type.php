@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('loan', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->dateTime('loan_date');
-            $table->dateTime('due_date');
-            $table->dateTime('return_date');
+        Schema::create('coll_type', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
             $table->timestamps();
-            $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
-            $table->foreignUuid('member_id')->constrained('members');
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loan');
+        Schema::dropIfExists('coll_type');
     }
 };

@@ -17,4 +17,8 @@ class Type extends Model
     function visitor() {
         return $this->hasMany(Visitor::class, 'jenis_id', 'id');
     }
+    protected $guarded = [
+        'id',
+
+    ];
 }

@@ -19,4 +19,9 @@ class Loan extends Model
     function member() {
         return $this->belongsTo(Member::class, 'member_id', 'id');
     }
+
+    protected $guarded = [
+        'id',
+
+    ];
 }

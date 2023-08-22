@@ -14,4 +14,8 @@ class StockOpname extends Model
     function stocktakeitem() {
         return $this->hasMany(StockTakeItem::class, 'stock_opname_id', 'id');
     }
+    protected $guarded = [
+        'id',
+
+    ];
 }

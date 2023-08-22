@@ -19,4 +19,13 @@ class StockTakeItem extends Model
     function eksemplar() {
         return $this->belongsTo(Eksemplar::class, 'eksemplar_id', 'id');
     }
+
+    function bookstatus() {
+        return $this->hasMany(BookStatus::class, 'book_status_id', 'id');
+    }
+    protected $guarded = [
+        'id',
+
+    ];
+
 }

@@ -12,6 +12,13 @@ class Biblio extends Model
 {
     use HasFactory, SoftDeletes, HasUuids;
 
+    protected $table = "biblio";
+
+    protected $guarded = [
+        'id',
+
+    ];
+
     function eksemplar() {
         return $this->hasMany(Eksemplar::class, 'biblio_id', 'id');
     }

@@ -15,4 +15,8 @@ class Member extends Model
     function loan() {
         return $this->hasMany(Loan::class, 'member_id', 'id');
     }
+    protected $guarded = [
+        'id',
+
+    ];
 }

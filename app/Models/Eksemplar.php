@@ -15,6 +15,13 @@ class Eksemplar extends Model
 {
     use HasFactory, SoftDeletes, HasUuids;
 
+    protected $table = 'eksemplar';
+
+    protected $guarded = [
+        'id',
+
+    ];
+
     function biblio() {
         return $this->belongsTo(Biblio::class, 'biblio_id', 'id');
     }
@@ -24,7 +31,7 @@ class Eksemplar extends Model
     }
 
     function loan() {
-        return $this->hasMany(Loan::class, 'eksemplar_id', 'id');
+        return $this->hasOne(Loan::class, 'eksemplar_id', 'id');
     }
 
     function stocktakeitem() {

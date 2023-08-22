@@ -15,10 +15,15 @@ return new class extends Migration
     {
         Schema::create('eksemplar', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('inventory_code');
-            $table->string('call_number')->unique();
-            $table->string('item_code');
+            $table->string('item_code')->unique();
             $table->string('rfid_code')->unique();
+            $table->string('oder_number')->nullable();
+            $table->date('oder_date');
+            $table->date('receipt_date');
+            $table->string('agent')->nullable();
+            $table->enum('source',['Beli','Hadiah']);
+            $table->string('invoice')->nullable();
+            $table->string('price')->nullable();
             $table->timestamps();
             $table->foreignUuid('biblio_id')->constrained('biblio');
             $table->foreignid('book_status_id')->constrained('book_statuses');

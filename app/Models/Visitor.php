@@ -15,4 +15,8 @@ class Visitor extends Model
     function type() {
         return $this->belongsTo(Type::class, 'jenis_id', 'id');
     }
+    protected $guarded = [
+        'id',
+
+    ];
 }

@@ -10,11 +10,16 @@ class BookStatus extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
+    protected $guarded = [
+        'id',
+
     ];
 
     function eksemplar() {
         return $this->hasMany(Eksemplar::class, 'book_status_id', 'id');
+    }
+
+    function stocktakeitem() {
+        return $this->belongsTo(stocktakeitem::class, 'book_status_id', 'id');
     }
 }

@@ -17,7 +17,7 @@ class BookStatusSeeder extends Seeder
     {
         $data =[
             ["name"=>"Dipinjam"],
-            ["name"=>"Dikembalikan"],
+            ["name"=>"Tersedia"],
             ["name"=>"Hilang"],
         ];
 

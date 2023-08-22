@@ -19,6 +19,7 @@ class TypeSeeder extends Seeder
             ["name"=>"Dosen"],
             ["name"=>"Mahasiswa"],
             ["name"=>"Tenaga Pendidikan"],
+            ["name"=>"Tamu"],
         ];
 
         foreach ($data as $value ) {

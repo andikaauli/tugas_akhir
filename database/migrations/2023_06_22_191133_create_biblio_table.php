@@ -16,17 +16,23 @@ return new class extends Migration
         Schema::create('biblio', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
+            $table->string('responsibility');
             $table->string('edition');
+            $table->string('spec_detail');
+            $table->string('gmd');
+            $table->string('content_type')->nullable();
+            $table->string('media_type')->nullable();
+            $table->string('carrier_type')->nullable();
+            $table->date('date')->nullable();
             $table->string('isbnissn')->unique();
-            $table->string('publisher');
-            $table->string('year');
             $table->string('place');
             $table->string('description');
-            $table->string('call_number')->unique();
+            $table->string('title_series');
             $table->string('classification');
-            $table->string('author');
+            $table->string('call_number')->unique();
+            $table->string('subject');
+            $table->string('language');
             $table->string('image');
-            $table->string('coll_type');
             $table->timestamps();
             $table->softDeletes();  //buat softdelete
         });
