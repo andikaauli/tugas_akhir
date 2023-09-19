@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->timestamps();
+        Schema::table('biblio', function (Blueprint $table) {
+            $table->foreignid('author_id')->constrained('author');
+            $table->foreignid('coll_type_id')->constrained('coll_type');
+            $table->foreignid('publisher_id')->constrained('publisher');
         });
     }
 
@@ -30,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('biblio', function (Blueprint $table) {
+            //
+        });
     }
 };
