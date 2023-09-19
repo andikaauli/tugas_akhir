@@ -1,0 +1,26 @@
+.content_box .content.actived {
+    padding: 16px;
+    display: block;
+}
+
+.tab_box .tab_btn.actived {
+    color: rgba(28,100,242);
+    background-color: white;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-color: rgba(229,231,235);
+}
+
+@keyframes moving {
+    from {
+        transform: translateX(50px);
+        opcity: 0;
+    }
+    to {
+        transform: translateX(00px);
+        opcity: 1;
+    }
+}
