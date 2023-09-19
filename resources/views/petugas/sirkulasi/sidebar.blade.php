@@ -21,22 +21,22 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/mulai-transaksi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Mulai Sirkulasi</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/pengembalian-kilat" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Pengembalian Kilat</span>
               </a>
            </li>
            <li>
-            <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/sejarah-peminjaman" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Sejarah Peminjaman</span>
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/daftar-keterlambatan" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Daftar Keterlambatan</span>
             </a>
          </li>

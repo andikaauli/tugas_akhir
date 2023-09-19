@@ -49,7 +49,7 @@
        </div>
        {{-- End Section 3 --}}
        {{-- Section 4 --}}
-       <div class="flex mb-4 bg-gray-200">
+       <div class="flex mb-4">
            <table class="table-auto w-full">
               <thead class="p-3 border-y border-solid border-gray-400">
                  <tr class="text-sm">
@@ -70,7 +70,7 @@
                       </div>
                     </td>
                     <td class="p-3 w-20">
-                       <a href="#" class="flex items-center justify-center">
+                       <a href="/edit-eksemplar" class="flex items-center justify-center">
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                              <rect width="24" height="24" fill="black"/>
                              <path d="M16 4L14 6L18 10L20 8L16 4ZM12 8L4 16V20H8L16 12L12 8Z" fill="white"/>

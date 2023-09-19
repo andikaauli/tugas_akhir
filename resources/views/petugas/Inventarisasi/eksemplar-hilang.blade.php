@@ -1,5 +1,5 @@
 @extends('main.main')
-@extends('petugas.sirkulasi.sidebar')
+@extends('petugas.inventarisasi.sidebar')
 {{-- End Sidebar --}}
 
 {{-- Content --}}
@@ -9,7 +9,7 @@
        <div class="px-4 pt-4 flex my-5">
           <div class="flex items-center">
              <p class="text-3xl text-black font-bold">
-                Sejarah Peminjaman
+                Eksemplar Hilang Saat Ini
              </p>
           </div>
        </div>

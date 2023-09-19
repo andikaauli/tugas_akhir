@@ -14,19 +14,19 @@
                <p class="font-bold">Pustakawan</p>
            </div>
        </div>
-     {{-- Bibliografi --}}
+     {{-- Daftar Terkendali --}}
      <div class="">
         <div class="text-white text-xs border-t border-white pl-4 pt-5 mt-4 pb-4">
            <p>DAFTAR TERKENDALI</p>
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/daftar-penerbit" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Penerbit</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/daftar-pengarang" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Pengarang</span>
               </a>
            </li>
@@ -34,20 +34,20 @@
            </li>
         </ul>
      </div>
-     {{-- End Bibliografi --}}
-     {{-- Eksemplar --}}
+     {{-- End Daftar Terkendali --}}
+     {{-- Daftar Referensi --}}
      <div class="">
         <div class="text-white text-xs border-t border-white pl-4 pt-5 mt-2 pb-4">
            <p>DAFTAR REFERENSI</p>
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/daftar-status" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Status Eksemplar</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/daftar-tipe-koleksi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Tipe Koleksi</span>
               </a>
            </li>
@@ -55,7 +55,7 @@
            </li>
         </ul>
      </div>
-     {{-- End Eksemplar --}}
+     {{-- End Daftar Referensi --}}
     </div>
  </aside>
 {{-- End Sidebar --}}

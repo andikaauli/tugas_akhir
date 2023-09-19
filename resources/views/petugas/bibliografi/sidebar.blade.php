@@ -21,12 +21,12 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/bibliografi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Daftar Bibliografi</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/create-bibliografi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Tambah Bibliografi Baru</span>
               </a>
            </li>
@@ -42,12 +42,12 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/eksemplar" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Daftar Eksemplar</span>
               </a>
            </li>
            <li>
-              <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/eksemplar-keluar" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Daftar Eksemplar Keluar</span>
               </a>
            </li>
