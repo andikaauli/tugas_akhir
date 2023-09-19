@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('loan', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('email')->unique();
+            $table->dateTime('loan_date');
+            $table->dateTime('due_date');
+            $table->dateTime('return_date');
             $table->timestamps();
+            $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
+            $table->foreignUuid('member_id')->constrained('members');
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('loan');
     }
 };

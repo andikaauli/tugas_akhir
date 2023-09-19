@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('stock_opname', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('email')->unique();
+            $table->string('name_user');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('stock_opname');
     }
 };

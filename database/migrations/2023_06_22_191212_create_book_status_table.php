@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('book_statuses', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('email')->unique();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('book_statuses');
     }
 };
