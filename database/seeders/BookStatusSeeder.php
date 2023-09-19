@@ -15,13 +15,13 @@ class BookStatusSeeder extends Seeder
      */
     public function run()
     {
-        $data =[
-            ["name"=>"Dipinjam"],
-            ["name"=>"Tersedia"],
-            ["name"=>"Hilang"],
+        $data = [
+            ["name" => "Dipinjam"],
+            ["name" => "Tersedia"],
+            ["name" => "Hilang"],
         ];
 
-        foreach ($data as $value ) {
+        foreach ($data as $value) {
             BookStatus::create($value);
         }
     }

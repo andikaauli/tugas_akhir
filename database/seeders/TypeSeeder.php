@@ -15,14 +15,14 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $data =[
-            ["name"=>"Dosen"],
-            ["name"=>"Mahasiswa"],
-            ["name"=>"Tenaga Pendidikan"],
-            ["name"=>"Tamu"],
+        $data = [
+            ["name" => "Dosen"],
+            ["name" => "Mahasiswa"],
+            ["name" => "Tenaga Pendidikan"],
+            ["name" => "Tamu"],
         ];
 
-        foreach ($data as $value ) {
+        foreach ($data as $value) {
             Type::create($value);
         }
     }

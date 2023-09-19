@@ -19,7 +19,8 @@ class Biblio extends Model
 
     ];
 
-    function eksemplar() {
+    function eksemplar()
+    {
         return $this->hasMany(Eksemplar::class, 'biblio_id', 'id');
     }
 }

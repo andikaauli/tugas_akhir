@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/biblio', [BiblioController::class, "getData"]);
 Route::get('/biblio/{id}', [BiblioController::class, "showData"]);
 Route::post('/biblio', [BiblioController::class, "addData"]);
-Route::post('/biblio/{id}', [BiblioController::class, "editData"]);
+Route::get('/biblio/edit/{id}', [BiblioController::class, "editData"]);
 
 Route::get('/eksemplar', [EksemplarController::class, "getData"]);
 Route::get('/eksemplar/{id}', [EksemplarController::class, "showData"]);

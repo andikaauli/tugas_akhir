@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Eksemplar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EksemplarController extends Controller
 {
@@ -13,35 +14,18 @@ class EksemplarController extends Controller
     //editData edit data
     //hapusData hapus data
 
-    // public function getData()
-    // {
-    //     // $eksemplar = Eksemplar::with(['biblio', 'bookstatus'])->first();
+    public function getData()
+    {
+        $eksemplar = Eksemplar::with(['bookstatus','loan','stocktakeitem'])->get(); //nampilin semua kolom nanti FE yg atur
 
-    //     // return $eksemplar->biblio->title; //Ambil tilte biblio suatu eksemplar
+        $eksemplar = Eksemplar::with(['eksemplar' => function ($query) {
+            return $query->with(['bookstatus']);
+        }])->get();
+        return $eksemplar;
+    }
 
-    //     // return [
-    //         //     $eksemplar['biblio']['title'],
-    //         //     $eksemplar['biblio']['year'],
-    //         // ];
-
-    //         $eksemplar = Eksemplar::with(['biblio' => function($query){
-    //             return $query->select(['id','title', 'publisher']);
-    //         }, 'bookstatus'])->get(['id','inventory_code', 'item_code', 'book_status_id', 'biblio_id']);
-
-    //         return $eksemplar;
-
-    // }
-
-    // public function showData($id)
-    // {
-    //     // return Eksemplar::findOrFail($id);
-
-    //     // return Eksemplar::with(['bookstatus'])->findOrFail($id);
-    //     return Eksemplar::with(['bookstatus'])->where('id', '=', $id)->firstOrFail();
-
-
-    //     // $eksemplar = Eksemplar::find($id);
-    //     // if(!$eksemplar) return "Tidak Ada";
-    //     // return $eksemplar;
-    // }
+    public function showData($id)
+    {
+        return Eksemplar::with(['bookstatus'])->findOrFail($id);
+    }
 }
