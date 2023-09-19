@@ -12,12 +12,18 @@ class StockTakeItemController extends Controller
 
         $stocktakeitem = StockTakeItem::with(['eksemplar' => function ($query) use ($rfid_code){
             return $query->where('rfid_code', $rfid_code);
-        }])->first();
+        }])->where("book_status_id",3)->first();
 
         $stocktakeitem->update([
             'book_status_id' => 2
         ]);
 
         return response()->json($stocktakeitem, 200);
+
+        // [
+        //     "name" => $request->name,
+        //     "name_user" => $request->name_user,
+        //     "start_date" => now()
+        // ] isi addData stockopname
     }
 }

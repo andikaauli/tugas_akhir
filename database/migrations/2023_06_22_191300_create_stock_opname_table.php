@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('name_user');
             $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->string('total_item');
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });
     }
