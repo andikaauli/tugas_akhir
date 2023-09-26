@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Eksemplar;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class EksemplarController extends Controller
