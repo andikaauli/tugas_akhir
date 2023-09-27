@@ -23,4 +23,19 @@ class Biblio extends Model
     {
         return $this->hasMany(Eksemplar::class, 'biblio_id', 'id');
     }
+
+    function author()
+    {
+        return $this->hasMany(Author::class, 'biblio_id', 'id');
+    }
+
+    function colltype()
+    {
+        return $this->hasMany(CollType::class, 'biblio_id', 'id');
+    }
+
+    function publisher()
+    {
+        return $this->hasMany(Publisher::class, 'biblio_id', 'id');
+    }
 }
