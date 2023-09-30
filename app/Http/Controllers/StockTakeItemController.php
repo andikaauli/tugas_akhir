@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StockTakeItem;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class StockTakeItemController extends Controller
 {

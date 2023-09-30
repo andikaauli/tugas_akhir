@@ -4,12 +4,15 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Biblio;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Biblio;
 use Illuminate\Database\Seeder;
+use Database\Seeders\TypeSeeder;
+use Database\Seeders\UserSeeder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\BookStatusSeeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {

@@ -10,7 +10,13 @@ class CollType extends Model
 {
     use HasFactory;
 
+    protected $table = 'coll_type';
+
     function biblio() {
         return $this->belongsTo(Biblio::class, 'biblio_id', 'id');
     }
+
+    protected $guarded = [
+        'id',
+    ];
 }

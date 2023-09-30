@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('nim')->unique();
-            $table->string('gender');
+            $table->enum('gender',['Laki-laki','Perempuan']);
             $table->dateTime('birth_date');
             $table->string('address');
             $table->string('email')->unique();

@@ -10,7 +10,13 @@ class Publisher extends Model
 {
     use HasFactory;
 
+    protected $table = 'publisher';
+
     function biblio() {
         return $this->belongsTo(Biblio::class, 'biblio_id', 'id');
     }
+
+    protected $guarded = [
+        'id',
+    ];
 }

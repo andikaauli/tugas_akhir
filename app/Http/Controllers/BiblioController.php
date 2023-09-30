@@ -15,15 +15,25 @@ class BiblioController extends Controller
         // $biblio = Biblio::with(['eksemplar' => function ($query) {  // ini adalah cara ke2
         //     return $query->with(['bookstatus'])->where("name", "Hilang");// bentuk klo nampilih bookstatus yg hilang
         // }])->get();
-        return response()->json($biblio);
+        return response()->json($biblio, 200);
 
         //bisa ditambahin pesan 200 dan 422
     }
 
+
+    // public function showData($id)
+    // {
+    //     $biblio = Biblio::with(['eksemplar.bookstatus'])->findOrFail($id);
+    //     return response()->json($biblio, 200);
+    // }
+
     public function showData($id)
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus'])->findOrFail($id);
-        return response()->json($biblio);
+        $biblio = Biblio::with(['eksemplar.bookstatus'])->find($id);
+        if(is_null($biblio)){
+            return abort(422);
+        }
+        return response()->json($biblio, 200);
     }
 
     public function addData(Request $request)
@@ -46,7 +56,7 @@ class BiblioController extends Controller
             'call_number' => ['required', 'unique:biblio', 'numeric'],
             'subject' => 'required',
             'language' => 'required',
-            'image' => 'required|image|max:1024',
+            'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
             'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
             'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
@@ -56,7 +66,9 @@ class BiblioController extends Controller
             return response()->json($validator->errors(), 422);
         }
         $biblio = Biblio::create($request->all());
-        return response()->json($biblio, 200);
+        return response()
+        ->json($biblio, 200)
+        ->with('Biblio baru berhasil ditambahkan!');
     }
 
     public function editData(Request $request, $id)
@@ -79,7 +91,7 @@ class BiblioController extends Controller
             'call_number' => ['required', 'unique:biblio', 'numeric'],
             'subject' => 'required',
             'language' => 'required',
-            'image' => 'required|image|max:1024',
+            'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
             'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
             'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
@@ -89,20 +101,39 @@ class BiblioController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+        // if ($image = $request->file('image')) {
+        //     $destinationPath = public_path('images/');
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['image'] = "$profileImage";
+        // }
+
         $biblio = Biblio::find($id);
         $biblio->update($request->all());
-        return response()->json($biblio, 200);
+        return response()
+        ->json($biblio, 200)
+        ->with('Data berhasil diubah!')
+        ;
     }
 
-    public function hapusData(Request $request, $id)
-    { //soft delete
-        $biblio = Biblio::find($id);
-        $biblio->delete();
-    }
+    // public function hapusData(Request $request, $id)
+    // { //soft delete
+    //     $biblio = Biblio::find($id);
+    //     $biblio->delete();
+    // }
+
+    // public function destroyData(Request $request, $id)
+    // { //hard delete
+    //     $biblio = Biblio::onlyTrashed()->find($id);
+    //     $biblio->forceDelete();
+    // }
 
     public function destroyData(Request $request, $id)
     { //hard delete
-        $biblio = Biblio::onlyTrashed()->find($id);
+        $biblio = Biblio::find($id);
         $biblio->forceDelete();
+        return response()
+            ->json($biblio, 200)
+            ->with('Data berhasil dihapus!');
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Eksemplar;
 use App\Models\StockOpname;
 use App\Models\StockTakeItem;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class StockOpnameController extends Controller
@@ -14,6 +15,12 @@ class StockOpnameController extends Controller
     // INVENTARISASI getdata daftar list stockopname nama dan tanggal bagian rekaman
     // PROSES INVENTARIS ini isinya dari stocktakeitem jadi gausa isi (editData)
     // LAPORAN INVENTARISASI showData dengan mengambil status buku dari stocktakeitem yg baru discan agar terbaru
+
+    public function getData()
+    {
+        $stockopname = StockOpname::all();
+        return response()->json($stockopname, 200);
+    }
 
     public function addData(Request $request)
     {
@@ -53,11 +60,5 @@ class StockOpnameController extends Controller
         return response()->json($stockopname, 200);
     }
 
-    public function getData()
-    {
-        $stockopname = StockOpname::all();
-        return response()->json($stockopname);
 
-
-    }
 }

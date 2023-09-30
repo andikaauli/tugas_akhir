@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Author extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+
+    protected $table = 'author';
 
     function biblio() {
         return $this->belongsTo(Biblio::class, 'biblio_id', 'id');
     }
+    protected $guarded = [
+        'id',
+    ];
 }

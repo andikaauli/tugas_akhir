@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Loan extends Model
 {
     use HasFactory, HasUuids;
-
+    protected $table = 'loan';
     function eksemplar() {
         return $this->belongsTo(Eksemplar::class, 'eksemplar_id', 'id');
     }

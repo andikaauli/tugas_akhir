@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Eksemplar;
+use App\Models\author;
+use App\Models\colltype;
+use App\Models\publisher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -26,16 +29,16 @@ class Biblio extends Model
 
     function author()
     {
-        return $this->hasMany(Author::class, 'biblio_id', 'id');
+        return $this->hasOne(Author::class, 'biblio_id', 'id');
     }
 
     function colltype()
     {
-        return $this->hasMany(CollType::class, 'biblio_id', 'id');
+        return $this->hasOne(CollType::class, 'biblio_id', 'id');
     }
 
     function publisher()
     {
-        return $this->hasMany(Publisher::class, 'biblio_id', 'id');
+        return $this->hasOne(Publisher::class, 'biblio_id', 'id');
     }
 }
