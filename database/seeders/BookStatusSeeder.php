@@ -16,9 +16,9 @@ class BookStatusSeeder extends Seeder
     public function run()
     {
         $data = [
-            ["name" => "Dipinjam"],
-            ["name" => "Tersedia"],
-            ["name" => "Hilang"],
+            ["id" => "1","name" => "Dipinjam"],
+            ["id" => "2","name" => "Tersedia"],
+            ["id" => "3","name" => "Hilang"],
         ];
 
         foreach ($data as $value) {

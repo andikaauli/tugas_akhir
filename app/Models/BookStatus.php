@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BookStatus extends Model
 {
     use HasFactory;
-
+    protected $table = 'book_statuses';
     protected $guarded = [
         'id',
 

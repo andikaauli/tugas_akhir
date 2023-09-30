@@ -16,10 +16,10 @@ class TypeSeeder extends Seeder
     public function run()
     {
         $data = [
-            ["name" => "Dosen"],
-            ["name" => "Mahasiswa"],
-            ["name" => "Tenaga Pendidikan"],
-            ["name" => "Tamu"],
+            ["id" => "1","name" => "Dosen"],
+            ["id" => "2","name" => "Mahasiswa"],
+            ["id" => "3","name" => "Tenaga Pendidikan"],
+            ["id" => "4","name" => "Tamu"],
         ];
 
         foreach ($data as $value) {

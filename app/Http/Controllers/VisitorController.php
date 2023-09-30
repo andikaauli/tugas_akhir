@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class VisitorController extends Controller
 {
+    // public function getData()
+    // {
+    //     $visitor = Visitor::all();
+    //     return response()->json($visitor, 200);
+    // }
+
     public function addData(Request $request)
     {
 
