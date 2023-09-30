@@ -21,20 +21,20 @@ class BiblioController extends Controller
     }
 
 
-    // public function showData($id)
-    // {
-    //     $biblio = Biblio::with(['eksemplar.bookstatus'])->findOrFail($id);
-    //     return response()->json($biblio, 200);
-    // }
-
     public function showData($id)
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus'])->find($id);
-        if(is_null($biblio)){
-            return abort(422);
-        }
+        $biblio = Biblio::with(['eksemplar.bookstatus'])->findOrFail($id);
         return response()->json($biblio, 200);
     }
+
+    // public function showData($id)
+    // {
+    //     $biblio = Biblio::with(['eksemplar.bookstatus'])->find($id);
+    //     if(is_null($biblio)){
+    //         return abort(422);
+    //     }
+    //     return response()->json($biblio, 200);
+    // }
 
     public function addData(Request $request)
     {
@@ -67,8 +67,7 @@ class BiblioController extends Controller
         }
         $biblio = Biblio::create($request->all());
         return response()
-        ->json($biblio, 200)
-        ->with('Biblio baru berhasil ditambahkan!');
+            ->json(['message'=>'Biblio baru berhasil ditambahkan!', 'data'=>$biblio]);
     }
 
     public function editData(Request $request, $id)
@@ -111,9 +110,8 @@ class BiblioController extends Controller
         $biblio = Biblio::find($id);
         $biblio->update($request->all());
         return response()
-        ->json($biblio, 200)
-        ->with('Data berhasil diubah!')
-        ;
+        ->json(['message'=>'Data Biblio berhasil diubah!', 'data'=>$biblio]);
+
     }
 
     // public function hapusData(Request $request, $id)
@@ -133,7 +131,6 @@ class BiblioController extends Controller
         $biblio = Biblio::find($id);
         $biblio->forceDelete();
         return response()
-            ->json($biblio, 200)
-            ->with('Data berhasil dihapus!');
+            ->json(['message'=>'Data Buku berhasil dihapus!', 'data'=>$biblio]);
     }
 }

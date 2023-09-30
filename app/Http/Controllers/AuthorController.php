@@ -15,20 +15,20 @@ class AuthorController extends Controller
         return response()->json($author, 200);
     }
 
-    // public function showData($id)
-    // {
-    //     $author = Author::all()->findOrFail($id);
-    //     return response()->json($author, 200);
-    // }
-
     public function showData($id)
     {
-        $author = Author::all()->find($id);
-        if(is_null($author)){
-            return abort(422);
-        }
+        $author = Author::all()->findOrFail($id);
         return response()->json($author, 200);
     }
+
+    // public function showData($id)
+    // {
+    //     $author = Author::all()->find($id);
+    //     if(is_null($author)){
+    //         return abort(422);
+    //     }
+    //     return response()->json($author, 200);
+    // }
 
     public function addData(Request $request)
     {
@@ -42,8 +42,7 @@ class AuthorController extends Controller
         }
         $author = Author::create($request->all());
         return response()
-            ->json($author, 200)
-            ->with('Pengarang baru berhasil ditambahkan!');
+            ->json(['message'=>'Pengarang baru berhasil ditambahkan!', 'data'=>$author]);
     }
 
     public function editData(Request $request, $id)
@@ -59,9 +58,10 @@ class AuthorController extends Controller
         $author = Author::find($id);
         $author->update($request->all());
         return response()
-            ->json($author, 200)
-            ->with('Data berhasil diubah!')
-            ;
+            // ->json($author, 200);
+            // ->json(['message'=>'data '.($request->title).' berhasil diubah!', 'data'=>$author]);
+            ->json(['message'=>'Data Pengarang berhasil diubah!', 'data'=>$author]);
+
     }
 
 
@@ -70,8 +70,7 @@ class AuthorController extends Controller
         $author = Author::find($id);
         $author->forceDelete();
         return response()
-            ->json($author, 200)
-            ->with('Data berhasil dihapus!');
+            ->json(['message'=>'Data Pengarang '.($request->title).' berhasil dihapus!', 'data'=>$author]);
     }
 
 }

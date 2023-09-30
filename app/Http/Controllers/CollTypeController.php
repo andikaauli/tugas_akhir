@@ -12,23 +12,23 @@ class CollTypeController extends Controller
     public function getData()
     {
         $colltype = CollType::all();
-        return response()->json($colltype);
+        return response()->json($colltype, 200);
+    }
+
+    public function showData($id)
+    {
+        $colltype = CollType::all()->findOrFail($id);
+        return response()->json($colltype, 200);
     }
 
     // public function showData($id)
     // {
-    //     $colltype = CollType::all()->findOrFail($id);
+    //     $colltype = Colltype::all()->find($id);
+    //     if(is_null($colltype)){
+    //         return abort(422);
+    //     }
     //     return response()->json($colltype, 200);
     // }
-
-    public function showData($id)
-    {
-        $colltype = Colltype::all()->find($id);
-        if(is_null($colltype)){
-            return abort(422);
-        }
-        return response()->json($colltype, 200);
-    }
 
     public function addData(Request $request)
     {
@@ -42,8 +42,7 @@ class CollTypeController extends Controller
         }
         $colltype = CollType::create($request->all());
         return response()
-            ->json($colltype, 200)
-            ->with('Tipe Koleksi baru berhasil ditambahkan!');
+            ->json(['message'=>'Tipe Koleksi baru berhasil ditambahkan!', 'data'=>$colltype]);
     }
 
     public function editData(Request $request, $id)
@@ -59,8 +58,7 @@ class CollTypeController extends Controller
         $colltype = CollType::find($id);
         $colltype->update($request->all());
         return response()
-            ->json($colltype, 200)
-            ->with('Data berhasil diubah!');
+            ->json(['message'=>'Data Tipe Koleksi berhasil diubah!', 'data'=>$colltype]);
     }
 
 
@@ -69,7 +67,7 @@ class CollTypeController extends Controller
         $colltype = CollType::find($id);
         $colltype->forceDelete();
         return response()
-            ->json($colltype, 200)
-            ->with('Data berhasil dihapus!');
+            ->json(['message'=>'Data Tipe Koleksi '.($request->title).' berhasil dihapus!', 'data'=>$colltype]);
+
     }
 }

@@ -17,12 +17,18 @@ class MemberController extends Controller
 
     public function showData($id)
     {
-        $member = Member::all()->find($id);
-        if(is_null($member)){
-            return abort(422);
-        }
+        $member = Member::all()->findOrFail($id);
         return response()->json($member, 200);
     }
+
+    // public function showData($id)
+    // {
+    //     $member = Member::all()->find($id);
+    //     if(is_null($member)){
+    //         return abort(422);
+    //     }
+    //     return response()->json($member, 200);
+    // }
 
     public function addData(Request $request)
     {
@@ -44,11 +50,8 @@ class MemberController extends Controller
             return response()->json($validator->errors(), 422);
         }
         $member = Member::create($request->all());
-
         return response()
-            ->json($member, 200)
-            ->with('Anggota baru berhasil ditambahkan')
-            ;
+            ->json(['message'=>'Anggota baru berhasil ditambahkan!', 'data'=>$member]);
     }
 
     public function editData(Request $request, $id)
@@ -73,9 +76,7 @@ class MemberController extends Controller
         $member = Member::find($id);
         $member->update($request->all());
         return response()
-        ->json($member, 200)
-        ->with('Data berhasil diubah')
-        ;
+            ->json(['message'=>'Data Anggota berhasil diubah!', 'data'=>$member]);
     }
 
 
@@ -84,7 +85,6 @@ class MemberController extends Controller
         $member = Member::find($id);
         $member->forceDelete();
         return response()
-            ->json($member, 200)
-            ->with('Data berhasil dihapus');
+            ->json(['message'=>'Data Anggota'.($request->name).' berhasil dihapus!', 'data'=>$member]);
     }
 }

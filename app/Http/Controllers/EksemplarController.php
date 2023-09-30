@@ -56,7 +56,9 @@ class EksemplarController extends Controller
             return response()->json($validator->errors(), 422);
         }
         $eksemplar = Eksemplar::create($request->all());
-        return response()->json($eksemplar, 200);
+        return response()
+            ->json(['message'=>'Eksemplar baru berhasil ditambahkan!', 'data'=>$eksemplar]);
+
     }
 
     public function editData(Request $request, $id)
@@ -82,7 +84,8 @@ class EksemplarController extends Controller
         }
         $eksemplar = Eksemplar::find($id);
         $eksemplar->update($request->all());
-        return response()->json($eksemplar, 200);
+        return response()
+            ->json(['message'=>'Data Eksemplar berhasil diubah!', 'data'=>$eksemplar]);
     }
 
 
@@ -90,6 +93,7 @@ class EksemplarController extends Controller
     { //hard delete
         $eksemplar = Eksemplar::find($id);
         $eksemplar->forceDelete();
-        return response()->json($eksemplar, 200);
+        return response()
+            ->json(['message'=>'Data Eksemplar '.($request->item_code).' berhasil dihapus!', 'data'=>$eksemplar]);
     }
 }

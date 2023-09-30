@@ -24,6 +24,7 @@ class VisitorController extends Controller
             return response()->json($validator->errors(), 422);
         }
         $visitor = Visitor::create($request->all());
-        return response()->json($visitor, 200);
+        return response()
+        ->json(['message'=>'Pengunjung baru berhasil ditambahkan!', 'data'=>$visitor]);
     }
 }

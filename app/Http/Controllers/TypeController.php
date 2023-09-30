@@ -11,6 +11,6 @@ class TypeController extends Controller
     public function getData()
     {
         $type = Type::all();
-        return response()->json($type);
+        return response()->json($type, 200);
     }
 }

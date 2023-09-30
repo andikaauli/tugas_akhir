@@ -13,23 +13,23 @@ class PublisherController extends Controller
     public function getData()
     {
         $publisher = Publisher::all();
-        return response()->json($publisher);
+        return response()->json($publisher, 200);
+    }
+
+    public function showData($id)
+    {
+        $publisher = Publisher::all()->findOrFail($id);
+        return response()->json($publisher, 200);
     }
 
     // public function showData($id)
     // {
-    //     $publisher = Publisher::all()->findOrFail($id);
-    //     return response()->json($publisher);
+    //     $publisher = Publisher::all()->find($id);
+    //     if(is_null($publisher)){
+    //         return abort(422);
+    //     }
+    //     return response()->json($publisher, 200);
     // }
-
-    public function showData($id)
-    {
-        $publisher = Publisher::all()->find($id);
-        if(is_null($publisher)){
-            return abort(422);
-        }
-        return response()->json($publisher);
-    }
 
     public function addData(Request $request)
     {
@@ -42,7 +42,8 @@ class PublisherController extends Controller
             return response()->json($validator->errors(), 422);
         }
         $publisher = Publisher::create($request->all());
-        return response()->json($publisher, 200);
+        return response()
+            ->json(['message'=>'Penerbit baru berhasil ditambahkan!', 'data'=>$publisher]);
     }
 
     public function editData(Request $request, $id)
@@ -57,7 +58,8 @@ class PublisherController extends Controller
         }
         $publisher = Publisher::find($id);
         $publisher->update($request->all());
-        return response()->json($publisher, 200);
+        return response()
+        ->json(['message'=>'Data Penerbit berhasil diubah!', 'data'=>$publisher]);
     }
 
 
@@ -68,6 +70,7 @@ class PublisherController extends Controller
             return abort(422);
         }
         $publisher->forceDelete();
-        return response()->json($publisher, 200);
+        return response()
+            ->json(['message'=>'Data Penerbit '.($request->title).' berhasil dihapus!', 'data'=>$publisher]);
     }
 }
