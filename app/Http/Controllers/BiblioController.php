@@ -56,7 +56,7 @@ class BiblioController extends Controller
             'call_number' => ['required', 'unique:biblio', 'numeric'],
             'subject' => 'required',
             'language' => 'required',
-            'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
             'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
             'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
@@ -75,7 +75,7 @@ class BiblioController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
-            'responsibility' => 'required',
+            'responsibility' => 'nullable',
             'edition' => 'required',
             'spec_detail' => 'required',
             'gmd' => 'required',
@@ -90,7 +90,7 @@ class BiblioController extends Controller
             'call_number' => ['required', 'unique:biblio', 'numeric'],
             'subject' => 'required',
             'language' => 'required',
-            'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
+            'image' => 'nullable|image|max:10240|mimes:jpeg,png,jpg',
             'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
             'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration

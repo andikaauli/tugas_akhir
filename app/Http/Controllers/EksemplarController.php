@@ -38,9 +38,9 @@ class EksemplarController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'item_code' => 'required|max:255',
+            'item_code' => 'required|max:255|numeric',
             'rfid_code' => 'required',
-            'order_number' => 'nullable',
+            'order_number' => 'nullable|numeric',
             'order_date' => 'required',
             'receipt_date' => 'required',
             'agent' => 'nullable',

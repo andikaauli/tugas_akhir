@@ -17,6 +17,9 @@ class Visitor extends Model
     }
     protected $guarded = [
         'id',
+    ];
+    protected $fillable = [
+        'name', 'instituion', 'jenis_id'
 
     ];
 }

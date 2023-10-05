@@ -17,8 +17,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('item_code')->unique();
             $table->string('rfid_code')->unique();
-            $table->string('oder_number')->nullable();
-            $table->date('oder_date');
+            $table->string('order_number')->nullable();
+            $table->date('order_date');
             $table->date('receipt_date');
             $table->string('agent')->nullable();
             $table->enum('source',['Beli','Hadiah']);

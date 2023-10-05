@@ -13,7 +13,7 @@ class Publisher extends Model
     protected $table = 'publisher';
 
     function biblio() {
-        return $this->belongsTo(Biblio::class, 'biblio_id', 'id');
+        return $this->hasOne(Biblio::class, 'biblio_id', 'id');
     }
 
     protected $guarded = [

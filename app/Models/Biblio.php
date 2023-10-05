@@ -29,16 +29,16 @@ class Biblio extends Model
 
     function author()
     {
-        return $this->hasOne(Author::class, 'biblio_id', 'id');
+        return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 
     function colltype()
     {
-        return $this->hasOne(CollType::class, 'biblio_id', 'id');
+        return $this->belongsTo(CollType::class, 'coll_type_id', 'id');
     }
 
     function publisher()
     {
-        return $this->hasOne(Publisher::class, 'biblio_id', 'id');
+        return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
     }
 }

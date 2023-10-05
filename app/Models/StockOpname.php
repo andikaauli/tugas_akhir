@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class StockOpname extends Model
 {
     use HasFactory, HasUuids;
+
     protected $table = 'stock_opname';
+
     function stocktakeitem() {
         return $this->hasMany(StockTakeItem::class, 'stock_opname_id', 'id');
     }
+
     protected $guarded = [
         'id',
 

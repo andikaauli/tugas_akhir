@@ -15,6 +15,13 @@ class LoanController extends Controller
     {
         $loan = Loan::with(['eksemplar','member'])->get();
         return response()->json($loan, 200);
-
     }
+
+    public function showData($id)
+    {
+        $loan = Loan::with(['eksemplar','member'])->get();
+        return response()->json($loan, 200);
+    }
+
+
 }

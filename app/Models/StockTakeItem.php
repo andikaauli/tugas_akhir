@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class StockTakeItem extends Model
 {
     use HasFactory, HasUuids;
-
+    protected $table = 'stock_take_item';
     function stockopname() {
         return $this->belongsTo(StockOpname::class, 'stock_opname_id', 'id');
     }
@@ -21,7 +21,7 @@ class StockTakeItem extends Model
     }
 
     function bookstatus() {
-        return $this->hasMany(BookStatus::class, 'book_status_id', 'id');
+        return $this->hasOne(BookStatus::class, 'id', 'book_status_id');
     }
     protected $guarded = [
         'id',

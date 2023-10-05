@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('biblio', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->string('responsibility');
+            $table->string('responsibility')->nullable();
             $table->string('edition');
             $table->string('spec_detail');
             $table->string('gmd');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('call_number')->unique();
             $table->string('subject');
             $table->string('language');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();  //buat softdelete
         });

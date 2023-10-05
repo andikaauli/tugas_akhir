@@ -1,0 +1,70 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Author;
+use App\Models\Biblio;
+use App\Models\CollType;
+use App\Models\Eksemplar;
+use App\Models\Publisher;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+class BiblioSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $faker=fake('id_ID');
+        for ($i=0; $i < 10; $i++) {
+            $biblio=Biblio::create([
+            'title' => $faker->word(),
+            'responsibility' => $faker->word(),
+            'edition' => $faker->word(),
+            'spec_detail' => $faker->word(),
+            'gmd' => $faker->word(),
+            'content_type' => $faker->word(),
+            'carrier_type' => $faker->word(),
+            'date' => $faker->date(),
+            'isbnissn' => $faker->randomNumber(),
+            'place' => $faker->word(),
+            'description' => $faker->word(),
+            'title_series' => $faker->word(),
+            'classification' => $faker->word(),
+            'call_number' => $faker->randomNumber(),
+            'subject' => $faker->word(),
+            'language' => $faker->word(),
+            'image' => $faker->imageUrl(),
+            'author_id' => Author::create([
+                'title'=> $faker->word(),
+            ])->id,
+            'coll_type_id' => CollType::create([
+                'title'=> $faker->word(),
+            ])->id,
+            'publisher_id' => Publisher::create([
+                'title'=> $faker->word(),
+            ])->id,
+            ]);
+
+            for ($i=0; $i < 20; $i++) {
+                $eksemplar=Eksemplar::create([
+                'item_code' => $faker->randomNumber(),
+                'rfid_code' => $faker->randomNumber(),
+                'order_number' => $faker->randomNumber(),
+                'order_date' => $faker->date(),
+                'receipt_date' => $faker->date(),
+                'agent' => $faker->word(),
+                'source' => $faker->randomElement(['Beli','Hadiah']),
+                'invoice' => $faker->word(),
+                'price' => $faker->randomNumber(),
+                'book_status_id' => $faker->randomElement([1,2,3]),
+                'biblio_id' => $biblio->id,
+                ]);
+            }
+        }
+    }
+}

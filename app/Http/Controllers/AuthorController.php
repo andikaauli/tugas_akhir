@@ -17,7 +17,7 @@ class AuthorController extends Controller
 
     public function showData($id)
     {
-        $author = Author::all()->findOrFail($id);
+        $author = author::all()->findOrFail($id);
         return response()->json($author, 200);
     }
 
