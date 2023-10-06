@@ -23,31 +23,31 @@ class BiblioSeeder extends Seeder
         for ($i=0; $i < 10; $i++) {
             $biblio=Biblio::create([
             'title' => $faker->word(),
+            'author_id' => Author::create([
+                'title'=> $faker->word(),
+            ])->id,
             'responsibility' => $faker->word(),
             'edition' => $faker->word(),
             'spec_detail' => $faker->word(),
+            'coll_type_id' => CollType::create([
+                'title'=> $faker->word(),
+            ])->id,
             'gmd' => $faker->word(),
             'content_type' => $faker->word(),
             'carrier_type' => $faker->word(),
             'date' => $faker->date(),
             'isbnissn' => $faker->randomNumber(),
+            'publisher_id' => Publisher::create([
+                'title'=> $faker->word(),
+            ])->id,
             'place' => $faker->word(),
             'description' => $faker->word(),
             'title_series' => $faker->word(),
             'classification' => $faker->word(),
             'call_number' => $faker->randomNumber(),
-            'subject' => $faker->word(),
             'language' => $faker->word(),
+            'abstract' => $faker->word(),
             'image' => $faker->imageUrl(),
-            'author_id' => Author::create([
-                'title'=> $faker->word(),
-            ])->id,
-            'coll_type_id' => CollType::create([
-                'title'=> $faker->word(),
-            ])->id,
-            'publisher_id' => Publisher::create([
-                'title'=> $faker->word(),
-            ])->id,
             ]);
 
             for ($i=0; $i < 20; $i++) {

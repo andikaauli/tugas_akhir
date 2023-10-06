@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('title_series');
             $table->string('classification');
             $table->string('call_number')->unique();
-            $table->string('subject');
             $table->string('language');
+            $table->string('abstract')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();  //buat softdelete

@@ -38,6 +38,7 @@ class StockOpnameController extends Controller
         $stockopname = StockOpname::create([
             "name" => $request->name,
             "name_user" => $request->name_user,
+            "status_stockopname" => 'berlangsung',
             "start_date" => now()
         ]);
 
@@ -64,14 +65,15 @@ class StockOpnameController extends Controller
     public function finishStockOpname($id){
         $stockopname = StockOpname::find($id);
         $stockopname->update([
-            "end_date" => now()
+            "end_date" => now(),
+            "status_stockopname" => 'selesai'
         ]);
         $stockopname->refresh();
         return response()
             ->json(['message'=>'Proses Inventarisasi '.($stockopname->name).' sudah selesai!', 'data'=>$stockopname]);
     }
 
-    public function showData($id, Request $request) //diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
+    public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
 
         $stockopname = Stockopname::with(['stocktakeitem'=>function($stocktakeitem) use($request){
@@ -95,7 +97,6 @@ class StockOpnameController extends Controller
 
 
         //dibawah ini untuk list data laporan hitungan totaal eksemplar
-        // if($stockopname->stocktakeitem->count()){
             $stocktakeitem=$stockopname->stocktakeitem;
             $stockopname['total_tersedia']=$stocktakeitem->filter(function ($s){
                 return $s->bookstatus->id==2;
@@ -114,7 +115,6 @@ class StockOpnameController extends Controller
             $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
                 return $s->bookstatus->id==2||$s->bookstatus->id==3;
             })->count();//misal ingin hitungan 2 id
-        // }
 
         return response()->json($stockopname, 200);
         //bikin filter yg diambil 2 dan 3 utk bagian laporan

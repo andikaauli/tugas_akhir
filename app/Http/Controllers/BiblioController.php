@@ -41,25 +41,25 @@ class BiblioController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
+            'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
             'responsibility' => 'required',
             'edition' => 'required',
             'spec_detail' => 'required',
+            'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'gmd' => 'required',
             'content_type' => 'nullable',
             'carrier_type' => 'nullable',
             'date' => 'nullable',
             'isbnissn' => ['required', 'unique:biblio', 'numeric'],
+            'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
             'place' => 'required',
             'description' => 'required',
             'title_series' => 'required',
             'classification' => 'required',
             'call_number' => ['required', 'unique:biblio', 'numeric'],
-            'subject' => 'required',
             'language' => 'required',
+            'abstract' => 'nullable',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
-            'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
-            'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
         ]);
 
         if ($validator->fails()) {
@@ -88,7 +88,6 @@ class BiblioController extends Controller
             'title_series' => 'required',
             'classification' => 'required',
             'call_number' => ['required', 'unique:biblio', 'numeric'],
-            'subject' => 'required',
             'language' => 'required',
             'image' => 'nullable|image|max:10240|mimes:jpeg,png,jpg',
             'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign

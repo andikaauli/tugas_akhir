@@ -41,7 +41,6 @@ class MemberController extends Controller
             'address' => 'required|max:255',
             'email' => 'required|max:255|email','unique:member',
             'instituion' => 'required|max:255',
-            // 'image' => 'required|max:255',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
             'phone' => 'required|max:255|numeric',
         ]);
@@ -65,7 +64,6 @@ class MemberController extends Controller
             'address' => 'required|max:255',
             'email' => 'required|max:255|email','unique:member',
             'instituion' => 'required|max:255',
-            // 'image' => 'required|max:255',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
             'phone' => 'required|max:255|numeric',
         ]);

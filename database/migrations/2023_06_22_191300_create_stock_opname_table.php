@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name_user');
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
+            $table->string('status_stockopname')->nullable();
             $table->timestamps();
         });
     }

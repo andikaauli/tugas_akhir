@@ -74,7 +74,10 @@ Route::get('/stocktakeitem', [StockTakeItemController::class, "editData"]);
 Route::get('/type', [TypeController::class, "getData"]);
 
 Route::get('/user', [UserController::class, "getData"]);
-// Route::post('/user', [UserController::class, "addData"]);
+Route::post('/user/add', [UserController::class, "addData"]);
+Route::post('/user/login', [UserController::class, "login"]);
+Route::get('/user/edit/{id}', [UserController::class, "editData"]);
+
 
 Route::get('/visitor', [VisitorController::class, "getData"]);
 Route::get('/visitor/{id}', [VisitorController::class, "showData"]);

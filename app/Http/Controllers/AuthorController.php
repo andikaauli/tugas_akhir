@@ -58,8 +58,6 @@ class AuthorController extends Controller
         $author = Author::find($id);
         $author->update($request->all());
         return response()
-            // ->json($author, 200);
-            // ->json(['message'=>'data '.($request->title).' berhasil diubah!', 'data'=>$author]);
             ->json(['message'=>'Data Pengarang berhasil diubah!', 'data'=>$author]);
 
     }

@@ -10,7 +10,7 @@ class Visitor extends Model
 {
     use HasFactory;
 
-    // protected $table = 'visitor'; utk deklarasi perubahan nama sesuai keinginan
+    protected $table = 'visitor'; //utk deklarasi perubahan nama sesuai keinginan
 
     function type() {
         return $this->belongsTo(Type::class, 'jenis_id', 'id');
