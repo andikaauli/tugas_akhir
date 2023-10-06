@@ -11,7 +11,7 @@ class BiblioController extends Controller
 {
     public function getData()
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus'])->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
+        $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
         // $biblio = Biblio::with(['eksemplar' => function ($query) {  // ini adalah cara ke2
         //     return $query->with(['bookstatus'])->where("name", "Hilang");// bentuk klo nampilih bookstatus yg hilang
         // }])->get();
@@ -23,7 +23,7 @@ class BiblioController extends Controller
 
     public function showData($id)
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus'])->findOrFail($id);
+        $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->findOrFail($id);
         return response()->json($biblio, 200);
     }
 

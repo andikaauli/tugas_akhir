@@ -86,27 +86,40 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        if($validator->fails())
+        // if($validator->fails())
+        // {
+        //     return response()->json($validator->errors(), 422);
+        // }
+
+        // if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        //     $user = $request->user();
+        //     // $request->session()->regenerate();
+        //     // return redirect()->intended('/');
+        // }
+
+        if(!auth()->attempt(['username' => $request->username, 'password' => $request->password]))
         {
-            return response()->json($validator->errors(), 422);
+            $request->session()->regenerate();
+            return response()->json(['message' =>'Username atau password Anda salah!'], 404);
         }
 
+        $user = User::findOrFail(auth()->user()->id);
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            $user = $request->user();
-            // $request->session()->regenerate();
-            // return redirect()->intended('/');
-        }
         return response()
             ->json(['message'=>($user->name).' berhasil Login!', 'data'=>$user]);
-        // return back()->withErrors([
-        //     'password' => 'Wrong username or password',
-        // ]);
+
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        return response()->json(['message'=>'Anda berhasil Logout!']);
     }
 
 }

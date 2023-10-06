@@ -29,7 +29,7 @@ class Biblio extends Model
 
     function author()
     {
-        return $this->belongsTo(Author::class, 'author_id', 'id');
+        return $this->belongsTo(Author::class, 'author_id', 'id',);
     }
 
     function colltype()
