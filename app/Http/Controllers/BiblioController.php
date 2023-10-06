@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class BiblioController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
-        // $biblio = Biblio::with(['eksemplar' => function ($query) {  // ini adalah cara ke2
-        //     return $query->with(['bookstatus'])->where("name", "Hilang");// bentuk klo nampilih bookstatus yg hilang
-        // }])->get();
+        $search = $request->search;
+        $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->get();
+        if ($search) {
+            $biblio = Biblio::where('title', 'LIKE', "%$search%")
+            ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
+        }
         return response()->json($biblio, 200);
 
-        //bisa ditambahin pesan 200 dan 422
     }
 
 
@@ -26,15 +27,6 @@ class BiblioController extends Controller
         $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->findOrFail($id);
         return response()->json($biblio, 200);
     }
-
-    // public function showData($id)
-    // {
-    //     $biblio = Biblio::with(['eksemplar.bookstatus'])->find($id);
-    //     if(is_null($biblio)){
-    //         return abort(422);
-    //     }
-    //     return response()->json($biblio, 200);
-    // }
 
     public function addData(Request $request)
     {

@@ -27,4 +27,16 @@ class StockTakeItemController extends Controller
         //     "start_date" => now()
         // ] isi addData stockopname
     }
+
+    public function getData(Request $request)
+    {
+        $search = $request->search;
+        $stocktakeitem = StockTakeItem::with(['eksemplar.bookstatus'])->get();
+        if ($search) {
+            $stocktakeitem = StockTakeItem::where('title', 'LIKE', "%$search%")
+            ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
+        }
+        return response()->json($stocktakeitem, 200);
+
+    }
 }

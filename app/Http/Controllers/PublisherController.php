@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class PublisherController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
+        $search = $request->search;
         $publisher = Publisher::all();
+        if ($search) {
+            $publisher = Publisher::where('title', 'LIKE', "%$search%")->get();
+        }
         return response()->json($publisher, 200);
     }
 

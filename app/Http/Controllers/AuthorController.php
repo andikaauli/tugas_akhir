@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthorController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
+        $search = $request->search;
         $author = Author::all();
+        if ($search) {
+            $author = Author::where('title', 'LIKE', "%$search%")->get();
+        }
         return response()->json($author, 200);
     }
 
@@ -66,9 +70,27 @@ class AuthorController extends Controller
     public function destroyData(Request $request, $id)
     { //hard delete
         $author = Author::find($id);
+
+        // if ($author) {
+        //     $author->forceDelete();
+        //     return response()->json(['message'=>'Data Pengarang '.($request->title).'berhasil dihapus!', 'data'=>$author], 200);
+        // } else {
+        //     return response()->json(['message'=>'Data Pengarang '.($request->title).'tidak ditemukan!'], 404);
+        // }
         $author->forceDelete();
         return response()
-            ->json(['message'=>'Data Pengarang '.($request->title).' berhasil dihapus!', 'data'=>$author]);
+            ->json(['message'=>'Data Pengarang'.($request->title).' berhasil dihapus!', 'data'=>$author]);
     }
+
+    //soft delete
+    // public function destroyData(Request $request, $id)
+    // {
+    //     $author = Author::find($id);
+    //     $author->delete();
+    //     return response()
+    //         ->json(['message'=>'Data Pengarang '.($request->title).' berhasil dihapus!', 'data'=>$author]);
+    // }
+
+
 
 }

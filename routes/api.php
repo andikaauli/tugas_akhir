@@ -48,8 +48,8 @@ Route::post('/eksemplar/edit/{id}', [EksemplarController::class, "editData"]);
 
 Route::get('/loan', [LoanController::class, "getData"]);
 Route::get('/loan/{id}', [LoanController::class, "showData"]);
-Route::post('/loan/add', [LoanController::class, "addData"]);
-Route::post('/loan/edit/{id}', [LoanController::class, "editData"]);
+Route::post('/loan/add', [LoanController::class, "peminjaman"]);
+Route::post('/loan/perpanjang/{id}', [LoanController::class, "perpanjang"]);
 
 
 Route::get('/member', [MemberController::class, "getData"]);
@@ -70,6 +70,7 @@ Route::post('/stockopname/finish/{id}', [StockOpnameController::class, "finishSt
 Route::post('/stockopname/add', [StockOpnameController::class, "addData"]);
 
 Route::post('/stocktakeitem', [StockTakeItemController::class, "editData"]);
+Route::get('/stocktakeitem', [StockTakeItemController::class, "getData"]);
 
 Route::get('/type', [TypeController::class, "getData"]);
 

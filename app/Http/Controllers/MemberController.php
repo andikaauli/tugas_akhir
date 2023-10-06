@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
+        $search = $request->search;
         $member = Member::all();
+        if ($search) {
+            $member = Member::where('name', 'LIKE', "%$search%")
+            ->orWhere('nim', 'LIKE', "%$search%")->get();
+        }
         return response()->json($member, 200);
-
     }
 
     public function showData($id)
