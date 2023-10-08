@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Author extends Model
 {
     use HasFactory;
-
     protected $table = 'author';
-
     function biblio() {
         return $this->hasOne(Biblio::class, 'biblio_id', 'id');
     }

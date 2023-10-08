@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -11,7 +12,8 @@ class MemberController extends Controller
     public function getData(Request $request)
     {
         $search = $request->search;
-        $member = Member::all();
+        $member = Member::with(['loan'])->get();
+        // $member = Member::all();
         if ($search) {
             $member = Member::where('name', 'LIKE', "%$search%")
             ->orWhere('nim', 'LIKE', "%$search%")->get();
@@ -21,7 +23,8 @@ class MemberController extends Controller
 
     public function showData($id)
     {
-        $member = Member::all()->findOrFail($id);
+        // $member = Member::all()->findOrFail($id);
+        $member = Member::with(['loan'])->findOrFail($id);
         return response()->json($member, 200);
     }
 

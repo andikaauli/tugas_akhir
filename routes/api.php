@@ -48,7 +48,7 @@ Route::post('/eksemplar/edit/{id}', [EksemplarController::class, "editData"]);
 
 Route::get('/loan', [LoanController::class, "getData"]);
 Route::get('/loan/{id}', [LoanController::class, "showData"]);
-Route::post('/loan/add', [LoanController::class, "peminjaman"]);
+Route::post('/loan/add/{id}', [LoanController::class, "peminjaman"]);
 Route::post('/loan/perpanjang/{id}', [LoanController::class, "perpanjang"]);
 
 
