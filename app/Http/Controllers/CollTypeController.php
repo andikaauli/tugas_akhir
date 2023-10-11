@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class CollTypeController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
+        $search = $request->search;
         $colltype = CollType::all();
+        if ($search) {
+            $colltype = CollType::where('title', 'LIKE', "%$search%")->get();
+        }
         return response()->json($colltype, 200);
     }
 

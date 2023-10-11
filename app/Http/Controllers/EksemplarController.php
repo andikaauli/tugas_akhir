@@ -15,15 +15,17 @@ class EksemplarController extends Controller
     //editData edit data
     //hapusData hapus data
 
-    public function getData()
+    public function getData(Request $request)
     {
-        $eksemplar = Eksemplar::with(['bookstatus','loan','stocktakeitem'])->get(); //nampilin semua kolom nanti FE yg atur
-
-        // $eksemplar = Eksemplar::with(['eksemplar' => function ($query) {
-        //     return $query->with(['bookstatus']);
-        // }])->get();
-        // return $eksemplar;
+        $search = $request->search;
+        $eksemplar = Eksemplar::with(['bookstatus','loan','stocktakeitem','biblio.author','biblio.colltype','biblio.publisher'])->get();
+        if ($search) {
+            $eksemplar = Eksemplar::where('title', 'LIKE', "%$search%")
+            ->orWhere('item_code', 'LIKE', "%$search%")->get();
+        }
         return response()->json($eksemplar, 200);
+
+
     }
 
     public function showData($id)

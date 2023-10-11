@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('biblio', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('responsibility')->nullable();
             $table->string('edition');
             $table->string('spec_detail');

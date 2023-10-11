@@ -10,11 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class VisitorController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
-        // $visitor = Visitor::all();
-        $visitor = Visitor::with(['type:id,name'])->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
-
+        $search = $request->search;
+        $visitor = Visitor::all();
+        // $visitor = Visitor::with(['type:id,name'])->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
+        if ($search) {
+            $visitor = Visitor::where('name', 'LIKE', "%$search%")
+            ->orWhere('type.name', 'LIKE', "%$search%")->get();
+        }
         return response()->json($visitor, 200);
     }
 
