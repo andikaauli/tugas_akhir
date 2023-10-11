@@ -13,19 +13,18 @@ class BiblioController extends Controller
     public function getData(Request $request)
     {
         $search = $request->search;
-        $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->get();
+        $biblio = Biblio::with(['eksemplar.bookstatus', 'author', 'colltype', 'publisher'])->get();
         if ($search) {
             $biblio = Biblio::where('title', 'LIKE', "%$search%")
-            ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
+                ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
         }
         return response()->json($biblio, 200);
-
     }
 
 
     public function showData($id)
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus','author','colltype','publisher'])->findOrFail($id);
+        $biblio = Biblio::with(['eksemplar.bookstatus', 'author', 'colltype', 'publisher'])->findOrFail($id);
         return response()->json($biblio, 200);
     }
 
@@ -60,7 +59,8 @@ class BiblioController extends Controller
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/images', $fileName);
-            $biblio->image = $fileName;}
+            $biblio->image = $fileName;
+        }
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -69,7 +69,7 @@ class BiblioController extends Controller
 
         $biblio = Biblio::create($request->all());
         return response()
-            ->json(['message'=>'Biblio baru berhasil ditambahkan!', 'data'=>$biblio]);
+            ->json(['message' => 'Biblio baru berhasil ditambahkan!', 'data' => $biblio]);
     }
 
     public function editData(Request $request, $id)
@@ -108,16 +108,15 @@ class BiblioController extends Controller
             $image->storeAs('public/images', $fileName);
             $biblio->image = $fileName;
 
-            if ($biblio->image && Storage::exists('public/images/'.$biblio->image)) {
-                Storage::delete('public/images/'.$biblio->image);
+            if ($biblio->image && Storage::exists('public/images/' . $biblio->image)) {
+                Storage::delete('public/images/' . $biblio->image);
             }
         }
 
         $biblio = Biblio::find($id);
         $biblio->update($request->all());
         return response()
-        ->json(['message'=>'Data Biblio berhasil diubah!', 'data'=>$biblio]);
-
+            ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
     }
 
     // public function hapusData(Request $request, $id)
@@ -137,6 +136,6 @@ class BiblioController extends Controller
         $biblio = Biblio::find($id);
         $biblio->forceDelete();
         return response()
-            ->json(['message'=>'Data Buku berhasil dihapus!', 'data'=>$biblio]);
+            ->json(['message' => 'Data Buku berhasil dihapus!', 'data' => $biblio]);
     }
 }
