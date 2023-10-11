@@ -18,6 +18,14 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function showData()
+    {
+        //info admin siapa yg login
+        $user = auth()->user();
+        // $user = User::all()->findOrFail($id);
+        return response()->json($user, 200);
+    }
+
     public function addData(Request $request)
     {//jika dibutuhkan tambah data
 
@@ -34,22 +42,12 @@ class UserController extends Controller
         }
 
         $user = User::create($request->all());
-
-        // $user = User::create([
-        //     'name'=>$request['name'],
-        //     'username'=>$request['username'],
-        //     'email' => $request['email'],
-        //     'password' =>bcrypt($request['password'])
-        // ]);  //jika ingin hash password saat tambah akun
-        ////lebih singkat atur di model
-
-
         return response()
             ->json(['message'=>'Admin baru berhasil ditambahkan!', 'data'=>$user]);
     }
 
     public function editData(Request $request, $id)
-    {//jika dibutuhkan tambah data
+    {
 
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|max:255|string',
@@ -68,45 +66,29 @@ class UserController extends Controller
             ->json(['message'=>'Data Admin berhasil diubah!', 'data'=>$user]);
     }
 
-    // public function login(Request $request)
-    // {
-    //     $request->validate([
-    //         'username' => 'required',
-    //         'password' => 'required',
-    //     ]);
-    //     if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-    //         $request->session()->regenerate();
-    //         return redirect()->intended('/');
-    //     }
-
-    //     return back()->withErrors([
-    //         'password' => 'Wrong username or password',
-    //     ]);
-    // }
-
     public function login(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'password' => 'required',
         ]);
 
-        if($validator->fails())
+        if(!auth()->attempt(['username' => $request->username, 'password' => $request->password]))
         {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['message' =>'Username atau password Anda salah!'], 404);
         }
 
+        $user = User::findOrFail(auth()->user()->id);
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            $user = $request->user();
-            // $request->session()->regenerate();
-            // return redirect()->intended('/');
-        }
         return response()
             ->json(['message'=>($user->name).' berhasil Login!', 'data'=>$user]);
-        // return back()->withErrors([
-        //     'password' => 'Wrong username or password',
-        // ]);
+    }
+
+    public function logout()
+    {
+        auth()->user();
+        return response()->json(['message'=>'Anda berhasil Logout!']);
     }
 
 }

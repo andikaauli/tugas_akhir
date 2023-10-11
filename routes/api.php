@@ -23,13 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/author', [AuthorController::class, "getData"]);
 Route::get('/author/{id}', [AuthorController::class, "showData"]);
 Route::post('/author/add', [AuthorController::class, "addData"]);
-Route::get('/author/edit/{id}', [AuthorController::class, "editData"]);
+Route::post('/author/edit/{id}', [AuthorController::class, "editData"]);
 Route::delete('/author/destroy/{id}', [AuthorController::class, "destroyData"]);
 
 Route::get('/biblio', [BiblioController::class, "getData"]);
 Route::get('/biblio/{id}', [BiblioController::class, "showData"]);
-Route::post('/biblio/add', [BiblioController::class, "addData"])->name('api.biblio.add');
-Route::get('/biblio/edit/{id}', [BiblioController::class, "editData"]);
+Route::post('/biblio/add', [BiblioController::class, "addData"]);
+Route::post('/biblio/edit/{id}', [BiblioController::class, "editData"]);
 Route::delete('/biblio/destroy/{id}', [BiblioController::class, "destroyData"]);
 
 Route::get('/bookstatus', [BookStatusController::class, "getData"]);
@@ -39,30 +39,32 @@ Route::get('/bookstatus', [BookStatusController::class, "getData"]);
 Route::get('/colltype', [CollTypeController::class, "getData"]);
 Route::get('/colltype/{id}', [CollTypeController::class, "showData"]);
 Route::post('/colltype/add', [CollTypeController::class, "addData"]);
-Route::get('/colltype/edit/{id}', [CollTypeController::class, "editData"]);
+Route::post('/colltype/edit/{id}', [CollTypeController::class, "editData"]);
 Route::delete('/colltype/destroy/{id}', [CollTypeController::class, "destroyData"]);
 
 Route::get('/eksemplar', [EksemplarController::class, "getData"]);
 Route::get('/eksemplar/{id}', [EksemplarController::class, "showData"]);
 Route::post('/eksemplar/add', [EksemplarController::class, "addData"]);
-Route::get('/eksemplar/edit/{id}', [EksemplarController::class, "editData"]);
+Route::post('/eksemplar/edit/{id}', [EksemplarController::class, "editData"]);
 
 Route::get('/loan', [LoanController::class, "getData"]);
 Route::get('/loan/{id}', [LoanController::class, "showData"]);
-Route::post('/loan/add', [LoanController::class, "addData"]);
-Route::get('/loan/edit/{id}', [LoanController::class, "editData"]);
+Route::post('/loan/add/{id}', [LoanController::class, "peminjaman"]);
+Route::post('/loan/perpanjang/{id}', [LoanController::class, "perpanjang"]);
+Route::post('/loan/pengembalian/{id}', [LoanController::class, "pengembalian"]);
+Route::delete('/loan/destroy/{id}', [LoanController::class, "destroyData"]);
 
 
 Route::get('/member', [MemberController::class, "getData"]);
 Route::get('/member/{id}', [MemberController::class, "showData"]);
 Route::post('/member/add', [MemberController::class, "addData"]);
-Route::get('/member/edit/{id}', [MemberController::class, "editData"]);
+Route::post('/member/edit/{id}', [MemberController::class, "editData"]);
 Route::delete('/member/destroy/{id}', [MemberController::class, "destroyData"]);
 
 Route::get('/publisher', [PublisherController::class, "getData"]);
 Route::get('/publisher/{id}', [PublisherController::class, "showData"]);
 Route::post('/publisher/add', [PublisherController::class, "addData"]);
-Route::get('/publisher/edit/{id}', [PublisherController::class, "editData"]);
+Route::post('/publisher/edit/{id}', [PublisherController::class, "editData"]);
 Route::delete('/publisher/destroy/{id}', [PublisherController::class, "destroyData"]);
 
 Route::get('/stockopname', [StockOpnameController::class, "getData"]);
@@ -70,15 +72,17 @@ Route::get('/stockopname/{id}', [StockOpnameController::class, "showData"]);
 Route::post('/stockopname/finish/{id}', [StockOpnameController::class, "finishStockOpname"]);
 Route::post('/stockopname/add', [StockOpnameController::class, "addData"]);
 
-Route::get('/stocktakeitem', [StockTakeItemController::class, "editData"]);
+Route::post('/stocktakeitem', [StockTakeItemController::class, "editData"]);
+Route::get('/stocktakeitem', [StockTakeItemController::class, "getData"]);
 
 Route::get('/type', [TypeController::class, "getData"]);
 
 Route::get('/user', [UserController::class, "getData"]);
+Route::get('/userlogin', [UserController::class, "showData"]);
 Route::post('/user/add', [UserController::class, "addData"]);
 Route::post('/user/login', [UserController::class, "login"]);
-Route::get('/user/edit/{id}', [UserController::class, "editData"]);
-
+Route::post('/user/logout', [UserController::class, "logout"]);
+Route::post('/user/edit/{id}', [UserController::class, "editData"]);
 
 Route::get('/visitor', [VisitorController::class, "getData"]);
 Route::get('/visitor/{id}', [VisitorController::class, "showData"]);

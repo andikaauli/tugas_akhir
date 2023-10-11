@@ -17,9 +17,13 @@ class StockOpnameController extends Controller
     // PROSES INVENTARIS ini isinya dari stocktakeitem jadi gausa isi (editData)
     // LAPORAN INVENTARISASI showData dengan mengambil status buku dari stocktakeitem yg baru discan agar terbaru
 
-    public function getData()
+    public function getData(Request $request)
     {
+        $search = $request->search;
         $stockopname = StockOpname::all();
+        if ($search) {
+            $stockopname = StockOpname::where('name', 'LIKE', "%$search%")->get();
+        }
         return response()->json($stockopname, 200);
     }
 
@@ -51,7 +55,6 @@ class StockOpnameController extends Controller
                 $book_status_id = 3;
             }
 
-
             StockTakeItem::create([
                 "stock_opname_id" => $stockopname->id,
                 "eksemplar_id" => $eksemplar->id,
@@ -61,32 +64,9 @@ class StockOpnameController extends Controller
 
         return response()->json($stockopname, 200);
     }
-
-    public function finishStockOpname($id)
-    {
-        $stockopname = StockOpname::with('stocktakeitem.eksemplar')->find($id);
-        $stockopname->update([
-            "end_date" => now(),
-            "status_stockopname" => 'selesai'
-        ]);
-
-        $stocktakeitem = $stockopname->stocktakeitem;
-
-        foreach ($stocktakeitem as $item) {
-            $item->eksemplpar->update([
-                'book_status_id' => $item->book_status_id
-            ]);
-        }
-
-        $stockopname->refresh();
-
-        return response()
-            ->json(['message' => 'Proses Inventarisasi ' . ($stockopname->name) . ' sudah selesai!', 'data' => $stockopname]);
-    }
-
     public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
-
+        $search = $request->search;
         $stockopname = Stockopname::with(['stocktakeitem' => function ($stocktakeitem) use ($request) {
             $filterstatus = [];
             if ($request->has('dipinjam')) {
@@ -105,8 +85,17 @@ class StockOpnameController extends Controller
             return $stocktakeitem->with(['bookstatus', 'eksemplar.biblio.author', 'eksemplar.biblio.colltype', 'eksemplar.biblio.publisher'])->get();
         }])->findOrFail($id);
 
+        //PENCARIAN
+        if ($search) {
+            $stocktakeitem = Stocktakeitem::where('eksemplar.biblio.title', 'LIKE', "%$search%")
+                ->orWhere('eksemplar.biblio.colltype.title', 'LIKE', "%$search%")->get();
+        }
 
         //dibawah ini untuk list data laporan hitungan totaal eksemplar
+        $stocktakeitem = $stockopname->stocktakeitem;
+        $stockopname['total_tersedia'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 2;
+        })->count();
         $stocktakeitem = $stockopname->stocktakeitem;
         $stockopname['total_tersedia'] = $stocktakeitem->filter(function ($s) {
             return $s->bookstatus->id == 2;
@@ -115,20 +104,48 @@ class StockOpnameController extends Controller
         $stockopname['total_hilang'] = $stocktakeitem->filter(function ($s) {
             return $s->bookstatus->id == 3;
         })->count();
+        $stockopname['total_hilang'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 3;
+        })->count();
 
+        $stockopname['total_terpinjam'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 1;
+        })->count();
         $stockopname['total_terpinjam'] = $stocktakeitem->filter(function ($s) {
             return $s->bookstatus->id == 1;
         })->count();
 
         $stockopname['total_eksemplar'] = $stocktakeitem->count();
+        $stockopname['total_eksemplar'] = $stocktakeitem->count();
 
-        $stockopname['total_diperiksa'] = $stocktakeitem->filter(function ($s) {
-            return $s->bookstatus->id == 2 || $s->bookstatus->id == 3;
-        })->count(); //misal ingin hitungan 2 id
+        // $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
+        //     return $s->bookstatus->id==2||$s->bookstatus->id==3;
+        // })->count();//misal ingin hitungan 2 id
 
         return response()->json($stockopname, 200);
         //bikin filter yg diambil 2 dan 3 utk bagian laporan
         //list data yg ditampilkan pada inven aktif ambil dari sini, dengan status 2 dan 3 dgn contoh url http://localhost:8000/api/stockopname/9a4689fe-6119-47f6-a6fc-94f64d56f6b7?tersedia=&hilang=
         //ketika bagian laporan ambil showdata tanpa parameter dgn contoh url http://localhost:8000/api/stockopname/9a4689fe-6119-47f6-a6fc-94f64d56f6b7
+    }
+
+    public function finishStockOpname($id)
+    {
+        $stockopname = StockOpname::with('stocktakeitem.eksemplar')->find($id);
+        $stockopname->update([
+            "end_date" => now(),
+            "status_stockopname" => 'selesai'
+        ]);
+
+        $stocktakeitem = $stockopname->stocktakeitem;
+
+        foreach ($stocktakeitem as $item) {
+            $item->eksemplar->update([
+                'book_status_id' => $item->book_status_id
+            ]);
+        }
+
+        $stockopname->refresh();
+        return response()
+            ->json(['message' => 'Proses Inventarisasi ' . ($stockopname->name) . ' sudah selesai!', 'data' => $stockopname]);
     }
 }
