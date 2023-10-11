@@ -46,37 +46,83 @@ class LoanController extends Controller
         // if ($validator->fails()) {
         //     return response()->json($validator->errors(), 422);
         // }
-        $bookstatus = Eksemplar::findOrFail($request->eksemplar_id)->only('book_status_id');
+
+        // $eksemplar = Eksemplar::with('bookstatus')->find($id);
+        // $eksemplar->update([
+        //     'book_status_id'=> 1,
+        // ]);
+        // $eksemplar->refresh();
+        $member = Member::find($id);
+
+        $bookstatus = Eksemplar::where('item_code',$request->item_code)->first('book_status_id');
 
         if($bookstatus['book_status_id'] != '2'){
             return response()->json(['message'=>'Eksemplar tidak dapat Dipinjam!'], 422);
-         }
+        }
 
-        $member = Member::findOrFail($id);
-        $eksemplar = Eksemplar::with(['bookstatus','biblio:id,title,author_id','biblio.author:id,title'])->findOrFail($request->eksemplar_id)->only('item_code','book_status_id','bookstatus','biblio');
-
+        $eksemplar = Eksemplar::with(['bookstatus','biblio:id,title,author_id','biblio.author:id,title'])->where('item_code',$request->item_code)->first();
+        // return $eksemplar;
         $loan = Loan::create([
-            "eksemplar_id" => $request->eksemplar_id,
+            "eksemplar_id" => $eksemplar->id,
             "member_id" => $member->id,
             "loan_date" => now(),
             "due_date" => now()->addDays(7),
+            "loan_status" => 'Sedang dipinjam',
+        ]);
+
+        $eksemplar->update([
+            'book_status_id'=> 1
         ]);
 
         return response()
             ->json(['message'=>'Proses peminjaman berhasil ditambahkan!', 'data'=>$loan, 'eksemplar'=>$eksemplar, 'member'=>$member]);
+
+
     }
 
     public function perpanjang(Request $request, $id)
     {
         $loan = Loan::find($id);
         $loan->update([
-            'due_date'=> Carbon::parse($loan->due_date)->addDays(7),
+            'due_date'=> Carbon::parse($loan->due_date)->addDays(7)
         ]);
         $loan->refresh();
         return response()
             ->json(['message'=>'Proses perpanjangan buku menjadi '.($loan->due_date), 'data'=>$loan]);
     }
+    public function destroyData(Request $request, $id)
+    { //hard delete
+        $loan = Loan::find($id);
+        $loan->forceDelete();
+        return response()
+            ->json(['message'=>'Peminjaman Eksemplar dibatalkan!', 'data'=>$loan]);
+    }
 
+    public function pengembalian(Request $request, $id)
+    {
+        $loan = Loan::find($id);
+        $loan->update([
+            'return_date'=> now(),
+        ]);
+        $eksemplar = Eksemplar::find($loan->eksemplar_id);
+        $eksemplar->update([
+            'book_status_id'=> 2
+        ]);
+
+        if (Carbon::now()->isAfter(Carbon::parse($loan->due_date))){
+            $loan->update([
+                'loan_status'=> 'Dikembalikan Terlambat'
+            ]);
+        } else{
+            $loan->update([
+                'loan_status'=> 'Dikembalikan Tepat Waktu'
+            ]);
+        }
+
+        $loan->refresh();
+        return response()
+            ->json(['message'=>'Eksemplar berhasil dikembalikan!', 'data'=>$loan]);
+    }
 
 
 

@@ -18,6 +18,14 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function showData()
+    {
+        //info admin siapa yg login
+        $user = auth()->user();
+        // $user = User::all()->findOrFail($id);
+        return response()->json($user, 200);
+    }
+
     public function addData(Request $request)
     {//jika dibutuhkan tambah data
 
@@ -79,7 +87,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        auth()->logout();
+        auth()->user();
         return response()->json(['message'=>'Anda berhasil Logout!']);
     }
 

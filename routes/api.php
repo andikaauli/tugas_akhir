@@ -50,6 +50,8 @@ Route::get('/loan', [LoanController::class, "getData"]);
 Route::get('/loan/{id}', [LoanController::class, "showData"]);
 Route::post('/loan/add/{id}', [LoanController::class, "peminjaman"]);
 Route::post('/loan/perpanjang/{id}', [LoanController::class, "perpanjang"]);
+Route::post('/loan/pengembalian/{id}', [LoanController::class, "pengembalian"]);
+Route::delete('/loan/destroy/{id}', [LoanController::class, "destroyData"]);
 
 
 Route::get('/member', [MemberController::class, "getData"]);
@@ -75,6 +77,7 @@ Route::get('/stocktakeitem', [StockTakeItemController::class, "getData"]);
 Route::get('/type', [TypeController::class, "getData"]);
 
 Route::get('/user', [UserController::class, "getData"]);
+Route::get('/userlogin', [UserController::class, "showData"]);
 Route::post('/user/add', [UserController::class, "addData"]);
 Route::post('/user/login', [UserController::class, "login"]);
 Route::post('/user/logout', [UserController::class, "logout"]);

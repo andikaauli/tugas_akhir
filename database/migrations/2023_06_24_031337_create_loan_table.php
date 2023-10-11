@@ -17,7 +17,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->dateTime('loan_date');
             $table->dateTime('due_date');
-            $table->dateTime('return_date')->nullable();;
+            $table->dateTime('return_date')->nullable();
+            $table->string('loan_status')->nullable();
             $table->timestamps();
             $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
             $table->foreignUuid('member_id')->constrained('members');

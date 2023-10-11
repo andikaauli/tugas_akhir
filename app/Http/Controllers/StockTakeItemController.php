@@ -27,6 +27,20 @@ class StockTakeItemController extends Controller
         //     "start_date" => now()
         // ] isi addData stockopname
     }
+    public function editDataButton(Request $request, $item_code){
+
+        $stocktakeitem = StockTakeItem::with(['eksemplar' => function ($query) use ($item_code){
+            return $query->where('item_code', $item_code);
+        }])->where("book_status_id",3)->first();
+
+        $stocktakeitem->update([
+            'book_status_id' => 2
+        ]);
+
+        return response()->json($stocktakeitem, 200);
+
+    }
+
 
     public function getData(Request $request)
     {

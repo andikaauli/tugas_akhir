@@ -52,6 +52,12 @@ class MemberController extends Controller
             'phone' => 'required|max:255|numeric',
         ]);
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/images', $fileName);
+            $member->image = $fileName;}
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -78,6 +84,18 @@ class MemberController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/images', $fileName);
+            $member->image = $fileName;
+
+            if ($member->image && Storage::exists('public/images/'.$member->image)) {
+                Storage::delete('public/images/'.$member->image);
+            }
+        }
+
         $member = Member::find($id);
         $member->update($request->all());
         return response()
