@@ -19,7 +19,6 @@ use App\Http\Controllers\StockTakeItemController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-
 });
 Route::get('/author', [AuthorController::class, "getData"]);
 Route::get('/author/{id}', [AuthorController::class, "showData"]);
@@ -29,11 +28,13 @@ Route::delete('/author/destroy/{id}', [AuthorController::class, "destroyData"]);
 
 Route::get('/biblio', [BiblioController::class, "getData"]);
 Route::get('/biblio/{id}', [BiblioController::class, "showData"]);
-Route::post('/biblio/add', [BiblioController::class, "addData"]);
+Route::post('/biblio/add', [BiblioController::class, "addData"])->name('api.biblio.add');
 Route::get('/biblio/edit/{id}', [BiblioController::class, "editData"]);
 Route::delete('/biblio/destroy/{id}', [BiblioController::class, "destroyData"]);
 
 Route::get('/bookstatus', [BookStatusController::class, "getData"]);
+
+
 
 Route::get('/colltype', [CollTypeController::class, "getData"]);
 Route::get('/colltype/{id}', [CollTypeController::class, "showData"]);
@@ -82,6 +83,3 @@ Route::get('/user/edit/{id}', [UserController::class, "editData"]);
 Route::get('/visitor', [VisitorController::class, "getData"]);
 Route::get('/visitor/{id}', [VisitorController::class, "showData"]);
 Route::post('/visitor/add', [VisitorController::class, "addData"]);
-
-
-

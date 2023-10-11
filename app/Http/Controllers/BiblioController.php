@@ -9,9 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class BiblioController extends Controller
 {
-    public function getData()
+    public function getData(Request $req)
     {
-        $biblio = Biblio::with(['eksemplar.bookstatus'])->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
+        $search = $req->search;
+        $biblio = Biblio::with(['eksemplar.bookstatus']);
+
+        if ($search) {
+            $biblio = $biblio->where('title', 'LIKE', "%$search%")
+                ->orWhere('isbnissn', 'LIKE', "%$search%");
+        }
+        $biblio = $biblio->get(); //nampilin semua kolom nanti FE yg atur, . berarti masuk ke dan , berarti dan
         // $biblio = Biblio::with(['eksemplar' => function ($query) {  // ini adalah cara ke2
         //     return $query->with(['bookstatus'])->where("name", "Hilang");// bentuk klo nampilih bookstatus yg hilang
         // }])->get();
@@ -67,7 +74,7 @@ class BiblioController extends Controller
         }
         $biblio = Biblio::create($request->all());
         return response()
-            ->json(['message'=>'Biblio baru berhasil ditambahkan!', 'data'=>$biblio]);
+            ->json(['message' => 'Biblio baru berhasil ditambahkan!', 'data' => $biblio]);
     }
 
     public function editData(Request $request, $id)
@@ -109,8 +116,7 @@ class BiblioController extends Controller
         $biblio = Biblio::find($id);
         $biblio->update($request->all());
         return response()
-        ->json(['message'=>'Data Biblio berhasil diubah!', 'data'=>$biblio]);
-
+            ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
     }
 
     // public function hapusData(Request $request, $id)
@@ -130,6 +136,6 @@ class BiblioController extends Controller
         $biblio = Biblio::find($id);
         $biblio->forceDelete();
         return response()
-            ->json(['message'=>'Data Buku berhasil dihapus!', 'data'=>$biblio]);
+            ->json(['message' => 'Data Buku berhasil dihapus!', 'data' => $biblio]);
     }
 }

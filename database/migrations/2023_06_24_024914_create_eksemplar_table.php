@@ -21,11 +21,11 @@ return new class extends Migration
             $table->date('order_date');
             $table->date('receipt_date');
             $table->string('agent')->nullable();
-            $table->enum('source',['Beli','Hadiah']);
+            $table->enum('source', ['Beli', 'Hadiah']);
             $table->string('invoice')->nullable();
             $table->string('price')->nullable();
             $table->timestamps();
-            $table->foreignUuid('biblio_id')->constrained('biblio');
+            $table->foreignUuid('biblio_id')->constrained('biblio')->cascadeOnDelete();
             $table->foreignid('book_status_id')->constrained('book_statuses');
             $table->softDeletes();  //buat softdelete
         });

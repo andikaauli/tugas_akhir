@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +19,51 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/bibliografi', function () {
-    return view('petugas/bibliografi/bibliografi');
-});
+Route::get('/bibliografi', function (Request $request) {
+    $search = $request->search;
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
+    $response = app()->handle($http);
+    $response = $response->getContent();
+
+    $bibliografi = json_decode($response);
+
+
+    return view('petugas/bibliografi/bibliografi', ['bibliografi' => $bibliografi]);
+})->name('client.bibliografi');
+
+Route::delete('/bibliografi/delete', function (Request $request) {
+    $deletedBiblioIdList = $request->deletedBiblio;
+
+    if (!$deletedBiblioIdList) {
+        return redirect()->back();
+    }
+
+    foreach ($deletedBiblioIdList as $biblioId) {
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/biblio/destroy/' . $biblioId, 'DELETE');
+        $response = app()->handle($http);
+    }
+
+    return redirect()->route('client.bibliografi');
+})->name('client.delete-bibliografi');
 
 Route::get('/create-bibliografi', function () {
     return view('petugas/bibliografi/create-bibliografi');
 });
+
+Route::post('/create-bibliografi', function (Request $request) {
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all());
+    $response = app()->handle($http);
+
+    if ($response->isClientError()) {
+        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+    }
+
+    return redirect()->route('client.bibliografi');
+})->name('client.create-bibliografi');
 
 Route::get('/eksemplar', function () {
     return view('petugas/bibliografi/eksemplar');
@@ -37,8 +77,29 @@ Route::get('/edit-eksemplar', function () {
     return view('petugas/bibliografi/edit-eksemplar');
 });
 
-Route::get('/edit-bibliografi', function () {
-    return view('petugas/bibliografi/edit-bibliografi');
+Route::get('/edit-bibliografi/{id}', function ($id) {
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/biblio/' . $id);
+    $response = app()->handle($http);
+    $response = $response->getContent();
+
+    $bibliografi = json_decode($response);
+
+
+    return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi]);
+})->name('client.edit-bibliografi');
+
+Route::put('/edit-bibliografi/{id}', function (Request $request, $id) {
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'GET', $request->all());
+    $response = app()->handle($http);
+
+    if ($response->isClientError()) {
+        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+    }
+
+    return redirect()->route('client.bibliografi');
 });
 
 Route::get('/mulai-transaksi', function () {
@@ -136,6 +197,3 @@ Route::get('/eksemplar-hilang', function () {
 Route::get('/end-inventarisasi', function () {
     return view('petugas/inventarisasi/end-inventarisasi');
 });
-
-
-
