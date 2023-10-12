@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
-
+use App\Http\Controllers\StockOpnameController;
+use App\Http\Controllers\BiblioController;
+use App\Http\Controllers\EksemplarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
