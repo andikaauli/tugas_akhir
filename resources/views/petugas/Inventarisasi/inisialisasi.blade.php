@@ -28,27 +28,6 @@
                 </div>
             </div>
         {{-- End Nama Inventariasi --}}
-        {{-- Tipe Kolekasi --}}
-        <div class="flex border-y border-solid border-gray-300">
-            <div class="px-4 py-3 text-sm w-60">
-                <p class="font-bold text-sm">Tipe Koleksi</p>
-            </div>
-            <div class="px-4 py-3 text-sm">
-                <p class="font-bold text-sm">:</p>
-            </div>
-            <div class="px-4 py-3">
-                <div class="" style="width:200px;">
-                    <select class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
-                      <option value="0">SEMUA</option>
-                      <option value="1">Fiksi</option>
-                      <option value="2">Kesehatan</option>
-                      <option value="3">Komik</option>
-                      <option value="4">Religi</option>
-                    </select>
-                  </div>
-            </div>
-        </div>
-        {{-- End Tipe Koleksi --}}
         {{-- Klasifikasi --}}
         <div class="flex border-y border-solid border-gray-300">
             <div class="px-4 py-3 text-sm w-60">

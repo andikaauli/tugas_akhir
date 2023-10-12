@@ -16,7 +16,7 @@
      {{-- End Section 1 --}}
      {{-- Search Bar --}}
      <div class="p-4 bg-blue-100">
-        <p class="mr-3 mb-2 font-normal">Kode Eksemplar</p>
+        <p class="mr-3 mb-2 font-medium">Kode Eksemplar</p>
         <div class="flex">
             <input type="search" class="relative w-80 m-0 mr-1 mb-3 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="" aria-label="Search" aria-describedby="button-addon3"/>
         {{-- Btn Filter --}}

@@ -36,7 +36,7 @@
               </a>
            </li>
            <li>
-            <a href="#" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/laporan-inventarisasi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Laporan Inventarisasi</span>
             </a>
          </li>

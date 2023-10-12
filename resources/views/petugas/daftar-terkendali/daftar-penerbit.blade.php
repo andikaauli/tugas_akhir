@@ -6,12 +6,15 @@
  <div class="sm:ml-64">
     <div class="mt-18">
      {{-- Section 1 --}}
-       <div class="px-4 pt-4 flex my-5">
-          <div class="flex items-center">
-             <p class="text-3xl text-black font-bold">
-                Penerbit
-             </p>
-          </div>
+       <div class="px-4 pt-4 flex justify-between my-5">
+            <div>
+                <p class="text-3xl text-black font-bold">
+                   Penerbit
+                </p>
+            </div>
+            <div>
+                <a href="create-penerbit" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Penerbit Baru</a>
+            </div>
        </div>
      {{-- End Section 1 --}}
      {{-- Section 2 --}}

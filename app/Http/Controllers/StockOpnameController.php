@@ -31,7 +31,7 @@ class StockOpnameController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            "name" =>'required|max:255',
+            "name" => 'required|max:255',
             "name_user" => 'required|max:255',
 
         ]);
@@ -67,46 +67,60 @@ class StockOpnameController extends Controller
     public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
         $search = $request->search;
-        $stockopname = Stockopname::with(['stocktakeitem'=>function($stocktakeitem) use($request){
-            $filterstatus=[];
+        $stockopname = Stockopname::with(['stocktakeitem' => function ($stocktakeitem) use ($request) {
+            $filterstatus = [];
             if ($request->has('dipinjam')) {
-                $filterstatus[]=1;
+                $filterstatus[] = 1;
             }
             if ($request->has('tersedia')) {
-                $filterstatus[]=2;
+                $filterstatus[] = 2;
             }
             if ($request->has('hilang')) {
-                $filterstatus[]=3;
+                $filterstatus[] = 3;
             }
 
-            if (count($filterstatus)){
-                $stocktakeitem->whereIn('book_status_id',$filterstatus);
+            if (count($filterstatus)) {
+                $stocktakeitem->whereIn('book_status_id', $filterstatus);
             }
-            return $stocktakeitem->with (['bookstatus','eksemplar.biblio.author','eksemplar.biblio.colltype','eksemplar.biblio.publisher'])->get();
-
+            return $stocktakeitem->with(['bookstatus', 'eksemplar.biblio.author', 'eksemplar.biblio.colltype', 'eksemplar.biblio.publisher'])->get();
         }])->findOrFail($id);
 
         //PENCARIAN
         if ($search) {
             $stocktakeitem = Stocktakeitem::where('eksemplar.biblio.title', 'LIKE', "%$search%")
-            ->orWhere('eksemplar.biblio.colltype.title', 'LIKE', "%$search%")->get();
+                ->orWhere('eksemplar.biblio.colltype.title', 'LIKE', "%$search%")->get();
         }
 
         //dibawah ini untuk list data laporan hitungan totaal eksemplar
-        $stocktakeitem=$stockopname->stocktakeitem;
-        $stockopname['total_tersedia']=$stocktakeitem->filter(function ($s){
-            return $s->bookstatus->id==2;
+        $stocktakeitem = $stockopname->stocktakeitem;
+        $stockopname['total_tersedia'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 2;
+        })->count();
+        $stocktakeitem = $stockopname->stocktakeitem;
+        $stockopname['total_tersedia'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 2;
         })->count();
 
-        $stockopname['total_hilang']=$stocktakeitem->filter(function ($s){
-            return $s->bookstatus->id==3;
+        $stockopname['total_hilang'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 3;
+        })->count();
+        $stockopname['total_hilang'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 3;
         })->count();
 
-        $stockopname['total_terpinjam']=$stocktakeitem->filter(function ($s){
-            return $s->bookstatus->id==1;
+        $stockopname['total_terpinjam'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 1;
+        })->count();
+        $stockopname['total_terpinjam'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 1;
         })->count();
 
-        $stockopname['total_eksemplar']=$stocktakeitem->count();
+        $stockopname['total_eksemplar'] = $stocktakeitem->count();
+        $stockopname['total_eksemplar'] = $stocktakeitem->count();
+
+        // $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
+        //     return $s->bookstatus->id==2||$s->bookstatus->id==3;
+        // })->count();//misal ingin hitungan 2 id
 
         return response()->json($stockopname, 200);
         //bikin filter yg diambil 2 dan 3 utk bagian laporan
@@ -114,7 +128,8 @@ class StockOpnameController extends Controller
         //ketika bagian laporan ambil showdata tanpa parameter dgn contoh url http://localhost:8000/api/stockopname/9a4689fe-6119-47f6-a6fc-94f64d56f6b7
     }
 
-    public function finishStockOpname($id){
+    public function finishStockOpname($id)
+    {
         $stockopname = StockOpname::with('stocktakeitem.eksemplar')->find($id);
         $stockopname->update([
             "end_date" => now(),
@@ -125,13 +140,12 @@ class StockOpnameController extends Controller
 
         foreach ($stocktakeitem as $item) {
             $item->eksemplar->update([
-                'book_status_id'=> $item->book_status_id
+                'book_status_id' => $item->book_status_id
             ]);
         }
 
         $stockopname->refresh();
         return response()
-            ->json(['message'=>'Proses Inventarisasi '.($stockopname->name).' sudah selesai!', 'data'=>$stockopname]);
+            ->json(['message' => 'Proses Inventarisasi ' . ($stockopname->name) . ' sudah selesai!', 'data' => $stockopname]);
     }
-
 }

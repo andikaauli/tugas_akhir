@@ -6,13 +6,16 @@
  <div class="sm:ml-64">
     <div class="mt-18">
      {{-- Section 1 --}}
-       <div class="px-4 pt-4 flex my-5">
-          <div class="flex items-center">
-             <p class="text-3xl text-black font-bold">
-                Tipe Koleksi
-             </p>
-          </div>
-       </div>
+     <div class="px-4 pt-4 flex justify-between my-5">
+        <div>
+            <p class="text-3xl text-black font-bold">
+               Tipe Koleksi
+            </p>
+        </div>
+        <div>
+            <a href="/create-tipe-koleksi" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Tipe Koleksi</a>
+        </div>
+   </div>
      {{-- End Section 1 --}}
      {{-- Section 2 --}}
        <div class="py-8 px-4 mb-4">

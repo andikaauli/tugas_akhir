@@ -14,22 +14,22 @@
           </div>
        </div>
      {{-- End Section 1 --}}
-     <div class="p-4 bg-blue-100">
-        <p>Filter Laporan</p>
-     </div>
-     <div class="justify-center items-center">
+     <div class="py-8 px-4 mb-4">
         {{-- Search Bar --}}
-       <div class="p-4">
-        <p class="mr-3 mb-2 font-normal">ID Anggota/Nama Anggota</p>
-        <input type="search" class="relative w-80 m-0 mr-1 mb-3 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="" aria-label="Search" aria-describedby="button-addon3"/>
-        {{-- Btn Filter --}}
-        <button class="px-3 h-10 rounded text-white text-sm font-semibold bg-blue-600 hover:bg-blue-500">
-            Terapkan Filter
-         </button>
-         {{-- End Btn Filter --}}
-        </div>
+           <div class="flex items-center ">
+              <p class="mr-3">Cari</p>
+              <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                 placeholder="Search"
+                 aria-label="Search"
+                 aria-describedby="button-addon3"/>
+              {{-- Btn Search --}}
+              <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
+                 Cari
+              </button>
+              {{-- End Btn Search --}}
+           </div>
         {{-- End Search Bar --}}
-    </div>
+       </div>
     {{-- Section 2 --}}
     <div class="flex mb-4 p-4 bg-white">
         <table class="table-auto w-full">
