@@ -3,9 +3,19 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
+
 use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\BiblioController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\EksemplarController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\StockTakeItemController;
+use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
