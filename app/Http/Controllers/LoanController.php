@@ -32,26 +32,10 @@ class LoanController extends Controller
     {
         //kasih kondisi klo kode eksemplar yg dicari barang hilang gagal
         //kasih update untuk ketika eksemplar tersedia berubah menjadi dipinjam
-
-        // $validator = Validator::make($request->all(), [
-        //     'eksemplar_id' => ['required', 'exists:eksemplar,id'],
-        // ]);
-        // if ($validator->fails()) {
-        //     return response()->json($validator->errors(), 422);
-        // }
-
         $validator = Validator::make($request->all(), [
             'eksemplar_id' => ['required', 'exists:eksemplar,id'],
         ]);
-        // if ($validator->fails()) {
-        //     return response()->json($validator->errors(), 422);
-        // }
 
-        // $eksemplar = Eksemplar::with('bookstatus')->find($id);
-        // $eksemplar->update([
-        //     'book_status_id'=> 1,
-        // ]);
-        // $eksemplar->refresh();
         $member = Member::find($id);
 
         $bookstatus = Eksemplar::where('item_code', $request->item_code)->first('book_status_id');
@@ -61,7 +45,6 @@ class LoanController extends Controller
         }
 
         $eksemplar = Eksemplar::with(['bookstatus', 'biblio:id,title,author_id', 'biblio.author:id,title'])->where('item_code', $request->item_code)->first();
-        // return $eksemplar;
         $loan = Loan::create([
             "eksemplar_id" => $eksemplar->id,
             "member_id" => $member->id,
@@ -91,6 +74,10 @@ class LoanController extends Controller
     public function destroyData(Request $request, $id)
     { //hard delete
         $loan = Loan::find($id);
+        $eksemplar = Eksemplar::find($loan->eksemplar_id);
+        $eksemplar->update([
+            'book_status_id' => 2
+        ]);
         $loan->forceDelete();
         return response()
             ->json(['message'=>'Peminjaman Eksemplar dibatalkan!', 'data'=>$loan]);
@@ -125,17 +112,17 @@ class LoanController extends Controller
     }
 
 
-    function peminjaman(Request $req)
-    {
-        $loanDate = now(); // YYYY-MM-DD | 2023-10-06
-        $dueDate = now()->addDays(7); // YYYY-MM-DD | 2023-10-13
-    }
-    function perpanjang($loanID)
-    {
-        $loan = Loan::find($loanID);
+    // function peminjaman(Request $req)
+    // {
+    //     $loanDate = now(); // YYYY-MM-DD | 2023-10-06
+    //     $dueDate = now()->addDays(7); // YYYY-MM-DD | 2023-10-13
+    // }
+    // function perpanjang($loanID)
+    // {
+    //     $loan = Loan::find($loanID);
 
-        $loan->update([
-            "due_date" => Carbon::parse($loan->due_date)->addDays(7),
-        ]);
-    }
+    //     $loan->update([
+    //         "due_date" => Carbon::parse($loan->due_date)->addDays(7),
+    //     ]);
+    // }
 }
