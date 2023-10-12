@@ -67,15 +67,7 @@
                  </div>
                  <div class="flex border-b border-gray-200">
                     <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>Tipe Keanggotaan</p>
-                    </div>
-                    <div class="font-normal text-sm px-4 py-3">
-                       <p>Standar</p>
-                    </div>
-                 </div>
-                 <div class="flex border-b border-gray-200">
-                    <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>Nama Anggota</p>
+                       <p>Berlaku Hingga</p>
                     </div>
                     <div class="font-normal text-sm px-4 py-3">
                        <p>2024-02-22</p>

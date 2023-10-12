@@ -197,3 +197,12 @@ Route::get('/eksemplar-hilang', function () {
 Route::get('/end-inventarisasi', function () {
     return view('petugas/inventarisasi/end-inventarisasi');
 });
+
+Route::get('/hasil-inventarisasi', function () {
+    return view('petugas/inventarisasi/hasil-inventarisasi');
+});
+
+Route::get('/laporan-inventarisasi', function () {
+    return view('petugas/inventarisasi/laporan-inventarisasi');
+});
+
