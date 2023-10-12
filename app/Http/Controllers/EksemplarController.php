@@ -50,8 +50,6 @@ class EksemplarController extends Controller
             'invoice' => 'nullable',
             'price' => ['required', 'numeric'],
             'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
-            // 'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
-            // 'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
         ]);
 
         if ($validator->fails()) {

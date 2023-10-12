@@ -108,10 +108,6 @@ class StockOpnameController extends Controller
 
         $stockopname['total_eksemplar']=$stocktakeitem->count();
 
-            // $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
-            //     return $s->bookstatus->id==2||$s->bookstatus->id==3;
-            // })->count();//misal ingin hitungan 2 id
-
         return response()->json($stockopname, 200);
         //bikin filter yg diambil 2 dan 3 utk bagian laporan
         //list data yg ditampilkan pada inven aktif ambil dari sini, dengan status 2 dan 3 dgn contoh url http://localhost:8000/api/stockopname/9a4689fe-6119-47f6-a6fc-94f64d56f6b7?tersedia=&hilang=

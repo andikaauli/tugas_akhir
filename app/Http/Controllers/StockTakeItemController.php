@@ -20,12 +20,6 @@ class StockTakeItemController extends Controller
         ]);
 
         return response()->json($stocktakeitem, 200);
-
-        // [
-        //     "name" => $request->name,
-        //     "name_user" => $request->name_user,
-        //     "start_date" => now()
-        // ] isi addData stockopname
     }
     public function editDataButton(Request $request, $item_code){
 

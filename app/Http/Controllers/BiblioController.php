@@ -66,7 +66,6 @@ class BiblioController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-
         $biblio = Biblio::create($request->all());
         return response()
             ->json(['message'=>'Biblio baru berhasil ditambahkan!', 'data'=>$biblio]);

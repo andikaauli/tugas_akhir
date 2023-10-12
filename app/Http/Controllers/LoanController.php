@@ -96,6 +96,8 @@ class LoanController extends Controller
         $loan->forceDelete();
         return response()
             ->json(['message'=>'Peminjaman Eksemplar dibatalkan!', 'data'=>$loan]);
+
+            //kalo hapus juga merubah status eksemplar
     }
 
     public function pengembalian(Request $request, $id)
