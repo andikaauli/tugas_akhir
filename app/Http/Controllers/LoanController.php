@@ -64,7 +64,7 @@ class LoanController extends Controller
 
             }
         }
-        return response()->json(['message' => 'Eksemplar dengan '.($request->item_code).' tidak ditemukan'], 404);
+        return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak tersedia'], 404);
     }
 
     public function perpanjang(Request $request, $id)
