@@ -30,35 +30,41 @@ class LoanController extends Controller
     }
     public function peminjaman(Request $request, $id)
     {
-        //kasih kondisi klo kode eksemplar yg dicari barang hilang gagal
-        //kasih update untuk ketika eksemplar tersedia berubah menjadi dipinjam
         $validator = Validator::make($request->all(), [
-            'eksemplar_id' => ['required', 'exists:eksemplar,id'],
+            // 'eksemplar_id' => ['required', 'exists:eksemplar,id'],
+            'item_code' => 'required|numeric',
         ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
         $member = Member::find($id);
 
-        $bookstatus = Eksemplar::where('item_code', $request->item_code)->first('book_status_id');
-
-        if ($bookstatus['book_status_id'] != '2') {
-            return response()->json(['message' => 'Eksemplar tidak dapat Dipinjam!'], 422);
-        }
-
         $eksemplar = Eksemplar::with(['bookstatus', 'biblio:id,title,author_id', 'biblio.author:id,title'])->where('item_code', $request->item_code)->first();
-        $loan = Loan::create([
-            "eksemplar_id" => $eksemplar->id,
-            "member_id" => $member->id,
-            "loan_date" => now(),
-            "due_date" => now()->addDays(7),
-            "loan_status" => 'Sedang dipinjam',
-        ]);
 
-        $eksemplar->update([
-            'book_status_id' => 1
-        ]);
+        if ($eksemplar) {
+            $bookstatus = Eksemplar::where('item_code', $request->item_code)->first('book_status_id');
+            if ($bookstatus['book_status_id'] != '2') {
 
-        return response()
-            ->json(['message' => 'Proses peminjaman berhasil ditambahkan!', 'data' => $loan, 'eksemplar' => $eksemplar, 'member' => $member]);
+                return response()->json(['message' => 'Eksemplar tidak dapat Dipinjam!'], 422);
+            }
+            else {
+                $loan = Loan::create([
+                    "eksemplar_id" => $eksemplar->id,
+                    "member_id" => $member->id,
+                    "loan_date" => now(),
+                    "due_date" => now()->addDays(7),
+                    "loan_status" => 'Sedang dipinjam',
+                ]);
+
+                $eksemplar->update([
+                    'book_status_id' => 1
+                ]);
+                return response()->json(['message' => 'Proses peminjaman berhasil ditambahkan!', 'data' => $loan, 'eksemplar' => $eksemplar, 'member' => $member]);
+
+            }
+        }
+        return response()->json(['message' => 'Eksemplar dengan '.($request->item_code).' tidak ditemukan'], 404);
     }
 
     public function perpanjang(Request $request, $id)
@@ -108,7 +114,7 @@ class LoanController extends Controller
 
         $loan->refresh();
         return response()
-            ->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loan]);
+            ->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loan,'eksemplar' => $eksemplar]);
     }
 
 
