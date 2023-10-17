@@ -11,39 +11,42 @@ use Illuminate\Support\Facades\Validator;
 class StockTakeItemController extends Controller
 {
     //contoh untuk proses stock opname
-    public function editData(Request $request){
+    public function editData(Request $request)
+    {
 
-        $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request){
+        $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request) {
             return $query->where('rfid_code', $request->rfid_code);
-        })->whereHas('stockopname', function ($query){
+        })->whereHas('stockopname', function ($query) {
             $query->whereNull('end_date');
-        })->where("book_status_id",3)->first();
+        })->where("book_status_id", 3)->first();
 
         $stocktakeitem->update([
             'book_status_id' => 2
         ]);
 
+        $stocktakeitem->refresh();
+
         return response()->json($stocktakeitem, 200);
     }
-    public function editDataButton(Request $request){
+    public function editDataButton(Request $request)
+    {
         //if status 3 menjadi 2 dan if status 2 akan error
         //bikin seperti peminjaman eksemplar
 
         $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
 
         if ($eksemplar) {
-            $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request){
+            $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request) {
                 return $query->where('item_code', $request->item_code);
             })->where('stock_opname_id', $request->stock_opname_id)->first();
 
             $stocktakeitem->update([
                 'book_status_id' => 2
             ]);
-                return response()->json($stocktakeitem, 200);
-
+            return response()->json($stocktakeitem, 200);
         }
 
-        return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak tersedia'], 404);
+        return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak tersedia'], 404);
     }
 
 
@@ -53,9 +56,8 @@ class StockTakeItemController extends Controller
         $stocktakeitem = StockTakeItem::with(['eksemplar.bookstatus'])->get();
         if ($search) {
             $stocktakeitem = StockTakeItem::where('title', 'LIKE', "%$search%")
-            ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
+                ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
         }
         return response()->json($stocktakeitem, 200);
-
     }
 }

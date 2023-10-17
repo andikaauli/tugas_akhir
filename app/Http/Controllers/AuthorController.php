@@ -21,7 +21,8 @@ class AuthorController extends Controller
 
     public function showData($id)
     {
-        $author = author::findOrFail($id);
+        $author = Author::findOrFail($id);
+
         return response()->json($author, 200);
     }
 
@@ -37,7 +38,7 @@ class AuthorController extends Controller
         }
         $author = Author::create($request->all());
         return response()
-            ->json(['message'=>'Pengarang baru berhasil ditambahkan!', 'data'=>$author]);
+            ->json(['message' => 'Pengarang baru berhasil ditambahkan!', 'data' => $author]);
     }
 
     public function editData(Request $request, $id)
@@ -54,8 +55,7 @@ class AuthorController extends Controller
         $author = Author::find($id);
         $author->update($request->all());
         return response()
-            ->json(['message'=>'Data Pengarang berhasil diubah!', 'data'=>$author]);
-
+            ->json(['message' => 'Data Pengarang berhasil diubah!', 'data' => $author]);
     }
 
 
@@ -71,7 +71,7 @@ class AuthorController extends Controller
         // }
         $author->forceDelete();
         return response()
-            ->json(['message'=>'Data Pengarang'.($request->title).' berhasil dihapus!', 'data'=>$author]);
+            ->json(['message' => 'Data Pengarang' . ($request->title) . ' berhasil dihapus!', 'data' => $author]);
     }
 
     //soft delete

@@ -28,7 +28,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text" name="title"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2">{{ $bibliografi->title}}</textarea>
+                        name="" id="" cols="30" rows="2">{{ $bibliografi->title }}</textarea>
                 </div>
             </div>
             {{-- End Judul --}}
@@ -40,21 +40,24 @@
                 <div class="px-4 py-3 text-sm">
                     <p>:</p>
                 </div>
-                    <div class="flex flex-auto items-stretch px-4 py-3">
-                        <div class="" style="width:200px;">
-                            <select
-                                class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
-                                <option value="0">Pilih Pengarang</option>
-                                <option value="1">Audi</option>
-                                <option value="2">BMW</option>
-                                <option value="3">Citroen</option>
-                                <option value="4">Ford</option>
-                            </select>
-                        </div>
-                        @error('author_id')
-                            <p class="text-red-500 animate-pulse">{{ $message }}</p>
-                        @enderror
+                <div class="flex flex-auto items-stretch px-4 py-3">
+                    <div class="" style="width:200px;">
+                        <select
+                            class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
+                            <option value="0">Pilih Pengarang</option>
+                            @foreach ($pengarang as $option)
+                                <option value="{{ $option->id }}"
+                                    {{ $bibliografi->author_id == $option->id ? 'selected' : '' }}>
+                                    {{ $option->title }}
+
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+                    @error('author_id')
+                        <p class="text-red-500 animate-pulse">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
             {{-- End Pengarang --}}
             {{-- Pernyataan Tanggung Jawab --}}
@@ -66,7 +69,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->responsibility}}"
+                    <input type="text" id="small-input" value="{{ $bibliografi->responsibility }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -80,7 +83,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->edition}}"
+                    <input type="text" id="small-input" value="{{ $bibliografi->edition }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -96,7 +99,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2">{{ $bibliografi->spec_detail}}</textarea>
+                        name="" id="" cols="30" rows="2">{{ $bibliografi->spec_detail }}</textarea>
                 </div>
             </div>
             {{-- End Info Detal Spesifik --}}
@@ -110,7 +113,8 @@
                 </div>
                 <div class="px-4 py-3">
                     <button type="button" id="select-all"
-                    class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Eksemplar</button>
+                        class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah
+                        Eksemplar</button>
                 </div>
             </div>
             {{-- End Tambah Eksemplar --}}
@@ -126,7 +130,7 @@
                     <div class="flex-auto h-24 border border-gray-400 rounded px-3 py-2 overflow-auto">
                         <div class="flex flex-row border-b border-gray-200">
                             <div class="basis-1/2 p-2">
-                                 <p class="text-sm font-medium">B00002</p>
+                                <p class="text-sm font-medium">B00002</p>
                             </div>
                             <div class="basis-1/2 p-2">
                                 <p class="text-sm font-medium">Reference</p>
@@ -134,7 +138,7 @@
                         </div>
                         <div class="flex flex-row border-b border-gray-200">
                             <div class="basis-1/2 p-2">
-                                 <p class="text-sm font-medium">B00002</p>
+                                <p class="text-sm font-medium">B00002</p>
                             </div>
                             <div class="basis-1/2 p-2">
                                 <p class="text-sm font-medium">Reference</p>
@@ -142,7 +146,7 @@
                         </div>
                         <div class="flex flex-row border-b border-gray-200">
                             <div class="basis-1/2 p-2">
-                                 <p class="text-sm font-medium">B00002</p>
+                                <p class="text-sm font-medium">B00002</p>
                             </div>
                             <div class="basis-1/2 p-2">
                                 <p class="text-sm font-medium">Reference</p>
@@ -161,7 +165,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input type="text" id="small-input"
+                        class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
             {{-- End GMD --}}
@@ -174,7 +179,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input type="text" id="small-input"
+                        class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
             {{-- End Tipe Isi --}}
@@ -187,7 +193,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input type="text" id="small-input"
+                        class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
             {{-- End Tipe Media --}}
@@ -200,7 +207,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input type="text" id="small-input"
+                        class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
             {{-- End Tipe Pembawa --}}
@@ -213,7 +221,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input type="text" id="small-input"
+                        class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
             {{-- End ISBN/ISSN --}}
@@ -335,7 +344,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2">{{ $bibliografi->abstract}}</textarea>
+                        name="" id="" cols="30" rows="2">{{ $bibliografi->abstract }}</textarea>
                 </div>
             </div>
             {{-- End Abstrak/Catatan --}}
@@ -349,7 +358,7 @@
                 </div>
                 <div class="px-4 py-3">
                     <div class="flex">
-                        <img src="{{ $bibliografi->image}}" class="bg-gray-300 rounded-md w-32 h-44"></img>
+                        <img src="{{ $bibliografi->image }}" class="bg-gray-300 rounded-md w-32 h-44"></img>
                         <div class="ml-3">
                             <label class="file">
                                 <input class=" border rounded text-sm" type="file" id="file"
