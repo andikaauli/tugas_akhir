@@ -96,27 +96,16 @@ class StockOpnameController extends Controller
         $stockopname['total_tersedia'] = $stocktakeitem->filter(function ($s) {
             return $s->bookstatus->id == 2;
         })->count();
-        $stocktakeitem = $stockopname->stocktakeitem;
-        $stockopname['total_tersedia'] = $stocktakeitem->filter(function ($s) {
-            return $s->bookstatus->id == 2;
-        })->count();
 
         $stockopname['total_hilang'] = $stocktakeitem->filter(function ($s) {
             return $s->bookstatus->id == 3;
         })->count();
-        $stockopname['total_hilang'] = $stocktakeitem->filter(function ($s) {
-            return $s->bookstatus->id == 3;
-        })->count();
 
-        $stockopname['total_terpinjam'] = $stocktakeitem->filter(function ($s) {
-            return $s->bookstatus->id == 1;
-        })->count();
         $stockopname['total_terpinjam'] = $stocktakeitem->filter(function ($s) {
             return $s->bookstatus->id == 1;
         })->count();
 
         $stockopname['total_eksemplar'] = $stocktakeitem->count();
-        // $stockopname['total_eksemplar'] = $stocktakeitem->count();
 
         // $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
         //     return $s->bookstatus->id==2||$s->bookstatus->id==3;

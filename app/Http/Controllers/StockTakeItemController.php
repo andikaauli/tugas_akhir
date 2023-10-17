@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StockTakeItem;
+use App\Models\Eksemplar;
 use Illuminate\Http\Request;
+use App\Models\StockTakeItem;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class StockTakeItemController extends Controller
 {
     //contoh untuk proses stock opname
-    public function editData(Request $request, $rfid_code){
+    public function editData(Request $request){
 
-        $stocktakeitem = StockTakeItem::with(['eksemplar' => function ($query) use ($rfid_code){
-            return $query->where('rfid_code', $rfid_code);
-        }])->where("book_status_id",3)->first();
+        $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request){
+            return $query->where('rfid_code', $request->rfid_code);
+        })->whereHas('stockopname', function ($query){
+            $query->whereNull('end_date');
+        })->where("book_status_id",3)->first();
 
         $stocktakeitem->update([
             'book_status_id' => 2
@@ -21,18 +25,25 @@ class StockTakeItemController extends Controller
 
         return response()->json($stocktakeitem, 200);
     }
-    public function editDataButton(Request $request, $item_code){
+    public function editDataButton(Request $request){
+        //if status 3 menjadi 2 dan if status 2 akan error
+        //bikin seperti peminjaman eksemplar
 
-        $stocktakeitem = StockTakeItem::with(['eksemplar' => function ($query) use ($item_code){
-            return $query->where('item_code', $item_code);
-        }])->where("book_status_id",3)->first();
+        $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
 
-        $stocktakeitem->update([
-            'book_status_id' => 2
-        ]);
+        if ($eksemplar) {
+            $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request){
+                return $query->where('item_code', $request->item_code);
+            })->where('stock_opname_id', $request->stock_opname_id)->first();
 
-        return response()->json($stocktakeitem, 200);
+            $stocktakeitem->update([
+                'book_status_id' => 2
+            ]);
+                return response()->json($stocktakeitem, 200);
 
+        }
+
+        return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak tersedia'], 404);
     }
 
 
