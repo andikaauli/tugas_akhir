@@ -20,8 +20,9 @@ class EksemplarController extends Controller
         $search = $request->search;
         $eksemplar = Eksemplar::with(['bookstatus','loan','stocktakeitem','biblio.author','biblio.colltype','biblio.publisher'])->get();
         if ($search) {
-            $eksemplar = Eksemplar::where('title', 'LIKE', "%$search%")
-            ->orWhere('item_code', 'LIKE', "%$search%")->get();
+            $eksemplar = Eksemplar::with(["biblio"=> function ($b) use ($search){
+                $b->where('title', 'LIKE', "%$search%");
+            }])->orWhere('item_code', 'LIKE', "%$search%")->get();
         }
         return response()->json($eksemplar, 200);
 
@@ -52,6 +53,13 @@ class EksemplarController extends Controller
             'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
         ]);
 
+        // // Mendapatkan kode RFID dari request
+        // $rfid_code = $request->input('rfid_code');
+
+        // // Membuat instance eksemplar
+        // $eksemplar = new Eksemplar;
+        // $eksemplar->rfid_code = $rfid_code;
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -60,6 +68,19 @@ class EksemplarController extends Controller
             ->json(['message'=>'Eksemplar baru berhasil ditambahkan!', 'data'=>$eksemplar]);
 
     }
+
+    // public function addRFID(Request $request, $rfid_code){
+
+    //     $stocktakeitem = StockTakeItem::with(['eksemplar' => function ($query) use ($rfid_code){
+    //         return $query->where('rfid_code', $rfid_code);
+    //     }])->where("book_status_id",3)->first();
+
+    //     $stocktakeitem->update([
+    //         'book_status_id' => 2
+    //     ]);
+
+    //     return response()->json($stocktakeitem, 200);
+    // }
 
     public function editData(Request $request, $id)
     {
