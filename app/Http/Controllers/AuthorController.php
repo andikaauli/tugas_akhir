@@ -26,15 +26,6 @@ class AuthorController extends Controller
         return response()->json($author, 200);
     }
 
-    // public function showData($id)
-    // {
-    //     $author = Author::all()->find($id);
-    //     if(is_null($author)){
-    //         return abort(422);
-    //     }
-    //     return response()->json($author, 200);
-    // }
-
     public function addData(Request $request)
     {
 

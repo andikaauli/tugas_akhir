@@ -21,7 +21,7 @@ class CollTypeController extends Controller
 
     public function showData($id)
     {
-        $colltype = CollType::all()->findOrFail($id);
+        $colltype = CollType::findOrFail($id);
         return response()->json($colltype, 200);
     }
 

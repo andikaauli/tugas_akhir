@@ -31,7 +31,6 @@ class LoanController extends Controller
     public function peminjaman(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            // 'eksemplar_id' => ['required', 'exists:eksemplar,id'],
             'item_code' => 'required|numeric',
         ]);
         if ($validator->fails()) {

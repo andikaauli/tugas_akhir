@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('biblio', function (Blueprint $table) {
             $table->foreignid('author_id')->nullable()->constrained('author')->nullOnDelete();
-            $table->foreignid('coll_type_id')->constrained('coll_type');
-            $table->foreignid('publisher_id')->constrained('publisher');
+            $table->foreignid('coll_type_id')->nullable()->constrained('coll_type')->nullOnDelete();
+            $table->foreignid('publisher_id')->nullable()->constrained('publisher')->nullOnDelete();
         });
     }
 

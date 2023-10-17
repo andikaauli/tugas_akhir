@@ -21,7 +21,7 @@ class EksemplarController extends Controller
         $eksemplar = Eksemplar::with(['bookstatus', 'loan', 'stocktakeitem', 'biblio.author', 'biblio.colltype', 'biblio.publisher'])->get();
         if ($search) {
             $eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
-                $b->where("title", "LIKE", "%$search%");
+                $b->where('title', 'LIKE', "%$search%");
             })->orWhere('item_code', 'LIKE', "%$search%")->get();
         }
 
@@ -33,8 +33,6 @@ class EksemplarController extends Controller
         $eksemplar = Eksemplar::with(['bookstatus', 'loan'])->findOrFail($id);
         return response()->json($eksemplar, 200);
     }
-
-
 
     public function addData(Request $request)
     {
@@ -72,8 +70,6 @@ class EksemplarController extends Controller
             'invoice' => 'nullable',
             'price' => ['required', 'numeric'],
             'book_status_id' => ['required', 'exists:bookstatus,id'], //bentukan kalo ada foreign
-            // 'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
-            // 'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
         ]);
 
         if ($validator->fails()) {

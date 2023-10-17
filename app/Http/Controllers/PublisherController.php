@@ -22,7 +22,7 @@ class PublisherController extends Controller
 
     public function showData($id)
     {
-        $publisher = Publisher::all()->findOrFail($id);
+        $publisher = Publisher::findOrFail($id);
         return response()->json($publisher, 200);
     }
 

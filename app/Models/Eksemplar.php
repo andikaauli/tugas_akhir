@@ -37,4 +37,6 @@ class Eksemplar extends Model
     function stocktakeitem() {
         return $this->hasOne(StockTakeItem::class, 'eksemplar_id', 'id');
     }
+
+
 }
