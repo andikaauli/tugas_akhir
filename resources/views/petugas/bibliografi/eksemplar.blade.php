@@ -79,7 +79,9 @@
                    <td class="p-3 w-40">{{$eks->item_code}}</td>
                    <td class="p-3">
                          <div class="">
-                            <p class="text-sm font-medium">Corruption and development : the anti-corruption campaignss</p>
+                            @foreach ($bibliografi as $biblio)
+                                <p class="text-sm font-medium">{{ $biblio->biblio->title }}</p>
+                            @endforeach
                             <p class="text-sm font-medium text-gray-500">Douglas, Korry - Douglas, Susan
                             </p>
                          </div>

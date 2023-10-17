@@ -14,7 +14,6 @@
        </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    @dd($colltypes)
     <form action="{{ route('client.edit-colltypes', ['id' => $colltypes->id]) }}" method="POST" class="m-0 p-0">
 
         @method('PUT')
@@ -29,7 +28,7 @@
                         <p class="font-bold text-sm">:</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input" value="{{ $colltype->title}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        <input type="text" id="small-input" value="{{ $colltypes->title}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
             {{-- End Tipe Koleksi --}}

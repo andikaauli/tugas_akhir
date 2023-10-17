@@ -77,11 +77,17 @@ Route::get('/edit-bibliografi/{id}', function ($id) {
     $pengarangRes = app()->handle($pengarangReq);
     $pengarangRes = $pengarangRes->getContent();
 
+    $publisherReq = new Request();
+    $publisherReq = $publisherReq->create(config('app.api_url') . '/publisher/');
+    $publisherRes = app()->handle($publisherReq);
+    $publisherRes = $publisherRes->getContent();
+
     $bibliografi = json_decode($response);
     $pengarang = json_decode($pengarangRes);
+    $publisher = json_decode($publisherRes);
 
 
-    return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang]);
+    return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher]);
 })->name('client.edit-bibliografi');
 
 Route::put('/edit-bibliografi/{id}', function (Request $request, $id) {
@@ -105,10 +111,15 @@ Route::prefix("/eksemplar")->group(function () {
         $response = app()->handle($http);
         $response = $response->getContent();
 
+        $bibliografiReq = new Request();
+        $bibliografiReq = $bibliografiReq->create(config('app.api_url') . '/bibliografi/');
+        $bibliografiRes = app()->handle($bibliografiReq);
+        $bibliografiRes = $bibliografiRes->getContent();
+
         $eksemplar = json_decode($response);
+        $bibliografi = json_decode($response);
 
-
-        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
+        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar, 'bibliografi' => $bibliografi]);
     })->name('client.eksemplar');
 
     Route::delete('/delete', function (Request $request) {
@@ -223,6 +234,7 @@ Route::get('/daftar-pengarang', function (Request $request) {
 Route::delete('/daftar-pengarang/delete', function (Request $request) {
     $deletedAuthorsIdList = $request->deletedAuthors;
 
+    dd($deletedAuthorsIdList);
 
     if (!$deletedAuthorsIdList) {
         return redirect()->back();

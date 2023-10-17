@@ -238,11 +238,13 @@
                     <div class="" style="width:200px;">
                         <select
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
-                            <option value="0">Penerbit</option>
-                            <option value="1">Audi</option>
-                            <option value="2">BMW</option>
-                            <option value="3">Citroen</option>
-                            <option value="4">Ford</option>
+                            @foreach ($publishers as $publisher)
+                                <option value="{{ $publisher->id }}"
+                                    {{ $bibliografi->publisher_id == $publisher->id ? 'selected' : '' }}>
+                                    {{ $publisher->title }}
+
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

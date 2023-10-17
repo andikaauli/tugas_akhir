@@ -14,7 +14,7 @@
        </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    <form action="{{ route('client.edit-publisher', ['id' => $publisher->id]) }}" method="POST" class="m-0 p-0">
+    <form action="{{ route('client.edit-publishers', ['id' => $publisher->id]) }}" method="POST" class="m-0 p-0">
         @method('PUT')
         @csrf
         <div class="bg-white">
@@ -27,7 +27,7 @@
                      <p class="font-bold text-sm">:</p>
                  </div>
                  <div class="px-4 py-3">
-                     <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                     <input type="text" id="small-input" value="{{ $publisher->title}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                  </div>
              </div>
          {{-- End ID Anggota --}}

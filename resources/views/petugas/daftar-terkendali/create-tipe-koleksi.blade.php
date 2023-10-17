@@ -15,6 +15,7 @@
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
     <form action="{{ route('client.create-colltypes') }}" method="POST" class="m-0 p-0">
+        @csrf
         <div class="bg-white">
             {{-- Tipe Koleksi --}}
                 <div class="flex border-y border-solid border-gray-300">

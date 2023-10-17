@@ -14,7 +14,7 @@
                    Penerbit
                 </p>
             </div>
-            <div>
+            <div class="flex">
                 <a href="create-penerbit" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Penerbit Baru</a>
             </div>
        </div>
@@ -42,7 +42,9 @@
     </div>
     {{-- End Section 2 --}}
        {{-- Section 3 --}}
-    <form action="">
+    <form action="{{ route('client.delete-publishers') }}" method="POST">
+        @csrf
+        @method('DELETE')
         <div class="flex mb-4 py-3 px-4">
             <button type="submit"
                 class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Hapus Data
@@ -71,7 +73,7 @@
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">
-                             <input id="default-checkbox" type="checkbox" name="deletedBiblio[]" value="{{ $publisher->id }}"  class="w-4 h-4  border-black rounded">
+                             <input id="default-checkbox" type="checkbox" name="deletedPublishers[]" value="{{ $publisher->id }}"  class="w-4 h-4  border-black rounded">
                          </div>
                        </td>
                        <td class="p-3 w-20">
@@ -83,13 +85,35 @@
                           </a>
                        </td>
                        <td class="p-3">{{ $publisher->title }}</td>
-                       <td class="p-3 w-46">2023-02-22 19:09:07</td>
+                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($publisher->updated_at)) }}</td>
                     </tr>
                     @endforeach
                   </tbody>
                </table>
            </div>
            {{-- End Section 4 --}}
-    </form>
-
+        </form>
+    </div>
 </div>
+
+
+<script>
+    const selectAllBtn = document.getElementById('select-all');
+    const deselectAllBtn = document.getElementById('deselect-all');
+
+    selectAllBtn.addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(check => {
+            check.checked = true
+        });
+    })
+
+    deselectAllBtn.addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(check => {
+            check.checked = false
+        });
+    })
+</script>

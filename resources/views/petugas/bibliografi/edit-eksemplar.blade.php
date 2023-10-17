@@ -28,8 +28,9 @@
                             <p>:</p>
                         </div>
                         <div class="flex flex-auto items-stretch px-4 py-3">
-                            <p class="text-sm font-medium">PostgreSQL : a comprehensive guide to building, programming,
-                                and administering PostgreSQL databases</p>
+                            @foreach ($bibliografi as $biblio)
+                                <p class="text-sm font-medium">{{$biblio->title}}</p>
+                            @endforeach
                         </div>
                     </div>
                     {{-- End Judul --}}

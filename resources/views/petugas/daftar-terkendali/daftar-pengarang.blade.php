@@ -14,7 +14,7 @@
                     Pengarang
                 </p>
             </div>
-            <div>
+            <div class="flex">
                 <a href="/create-pengarang"
                     class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah
                     Pengarang Baru</a>
@@ -104,7 +104,7 @@
             {{-- End Section 4 --}}
         </form>
     </div>
-
+</div>
     <script>
         const selectAllBtn = document.getElementById('select-all');
         const deselectAllBtn = document.getElementById('deselect-all');

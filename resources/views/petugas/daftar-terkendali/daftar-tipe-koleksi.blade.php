@@ -14,7 +14,7 @@
                Tipe Koleksi
             </p>
         </div>
-        <div>
+        <div class="flex">
             <a href="/create-tipe-koleksi" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Tipe Koleksi</a>
         </div>
    </div>
@@ -42,7 +42,9 @@
     </div>
     {{-- End Section 2 --}}
     {{-- Section 3 --}}
-    <form action="">
+    <form action="{{ route('client.delete-colltypes') }}" method="POST">
+        @csrf
+        @method('DELETE')
         <div class="flex mb-4 py-3 px-4">
             <button type="submit"
                 class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Hapus Data
@@ -84,16 +86,16 @@
 
                        </td>
                        <td class="p-3">{{$colltype->title}}</td>
-                       <td class="p-3 w-46">{{$colltype->updated_at}}</td>
+                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($colltype->updated_at)) }}</td>
                     </tr>
                     @endforeach
                   </tbody>
                </table>
            </div>
            {{-- End Section 4 --}}
-    </form>
+        </form>
+    </div>
 </div>
-
 <script>
     const selectAllBtn = document.getElementById('select-all');
     const deselectAllBtn = document.getElementById('deselect-all');
