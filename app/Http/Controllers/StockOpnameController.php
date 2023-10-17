@@ -116,7 +116,7 @@ class StockOpnameController extends Controller
         })->count();
 
         $stockopname['total_eksemplar'] = $stocktakeitem->count();
-        $stockopname['total_eksemplar'] = $stocktakeitem->count();
+        // $stockopname['total_eksemplar'] = $stocktakeitem->count();
 
         // $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
         //     return $s->bookstatus->id==2||$s->bookstatus->id==3;

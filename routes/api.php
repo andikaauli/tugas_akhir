@@ -74,6 +74,7 @@ Route::post('/stockopname/add', [StockOpnameController::class, "addData"]);
 
 Route::post('/stocktakeitem', [StockTakeItemController::class, "editData"]);
 Route::get('/stocktakeitem', [StockTakeItemController::class, "getData"]);
+Route::post('/stocktakeitem/button', [StockTakeItemController::class, "editDataButton"]);
 
 Route::get('/type', [TypeController::class, "getData"]);
 
