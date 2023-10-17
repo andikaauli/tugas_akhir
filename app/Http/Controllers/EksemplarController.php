@@ -40,11 +40,11 @@ class EksemplarController extends Controller
             'item_code' => 'required|max:255|numeric',
             'rfid_code' => 'required|max:255',
             'order_number' => 'nullable|numeric|max:255',
-            'order_date' => 'nullable|max:255',
+            'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
-            'agent' => 'nullable|max:255',
+            'agent' => 'nullable|max:255|string',
             'source' => 'required',
-            'invoice' => 'nullable|max:255',
+            'invoice' => 'nullable|max:255|numeric',
             'price' => ['nullable', 'numeric'],
             'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
         ]);
@@ -63,11 +63,11 @@ class EksemplarController extends Controller
             'item_code' => 'required|max:255|numeric',
             'rfid_code' => 'required|max:255',
             'order_number' => 'nullable|numeric|max:255',
-            'order_date' => 'nullable|max:255',
+            'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
-            'agent' => 'nullable|max:255',
+            'agent' => 'nullable|max:255|string',
             'source' => 'required',
-            'invoice' => 'nullable|max:255',
+            'invoice' => 'nullable|max:255|numeric',
             'price' => ['nullable', 'numeric'],
             'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
         ]);

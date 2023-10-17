@@ -31,7 +31,7 @@ class Eksemplar extends Model
     }
 
     function loan() {
-        return $this->hasOne(Loan::class, 'eksemplar_id', 'id');
+        return $this->hasMany(Loan::class, 'eksemplar_id', 'id');
     }
 
     function stocktakeitem() {

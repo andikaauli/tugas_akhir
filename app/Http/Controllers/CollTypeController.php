@@ -38,7 +38,7 @@ class CollTypeController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|string',
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +53,7 @@ class CollTypeController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|string',
         ]);
 
         if ($validator->fails()) {
