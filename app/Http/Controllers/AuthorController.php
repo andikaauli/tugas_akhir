@@ -45,6 +45,7 @@ class AuthorController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
+            'born_date' => 'nullable|max:255',
         ]);
 
         if ($validator->fails()) {

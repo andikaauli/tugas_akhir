@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('author', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('born_date')->nullable();
             $table->timestamps();
             $table->softDeletes();  //buat softdelete
 
