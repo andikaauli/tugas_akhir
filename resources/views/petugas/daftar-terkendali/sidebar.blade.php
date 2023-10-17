@@ -41,11 +41,6 @@
            <p>DAFTAR REFERENSI</p>
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
-           <li class=" ">
-              <a href="/daftar-status" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
-                 <span class="flex-1 ml-3 whitespace-nowrap">Status Eksemplar</span>
-              </a>
-           </li>
            <li>
               <a href="/daftar-tipe-koleksi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Tipe Koleksi</span>

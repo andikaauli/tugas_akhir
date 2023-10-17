@@ -14,17 +14,16 @@
           </div>
        </div>
      {{-- End Section 1 --}}
-     <div class="justify-center items-center">
+    <div class="justify-center items-center">
         {{-- Search Bar --}}
-       <div class="flex items-center p-4">
-        <p class="mr-3 text-sm font-medium">Masukkan Kode Eksemplar</p>
-        <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="Search" aria-label="Search" aria-describedby="button-addon3"/>
-        {{-- Btn Search --}}
-        <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
-            Pinjam
-         </button>
-         {{-- End Btn Search --}}
+        <div class="flex items-center p-4">
+            <p class="mr-3 text-sm font-semibold">ID Anggota</p>
+            <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="Search" aria-label="Search" aria-describedby="button-addon3"/>
+            {{-- Btn Search --}}
+            <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">Mulai Transaksi</button>
+            {{-- End Btn Search --}}
         </div>
+        {{-- End Search Bar --}}
         <div class="bg-white mb-6">
            <div class="p-4">
               <button class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Selesai Transaksi</button>
@@ -87,6 +86,15 @@
             </div>
             <div class="content_box">
               <div class="content hidden bg-white animate-move duration-500 p-5 actived">
+                {{-- Search Bar --}}
+                <div class="flex items-center p-4">
+                    <p class="mr-3 text-sm font-medium">Masukkan Kode Eksemplar</p>
+                    <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="Search" aria-label="Search" aria-describedby="button-addon3"/>
+                    {{-- Btn Search --}}
+                    <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">Pinjam</button>
+                    {{-- End Btn Search --}}
+                </div>
+                {{-- End Search Bar --}}
                 <table class="table-auto w-full">
                     <thead class="p-3 border-b border-solid border-gray-200">
                        <tr class="text-sm">
