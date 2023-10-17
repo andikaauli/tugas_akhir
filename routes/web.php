@@ -111,15 +111,11 @@ Route::prefix("/eksemplar")->group(function () {
         $response = app()->handle($http);
         $response = $response->getContent();
 
-        $bibliografiReq = new Request();
-        $bibliografiReq = $bibliografiReq->create(config('app.api_url') . '/bibliografi/');
-        $bibliografiRes = app()->handle($bibliografiReq);
-        $bibliografiRes = $bibliografiRes->getContent();
 
         $eksemplar = json_decode($response);
-        $bibliografi = json_decode($response);
 
-        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar, 'bibliografi' => $bibliografi]);
+
+        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
     })->name('client.eksemplar');
 
     Route::delete('/delete', function (Request $request) {
