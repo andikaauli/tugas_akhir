@@ -18,11 +18,12 @@
         {{-- Section 2 --}}
         <div class="py-8 px-4 mb-4">
             {{-- Search Bar --}}
-            <div class="flex items-center ">
+            <div class="flex items-center">
                 <p class="mr-3">Cari</p>
-                <form action="{{ route('client.bibliografi') }}" method="GET">
-                    <input type="search" name="search"
-                        class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                <form class="m-0" action="{{ route('client.bibliografi') }}" method="GET">
+                    <div class="flex items-center">
+                        <input type="search" name="search"
+                        class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
                         value="{{ request('search') }}" placeholder="Search" aria-label="Search"
                         aria-describedby="button-addon3" />
                     {{-- Btn Search --}}
@@ -30,6 +31,7 @@
                         class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
                         Cari
                     </button>
+                    </div>
                 </form>
                 {{-- End Btn Search --}}
             </div>
@@ -67,13 +69,13 @@
 
                         @foreach ($bibliografi as $biblio)
                             <tr class="border-b border-solid border-gray-400">
-                                <td class="p-3">
+                                <td class="p-3 w-16">
                                     <div class="flex items-center justify-center">
                                         <input id="default-checkbox" type="checkbox" name="deletedBiblio[]"
                                             value="{{ $biblio->id }}" class="w-4 h-4  border-black rounded">
                                     </div>
                                 </td>
-                                <td class="p-3">
+                                <td class="p-3 w-20">
                                     <a href="{{ route('client.edit-bibliografi', ['id' => $biblio->id]) }}"
                                         class="flex items-center justify-center">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -86,19 +88,18 @@
                                 </td>
                                 <td class="p-3">
                                     <div class="flex">
-                                        <div class="bg-gray-500 w-12 h-16">
+                                        <img src="{{ $biblio->image}}" class="w-12 h-16">
 
-                                        </div>
+                                        </img>
                                         <div class="ml-4">
                                             <p class="text-sm font-medium">{{ $biblio->title }}</p>
-                                            <p class="text-sm font-medium text-gray-500">
-                                            </p>
+                                            <p class="text-sm font-medium text-gray-500"></p>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="p-3">{{ $biblio->isbnissn }}</td>
-                                <td class="p-3">3</td>
-                                <td class="p-3">2023-02-22 19:09:07</td>
+                                <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
+                                <td class="p-3 w-16 text-center">3</td>
+                                <td class="p-3 w-52">{{ $biblio->updated_at}}</td>
                             </tr>
                         @endforeach
                         @foreach ($bibliografi as $biblio)

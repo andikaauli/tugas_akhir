@@ -268,9 +268,189 @@
         </div>
         {{-- End Section 4 --}}
         {{-- Section 5 --}}
-        <div>
+        {{-- Tambah Eksemplar --}}
+        <div class="border-2 rounded-2xl border-solid border-gray-300">
 
+            <div class="p-3">
+                {{-- Btn Simpan --}}
+                <div class="m-3">
+                    <button class="text-sm py-2 px-3 rounded-md bg-blue-600 text-white font-semibold">Simpan</button>
+                </div>
+                {{-- Btn Simpan --}}
+                {{-- Judul --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Judul</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End Judul --}}
+                {{-- Kode RFID --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Kode RFID</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End Kode RFID --}}
+                {{-- Kode Eksemplar --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Kode Eksemplar</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End Kode Eksemplar --}}
+                {{-- No. Panggil --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>No. Panggil</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End No. Panggil --}}
+                {{-- Tipe Koleksi --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Tipe Koleksi</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <div class="" style="width:200px;">
+                            <select
+                                class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
+                                <option value="0">Tipe Koleksi</option>
+                                <option value="1">Audi</option>
+                                <option value="2">BMW</option>
+                                <option value="3">Citroen</option>
+                                <option value="4">Ford</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{-- End Tipe Koleksi --}}
+                {{-- Status --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Status</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <div class="" style="width:200px;">
+                            <select
+                                class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
+                                <option value="0">Status Eksemplar</option>
+                                <option value="1">Audi</option>
+                                <option value="2">BMW</option>
+                                <option value="3">Citroen</option>
+                                <option value="4">Ford</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{-- End Status --}}
+                {{-- No. Pemesanan --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>No. Pemesanan</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End No. Pemesanan --}}
+                {{-- Tanggal Pemesanan --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Tanggal Pemesanan</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input
+                            class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                            type="date" name="dateofbirth" id="dateofbirth">
+                    </div>
+                </div>
+                {{-- End Tanggal Pemesanan --}}
+                {{-- Tanggal Penerimaan --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Tanggal Penerimaan</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input
+                            class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                            type="date" name="dateofbirth" id="dateofbirth">
+                    </div>
+                </div>
+                {{-- End Tanggal Penerimaan --}}
+                {{-- Agen --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Agen</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End Agen --}}
+                {{-- Sumber Perolehan --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Sumber Perolehan</p>
+                    </div>
+                    <div class="flex text-sm px-4 py-3">
+                        <div class="flex items-center justify-center">
+                            <input class="mr-2" type="radio" name="" id="">
+                            <label class="mr-3" for="">Beli</label>
+                            <input class="mr-2" type="radio" name="" id="">
+                            <label for="">Hadiah/Hibah</label>
+                        </div>
+                    </div>
+                </div>
+                {{-- End Sumber Perolehan --}}
+                {{-- Faktur --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Faktur</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End Faktur --}}
+                {{-- Harga --}}
+                <div class="flex">
+                    <div class="px-4 py-3 font-bold text-sm w-44">
+                        <p>Harga</p>
+                    </div>
+                    <div class="px-4 py-3">
+                        <input type="text" id="small-input"
+                            class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                </div>
+                {{-- End Harga --}}
+
+            </div>
+            {{-- Footer --}}
+            <div class="bg-black p-6 rounded-b-2xl">
+                <p class="text-white text-center font-bold text-sm">Eksemplar/Kopi</p>
+            </div>
+            {{-- End Footer --}}
         </div>
+        {{-- End Tambah Eksemplar --}}
         {{-- End Section 5 --}}
         <div class="justify-center items-center">
             {{-- Search Bar --}}
@@ -343,6 +523,7 @@
                </div>
             </div>
             {{-- Tabs --}}
+            {{-- Section 6 --}}
             <div class="container ">
                 <div class="tab_box w-full flex items-center border-b border-gray-200 relative">
                 <div class="p-3"></div>
@@ -458,6 +639,34 @@
                 })
             </script>
         </div>
+        {{-- Section 7 --}}
+        <div class="h-24 border-3 border-black m-4 px-3 py-2 overflow-auto">
+            <div class="flex flex-row border-b border-gray-200">
+                <div class="basis-1/2 p-2">
+                     <p class="text-sm font-medium">B00002</p>
+                </div>
+                <div class="basis-1/2 p-2">
+                    <p class="text-sm font-medium">B00002</p>
+                </div>
+            </div>
+            <div class="flex flex-row border-b border-gray-200">
+                <div class="basis-1/2 p-2">
+                     <p class="text-sm font-medium">B00002</p>
+                </div>
+                <div class="basis-1/2 p-2">
+                    <p class="text-sm font-medium">B00002</p>
+                </div>
+            </div>
+            <div class="flex flex-row border-b border-gray-200">
+                <div class="basis-1/2 p-2">
+                     <p class="text-sm font-medium">B00002</p>
+                </div>
+                <div class="basis-1/2 p-2">
+                    <p class="text-sm font-medium">B00002</p>
+                </div>
+            </div>
+        </div>
+        {{-- End Section 7 --}}
      </div>
   </div>
 @vite('resources/js/app.js')

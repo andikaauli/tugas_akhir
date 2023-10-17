@@ -16,7 +16,7 @@
      {{-- End Section 1 --}}
      <div class="py-8 px-4 mb-4">
         {{-- Search Bar --}}
-           <div class="flex items-center ">
+           <div class="flex items-center">
               <p class="mr-3">Cari</p>
               <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
                  placeholder="Search"
