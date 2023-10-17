@@ -22,17 +22,15 @@ class AuthorController extends Controller
     public function showData($id)
     {
         $author = Author::findOrFail($id);
-
         return response()->json($author, 200);
     }
 
     public function addData(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|string',
+            'born_date' => 'nullable|max:255|date',
         ]);
-
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -45,7 +43,7 @@ class AuthorController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|string',
             'born_date' => 'nullable|max:255',
         ]);
 
@@ -57,7 +55,6 @@ class AuthorController extends Controller
         return response()
             ->json(['message' => 'Data Pengarang berhasil diubah!', 'data' => $author]);
     }
-
 
     public function destroyData(Request $request, $id)
     { //hard delete
@@ -73,16 +70,4 @@ class AuthorController extends Controller
         return response()
             ->json(['message' => 'Data Pengarang' . ($request->title) . ' berhasil dihapus!', 'data' => $author]);
     }
-
-    //soft delete
-    // public function destroyData(Request $request, $id)
-    // {
-    //     $author = Author::find($id);
-    //     $author->delete();
-    //     return response()
-    //         ->json(['message'=>'Data Pengarang '.($request->title).' berhasil dihapus!', 'data'=>$author]);
-    // }
-
-
-
 }

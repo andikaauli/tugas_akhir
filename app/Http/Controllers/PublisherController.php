@@ -26,20 +26,11 @@ class PublisherController extends Controller
         return response()->json($publisher, 200);
     }
 
-    // public function showData($id)
-    // {
-    //     $publisher = Publisher::all()->find($id);
-    //     if(is_null($publisher)){
-    //         return abort(422);
-    //     }
-    //     return response()->json($publisher, 200);
-    // }
-
     public function addData(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|string',
         ]);
 
         if ($validator->fails()) {
@@ -54,7 +45,7 @@ class PublisherController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|string',
         ]);
 
         if ($validator->fails()) {

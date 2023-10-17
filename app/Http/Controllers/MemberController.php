@@ -41,15 +41,15 @@ class MemberController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'nim' => 'required|max:255|numeric','unique:member',
-            'gender' => 'required|max:255',
-            'birth_date' => 'required|max:255',
+            'name' => 'required|max:255|string',
+            'nim' => 'required|min:14|numeric','unique:member',
+            'gender' => 'required',
+            'birth_date' => 'required|date',
             'address' => 'required|max:255',
             'email' => 'required|max:255|email','unique:member',
-            'instituion' => 'required|max:255',
+            'instituion' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'required|max:255|numeric',
+            'phone' => 'required|min:11|numeric','unique:member',
         ]);
 
         if ($request->hasFile('image')) {
@@ -70,15 +70,15 @@ class MemberController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'nim' => 'required|max:255|numeric','unique:member',
-            'gender' => 'required|max:255',
-            'birth_date' => 'required|max:255',
+            'name' => 'required|max:255|string',
+            'nim' => 'required|min:14|numeric','unique:member',
+            'gender' => 'required',
+            'birth_date' => 'required|date',
             'address' => 'required|max:255',
             'email' => 'required|max:255|email','unique:member',
-            'instituion' => 'required|max:255',
+            'instituion' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'required|max:255|numeric',
+            'phone' => 'required|min:11|numeric','unique:member',
         ]);
 
         if ($validator->fails()) {

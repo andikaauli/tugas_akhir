@@ -30,11 +30,11 @@ class UserController extends Controller
     {//jika dibutuhkan tambah data
 
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|max:255|string',
-            'username' => 'nullable|max:255','unique:user',
-            'password' => 'nullable|min:8',
+            'name' => 'required|max:255|string',
+            'username' => 'required|max:255','unique:user',
+            'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
-            'email' => 'nullable|max:255|email','unique:user',
+            'email' => 'required|max:255|email','unique:user',
         ]);
 
         if ($validator->fails()) {
@@ -50,11 +50,11 @@ class UserController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|max:255|string',
-            'username' => 'nullable|max:255','unique:user',
-            'password' => 'nullable|min:8',
+            'name' => 'required|max:255|string',
+            'username' => 'required|max:255','unique:user',
+            'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
-            'email' => 'nullable|max:255|email','unique:user',
+            'email' => 'required|max:255|email','unique:user',
         ]);
 
         if ($validator->fails()) {

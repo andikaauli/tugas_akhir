@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('item_code')->unique();
             $table->string('rfid_code')->unique();
             $table->string('order_number')->nullable();
-            $table->date('order_date');
-            $table->date('receipt_date');
+            $table->date('order_date')->nullable();
+            $table->date('receipt_date')->nullable();
             $table->string('agent')->nullable();
             $table->enum('source', ['Beli', 'Hadiah']);
             $table->string('invoice')->nullable();

@@ -38,14 +38,14 @@ class EksemplarController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'item_code' => 'required|max:255|numeric',
-            'rfid_code' => 'required',
-            'order_number' => 'nullable|numeric',
-            'order_date' => 'required',
-            'receipt_date' => 'required',
-            'agent' => 'nullable',
+            'rfid_code' => 'required|max:255',
+            'order_number' => 'nullable|numeric|max:255',
+            'order_date' => 'nullable|max:255',
+            'receipt_date' => 'nullable|date',
+            'agent' => 'nullable|max:255',
             'source' => 'required',
-            'invoice' => 'nullable',
-            'price' => ['required', 'numeric'],
+            'invoice' => 'nullable|max:255',
+            'price' => ['nullable', 'numeric'],
             'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
         ]);
 
@@ -60,16 +60,16 @@ class EksemplarController extends Controller
     public function editData(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'item_code' => 'required|max:255',
-            'rfid_code' => 'required',
-            'order_number' => 'nullable',
-            'order_date' => 'required',
-            'receipt_date' => 'required',
-            'agent' => 'nullable',
+            'item_code' => 'required|max:255|numeric',
+            'rfid_code' => 'required|max:255',
+            'order_number' => 'nullable|numeric|max:255',
+            'order_date' => 'nullable|max:255',
+            'receipt_date' => 'nullable|date',
+            'agent' => 'nullable|max:255',
             'source' => 'required',
-            'invoice' => 'nullable',
-            'price' => ['required', 'numeric'],
-            'book_status_id' => ['required', 'exists:bookstatus,id'], //bentukan kalo ada foreign
+            'invoice' => 'nullable|max:255',
+            'price' => ['nullable', 'numeric'],
+            'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
         ]);
 
         if ($validator->fails()) {

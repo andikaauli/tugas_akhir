@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('instituion');
             $table->string('image');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->softDeletes();  //buat softdelete
             $table->timestamps();
         });

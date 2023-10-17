@@ -15,21 +15,21 @@ return new class extends Migration
     {
         Schema::create('biblio', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title')->nullable();
+            $table->string('title');
             $table->string('responsibility')->nullable();
-            $table->string('edition');
-            $table->string('spec_detail');
-            $table->string('gmd');
+            $table->string('edition')->nullable();
+            $table->string('spec_detail')->nullable();
+            $table->string('gmd')->nullable();
             $table->string('content_type')->nullable();
             $table->string('carrier_type')->nullable();
             $table->date('date')->nullable();
-            $table->string('isbnissn')->unique();
-            $table->string('place');
-            $table->string('description');
-            $table->string('title_series');
-            $table->string('classification');
-            $table->string('call_number')->unique();
-            $table->string('language');
+            $table->string('isbnissn')->unique()->nullable();
+            $table->string('place')->nullable();
+            $table->string('description')->nullable();
+            $table->string('title_series')->nullable();
+            $table->string('classification')->nullable();
+            $table->string('call_number')->unique()->nullable();
+            $table->string('language')->nullable();
             $table->string('abstract')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

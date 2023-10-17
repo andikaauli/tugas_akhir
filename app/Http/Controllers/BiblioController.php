@@ -14,10 +14,12 @@ class BiblioController extends Controller
     {
         $search = $request->search;
         $biblio = Biblio::with(['eksemplar.bookstatus', 'author', 'colltype', 'publisher'])->get();
+
         if ($search) {
             $biblio = Biblio::where('title', 'LIKE', "%$search%")
                 ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
         }
+
         return response()->json($biblio, 200);
     }
 
@@ -34,23 +36,23 @@ class BiblioController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
-            'responsibility' => 'nullable',
-            'edition' => 'required',
-            'spec_detail' => 'nullable',
-            'coll_type_id' => ['required', 'exists:coll_type,id'], //bentukan kalo ada foreign
-            'gmd' => 'nullable',
-            'content_type' => 'nullable',
-            'carrier_type' => 'nullable',
-            'date' => 'nullable',
-            'isbnissn' => ['required', 'unique:biblio', 'numeric'],
-            'publisher_id' => ['required', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
-            'place' => 'nullable',
-            'description' => 'nullable',
-            'title_series' => 'nullable',
-            'classification' => 'required',
-            'call_number' => ['required', 'unique:biblio', 'numeric'],
-            'language' => 'required',
-            'abstract' => 'nullable',
+            'responsibility' => 'nullable|max:255',
+            'edition' => 'nullable|max:255',
+            'spec_detail' => 'nullable|max:255',
+            'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
+            'gmd' => 'nullable|max:255',
+            'content_type' => 'nullable|max:255',
+            'carrier_type' => 'nullable|max:255',
+            'date' => 'nullable|date',
+            'isbnissn' => ['nullable', 'unique:biblio', 'numeric'],
+            'publisher_id' => ['nullable', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
+            'place' => 'nullable|max:255',
+            'description' => 'nullable|max:255',
+            'title_series' => 'nullable|max:255',
+            'classification' => 'nullable|max:255',
+            'call_number' => ['nullable', 'unique:biblio', 'numeric'],
+            'language' => 'nullable',
+            'abstract' => 'nullable|max:255',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
@@ -75,26 +77,26 @@ class BiblioController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'nullable|max:255',
-            'responsibility' => 'nullable',
-            'edition' => 'nullable',
-            'spec_detail' => 'nullable',
-            'gmd' => 'nullable',
-            'content_type' => 'nullable',
-            'carrier_type' => 'nullable',
-            'date' => 'nullable',
+            'title' => 'required|max:255',
+            'author_id' => ['required', 'exists:author,id'], //bentukan kalo ada foreign
+            'responsibility' => 'nullable|max:255',
+            'edition' => 'nullable|max:255',
+            'spec_detail' => 'nullable|max:255',
+            'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
+            'gmd' => 'nullable|max:255',
+            'content_type' => 'nullable|max:255',
+            'carrier_type' => 'nullable|max:255',
+            'date' => 'nullable|date',
             'isbnissn' => ['nullable', 'unique:biblio', 'numeric'],
-            'place' => 'nullable',
-            'description' => 'nullable',
-            'title_series' => 'nullable',
-            'classification' => 'nullable',
+            'publisher_id' => ['nullable', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
+            'place' => 'nullable|max:255',
+            'description' => 'nullable|max:255',
+            'title_series' => 'nullable|max:255',
+            'classification' => 'nullable|max:255',
             'call_number' => ['nullable', 'unique:biblio', 'numeric'],
             'language' => 'nullable',
-            'image' => 'nullable|image|max:10240|mimes:jpeg,png,jpg',
-            'author_id' => ['nullable', 'exists:author,id'], //bentukan kalo ada foreign
-            'coll_type_id' => ['nullable', 'exists:coll_type,id'], //bentukan kalo ada foreign
-            'publisher_id' => ['nullable', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
-
+            'abstract' => 'nullable|max:255',
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
         if ($validator->fails()) {
@@ -117,18 +119,6 @@ class BiblioController extends Controller
         return response()
             ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
     }
-
-    // public function hapusData(Request $request, $id)
-    // { //soft delete
-    //     $biblio = Biblio::find($id);
-    //     $biblio->delete();
-    // }
-
-    // public function destroyData(Request $request, $id)
-    // { //hard delete
-    //     $biblio = Biblio::onlyTrashed()->find($id);
-    //     $biblio->forceDelete();
-    // }
 
     public function destroyData(Request $request, $id)
     { //hard delete
