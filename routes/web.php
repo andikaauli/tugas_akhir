@@ -16,6 +16,8 @@ use App\Http\Controllers\StockTakeItemController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitorController;
+use App\Models\BookStatus;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,9 +113,21 @@ Route::prefix("/eksemplar")->group(function () {
         $response = app()->handle($http);
         $response = $response->getContent();
 
-
         $eksemplar = json_decode($response);
 
+        // ! Nyoba BookStatus
+        // ! Dari API
+        $bs = new Request();
+        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
+        $bsres = app()->handle($bs);
+        $bsres = $bsres->getContent();
+        $bsApi = json_decode($bsres);
+
+        // ! Dari Model Langsung
+        $bookstatus = BookStatus::all();
+
+        dd($bsApi, $bookstatus->toArray());
+        // ! Nyoba BookStatus
 
         return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
     })->name('client.eksemplar');
