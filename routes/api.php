@@ -82,6 +82,11 @@ Route::prefix("publisher")->group(function () {
     Route::delete('/destroy/{id}', [PublisherController::class, "destroyData"]);
 });
 
+Route::prefix("rfidtemp")->group(function () {
+    Route::get('', [RfidTempController::class, "getData"]);
+    Route::post('/add', [RfidTempController::class, "addData"]);
+});
+
 Route::prefix("stockopname")->group(function () {
     Route::get('', [StockOpnameController::class, "getData"]);
     Route::get('/{id}', [StockOpnameController::class, "showData"]);
@@ -110,9 +115,4 @@ Route::prefix("visitor")->group(function () {
     Route::get('', [VisitorController::class, "getData"]);
     Route::get('/{id}', [VisitorController::class, "showData"]);
     Route::post('/add', [VisitorController::class, "addData"]);
-});
-
-Route::prefix("rfidtemp")->group(function () {
-    Route::get('', [RfidTempController::class, "getData"]);
-    Route::post('/add', [RfidTempController::class, "addData"]);
 });

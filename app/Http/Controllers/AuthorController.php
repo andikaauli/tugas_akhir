@@ -31,9 +31,11 @@ class AuthorController extends Controller
             'title' => 'required|max:255|string',
             'born_date' => 'nullable|max:255|date',
         ]);
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         $author = Author::create($request->all());
         return response()
             ->json(['message' => 'Pengarang baru berhasil ditambahkan!', 'data' => $author]);
@@ -50,6 +52,7 @@ class AuthorController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         $author = Author::find($id);
         $author->update($request->all());
         return response()
