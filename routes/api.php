@@ -26,15 +26,15 @@ Route::post('/author/add', [AuthorController::class, "addData"]);
 Route::post('/author/edit/{id}', [AuthorController::class, "editData"]);
 Route::delete('/author/destroy/{id}', [AuthorController::class, "destroyData"]);
 
-Route::get('/biblio', [BiblioController::class, "getData"]);
-Route::get('/biblio/{id}', [BiblioController::class, "showData"]);
-Route::post('/biblio/add', [BiblioController::class, "addData"]);
-Route::post('/biblio/edit/{id}', [BiblioController::class, "editData"]);
-Route::delete('/biblio/destroy/{id}', [BiblioController::class, "destroyData"]);
+Route::prefix("biblio")->group(function () {
+    Route::get('', [BiblioController::class, "getData"]);
+    Route::get('/{id}', [BiblioController::class, "showData"]);
+    Route::post('/add', [BiblioController::class, "addData"]);
+    Route::post('/edit/{id}', [BiblioController::class, "editData"]);
+    Route::delete('/destroy/{id}', [BiblioController::class, "destroyData"]);
+});
 
 Route::get('/bookstatus', [BookStatusController::class, "getData"]);
-
-
 
 Route::get('/colltype', [CollTypeController::class, "getData"]);
 Route::get('/colltype/{id}', [CollTypeController::class, "showData"]);
@@ -74,7 +74,7 @@ Route::post('/stockopname/add', [StockOpnameController::class, "addData"]);
 
 Route::post('/stocktakeitem', [StockTakeItemController::class, "editData"]);
 Route::get('/stocktakeitem', [StockTakeItemController::class, "getData"]);
-Route::post('/stocktakeitem/button', [StockTakeItemController::class, "editDataButton"]);
+Route::post('/stocktakeitem/{item_code}', [StockTakeItemController::class, "editDataButton"]);
 
 Route::get('/type', [TypeController::class, "getData"]);
 

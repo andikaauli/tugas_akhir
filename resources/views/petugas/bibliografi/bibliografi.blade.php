@@ -23,14 +23,14 @@
                 <form class="m-0" action="{{ route('client.bibliografi') }}" method="GET">
                     <div class="flex items-center">
                         <input type="search" name="search"
-                        class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        value="{{ request('search') }}" placeholder="Search" aria-label="Search"
-                        aria-describedby="button-addon3" />
-                    {{-- Btn Search --}}
-                    <button type="submit"
-                        class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
-                        Cari
-                    </button>
+                            class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                            value="{{ request('search') }}" placeholder="Search" aria-label="Search"
+                            aria-describedby="button-addon3" />
+                        {{-- Btn Search --}}
+                        <button type="submit"
+                            class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
+                            Cari
+                        </button>
                     </div>
                 </form>
                 {{-- End Btn Search --}}
@@ -88,7 +88,7 @@
                                 </td>
                                 <td class="p-3">
                                     <div class="flex">
-                                        <img src="{{ $biblio->image}}" class="w-12 h-16">
+                                        <img src="{{ $biblio->image }}" class="w-12 h-16">
 
                                         </img>
                                         <div class="ml-4">
@@ -98,8 +98,8 @@
                                     </div>
                                 </td>
                                 <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
-                                <td class="p-3 w-16 text-center">3</td>
-                                <td class="p-3 w-52">{{ $biblio->updated_at}}</td>
+                                <td class="p-3 w-16 text-center">{{ count($biblio->eksemplar) }}</td>
+                                <td class="p-3 w-52">{{ $biblio->updated_at }}</td>
                             </tr>
                         @endforeach
                         @foreach ($bibliografi as $biblio)
@@ -134,7 +134,7 @@
                                     </div>
                                 </td>
                                 <td class="p-3">{{ $biblio->isbnissn }}</td>
-                                <td class="p-3">3</td>
+                                <td class="p-3">{{ count($biblio->eksemplar) }}</td>
                                 <td class="p-3">2023-02-22 19:09:07</td>
                             </tr>
                         @endforeach

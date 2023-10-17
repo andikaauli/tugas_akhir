@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('biblio', function (Blueprint $table) {
-            $table->foreignid('author_id')->constrained('author');
+            $table->foreignid('author_id')->nullable()->constrained('author')->nullOnDelete();
             $table->foreignid('coll_type_id')->constrained('coll_type');
             $table->foreignid('publisher_id')->constrained('publisher');
         });
