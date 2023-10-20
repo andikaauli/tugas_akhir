@@ -14,8 +14,8 @@
         </div>
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.create-bibliografi') }}" method="POST" class="h-full">
-
+        <form action="{{ route('client.create-bibliografi')}}" method="POST" class="m-0 p-0">
+            @method('PUT')
             @csrf
             {{-- Judul --}}
             <div class="flex border-y border-solid border-gray-300">
@@ -44,11 +44,13 @@
                     <div class="" style="width:200px;">
                         <select
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
-                            <option value="0">Pilih Pengarang</option>
-                            <option value="1">Audi</option>
-                            <option value="2">BMW</option>
-                            <option value="3">Citroen</option>
-                            <option value="4">Ford</option>
+                            @foreach ($pengarang as $option)
+                                <option value="{{ $option->id }}"
+                                    {{-- {{ $bibliografi->author_id == $option->id ? 'selected' : '' }}> --}}>
+                                    {{ $option->title }}
+
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     @error('author_id')
@@ -182,11 +184,11 @@
                     <div class="" style="width:200px;">
                         <select
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
-                            <option value="0">Penerbit</option>
-                            <option value="1">Audi</option>
-                            <option value="2">BMW</option>
-                            <option value="3">Citroen</option>
-                            <option value="4">Ford</option>
+                            @foreach ($publishers as $publisher)
+                                <option value="{{ $publisher->id }}">
+                                    {{ $publisher->title }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

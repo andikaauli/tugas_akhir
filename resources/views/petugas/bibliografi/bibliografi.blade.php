@@ -99,10 +99,10 @@
                                 </td>
                                 <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
                                 <td class="p-3 w-16 text-center">{{ count($biblio->eksemplar) }}</td>
-                                <td class="p-3 w-52">{{ $biblio->updated_at }}</td>
+                                <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at )) }}</td>
                             </tr>
                         @endforeach
-                        @foreach ($bibliografi as $biblio)
+                        {{-- @foreach ($bibliografi as $biblio)
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3">
                                     <div class="flex items-center justify-center">
@@ -137,7 +137,7 @@
                                 <td class="p-3">{{ count($biblio->eksemplar) }}</td>
                                 <td class="p-3">2023-02-22 19:09:07</td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
