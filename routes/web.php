@@ -33,12 +33,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix("/bibliografi")->group(function() {
+Route::prefix("/bibliografi")->group(function () {
     Route::get('/', [BiblioController::class, 'getBiblio'])->name('client.bibliografi');
     Route::delete('/delete', [BiblioController::class, 'destroy'])->name('client.delete-bibliografi');
     Route::get('/create', [BiblioController::class, 'create']);
-    Route::post('/create',[BiblioController::class, 'store'])->name('client.create-bibliografi');
-    Route::get('/edit/{id}',[BiblioController::class, 'edit'])->name('client.edit-bibliografi');
+    Route::post('/create', [BiblioController::class, 'store'])->name('client.create-bibliografi');
+    Route::get('/edit/{id}', [BiblioController::class, 'edit'])->name('client.edit-bibliografi');
     Route::put('/edit/{id}', [BiblioController::class, 'update']);
 });
 
@@ -54,7 +54,8 @@ Route::prefix("/eksemplar")->group(function () {
 
         $eksemplar = json_decode($response);
 
-        // dd($eksemplar);
+        dd(collect($eksemplar)->paginate(5));
+
         // ! Nyoba BookStatus
         // ! Dari API
         $bs = new Request();
@@ -141,7 +142,7 @@ Route::put('/edit-eksemplar/{id}', function (Request $request, $id) {
     return redirect()->route('client.eksemplar');
 });
 
-Route::get('/eksemplar-keluar',function (Request $request) {
+Route::get('/eksemplar-keluar', function (Request $request) {
     $search = $request->search;
     $http = new Request();
     $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
