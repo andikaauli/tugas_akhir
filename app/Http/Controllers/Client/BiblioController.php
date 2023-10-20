@@ -135,6 +135,8 @@ class BiblioController extends Controller
         $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'GET', $request->all());
         $response = app()->handle($http);
 
+        dd($http);
+
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
          // throw ValidationException::withMessages((array) json_decode($response->getContent()));
