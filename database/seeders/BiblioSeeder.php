@@ -26,6 +26,7 @@ class BiblioSeeder extends Seeder
             'title' => $faker->word(),
             'author_id' => Author::create([
                 'title'=> $faker->word(),
+                'born_date'=> $faker->date(),
             ])->id,
             'responsibility' => $faker->word(),
             'edition' => $faker->word(),
@@ -35,6 +36,7 @@ class BiblioSeeder extends Seeder
             ])->id,
             'gmd' => $faker->word(),
             'content_type' => $faker->word(),
+            'media_type' => $faker->word(),
             'carrier_type' => $faker->word(),
             'date' => $faker->date(),
             'isbnissn' => $faker->randomNumber(),

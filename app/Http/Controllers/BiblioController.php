@@ -42,6 +42,7 @@ class BiblioController extends Controller
             'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'gmd' => 'nullable|max:255',
             'content_type' => 'nullable|max:255',
+            'media_type' => 'nullable|max:255',
             'carrier_type' => 'nullable|max:255',
             'date' => 'nullable|date',
             'isbnissn' => ['nullable', 'unique:biblio', 'numeric'],

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('spec_detail')->nullable();
             $table->string('gmd')->nullable();
             $table->string('content_type')->nullable();
+            $table->string('media_type')->nullable();
             $table->string('carrier_type')->nullable();
             $table->date('date')->nullable();
             $table->string('isbnissn')->unique()->nullable();

@@ -75,7 +75,7 @@ class BiblioController extends Controller
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-         }
+        }
 
         return redirect()->route('client.bibliografi');
     }
@@ -119,7 +119,7 @@ class BiblioController extends Controller
         $publisher = json_decode($publisherRes);
 
 
-    return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher]);
+        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher]);
     }
 
     /**
@@ -132,15 +132,27 @@ class BiblioController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'GET', $request->all());
+        $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'POST', $request->except('_method'));
+
+
+        // ? 2 Cara filter request
+        // ? EXCEPT from Request
+        // $request->except('_method')
+
+        // ? Array Filter
+        // array_filter($request->all(), function ($key) {
+        //     return $key != '_method';
+        // }, ARRAY_FILTER_USE_KEY);
+
         $response = app()->handle($http);
 
         dd($http);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-         // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+            // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
+
 
         return redirect()->route('client.bibliografi');
     }

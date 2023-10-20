@@ -3,13 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoanController;
-use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BiblioController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\CollTypeController;
+use App\Http\Controllers\RfidTempController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookStatusController;
@@ -61,8 +61,9 @@ Route::prefix("loan")->group(function () {
     Route::get('', [LoanController::class, "getData"]);
     Route::get('/{id}', [LoanController::class, "showData"]);
     Route::post('/add/{id}', [LoanController::class, "peminjaman"]);
-    Route::post('/perpanjang/{id}', [LoanController::class, "perpanjang"]);
     Route::post('/pengembalian/{id}', [LoanController::class, "pengembalian"]);
+    Route::post('/pengembaliankilat', [LoanController::class, "pengembalianButton"]);
+    Route::post('/perpanjang/{id}', [LoanController::class, "perpanjang"]);
     Route::delete('/destroy/{id}', [LoanController::class, "destroyData"]);
 });
 
@@ -99,8 +100,6 @@ Route::prefix("stocktakeitem")->group(function () {
     Route::post('/edit', [StockTakeItemController::class, "editData"]);
     Route::post('/button', [StockTakeItemController::class, "editDataButton"]);
 });
-
-Route::get('/type', [TypeController::class, "getData"]);
 
 Route::prefix("user")->group(function () {
     Route::get('', [UserController::class, "getData"]);
