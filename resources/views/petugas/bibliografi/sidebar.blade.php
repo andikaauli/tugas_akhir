@@ -26,7 +26,7 @@
               </a>
            </li>
            <li>
-              <a href="/create-bibliografi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/bibliografi/create" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Tambah Bibliografi Baru</span>
               </a>
            </li>

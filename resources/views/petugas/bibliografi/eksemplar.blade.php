@@ -90,13 +90,13 @@
                             <td class="p-3">
                                 <div class="">
                                     <p class="text-sm font-medium">{{ $eks->biblio->title }}</p>
-                                    <p class="text-sm font-medium text-gray-500">Douglas, Korry - Douglas, Susan
+                                    <p class="text-sm font-medium text-gray-500">{{$eks->biblio->author->title}}
                                     </p>
                                 </div>
                             </td>
-                            <td class="p-3 w-32">Reference</td>
-                            <td class="p-3 w-28">005.75/85-22 Korp</td>
-                            <td class="p-3 w-46">{{ $eks->updated_at }}</td>
+                            <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td>
+                            <td class="p-3 w-28">{{$eks->biblio->call_number}}</td>
+                            <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime( $eks->updated_at )) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

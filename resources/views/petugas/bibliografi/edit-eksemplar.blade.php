@@ -28,9 +28,8 @@
                             <p>:</p>
                         </div>
                         <div class="flex flex-auto items-stretch px-4 py-3">
-                            @foreach ($bibliografi as $biblio)
-                                <p class="text-sm font-medium">{{$biblio->title}}</p>
-                            @endforeach
+                            {{-- @dd($eksemplar) --}}
+                                <p class="text-sm font-medium">Judul</p>
                         </div>
                     </div>
                     {{-- End Judul --}}
@@ -71,7 +70,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input"
+                            <input type="text" id="small-input" value=""
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -88,11 +87,13 @@
                             <div class="" style="width:200px;">
                                 <select
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
-                                    <option value="0">Status Eksemplar</option>
-                                    <option value="1">Audi</option>
-                                    <option value="2">BMW</option>
-                                    <option value="3">Citroen</option>
-                                    <option value="4">Ford</option>
+
+                                    @foreach ($status as $option)
+                                    <option value="{{ $option->id }}"
+                                        {{ $eksemplar->book_status_id == $option->id ? 'selected' : '' }}>
+                                        {{ $option->name }}
+                                    </option>
+                            @endforeach
                                 </select>
                             </div>
                         </div>
@@ -141,7 +142,7 @@
                         <div class="px-4 py-3">
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                                type="date" name="dateofbirth" id="dateofbirth">
+                                type="date" name="dateofbirth" id="dateofbirth" value="{{ $eksemplar->receipt_date }}">
                         </div>
                     </div>
                     {{-- End Tanggal Penerimaan --}}
@@ -154,7 +155,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input"
+                            <input type="text" id="small-input" value="{{ $eksemplar->agent }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>

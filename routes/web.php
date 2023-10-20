@@ -33,77 +33,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/bibliografi', [BiblioController::class, 'getBiblio'])->name('client.bibliografi');
-
-Route::delete('/bibliografi/delete', function (Request $request) {
-    $deletedBiblioIdList = $request->deletedBiblio;
-
-    if (!$deletedBiblioIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedBiblioIdList as $biblioId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/destroy/' . $biblioId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.bibliografi');
-})->name('client.delete-bibliografi');
-
-Route::get('/create-bibliografi', function () {
-    return view('petugas/bibliografi/create-bibliografi');
+Route::prefix("/bibliografi")->group(function() {
+    Route::get('/', [BiblioController::class, 'getBiblio'])->name('client.bibliografi');
+    Route::delete('/delete', [BiblioController::class, 'destroy'])->name('client.delete-bibliografi');
+    Route::get('/create', [BiblioController::class, 'create']);
+    Route::post('/create',[BiblioController::class, 'store'])->name('client.create-bibliografi');
+    Route::get('/edit/{id}',[BiblioController::class, 'edit'])->name('client.edit-bibliografi');
+    Route::put('/edit/{id}', [BiblioController::class, 'update']);
 });
 
-Route::post('/create-bibliografi', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all());
-    $response = app()->handle($http);
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.bibliografi');
-})->name('client.create-bibliografi');
-
-Route::get('/edit-bibliografi/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/biblio/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $pengarangReq = new Request();
-    $pengarangReq = $pengarangReq->create(config('app.api_url') . '/author/');
-    $pengarangRes = app()->handle($pengarangReq);
-    $pengarangRes = $pengarangRes->getContent();
-
-    $publisherReq = new Request();
-    $publisherReq = $publisherReq->create(config('app.api_url') . '/publisher/');
-    $publisherRes = app()->handle($publisherReq);
-    $publisherRes = $publisherRes->getContent();
-
-    $bibliografi = json_decode($response);
-    $pengarang = json_decode($pengarangRes);
-    $publisher = json_decode($publisherRes);
-
-
-    return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher]);
-})->name('client.edit-bibliografi');
-
-Route::put('/edit-bibliografi/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.bibliografi');
-});
 
 Route::prefix("/eksemplar")->group(function () {
     Route::get('/', function (Request $request) {
@@ -115,6 +54,7 @@ Route::prefix("/eksemplar")->group(function () {
 
         $eksemplar = json_decode($response);
 
+        // dd($eksemplar);
         // ! Nyoba BookStatus
         // ! Dari API
         $bs = new Request();
@@ -126,8 +66,8 @@ Route::prefix("/eksemplar")->group(function () {
         // ! Dari Model Langsung
         $bookstatus = BookStatus::all();
 
-        dd($bsApi, $bookstatus->toArray());
-        // ! Nyoba BookStatus
+        // dd($bsApi, $bookstatus->toArray());
+        // // ! Nyoba BookStatus
 
         return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
     })->name('client.eksemplar');
@@ -174,10 +114,18 @@ Route::get('/edit-eksemplar/{id}', function ($id) {
     $response = app()->handle($http);
     $response = $response->getContent();
 
+    // ! Dari API
+    $bs = new Request();
+    $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
+    $bsres = app()->handle($bs);
+    $bsres = $bsres->getContent();
+    $bsApi = json_decode($bsres);
+
+
     $eksemplar = json_decode($response);
 
 
-    return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar]);
+    return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
 })->name('client.edit-eksemplar');
 
 Route::put('/edit-eksemplar/{id}', function (Request $request, $id) {
@@ -193,9 +141,18 @@ Route::put('/edit-eksemplar/{id}', function (Request $request, $id) {
     return redirect()->route('client.eksemplar');
 });
 
-Route::get('/eksemplar-keluar', function () {
-    return view('petugas/bibliografi/eksemplar-keluar');
-});
+Route::get('/eksemplar-keluar',function (Request $request) {
+    $search = $request->search;
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
+    $response = app()->handle($http);
+    $response = $response->getContent();
+
+    $loan = json_decode($response);
+    dd($loan);
+
+    return view('petugas/bibliografi/eksemplar-keluar', ['loan' => $loan]);
+})->name('client.loan');
 
 Route::get('/edit-eksemplar', function () {
     return view('petugas/bibliografi/edit-eksemplar');
@@ -217,16 +174,79 @@ Route::get('/daftar-keterlambatan', function () {
     return view('petugas/sirkulasi/daftar-keterlambatan');
 });
 
-Route::get('/daftar-anggota', function () {
-    return view('petugas/keanggotaan/daftar-anggota');
-});
+Route::get('/daftar-anggota', function (Request $request) {
+    $search = $request->search;
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
+    $response = app()->handle($http);
+    $response = $response->getContent();
+
+    $member = json_decode($response);
+    dd($member);
+    return view('petugas/keanggotaan/daftar-anggota', ['members' => $member]);
+})->name('client.member');
+
+Route::delete('/daftar-anggota/delete', function (Request $request) {
+    $deletedMemberIdList = $request->deletedMember;
+
+    if (!$deletedMemberIdList) {
+        return redirect()->back();
+    }
+
+    foreach ($deletedMemberIdList as $memberId) {
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
+        $response = app()->handle($http);
+    }
+
+    return redirect()->route('client.member');
+})->name('client.delete-member');
 
 Route::get('/create-anggota', function () {
     return view('petugas/keanggotaan/create-anggota');
 });
 
+Route::post('/create-anggota', function (Request $request) {
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all());
+    $response = app()->handle($http);
+
+    if ($response->isClientError()) {
+        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+    }
+
+    return redirect()->route('client.member');
+})->name('client.create-member');
+
 Route::get('/edit-anggota', function () {
     return view('petugas/keanggotaan/edit-anggota');
+});
+
+Route::get('/edit-anggota/{id}', function ($id) {
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/member/' . $id);
+    $response = app()->handle($http);
+    $response = $response->getContent();
+
+
+    $member = json_decode($response);
+
+    return view('petugas/daftar-terkendali/edit-pengarang', ['members' => $member]);
+})->name('client.edit-member');
+
+Route::put('/edit-anggota/{id}', function (Request $request, $id) {
+    $http = new Request();
+    $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'GET', $request->all());
+    $response = app()->handle($http);
+
+    if ($response->isClientError()) {
+        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+    }
+
+
+    return redirect()->route('client.member');
 });
 
 Route::get('/daftar-pengarang', function (Request $request) {
@@ -240,6 +260,7 @@ Route::get('/daftar-pengarang', function (Request $request) {
 
     return view('petugas/daftar-terkendali/daftar-pengarang', ['authors' => $authors]);
 })->name('client.authors');
+
 
 Route::delete('/daftar-pengarang/delete', function (Request $request) {
     $deletedAuthorsIdList = $request->deletedAuthors;
