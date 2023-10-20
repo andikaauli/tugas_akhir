@@ -8,6 +8,7 @@ use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\Client\BiblioController;
+use App\Http\Controllers\Client\EksemplarController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
@@ -45,100 +46,12 @@ Route::prefix("/bibliografi")->group(function() {
 
 
 Route::prefix("/eksemplar")->group(function () {
-    Route::get('/', function (Request $request) {
-        $search = $request->search;
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-
-        $eksemplar = json_decode($response);
-
-        // dd($eksemplar);
-        // ! Nyoba BookStatus
-        // ! Dari API
-        $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-        $bsres = app()->handle($bs);
-        $bsres = $bsres->getContent();
-        $bsApi = json_decode($bsres);
-
-        // ! Dari Model Langsung
-        $bookstatus = BookStatus::all();
-
-        // dd($bsApi, $bookstatus->toArray());
-        // // ! Nyoba BookStatus
-
-        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
-    })->name('client.eksemplar');
-
-    Route::delete('/delete', function (Request $request) {
-        $deletedEksemplarIdList = $request->deletedEksemplar;
-
-        if (!$deletedEksemplarIdList) {
-            return redirect()->back();
-        }
-
-        foreach ($deletedEksemplarIdList as $eksemplarId) {
-            $http = new Request();
-            $http = $http->create(config('app.api_url') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
-            $response = app()->handle($http);
-        }
-
-        return redirect()->route('client.eksemplar');
-    })->name('client.delete-eksemplar');
-});
-
-
-
-Route::get('/create-eksemplar', function () {
-    return view('petugas/bibliografi/create-eksemplar');
-});
-
-Route::post('/create-eksemplar', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.eksemplar');
-})->name('client.create-eksemplar');
-
-Route::get('/edit-eksemplar/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/eksemplar/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    // ! Dari API
-    $bs = new Request();
-    $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-    $bsres = app()->handle($bs);
-    $bsres = $bsres->getContent();
-    $bsApi = json_decode($bsres);
-
-
-    $eksemplar = json_decode($response);
-
-
-    return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
-})->name('client.edit-eksemplar');
-
-Route::put('/edit-eksemplar/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.eksemplar');
+    Route::get('/', [EksemplarController::class, 'index'])->name('client.eksemplar');
+    Route::delete('/delete', [EksemplarController::class, 'destroy'])->name('client.delete-eksemplar');
+    Route::get('/create', [EksemplarController::class, 'create'] );
+    Route::post('/create', [EksemplarController::class, 'store'])->name('client.create-eksemplar');
+    Route::get('/edit/{id}',[EksemplarController::class, 'edit'])->name('client.edit-eksemplar');
+    Route::put('/edit/{id}', [EksemplarController::class, 'edit']);
 });
 
 Route::get('/eksemplar-keluar',function (Request $request) {

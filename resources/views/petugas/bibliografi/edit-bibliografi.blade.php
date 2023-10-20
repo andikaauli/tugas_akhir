@@ -114,7 +114,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <button type="button" id="select-all"
+                    <button type="button" id="select-all" href="/eksemplar/edit"
                         class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah
                         Eksemplar</button>
                 </div>
