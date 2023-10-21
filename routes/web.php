@@ -8,7 +8,6 @@ use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\Client\BiblioController;
-use App\Http\Controllers\Client\EksemplarController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
