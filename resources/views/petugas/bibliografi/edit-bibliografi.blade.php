@@ -1,6 +1,6 @@
 @extends('main.main')
 @extends('petugas.bibliografi.sidebar')
-
+@dd($bibliografi)
 {{-- Content --}}
 <div class="sm:ml-64">
     <div class="mt-18">
@@ -240,7 +240,7 @@
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <div class="" style="width:200px;">
-                        <select
+                        <select name="publisher_id"
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
                             @foreach ($publishers as $publisher)
                                 <option value="{{ $publisher->id }}"

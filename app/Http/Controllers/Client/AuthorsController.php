@@ -94,7 +94,7 @@ class AuthorsController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'GET', $request->all());
+        $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
         if ($response->isClientError()) {
