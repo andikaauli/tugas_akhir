@@ -40,10 +40,16 @@ class StockTakeItemController extends Controller
                 return $query->where('item_code', $request->item_code);
             })->where('stock_opname_id', $request->stock_opname_id)->first();
 
-            $stocktakeitem->update([
+            if($stocktakeitem['book_status_id'] == '1'){
+                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' sedang Dipinjam!'], 422);
+
+            } else{
+                $stocktakeitem->update([
                 'book_status_id' => 2
             ]);
             return response()->json($stocktakeitem, 200);
+            }
+
         }
 
         return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak tersedia'], 404);
