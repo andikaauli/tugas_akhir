@@ -11,6 +11,8 @@ use App\Http\Controllers\Client\BiblioController;
 use App\Http\Controllers\Client\EksemplarsController;
 use App\Http\Controllers\Client\MembersController;
 use App\Http\Controllers\Client\AuthorsController;
+use App\Http\Controllers\Client\ColltypesController;
+use App\Http\Controllers\Client\PublishersController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
@@ -141,77 +143,38 @@ Route::prefix("/publisher")->group(function () {
     Route::put('/edit/{id}', [PublishersController::class, 'store']);
 });
 
-Route::get('/daftar-tipe-koleksi', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $colltypes = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/daftar-tipe-koleksi', ['colltypes' => $colltypes]);
-})->name('client.colltypes');
-
-Route::delete('/daftar-tipe-koleksi/delete', function (Request $request) {
-    $deletedColltypesIdList = $request->deletedColltypes;
-
-    if (!$deletedColltypesIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedColltypesIdList as $colltypesId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/colltype/destroy/' . $colltypesId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.colltypes');
-})->name('client.delete-colltypes');
-
-Route::get('/create-tipe-koleksi', function () {
-    return view('petugas/daftar-terkendali/create-tipe-koleksi');
+Route::prefix("/colltype")->group(function () {
+    Route::get('/', [CollTypesController::class, 'index'])->name('client.colltypes');
+    Route::delete('/delete', [CollTypesController::class, 'destroy'])->name('client.delete-colltypes');
+    Route::get('/create', [CollTypesController::class, 'create']);
+    Route::post('/create', [CollTypesController::class, 'store'])->name('client.create-colltypes');
+    Route::get('/edit/{id}', [CollTypesController::class, 'edit'])->name('client.edit-colltypes');
+    Route::put('/edit/{id}', [CollTypesController::class, 'store']);
 });
 
-Route::post('/create-tipe-koleksi', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype/add', 'POST', $request->all());
-    $response = app()->handle($http);
+// Route::get('/daftar-tipe-koleksi', function (Request $request) {
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
+// })->name('client.colltypes');
 
-    return redirect()->route('client.colltypes');
-})->name('client.create-colltypes');
+// Route::delete('/daftar-tipe-koleksi/delete', function () {
 
-Route::get('/edit-tipe-koleksi/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
+// })->name('client.delete-colltypes');
 
-    $colltypes = json_decode($response);
+// Route::get('/create-tipe-koleksi', function () {
 
+// });
 
-    return view('petugas/daftar-terkendali/edit-tipe-koleksi', ['colltypes' => $colltypes]);
-})->name('client.edit-colltypes');
+// Route::post('/create-tipe-koleksi', function (Request $request) {
 
-Route::put('/edit-tipe-koleksi/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
+// })->name('client.create-colltypes');
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
+// Route::get('/edit-tipe-koleksi/{id}', function ($id) {
 
+// })->name('client.edit-colltypes');
 
-    return redirect()->route('client.colltypes');
-});
+// Route::put('/edit-tipe-koleksi/{id}', function (Request $request, $id) {
+
+// });
 
 Route::get('/inisialisasi', function () {
     return view('petugas/inventarisasi/inisialisasi');
