@@ -132,76 +132,13 @@ Route::prefix("/author")->group(function () {
 
 // });
 
-Route::get('/daftar-penerbit', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $publishers = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);
-})->name('client.publishers');
-
-Route::delete('/daftar-penerbit/delete', function (Request $request) {
-    $deletedPublishersIdList = $request->deletedPublishers;
-
-    if (!$deletedPublishersIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedPublishersIdList as $publishersId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/publisher/destroy/' . $publishersId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.publishers');
-})->name('client.delete-publishers');
-
-Route::get('/create-penerbit', function () {
-    return view('petugas/daftar-terkendali/create-penerbit');
-});
-
-Route::post('/create-penerbit', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.publishers');
-})->name('client.create-publishers');
-
-Route::get('/edit-penerbit/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $publisher = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/edit-penerbit', ['publisher' => $publisher]);
-})->name('client.edit-publishers');
-
-Route::put('/edit-penerbit/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-
-    return redirect()->route('client.publishers');
+Route::prefix("/publisher")->group(function () {
+    Route::get('/', [PublishersController::class, 'index'])->name('client.publishers');
+    Route::delete('/delete', [PublishersController::class, 'destroy'])->name('client.delete-publishers');
+    Route::get('/create', [PublishersController::class, 'create']);
+    Route::post('/create', [PublishersController::class, 'store'])->name('client.create-publishers');
+    Route::get('/edit/{id}', [PublishersController::class, 'edit'])->name('client.edit-publishers');
+    Route::put('/edit/{id}', [PublishersController::class, 'store']);
 });
 
 Route::get('/daftar-tipe-koleksi', function (Request $request) {
