@@ -21,12 +21,12 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="/daftar-penerbit" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/publisher" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Penerbit</span>
               </a>
            </li>
            <li>
-              <a href="/daftar-pengarang" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/author" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Pengarang</span>
               </a>
            </li>
@@ -42,7 +42,7 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li>
-              <a href="/daftar-tipe-koleksi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/colltype" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Tipe Koleksi</span>
               </a>
            </li>
