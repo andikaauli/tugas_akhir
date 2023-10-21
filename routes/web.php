@@ -99,11 +99,11 @@ Route::prefix("/anggota")->group(function () {
 });
 
 Route::prefix("/author")->group(function () {
-    Route::get('/', [AuthorsController::class, 'index'])->name('client.author');
-    Route::delete('/delete', [AuthorsController::class, 'destroy'])->name('client.delete-author');
+    Route::get('/', [AuthorsController::class, 'index'])->name('client.authors');
+    Route::delete('/delete', [AuthorsController::class, 'destroy'])->name('client.delete-authors');
     Route::get('/create', [AuthorsController::class, 'create']);
-    Route::post('/create', [AuthorsController::class, 'store'])->name('client.create-author');
-    Route::get('/edit/{id}', [AuthorsController::class, 'edit'])->name('client.edit-author');
+    Route::post('/create', [AuthorsController::class, 'store'])->name('client.create-authors');
+    Route::get('/edit/{id}', [AuthorsController::class, 'edit'])->name('client.edit-authors');
     Route::put('/edit/{id}', [AuthorsController::class, 'store']);
 });
 
