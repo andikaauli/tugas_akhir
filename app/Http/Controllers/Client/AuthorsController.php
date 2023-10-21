@@ -5,7 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MembersController extends Controller
+class AuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,13 @@ class MembersController extends Controller
     {
         $search = $request->search;
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
+        $http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
         $response = app()->handle($http);
         $response = $response->getContent();
 
-        $member = json_decode($response);
-        // dd($member);
-        return view('petugas/keanggotaan/daftar-anggota', ['members' => $member]);
+        $authors = json_decode($response);
+
+        return view('petugas/daftar-terkendali/daftar-pengarang', ['authors' => $authors]);
     }
 
     /**
@@ -30,9 +30,9 @@ class MembersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('petugas/keanggotaan/create-anggota');
+        return view('petugas/daftar-terkendali/create-pengarang');
     }
 
     /**
@@ -44,7 +44,7 @@ class MembersController extends Controller
     public function store(Request $request)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all());
+        $http = $http->create(config('app.api_url') . '/author/add', 'POST', $request->all());
         $response = app()->handle($http);
 
         if ($response->isClientError()) {
@@ -52,7 +52,7 @@ class MembersController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.member');
+        return redirect()->route('client.authors');
     }
 
     /**
@@ -75,14 +75,13 @@ class MembersController extends Controller
     public function edit($id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/' . $id);
+        $http = $http->create(config('app.api_url') . '/author/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
 
+        $authors = json_decode($response);
 
-        $member = json_decode($response);
-
-        return view('petugas/daftar-terkendali/edit-pengarang', ['members' => $member]);
+    return view('petugas/daftar-terkendali/edit-pengarang', ['author' => $authors]);
     }
 
     /**
@@ -95,7 +94,7 @@ class MembersController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'GET', $request->all());
+        $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'GET', $request->all());
         $response = app()->handle($http);
 
         if ($response->isClientError()) {
@@ -103,7 +102,8 @@ class MembersController extends Controller
         // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.member');
+
+        return redirect()->route('client.authors');
     }
 
     /**
@@ -114,18 +114,20 @@ class MembersController extends Controller
      */
     public function destroy(Request $request)
     {
-        $deletedMemberIdList = $request->deletedMember;
+        $deletedAuthorsIdList = $request->deletedAuthors;
 
-    if (!$deletedMemberIdList) {
+    dd($deletedAuthorsIdList);
+
+    if (!$deletedAuthorsIdList) {
         return redirect()->back();
     }
 
-    foreach ($deletedMemberIdList as $memberId) {
+    foreach ($deletedAuthorsIdList as $authorsId) {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
+        $http = $http->create(config('app.api_url') . '/author/destroy/' . $authorsId, 'DELETE');
         $response = app()->handle($http);
     }
 
-    return redirect()->route('client.member');
+    return redirect()->route('client.authors');
     }
 }

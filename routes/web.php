@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\Client\BiblioController;
 use App\Http\Controllers\Client\EksemplarsController;
+use App\Http\Controllers\Client\MembersController;
+use App\Http\Controllers\Client\AuthorsController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
@@ -96,79 +98,39 @@ Route::prefix("/anggota")->group(function () {
     Route::put('/edit/{id}', [MembersController::class, 'store']);
 });
 
-Route::get('/daftar-pengarang', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $authors = json_decode($response);
-
-    return view('petugas/daftar-terkendali/daftar-pengarang', ['authors' => $authors]);
-})->name('client.authors');
-
-
-Route::delete('/daftar-pengarang/delete', function (Request $request) {
-    $deletedAuthorsIdList = $request->deletedAuthors;
-
-    dd($deletedAuthorsIdList);
-
-    if (!$deletedAuthorsIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedAuthorsIdList as $authorsId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/author/destroy/' . $authorsId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.authors');
-})->name('client.delete-authors');
-
-Route::get('/create-pengarang', function () {
-    return view('petugas/daftar-terkendali/create-pengarang');
+Route::prefix("/author")->group(function () {
+    Route::get('/', [AuthorsController::class, 'index'])->name('client.author');
+    Route::delete('/delete', [AuthorsController::class, 'destroy'])->name('client.delete-author');
+    Route::get('/create', [AuthorsController::class, 'create']);
+    Route::post('/create', [AuthorsController::class, 'store'])->name('client.create-author');
+    Route::get('/edit/{id}', [AuthorsController::class, 'edit'])->name('client.edit-author');
+    Route::put('/edit/{id}', [AuthorsController::class, 'store']);
 });
 
-Route::post('/create-pengarang', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author/add', 'POST', $request->all());
-    $response = app()->handle($http);
+// Route::get('/daftar-pengarang', function (Request $request) {
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.authors');
-})->name('client.create-authors');
-
-Route::get('/edit-pengarang/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
+// })->name('client.authors');
 
 
-    $authors = json_decode($response);
+// Route::delete('/daftar-pengarang/delete', function (Request $request) {
 
-    return view('petugas/daftar-terkendali/edit-pengarang', ['author' => $authors]);
-})->name('client.edit-authors');
+// })->name('client.delete-authors');
 
-Route::put('/edit-pengarang/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
+// Route::get('/create-pengarang', function () {
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
+// });
 
+// Route::post('/create-pengarang', function (Request $request) {
 
-    return redirect()->route('client.authors');
-});
+// })->name('client.create-authors');
+
+// Route::get('/edit-pengarang/{id}', function ($id) {
+
+// })->name('client.edit-authors');
+
+// Route::put('/edit-pengarang/{id}', function (Request $request, $id) {
+
+// });
 
 Route::get('/daftar-penerbit', function (Request $request) {
     $search = $request->search;
