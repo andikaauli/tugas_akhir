@@ -8,6 +8,7 @@ use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\Client\BiblioController;
+use App\Http\Controllers\Client\EksemplarsController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
@@ -45,12 +46,12 @@ Route::prefix("/bibliografi")->group(function() {
 
 
 Route::prefix("/eksemplar")->group(function () {
-    Route::get('/', [EksemplarController::class, 'index'])->name('client.eksemplar');
-    Route::delete('/delete', [EksemplarController::class, 'destroy'])->name('client.delete-eksemplar');
-    Route::get('/create', [EksemplarController::class, 'create'] );
-    Route::post('/create', [EksemplarController::class, 'store'])->name('client.create-eksemplar');
-    Route::get('/edit/{id}',[EksemplarController::class, 'edit'])->name('client.edit-eksemplar');
-    Route::put('/edit/{id}', [EksemplarController::class, 'edit']);
+    Route::get('/', [EksemplarsController::class, 'index'])->name('client.eksemplar');
+    Route::delete('/delete', [EksemplarsController::class, 'destroy'])->name('client.delete-eksemplar');
+    Route::get('/create', [EksemplarsController::class, 'create'] );
+    Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
+    Route::get('/edit/{id}',[EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
+    Route::put('/edit/{id}', [EksemplarsController::class, 'edit']);
 });
 
 Route::get('/eksemplar-keluar',function (Request $request) {

@@ -32,7 +32,7 @@ class EksemplarsController extends Controller
         $bsApi = json_decode($bsres);
 
         // ! Dari Model Langsung
-        $bookstatus = BookStatus::all();
+        // $bookstatus = BookStatus::all();
 
         // dd($bsApi, $bookstatus->toArray());
         // // ! Nyoba BookStatus
