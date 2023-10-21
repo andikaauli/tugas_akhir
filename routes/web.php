@@ -87,79 +87,13 @@ Route::get('/daftar-keterlambatan', function () {
     return view('petugas/sirkulasi/daftar-keterlambatan');
 });
 
-Route::get('/daftar-anggota', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $member = json_decode($response);
-    dd($member);
-    return view('petugas/keanggotaan/daftar-anggota', ['members' => $member]);
-})->name('client.member');
-
-Route::delete('/daftar-anggota/delete', function (Request $request) {
-    $deletedMemberIdList = $request->deletedMember;
-
-    if (!$deletedMemberIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedMemberIdList as $memberId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.member');
-})->name('client.delete-member');
-
-Route::get('/create-anggota', function () {
-    return view('petugas/keanggotaan/create-anggota');
-});
-
-Route::post('/create-anggota', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.member');
-})->name('client.create-member');
-
-Route::get('/edit-anggota', function () {
-    return view('petugas/keanggotaan/edit-anggota');
-});
-
-Route::get('/edit-anggota/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-
-    $member = json_decode($response);
-
-    return view('petugas/daftar-terkendali/edit-pengarang', ['members' => $member]);
-})->name('client.edit-member');
-
-Route::put('/edit-anggota/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-
-    return redirect()->route('client.member');
+Route::prefix("/anggota")->group(function () {
+    Route::get('/', [MembersController::class, 'index'])->name('client.member');
+    Route::delete('/delete', [MembersController::class, 'destroy'])->name('client.delete-member');
+    Route::get('/create', [MembersController::class, 'create']);
+    Route::post('/create', [MembersController::class, 'store'])->name('client.create-member');
+    Route::get('/edit/{id}', [MembersController::class, 'edit'])->name('client.edit-member');
+    Route::put('/edit/{id}', [MembersController::class, 'store']);
 });
 
 Route::get('/daftar-pengarang', function (Request $request) {
