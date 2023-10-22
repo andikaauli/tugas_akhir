@@ -82,7 +82,7 @@ class BiblioSeeder extends Seeder
                 'birth_date' => $faker->date(),
                 'address' => $faker->word(),
                 'email' => $faker->email(),
-                'instituion' => $faker->word(),
+                'institution' => $faker->word(),
                 'image' => $faker->imageUrl(),
                 'phone' => $faker->phoneNumber(),
                 ]);
