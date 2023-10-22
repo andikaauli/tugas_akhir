@@ -44,6 +44,7 @@ class PublishersController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/publisher/add', 'POST', $request->all());
         $response = app()->handle($http);
@@ -94,6 +95,7 @@ class PublishersController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'GET', $request->all());
         $response = app()->handle($http);

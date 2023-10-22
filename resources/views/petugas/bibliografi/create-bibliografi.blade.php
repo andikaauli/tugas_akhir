@@ -15,7 +15,6 @@
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
         <form action="{{ route('client.create-bibliografi')}}" method="POST" class="m-0 p-0">
-            @method('PUT')
             @csrf
             {{-- Judul --}}
             <div class="flex border-y border-solid border-gray-300">
@@ -45,7 +44,7 @@
                         <select
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
                             @foreach ($pengarang as $option)
-                                <option value="{{ $option->id }}"
+                                <option value="{{ $option->id }}" name="author_id"
                                     {{-- {{ $bibliografi->author_id == $option->id ? 'selected' : '' }}> --}}>
                                     {{ $option->title }}
 
@@ -53,9 +52,9 @@
                             @endforeach
                         </select>
                     </div>
-                    @error('author_id')
+                    {{-- @error('author_id')
                         <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
-                    @enderror
+                    @enderror --}}
                 </div>
             </div>
             {{-- End Pengarang --}}
@@ -68,7 +67,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="responsibility"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -82,7 +81,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="edition"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -98,7 +97,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2"></textarea>
+                        name="spec_detail" id="" cols="30" rows="2"></textarea>
                 </div>
             </div>
             {{-- End Info Detal Spesifik --}}
@@ -111,7 +110,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="gmd"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -125,7 +124,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="content_type"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -139,7 +138,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="media_type"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -153,7 +152,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="carrier_type"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -167,7 +166,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="isbnissn"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -185,7 +184,7 @@
                         <select
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
                             @foreach ($publishers as $publisher)
-                                <option value="{{ $publisher->id }}">
+                                <option value="{{ $publisher->id }}" name="publisher_id">
                                     {{ $publisher->title }}
                                 </option>
                             @endforeach
@@ -203,7 +202,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="place"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -217,7 +216,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="description"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -233,7 +232,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="1"></textarea>
+                        name="title_series" id="" cols="30" rows="1"></textarea>
                 </div>
             </div>
             {{-- End Judul Seri --}}
@@ -246,7 +245,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="classification"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -260,7 +259,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="call_number"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -274,7 +273,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" id="small-input" name="language"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -290,7 +289,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2"></textarea>
+                        name="abstract" id="" cols="30" rows="2"></textarea>
                 </div>
             </div>
             {{-- End Abstrak/Catatan --}}
@@ -307,7 +306,7 @@
                         <img src="" class="rounded-md w-32 h-44"></img>
                         <div class="ml-3">
                             <label class="file">
-                                <input class=" border rounded text-sm" type="file" id="file"
+                                <input class=" border rounded text-sm" type="file" id="file" name="image" accept=".jpg, .jpeg, .png"
                                     aria-label="File browser example">
                                 <span class="file-custom"></span>
                             </label>
