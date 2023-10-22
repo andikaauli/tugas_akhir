@@ -19,7 +19,7 @@ class Visitor extends Model
         'id',
     ];
     protected $fillable = [
-        'name', 'instituion', 'jenis_id'
+        'name', 'institution', 'jenis_id'
 
     ];
 }

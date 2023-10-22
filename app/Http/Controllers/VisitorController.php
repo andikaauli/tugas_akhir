@@ -32,7 +32,7 @@ class VisitorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'instituion' => 'required|max:255|string',
+            'institution' => 'required|max:255|string',
             'jenis_id' => ['required', 'exists:types,id'], //bentukan kalo ada foreign
 
         ]);

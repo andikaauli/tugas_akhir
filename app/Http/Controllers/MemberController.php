@@ -47,7 +47,7 @@ class MemberController extends Controller
             'birth_date' => 'required|date',
             'address' => 'required|max:255',
             'email' => 'required|max:255|email','unique:member',
-            'instituion' => 'required|max:255|string',
+            'institution' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
             'phone' => 'required|min:11|numeric','unique:member',
         ]);
@@ -76,7 +76,7 @@ class MemberController extends Controller
             'birth_date' => 'required|date',
             'address' => 'required|max:255',
             'email' => 'required|max:255|email','unique:member',
-            'instituion' => 'required|max:255|string',
+            'institution' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
             'phone' => 'required|min:11|numeric','unique:member',
         ]);

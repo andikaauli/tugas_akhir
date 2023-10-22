@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('visitors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('instituion');
+            $table->string('institution');
             $table->timestamps();
             $table->foreignid('jenis_id')->constrained('types');
         });
