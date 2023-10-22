@@ -97,7 +97,7 @@ class PublishersController extends Controller
     {
 
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'GET', $request->all());
+        $http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
         if ($response->isClientError()) {

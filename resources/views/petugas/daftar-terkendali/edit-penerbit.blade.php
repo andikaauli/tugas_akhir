@@ -33,7 +33,7 @@
          {{-- End ID Anggota --}}
          {{-- Btn Simpan --}}
          <div class="flex border-b border-solid border-gray-300 px-4 py-3">
-            <a href="{{ route('client.publisher') }}"
+            <a href="{{ route('client.publishers') }}"
                 class="py-2 px-3 mr-2 rounded text-white text-sm font-bold bg-gray-500 hover:bg-blue-500">Batal</a>
             <button type="submit"
                 class="py-2 px-3 rounded text-white text-sm font-bold bg-blue-600 hover:bg-blue-400">Perbaharui</button>
