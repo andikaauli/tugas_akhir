@@ -44,6 +44,7 @@ class BiblioController extends Controller
      */
     public function create(Request $request)
     {
+
         $pengarangReq = new Request();
         $pengarangReq = $pengarangReq->create(config('app.api_url') . '/author/');
         $pengarangRes = app()->handle($pengarangReq);
@@ -68,6 +69,7 @@ class BiblioController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all());
         $response = app()->handle($http);
@@ -145,6 +147,8 @@ class BiblioController extends Controller
         // }, ARRAY_FILTER_USE_KEY);
 
         $response = app()->handle($http);
+
+        // dd($http);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));

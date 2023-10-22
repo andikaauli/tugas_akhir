@@ -5,7 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EksemplarController extends Controller
+class AuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,28 +16,13 @@ class EksemplarController extends Controller
     {
         $search = $request->search;
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
+        $http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
         $response = app()->handle($http);
         $response = $response->getContent();
 
-        $eksemplar = json_decode($response);
+        $authors = json_decode($response);
 
-        // dd($eksemplar);
-        // ! Nyoba BookStatus
-        // ! Dari API
-        $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-        $bsres = app()->handle($bs);
-        $bsres = $bsres->getContent();
-        $bsApi = json_decode($bsres);
-
-        // ! Dari Model Langsung
-        $bookstatus = BookStatus::all();
-
-        // dd($bsApi, $bookstatus->toArray());
-        // // ! Nyoba BookStatus
-
-        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
+        return view('petugas/daftar-terkendali/daftar-pengarang', ['authors' => $authors]);
     }
 
     /**
@@ -45,9 +30,9 @@ class EksemplarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('petugas/bibliografi/create-eksemplar');
+        return view('petugas/daftar-terkendali/create-pengarang');
     }
 
     /**
@@ -59,7 +44,7 @@ class EksemplarController extends Controller
     public function store(Request $request)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
+        $http = $http->create(config('app.api_url') . '/author/add', 'POST', $request->all());
         $response = app()->handle($http);
 
         if ($response->isClientError()) {
@@ -67,7 +52,7 @@ class EksemplarController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.eksemplar');
+        return redirect()->route('client.authors');
     }
 
     /**
@@ -90,20 +75,13 @@ class EksemplarController extends Controller
     public function edit($id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar/' . $id);
+        $http = $http->create(config('app.api_url') . '/author/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
 
-    // ! Dari API
-        $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-        $bsres = app()->handle($bs);
-        $bsres = $bsres->getContent();
-        $bsApi = json_decode($bsres);
+        $authors = json_decode($response);
 
-        $eksemplar = json_decode($response);
-
-        return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
+    return view('petugas/daftar-terkendali/edit-pengarang', ['author' => $authors]);
     }
 
     /**
@@ -116,7 +94,7 @@ class EksemplarController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'GET', $request->all());
+        $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
         if ($response->isClientError()) {
@@ -124,7 +102,8 @@ class EksemplarController extends Controller
         // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.eksemplar');
+
+        return redirect()->route('client.authors');
     }
 
     /**
@@ -135,18 +114,20 @@ class EksemplarController extends Controller
      */
     public function destroy(Request $request)
     {
-        $deletedEksemplarIdList = $request->deletedEksemplar;
+        $deletedAuthorsIdList = $request->deletedAuthors;
 
-        if (!$deletedEksemplarIdList) {
-            return redirect()->back();
-        }
+    dd($deletedAuthorsIdList);
 
-        foreach ($deletedEksemplarIdList as $eksemplarId) {
-            $http = new Request();
-            $http = $http->create(config('app.api_url') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
-            $response = app()->handle($http);
-        }
+    if (!$deletedAuthorsIdList) {
+        return redirect()->back();
+    }
 
-        return redirect()->route('client.eksemplar');
+    foreach ($deletedAuthorsIdList as $authorsId) {
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/author/destroy/' . $authorsId, 'DELETE');
+        $response = app()->handle($http);
+    }
+
+    return redirect()->route('client.authors');
     }
 }

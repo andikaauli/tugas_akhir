@@ -15,7 +15,7 @@
             </p>
         </div>
         <div class="flex">
-            <a href="/create-tipe-koleksi" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Tipe Koleksi</a>
+            <a href="colltype/create" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Tipe Koleksi</a>
         </div>
    </div>
      {{-- End Section 1 --}}

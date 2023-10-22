@@ -8,6 +8,11 @@ use App\Http\Controllers\StockOpnameController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookStatusController;
 use App\Http\Controllers\Client\BiblioController;
+use App\Http\Controllers\Client\EksemplarsController;
+use App\Http\Controllers\Client\MembersController;
+use App\Http\Controllers\Client\AuthorsController;
+use App\Http\Controllers\Client\ColltypesController;
+use App\Http\Controllers\Client\PublishersController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
@@ -45,101 +50,12 @@ Route::prefix("/bibliografi")->group(function () {
 
 
 Route::prefix("/eksemplar")->group(function () {
-    Route::get('/', function (Request $request) {
-        $search = $request->search;
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-
-        $eksemplar = json_decode($response);
-
-        dd(collect($eksemplar)->paginate(5));
-
-        // ! Nyoba BookStatus
-        // ! Dari API
-        $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-        $bsres = app()->handle($bs);
-        $bsres = $bsres->getContent();
-        $bsApi = json_decode($bsres);
-
-        // ! Dari Model Langsung
-        $bookstatus = BookStatus::all();
-
-        // dd($bsApi, $bookstatus->toArray());
-        // // ! Nyoba BookStatus
-
-        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
-    })->name('client.eksemplar');
-
-    Route::delete('/delete', function (Request $request) {
-        $deletedEksemplarIdList = $request->deletedEksemplar;
-
-        if (!$deletedEksemplarIdList) {
-            return redirect()->back();
-        }
-
-        foreach ($deletedEksemplarIdList as $eksemplarId) {
-            $http = new Request();
-            $http = $http->create(config('app.api_url') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
-            $response = app()->handle($http);
-        }
-
-        return redirect()->route('client.eksemplar');
-    })->name('client.delete-eksemplar');
-});
-
-
-
-Route::get('/create-eksemplar', function () {
-    return view('petugas/bibliografi/create-eksemplar');
-});
-
-Route::post('/create-eksemplar', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.eksemplar');
-})->name('client.create-eksemplar');
-
-Route::get('/edit-eksemplar/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/eksemplar/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    // ! Dari API
-    $bs = new Request();
-    $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-    $bsres = app()->handle($bs);
-    $bsres = $bsres->getContent();
-    $bsApi = json_decode($bsres);
-
-
-    $eksemplar = json_decode($response);
-
-
-    return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
-})->name('client.edit-eksemplar');
-
-Route::put('/edit-eksemplar/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.eksemplar');
+    Route::get('/', [EksemplarsController::class, 'index'])->name('client.eksemplar');
+    Route::delete('/delete', [EksemplarsController::class, 'destroy'])->name('client.delete-eksemplar');
+    Route::get('/create', [EksemplarsController::class, 'create']);
+    Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
+    Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
+    Route::put('/edit/{id}', [EksemplarsController::class, 'edit']);
 });
 
 Route::get('/eksemplar-keluar', function (Request $request) {
@@ -175,298 +91,90 @@ Route::get('/daftar-keterlambatan', function () {
     return view('petugas/sirkulasi/daftar-keterlambatan');
 });
 
-Route::get('/daftar-anggota', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $member = json_decode($response);
-    dd($member);
-    return view('petugas/keanggotaan/daftar-anggota', ['members' => $member]);
-})->name('client.member');
-
-Route::delete('/daftar-anggota/delete', function (Request $request) {
-    $deletedMemberIdList = $request->deletedMember;
-
-    if (!$deletedMemberIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedMemberIdList as $memberId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.member');
-})->name('client.delete-member');
-
-Route::get('/create-anggota', function () {
-    return view('petugas/keanggotaan/create-anggota');
+Route::prefix("/anggota")->group(function () {
+    Route::get('/', [MembersController::class, 'index'])->name('client.member');
+    Route::delete('/delete', [MembersController::class, 'destroy'])->name('client.delete-member');
+    Route::get('/create', [MembersController::class, 'create']);
+    Route::post('/create', [MembersController::class, 'store'])->name('client.create-member');
+    Route::get('/edit/{id}', [MembersController::class, 'edit'])->name('client.edit-member');
+    Route::put('/edit/{id}', [MembersController::class, 'store']);
 });
 
-Route::post('/create-anggota', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.member');
-})->name('client.create-member');
-
-Route::get('/edit-anggota', function () {
-    return view('petugas/keanggotaan/edit-anggota');
+Route::prefix("/author")->group(function () {
+    Route::get('/', [AuthorsController::class, 'index'])->name('client.authors');
+    Route::delete('/delete', [AuthorsController::class, 'destroy'])->name('client.delete-authors');
+    Route::get('/create', [AuthorsController::class, 'create']);
+    Route::post('/create', [AuthorsController::class, 'store'])->name('client.create-authors');
+    Route::get('/edit/{id}', [AuthorsController::class, 'edit'])->name('client.edit-authors');
+    Route::put('/edit/{id}', [AuthorsController::class, 'store']);
 });
 
-Route::get('/edit-anggota/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
+// Route::get('/daftar-pengarang', function (Request $request) {
+
+// })->name('client.authors');
 
 
-    $member = json_decode($response);
+// Route::delete('/daftar-pengarang/delete', function (Request $request) {
 
-    return view('petugas/daftar-terkendali/edit-pengarang', ['members' => $member]);
-})->name('client.edit-member');
+// })->name('client.delete-authors');
 
-Route::put('/edit-anggota/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
+// Route::get('/create-pengarang', function () {
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
+// });
 
+// Route::post('/create-pengarang', function (Request $request) {
 
-    return redirect()->route('client.member');
+// })->name('client.create-authors');
+
+// Route::get('/edit-pengarang/{id}', function ($id) {
+
+// })->name('client.edit-authors');
+
+// Route::put('/edit-pengarang/{id}', function (Request $request, $id) {
+
+// });
+
+Route::prefix("/publisher")->group(function () {
+    Route::get('/', [PublishersController::class, 'index'])->name('client.publishers');
+    Route::delete('/delete', [PublishersController::class, 'destroy'])->name('client.delete-publishers');
+    Route::get('/create', [PublishersController::class, 'create']);
+    Route::post('/create', [PublishersController::class, 'store'])->name('client.create-publishers');
+    Route::get('/edit/{id}', [PublishersController::class, 'edit'])->name('client.edit-publishers');
+    Route::put('/edit/{id}', [PublishersController::class, 'store']);
 });
 
-Route::get('/daftar-pengarang', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $authors = json_decode($response);
-
-    return view('petugas/daftar-terkendali/daftar-pengarang', ['authors' => $authors]);
-})->name('client.authors');
-
-
-Route::delete('/daftar-pengarang/delete', function (Request $request) {
-    $deletedAuthorsIdList = $request->deletedAuthors;
-
-    dd($deletedAuthorsIdList);
-
-    if (!$deletedAuthorsIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedAuthorsIdList as $authorsId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/author/destroy/' . $authorsId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.authors');
-})->name('client.delete-authors');
-
-Route::get('/create-pengarang', function () {
-    return view('petugas/daftar-terkendali/create-pengarang');
+Route::prefix("/colltype")->group(function () {
+    Route::get('/', [CollTypesController::class, 'index'])->name('client.colltypes');
+    Route::delete('/delete', [CollTypesController::class, 'destroy'])->name('client.delete-colltypes');
+    Route::get('/create', [CollTypesController::class, 'create']);
+    Route::post('/create', [CollTypesController::class, 'store'])->name('client.create-colltypes');
+    Route::get('/edit/{id}', [CollTypesController::class, 'edit'])->name('client.edit-colltypes');
+    Route::put('/edit/{id}', [CollTypesController::class, 'store']);
 });
 
-Route::post('/create-pengarang', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author/add', 'POST', $request->all());
-    $response = app()->handle($http);
+// Route::get('/daftar-tipe-koleksi', function (Request $request) {
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
+// })->name('client.colltypes');
 
-    return redirect()->route('client.authors');
-})->name('client.create-authors');
+// Route::delete('/daftar-tipe-koleksi/delete', function () {
 
-Route::get('/edit-pengarang/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
+// })->name('client.delete-colltypes');
 
+// Route::get('/create-tipe-koleksi', function () {
 
-    $authors = json_decode($response);
+// });
 
-    return view('petugas/daftar-terkendali/edit-pengarang', ['author' => $authors]);
-})->name('client.edit-authors');
+// Route::post('/create-tipe-koleksi', function (Request $request) {
 
-Route::put('/edit-pengarang/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
+// })->name('client.create-colltypes');
 
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
+// Route::get('/edit-tipe-koleksi/{id}', function ($id) {
 
+// })->name('client.edit-colltypes');
 
-    return redirect()->route('client.authors');
-});
+// Route::put('/edit-tipe-koleksi/{id}', function (Request $request, $id) {
 
-Route::get('/daftar-penerbit', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $publishers = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);
-})->name('client.publishers');
-
-Route::delete('/daftar-penerbit/delete', function (Request $request) {
-    $deletedPublishersIdList = $request->deletedPublishers;
-
-    if (!$deletedPublishersIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedPublishersIdList as $publishersId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/publisher/destroy/' . $publishersId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.publishers');
-})->name('client.delete-publishers');
-
-Route::get('/create-penerbit', function () {
-    return view('petugas/daftar-terkendali/create-penerbit');
-});
-
-Route::post('/create-penerbit', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.publishers');
-})->name('client.create-publishers');
-
-Route::get('/edit-penerbit/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $publisher = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/edit-penerbit', ['publisher' => $publisher]);
-})->name('client.edit-publishers');
-
-Route::put('/edit-penerbit/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-
-    return redirect()->route('client.publishers');
-});
-
-Route::get('/daftar-tipe-koleksi', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $colltypes = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/daftar-tipe-koleksi', ['colltypes' => $colltypes]);
-})->name('client.colltypes');
-
-Route::delete('/daftar-tipe-koleksi/delete', function (Request $request) {
-    $deletedColltypesIdList = $request->deletedColltypes;
-
-    if (!$deletedColltypesIdList) {
-        return redirect()->back();
-    }
-
-    foreach ($deletedColltypesIdList as $colltypesId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/colltype/destroy/' . $colltypesId, 'DELETE');
-        $response = app()->handle($http);
-    }
-
-    return redirect()->route('client.colltypes');
-})->name('client.delete-colltypes');
-
-Route::get('/create-tipe-koleksi', function () {
-    return view('petugas/daftar-terkendali/create-tipe-koleksi');
-});
-
-Route::post('/create-tipe-koleksi', function (Request $request) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype/add', 'POST', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-    return redirect()->route('client.colltypes');
-})->name('client.create-colltypes');
-
-Route::get('/edit-tipe-koleksi/{id}', function ($id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype/' . $id);
-    $response = app()->handle($http);
-    $response = $response->getContent();
-
-    $colltypes = json_decode($response);
-
-
-    return view('petugas/daftar-terkendali/edit-tipe-koleksi', ['colltypes' => $colltypes]);
-})->name('client.edit-colltypes');
-
-Route::put('/edit-tipe-koleksi/{id}', function (Request $request, $id) {
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/colltype/edit/' . $id, 'GET', $request->all());
-    $response = app()->handle($http);
-
-    if ($response->isClientError()) {
-        return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-    }
-
-
-    return redirect()->route('client.colltypes');
-});
+// });
 
 Route::get('/inisialisasi', function () {
     return view('petugas/inventarisasi/inisialisasi');

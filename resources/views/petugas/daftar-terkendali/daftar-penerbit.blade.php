@@ -15,7 +15,7 @@
                 </p>
             </div>
             <div class="flex">
-                <a href="create-penerbit" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Penerbit Baru</a>
+                <a href="publisher/create" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah Penerbit Baru</a>
             </div>
        </div>
      {{-- End Section 1 --}}

@@ -66,30 +66,6 @@ class LoanController extends Controller
         return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak tersedia'], 404);
     }
 
-    public function perpanjang(Request $request, $id)
-    {
-        $loan = Loan::find($id);
-        $loan->update([
-            'due_date' => Carbon::parse($loan->due_date)->addDays(7)
-        ]);
-        $loan->refresh();
-        return response()
-            ->json(['message' => 'Proses perpanjangan buku menjadi ' . ($loan->due_date), 'data' => $loan]);
-    }
-    public function destroyData(Request $request, $id)
-    { //hard delete
-        $loan = Loan::find($id);
-        $eksemplar = Eksemplar::find($loan->eksemplar_id);
-        $eksemplar->update([
-            'book_status_id' => 2
-        ]);
-        $loan->forceDelete();
-        return response()
-            ->json(['message'=>'Peminjaman Eksemplar dibatalkan!', 'data'=>$loan]);
-
-            //kalo hapus juga merubah status eksemplar
-    }
-
     public function pengembalian(Request $request, $id)
     {
         $loan = Loan::find($id);
@@ -116,18 +92,93 @@ class LoanController extends Controller
             ->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loan,'eksemplar' => $eksemplar]);
     }
 
+    public function pengembalianButton(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'item_code' => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
-    // function peminjaman(Request $req)
-    // {
-    //     $loanDate = now(); // YYYY-MM-DD | 2023-10-06
-    //     $dueDate = now()->addDays(7); // YYYY-MM-DD | 2023-10-13
-    // }
-    // function perpanjang($loanID)
-    // {
-    //     $loan = Loan::find($loanID);
+        $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
 
-    //     $loan->update([
-    //         "due_date" => Carbon::parse($loan->due_date)->addDays(7),
-    //     ]);
-    // }
+        if ($eksemplar) {
+            // $loan = Loan::where('item_code', $request->item_code)->where('return_date', null);
+            $loan = Loan::whereHas('eksemplar', function ($query) use ($request) {
+                    return $query->where('item_code', $request->item_code);
+                })->where('return_date', null);
+            $loanData = $loan->first();
+            $countData = $loan->count();
+
+            if ($countData == 1) {
+                $loanData->update([
+                        'return_date' => now(),
+                    ]);
+                $eksemplar->update([
+                        'book_status_id' => 2
+                ]);
+                if (Carbon::now()->isAfter(Carbon::parse($loanData->due_date))) {
+                    $loanData->update([
+                        'loan_status' => 'Dikembalikan Terlambat'
+                    ]);
+                } else {
+                    $loanData->update([
+                        'loan_status' => 'Dikembalikan Tepat Waktu'
+                    ]);
+                }
+                $loanData->refresh();
+                return response()->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loanData,'eksemplar' => $eksemplar]);
+            } else{
+                return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak ada di peminjaman!']);
+            }
+
+            // $loan = Loan::whereHas('eksemplar', function ($query) use ($request) {
+            //     return $query->where('item_code', $request->item_code);
+            // })->where('return_date', null)->first();
+            // $loan->update([
+            //     'return_date' => now(),
+            // ]);
+            // $eksemplar->update([
+            //     'book_status_id' => 2
+            // ]);
+            // if (Carbon::now()->isAfter(Carbon::parse($loan->due_date))) {
+            //     $loan->update([
+            //         'loan_status' => 'Dikembalikan Terlambat'
+            //     ]);
+            // } else {
+            //     $loan->update([
+            //         'loan_status' => 'Dikembalikan Tepat Waktu'
+            //     ]);
+            // }
+            // $loan->refresh();
+            // return response()->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loan,'eksemplar' => $eksemplar]);
+
+        }
+
+        return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak tersedia'], 404);
+
+    }
+
+    public function perpanjang(Request $request, $id)
+    {
+        $loan = Loan::find($id);
+        $loan->update([
+            'due_date' => Carbon::parse($loan->due_date)->addDays(7)
+        ]);
+        $loan->refresh();
+        return response()
+            ->json(['message' => 'Proses perpanjangan buku menjadi ' . ($loan->due_date), 'data' => $loan]);
+    }
+    public function destroyData(Request $request, $id)
+    { //hard delete
+        $loan = Loan::find($id);
+        $eksemplar = Eksemplar::find($loan->eksemplar_id);
+        $eksemplar->update([
+            'book_status_id' => 2
+        ]);
+        $loan->forceDelete();
+        return response()
+            ->json(['message'=>'Peminjaman Eksemplar dibatalkan!', 'data'=>$loan]);
+    }
 }

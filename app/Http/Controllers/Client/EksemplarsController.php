@@ -5,7 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EksemplarController extends Controller
+class EksemplarsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,7 +32,7 @@ class EksemplarController extends Controller
         $bsApi = json_decode($bsres);
 
         // ! Dari Model Langsung
-        $bookstatus = BookStatus::all();
+        // $bookstatus = BookStatus::all();
 
         // dd($bsApi, $bookstatus->toArray());
         // // ! Nyoba BookStatus
