@@ -82,7 +82,7 @@ class MembersController extends Controller
 
         $member = json_decode($response);
 
-        return view('petugas/daftar-terkendali/edit-pengarang', ['members' => $member]);
+        return view('petugas/keanggotaan/edit-anggota', ['members' => $member]);
     }
 
     /**
@@ -95,7 +95,7 @@ class MembersController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'GET', $request->all());
+        $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
         if ($response->isClientError()) {

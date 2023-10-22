@@ -75,7 +75,7 @@
                          </div>
                        </td>
                        <td class="p-3 w-20">
-                          <a href="/anggota/edit" class="flex items-center justify-center">
+                          <a href="{{ route('client.edit-member', ['id' => $member->id]) }}" class="flex items-center justify-center">
                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="24" height="24" fill="black"/>
                                 <path d="M16 4L14 6L18 10L20 8L16 4ZM12 8L4 16V20H8L16 12L12 8Z" fill="white"/>
@@ -117,3 +117,24 @@
        {{-- End Section 3 --}}
     </div>
 </div>
+
+<script>
+    const selectAllBtn = document.getElementById('select-all');
+    const deselectAllBtn = document.getElementById('deselect-all');
+
+    selectAllBtn.addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(check => {
+            check.checked = true
+        });
+    })
+
+    deselectAllBtn.addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(check => {
+            check.checked = false
+        });
+    })
+</script>
