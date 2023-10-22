@@ -38,12 +38,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix("/bibliografi")->group(function() {
+Route::prefix("/bibliografi")->group(function () {
     Route::get('/', [BiblioController::class, 'getBiblio'])->name('client.bibliografi');
     Route::delete('/delete', [BiblioController::class, 'destroy'])->name('client.delete-bibliografi');
     Route::get('/create', [BiblioController::class, 'create']);
-    Route::post('/create',[BiblioController::class, 'store'])->name('client.create-bibliografi');
-    Route::get('/edit/{id}',[BiblioController::class, 'edit'])->name('client.edit-bibliografi');
+    Route::post('/create', [BiblioController::class, 'store'])->name('client.create-bibliografi');
+    Route::get('/edit/{id}', [BiblioController::class, 'edit'])->name('client.edit-bibliografi');
     Route::put('/edit/{id}', [BiblioController::class, 'update']);
 });
 
@@ -52,13 +52,13 @@ Route::prefix("/bibliografi")->group(function() {
 Route::prefix("/eksemplar")->group(function () {
     Route::get('/', [EksemplarsController::class, 'index'])->name('client.eksemplar');
     Route::delete('/delete', [EksemplarsController::class, 'destroy'])->name('client.delete-eksemplar');
-    Route::get('/create', [EksemplarsController::class, 'create'] );
+    Route::get('/create', [EksemplarsController::class, 'create']);
     Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
-    Route::get('/edit/{id}',[EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
+    Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
     Route::put('/edit/{id}', [EksemplarsController::class, 'edit']);
 });
 
-Route::get('/eksemplar-keluar',function (Request $request) {
+Route::get('/eksemplar-keluar', function (Request $request) {
     $search = $request->search;
     $http = new Request();
     $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);

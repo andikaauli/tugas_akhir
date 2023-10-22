@@ -18,12 +18,15 @@ class EksemplarController extends Controller
     public function getData(Request $request)
     {
         $search = $request->search;
-        $eksemplar = Eksemplar::with(['bookstatus', 'loan', 'stocktakeitem', 'biblio.author', 'biblio.colltype', 'biblio.publisher'])->get();
+        $eksemplar = Eksemplar::with(['bookstatus', 'loan', 'stocktakeitem', 'biblio.author', 'biblio.colltype', 'biblio.publisher']);
+
         if ($search) {
-            $eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
+            $eksemplar = $eksemplar->whereHas("biblio", function ($b) use ($search) {
                 $b->where('title', 'LIKE', "%$search%");
-            })->orWhere('item_code', 'LIKE', "%$search%")->get();
+            })->orWhere('item_code', 'LIKE', "%$search%");
         }
+
+        $eksemplar = $eksemplar->get();
 
         return response()->json($eksemplar, 200);
     }

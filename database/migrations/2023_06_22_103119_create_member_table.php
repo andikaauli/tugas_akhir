@@ -21,7 +21,7 @@ return new class extends Migration
             $table->dateTime('birth_date');
             $table->string('address');
             $table->string('email')->unique();
-            $table->string('instituion');
+            $table->string('institution');
             $table->string('image');
             $table->string('phone')->unique();
             $table->softDeletes();  //buat softdelete
