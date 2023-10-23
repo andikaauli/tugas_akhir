@@ -13,12 +13,22 @@ class BiblioController extends Controller
     public function getData(Request $request)
     {
         $search = $request->search;
-        $biblio = Biblio::with(['eksemplar.bookstatus', 'author', 'colltype', 'publisher'])->get();
+        $biblio = Biblio::with(['eksemplar.bookstatus', 'author', 'colltype', 'publisher']);
+
+        // if ($search) {
+        //     $biblio = $biblio::where('title', 'LIKE', "%$search%")
+        //         ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
+        // }
+        // $biblio = $biblio->get();
 
         if ($search) {
-            $biblio = Biblio::where('title', 'LIKE', "%$search%")
-                ->orWhere('isbnissn', 'LIKE', "%$search%")->get();
+            $biblio = $biblio->whereHas("eksemplar", function ($b) use ($search) {
+                // $b->where('title', 'LIKE', "%$search%");
+            })->where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%");
         }
+
+        $biblio = $biblio->get();
+
 
         return response()->json($biblio, 200);
     }
