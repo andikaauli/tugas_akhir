@@ -18,7 +18,7 @@
         @method('PUT')
         @csrf
         <div class="bg-white">
-         {{-- ID Anggota --}}
+         {{-- Nama Penerbit --}}
              <div class="flex border-y border-solid border-gray-300">
                  <div class="px-4 py-3 text-sm w-60">
                      <p class="font-bold text-sm">Nama Penerbit*</p>
@@ -27,10 +27,10 @@
                      <p class="font-bold text-sm">:</p>
                  </div>
                  <div class="px-4 py-3">
-                     <input type="text" id="small-input" value="{{ $publisher->title}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                     <input type="text" name="title" id="small-input" value="{{ $publisher->title}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                  </div>
              </div>
-         {{-- End ID Anggota --}}
+         {{-- End Nama Penerbit --}}
          {{-- Btn Simpan --}}
          <div class="flex border-b border-solid border-gray-300 px-4 py-3">
             <a href="{{ route('client.publishers') }}"
@@ -38,7 +38,7 @@
             <button type="submit"
                 class="py-2 px-3 rounded text-white text-sm font-bold bg-blue-600 hover:bg-blue-400">Perbaharui</button>
         </div>
-         {{-- End Btn Simpan --}}
+        {{-- End Btn Simpan --}}
         </div>
     </form>
     {{-- End Section 2 --}}

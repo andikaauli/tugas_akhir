@@ -85,7 +85,7 @@
                        <td class="p-3 font-medium w-40">{{$member->nim}}</td>
                        <td class="p-3">
                              <div class="flex">
-                                <div class="bg-gray-200 w-16 h-16 rounded-md mr-4"></div>
+                                <img src="{{$member->image}}" class="bg-gray-200 w-16 h-16 rounded-md mr-4"></img>
                                 <div class="">
                                   <div class="mb-1"><p class="font-medium">{{$member->name}}</p></div>
                                   <div class="flex items-center">

@@ -42,7 +42,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value="{{ $eksemplar->rfid_code }}"
+                            <input name="rfid_code" type="text" id="small-input" value="{{ $eksemplar->rfid_code }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value="{{ $eksemplar->item_code }}"
+                            <input name="item_code" type="text" id="small-input" value="{{ $eksemplar->item_code }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value=""
+                            <input name="colltype" type="text" id="small-input" value=""
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
 
                                     @foreach ($status as $option)
-                                    <option value="{{ $option->id }}"
+                                    <option name="id" value="{{ $option->id }}"
                                         {{ $eksemplar->book_status_id == $option->id ? 'selected' : '' }}>
                                         {{ $option->name }}
                                     </option>
@@ -108,7 +108,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value="{{ $eksemplar->order_number }}"
+                            <input name="order_number" type="text" id="small-input" value="{{ $eksemplar->order_number }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                         <div class="px-4 py-3">
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                                type="date" name="dateofbirth" id="dateofbirth" value="{{ $eksemplar->order_date }}">
+                                type="date" name="order_date" id="dateofbirth" value="{{ $eksemplar->order_date }}">
 
                             {{ Carbon\Carbon::parse($eksemplar->created_at)->format('Y-m-d') }}
 
@@ -142,7 +142,7 @@
                         <div class="px-4 py-3">
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                                type="date" name="dateofbirth" id="dateofbirth" value="{{ $eksemplar->receipt_date }}">
+                                type="date" name="recipt_date" id="dateofbirth" value="{{ $eksemplar->receipt_date }}">
                         </div>
                     </div>
                     {{-- End Tanggal Penerimaan --}}
@@ -155,7 +155,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value="{{ $eksemplar->agent }}"
+                            <input name="agent" type="text" id="small-input" value="{{ $eksemplar->agent }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -170,10 +170,10 @@
                         </div>
                         <div class="flex text-sm px-4 py-3">
                             <div class="flex items-center justify-center">
-                                <input class="mr-2" type="radio" name="" id=""
+                                <input class="mr-2" type="radio" name="source" id=""
                                     {{ $eksemplar->source == 'Beli' ? 'checked' : '' }}>
                                 <label class="mr-3" for="">Beli</label>
-                                <input class="mr-2" type="radio" name="" id=""
+                                <input class="mr-2" type="radio" name="source" id=""
                                     @if ($eksemplar->source == 'Hadiah') checked @endif>
                                 <label for="">Hadiah/Hibah</label>
                             </div>
@@ -189,7 +189,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value="{{ $eksemplar->invoice }}"
+                            <input name="invoice" type="text" id="small-input" value="{{ $eksemplar->invoice }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="small-input" value="{{ $eksemplar->price }}"
+                            <input name="price" type="text" id="small-input" value="{{ $eksemplar->price }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>

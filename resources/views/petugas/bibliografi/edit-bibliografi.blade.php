@@ -1,6 +1,6 @@
 @extends('main.main')
 @extends('petugas.bibliografi.sidebar')
-@dd($bibliografi)
+{{-- @dd($bibliografi) --}}
 {{-- Content --}}
 <div class="sm:ml-64">
     <div class="mt-18">
@@ -29,7 +29,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text" name="title"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2">{{ $bibliografi->title }}</textarea>
+                         id="" cols="30" rows="2">{{ $bibliografi->title }}</textarea>
                 </div>
             </div>
             {{-- End Judul --}}
@@ -71,7 +71,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->responsibility }}"
+                    <input type="text" name="responsibility" id="small-input" value="{{ $bibliografi->responsibility }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->edition }}"
+                    <input type="text"  name="edition" id="small-input" value="{{ $bibliografi->edition }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     <p>:</p>
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
-                    <textarea type="text"
+                    <textarea type="text"  name="spec_detail"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                         name="" id="" cols="30" rows="2">{{ $bibliografi->spec_detail }}</textarea>
                 </div>
@@ -114,7 +114,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <button type="button" id="select-all" href="/eksemplar/edit"
+                    <button type="button" id="select-all" href="/eksemplar/add"
                         class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah
                         Eksemplar</button>
                 </div>
@@ -140,22 +140,6 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="flex flex-row border-b border-gray-200">
-                            <div class="basis-1/2 p-2">
-                                <p class="text-sm font-medium">B00002</p>
-                            </div>
-                            <div class="basis-1/2 p-2">
-                                <p class="text-sm font-medium">Reference</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row border-b border-gray-200">
-                            <div class="basis-1/2 p-2">
-                                <p class="text-sm font-medium">B00002</p>
-                            </div>
-                            <div class="basis-1/2 p-2">
-                                <p class="text-sm font-medium">Reference</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -169,7 +153,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->gmd }}"
+                    <input type="text" name="gmd" id="small-input" value="{{ $bibliografi->gmd }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -183,7 +167,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input"
+                    <input type="text" name="content_type" id="small-input" value="{{ $bibliografi->content_type }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -197,7 +181,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->content_type }}"
+                    <input type="text" name="media_type" id="small-input" value="{{ $bibliografi->media_type }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -211,7 +195,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->carrier_type }}"
+                    <input type="text" name="carrier_type" id="small-input" value="{{ $bibliografi->carrier_type }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -225,7 +209,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->isbnissn }}"
+                    <input type="text"  id="small-input" value="{{ $bibliografi->isbnissn }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -263,7 +247,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->place }}"
+                    <input type="text" name="place" id="small-input" value="{{ $bibliografi->place }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -277,7 +261,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->description }}"
+                    <input type="text" name="description" id="small-input" value="{{ $bibliografi->description }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -291,7 +275,7 @@
                     <p>:</p>
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
-                    <textarea type="text"
+                    <textarea type="text" name="title_series"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                         name="" id="" value="{{ $bibliografi->title_series }}" cols="30" rows="1"></textarea>
                 </div>
@@ -306,7 +290,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->classification }}"
+                    <input type="text" name="classification" id="small-input" value="{{ $bibliografi->classification }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -334,7 +318,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->language }}"
+                    <input type="text" name="language" id="small-input" value="{{ $bibliografi->language }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -350,7 +334,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        name="" id="" cols="30" rows="2">{{ $bibliografi->abstract }}</textarea>
+                        name="abstract" id="" cols="30" rows="2">{{ $bibliografi->abstract }}</textarea>
                 </div>
             </div>
             {{-- End Abstrak/Catatan --}}

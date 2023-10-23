@@ -30,7 +30,7 @@ class MembersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('petugas/keanggotaan/create-anggota');
     }
@@ -95,7 +95,7 @@ class MembersController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'POST', $request->except('_method'));
+        $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
         if ($response->isClientError()) {

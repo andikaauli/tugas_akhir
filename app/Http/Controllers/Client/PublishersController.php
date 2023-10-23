@@ -100,6 +100,8 @@ class PublishersController extends Controller
         $http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
+        // dd($response->getContent)();
+
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         // throw ValidationException::withMessages((array) json_decode($response->getContent()));

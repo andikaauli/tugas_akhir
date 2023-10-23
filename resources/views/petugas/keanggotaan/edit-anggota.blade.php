@@ -16,6 +16,7 @@
     {{-- Section 2 --}}
     <form action="{{ route('client.edit-member', ['id' => $members->id]) }}" method="POST" class="m-0 p-0">
         @method('PUT')
+        @csrf
         <div class="bg-white">
          {{-- Nama Anggota --}}
              <div class="flex border-b border-solid border-gray-300">
@@ -39,7 +40,7 @@
                     <p class="font-bold text-sm">:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input value="{{ $members->nim}}" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input value="{{ $members->nim}}" type="text" id="small-input" name="nim" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
         {{-- End NIM Anggota --}}
@@ -53,7 +54,7 @@
                  </div>
                  <div class="px-4 py-3">
                      <input class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                     type="date" name="dateofbirth" id="dateofbirth" value="{{ Carbon\Carbon::parse($members->birth_date)->format('Y-m-d') }}">
+                     type="date" id="dateofbirth" value="{{ Carbon\Carbon::parse($members->birth_date)->format('Y-m-d') }}">
                      {{ Carbon\Carbon::parse($members->created_at)->format('Y-m-d') }}
                  </div>
              </div>
@@ -68,7 +69,7 @@
                  </div>
                  <div class="px-4 py-3 items-stretch flex-auto">
                      <div class="flex flex-auto items-stretch">
-                         <input value="{{ $members->instituion}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                         <input  value="{{ $members->instituion}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                      </div>
                  </div>
              </div>

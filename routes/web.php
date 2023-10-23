@@ -55,7 +55,7 @@ Route::prefix("/eksemplar")->group(function () {
     Route::get('/create', [EksemplarsController::class, 'create']);
     Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
     Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
-    Route::put('/edit/{id}', [EksemplarsController::class, 'edit']);
+    Route::put('/edit/{id}', [EksemplarsController::class, 'update']);
 });
 
 Route::get('/eksemplar-keluar', function (Request $request) {
@@ -66,7 +66,6 @@ Route::get('/eksemplar-keluar', function (Request $request) {
     $response = $response->getContent();
 
     $loan = json_decode($response);
-    dd($loan);
 
     return view('petugas/bibliografi/eksemplar-keluar', ['loan' => $loan]);
 })->name('client.loan');
@@ -97,7 +96,7 @@ Route::prefix("/anggota")->group(function () {
     Route::get('/create', [MembersController::class, 'create']);
     Route::post('/create', [MembersController::class, 'store'])->name('client.create-member');
     Route::get('/edit/{id}', [MembersController::class, 'edit'])->name('client.edit-member');
-    Route::put('/edit/{id}', [MembersController::class, 'store']);
+    Route::put('/edit/{id}', [MembersController::class, 'update']);
 });
 
 Route::prefix("/author")->group(function () {
@@ -106,7 +105,7 @@ Route::prefix("/author")->group(function () {
     Route::get('/create', [AuthorsController::class, 'create']);
     Route::post('/create', [AuthorsController::class, 'store'])->name('client.create-authors');
     Route::get('/edit/{id}', [AuthorsController::class, 'edit'])->name('client.edit-authors');
-    Route::put('/edit/{id}', [AuthorsController::class, 'store']);
+    Route::put('/edit/{id}', [AuthorsController::class, 'update']);
 });
 
 // Route::get('/daftar-pengarang', function (Request $request) {
@@ -140,7 +139,7 @@ Route::prefix("/publisher")->group(function () {
     Route::get('/create', [PublishersController::class, 'create']);
     Route::post('/create', [PublishersController::class, 'store'])->name('client.create-publishers');
     Route::get('/edit/{id}', [PublishersController::class, 'edit'])->name('client.edit-publishers');
-    Route::put('/edit/{id}', [PublishersController::class, 'store']);
+    Route::put('/edit/{id}', [PublishersController::class, 'update']);
 });
 
 Route::prefix("/colltype")->group(function () {
@@ -149,7 +148,7 @@ Route::prefix("/colltype")->group(function () {
     Route::get('/create', [CollTypesController::class, 'create']);
     Route::post('/create', [CollTypesController::class, 'store'])->name('client.create-colltypes');
     Route::get('/edit/{id}', [CollTypesController::class, 'edit'])->name('client.edit-colltypes');
-    Route::put('/edit/{id}', [CollTypesController::class, 'store']);
+    Route::put('/edit/{id}', [CollTypesController::class, 'update']);
 });
 
 // Route::get('/daftar-tipe-koleksi', function (Request $request) {

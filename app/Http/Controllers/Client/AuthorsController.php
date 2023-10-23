@@ -116,11 +116,9 @@ class AuthorsController extends Controller
     {
         $deletedAuthorsIdList = $request->deletedAuthors;
 
-    dd($deletedAuthorsIdList);
-
-    if (!$deletedAuthorsIdList) {
-        return redirect()->back();
-    }
+        if (!$deletedAuthorsIdList) {
+            return redirect()->back();
+        }
 
     foreach ($deletedAuthorsIdList as $authorsId) {
         $http = new Request();
