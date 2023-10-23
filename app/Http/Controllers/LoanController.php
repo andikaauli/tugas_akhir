@@ -15,11 +15,31 @@ class LoanController extends Controller
     public function getData(Request $request)
     {
         $search = $request->search;
-        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio'])->get();
+        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
+
+        // if ($search) {
+        //     $loan = Loan::where('member.name', 'LIKE', "%$search%")
+        //         ->orWhere('member.nim', 'LIKE', "%$search%")->get();
+        // }
+
         if ($search) {
-            $loan = Loan::where('member.name', 'LIKE', "%$search%")
-                ->orWhere('member.nim', 'LIKE', "%$search%")->get();
+            $loan = $loan
+                ->whereHas("member", function ($b) use ($search) {
+                $b->where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%");
+                })
+
+                ->orWhereHas("eksemplar", function ($b) use ($search) {
+                $b->where('item_code', 'LIKE', "%$search%");
+                })
+
+                ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
+                $b->where('title', 'LIKE', "%$search%");
+                })
+
+                ->orWhere('loan_status', 'LIKE', "%$search%");
         }
+
+        $loan = $loan->get();
         return response()->json($loan, 200);
     }
 
@@ -110,7 +130,6 @@ class LoanController extends Controller
                 })->where('return_date', null);
             $loanData = $loan->first();
             $countData = $loan->count();
-
             if ($countData == 1) {
                 $loanData->update([
                         'return_date' => now(),
@@ -132,28 +151,6 @@ class LoanController extends Controller
             } else{
                 return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak ada di peminjaman!']);
             }
-
-            // $loan = Loan::whereHas('eksemplar', function ($query) use ($request) {
-            //     return $query->where('item_code', $request->item_code);
-            // })->where('return_date', null)->first();
-            // $loan->update([
-            //     'return_date' => now(),
-            // ]);
-            // $eksemplar->update([
-            //     'book_status_id' => 2
-            // ]);
-            // if (Carbon::now()->isAfter(Carbon::parse($loan->due_date))) {
-            //     $loan->update([
-            //         'loan_status' => 'Dikembalikan Terlambat'
-            //     ]);
-            // } else {
-            //     $loan->update([
-            //         'loan_status' => 'Dikembalikan Tepat Waktu'
-            //     ]);
-            // }
-            // $loan->refresh();
-            // return response()->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loan,'eksemplar' => $eksemplar]);
-
         }
 
         return response()->json(['message' => 'Eksemplar dengan kode '.($request->item_code).' tidak tersedia'], 404);
