@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -16,7 +17,7 @@ class MemberController extends Controller
         // $member = Member::all();
         if ($search) {
             $member = Member::where('name', 'LIKE', "%$search%")
-            ->orWhere('nim', 'LIKE', "%$search%")->get();
+                ->orWhere('nim', 'LIKE', "%$search%")->get();
         }
         return response()->json($member, 200);
     }
@@ -39,31 +40,36 @@ class MemberController extends Controller
 
     public function addData(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|min:14|numeric','unique:member',
+            'nim' => 'required|min:14|numeric', 'unique:member',
             'gender' => 'required',
             'birth_date' => 'required|date',
             'address' => 'required|max:255',
-            'email' => 'required|max:255|email','unique:member',
+            'email' => 'required|max:255|email', 'unique:member',
             'institution' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'required|min:11|numeric','unique:member',
+            'phone' => 'required|min:11|numeric', 'unique:member',
         ]);
+
+        $data = $request->all();
+        $imagePath = null;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $fileName);
-            $member->image = $fileName;}
+            $storeImage = $image->storeAs('public/images', $fileName);
+            $imagePath = asset(str_replace("public", "storage", $storeImage));
+            $data['image'] = $imagePath;
+            // $member->image = $fileName;
+        }
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        $member = Member::create($request->all());
+        $member = Member::create($data);
         return response()
-            ->json(['message'=>'Anggota baru berhasil ditambahkan!', 'data'=>$member]);
+            ->json(['message' => 'Anggota baru berhasil ditambahkan!', 'data' => $member]);
     }
 
     public function editData(Request $request, $id)
@@ -71,14 +77,14 @@ class MemberController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|min:14|numeric','unique:member',
+            'nim' => 'required|min:14|numeric', 'unique:member',
             'gender' => 'required',
             'birth_date' => 'required|date',
             'address' => 'required|max:255',
-            'email' => 'required|max:255|email','unique:member',
+            'email' => 'required|max:255|email', 'unique:member',
             'institution' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'required|min:11|numeric','unique:member',
+            'phone' => 'required|min:11|numeric', 'unique:member',
         ]);
 
         if ($validator->fails()) {
@@ -89,17 +95,17 @@ class MemberController extends Controller
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/images', $fileName);
-            $member->image = $fileName;
+            $memberImage = $fileName;
 
-            if ($member->image && Storage::exists('public/images/'.$member->image)) {
-                Storage::delete('public/images/'.$member->image);
+            if ($memberImage && Storage::exists('public/images/' . $memberImage)) {
+                Storage::delete('public/images/' . $memberImage);
             }
         }
 
         $member = Member::find($id);
         $member->update($request->all());
         return response()
-            ->json(['message'=>'Data Anggota berhasil diubah!', 'data'=>$member]);
+            ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $member]);
     }
 
 
@@ -108,6 +114,6 @@ class MemberController extends Controller
         $member = Member::find($id);
         $member->forceDelete();
         return response()
-            ->json(['message'=>'Data Anggota'.($request->name).' berhasil dihapus!', 'data'=>$member]);
+            ->json(['message' => 'Data Anggota' . ($request->name) . ' berhasil dihapus!', 'data' => $member]);
     }
 }
