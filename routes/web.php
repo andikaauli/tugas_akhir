@@ -153,7 +153,7 @@ Route::prefix("/colltype")->group(function () {
 });
 
 Route::prefix("loan")->group(function () {
-    Route::get('/history', [LoansController::class. 'index'])->name('client.loan-history');
+    Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
 });
 
 // Route::get('/daftar-tipe-koleksi', function (Request $request) {

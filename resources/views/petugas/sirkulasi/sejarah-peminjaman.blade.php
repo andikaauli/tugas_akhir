@@ -18,7 +18,7 @@
         {{-- Search Bar --}}
         <div class="flex items-center">
             <p class="mr-3">Cari</p>
-            <form class="m-0" action="{{ route('client.publishers') }}" method="GET">
+            <form class="m-0" action="{{ route('client.loan-history') }}" method="GET">
                 <div class="flex items-center">
                     <input type="search" name="search"
                     class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
@@ -52,13 +52,13 @@
                @foreach ($loans as $loan)
                <tbody>
                   <tr class="border-b border-solid border-gray-400">
-                     <td class="p-1.5 text-sm leading-6 border-x border-b w-24">{{$loan->$member_id}}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">abimanyu</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->$eksemplar_id}}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b">PostgreSQL : a comprehensive guide to building, programming, and administering PostgreSQL databases</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->$due_date}}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->$return_date}}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->$loan_status}}</td>
+                     <td class="p-1.5 text-sm leading-6 border-x border-b w-24">{{$loan->member->nim}}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->member->name}}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->eksemplar->item_code}}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b">{{$loan->eksemplar->biblio->title}}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date)->format('Y-m-d') }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('Y-m-d') }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->loan_status}}</td>
                   </tr>
                </tbody>
                @endforeach
