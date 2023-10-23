@@ -51,7 +51,6 @@ class AuthorsController extends Controller
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
-
         return redirect()->route('client.authors');
     }
 

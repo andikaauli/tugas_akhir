@@ -125,10 +125,13 @@
              </div>
              <div class="px-4 py-3">
                  <div class="flex">
-                     <div class="bg-gray-300 rounded-md w-32 h-32"></div>
+                     <img id="blah" src="http://placehold.it/180" alt="your image" class="rounded-md max-w-xxs">
                      <div class="ml-3">
                          <label class="file">
-                             <input class=" border rounded text-sm" type="file" name="image" id="file" aria-label="File browser example">
+                             <input class=" border rounded text-sm" type="file" onchange="readURL(this);">
+                             <style>input[type=file]{
+                                padding:10px;
+                                background:#2d2d2d;}</style>
                              <span class="file-custom"></span>
                            </label>
                      </div>
@@ -160,5 +163,20 @@
     {{-- End Section 2 --}}
     </div>
 </div>
+
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
 
 

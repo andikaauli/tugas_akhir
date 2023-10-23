@@ -13,6 +13,7 @@ use App\Http\Controllers\Client\MembersController;
 use App\Http\Controllers\Client\AuthorsController;
 use App\Http\Controllers\Client\ColltypesController;
 use App\Http\Controllers\Client\PublishersController;
+use App\Http\Controllers\Client\LoansController;
 use App\Http\Controllers\EksemplarController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
@@ -151,6 +152,10 @@ Route::prefix("/colltype")->group(function () {
     Route::put('/edit/{id}', [CollTypesController::class, 'update']);
 });
 
+Route::prefix("loan")->group(function () {
+    Route::get('/history', [LoansController::class. 'index'])->name('client.loan-history');
+});
+
 // Route::get('/daftar-tipe-koleksi', function (Request $request) {
 
 // })->name('client.colltypes');
@@ -201,6 +206,10 @@ Route::get('/hasil-inventarisasi', function () {
 
 Route::get('/laporan-inventarisasi', function () {
     return view('petugas/inventarisasi/laporan-inventarisasi');
+});
+
+Route::get('/home', function () {
+    return view('dashboard/dashboard');
 });
 
 // Route::resource("zzz", VisitorController::class);

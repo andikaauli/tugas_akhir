@@ -32,6 +32,12 @@ module.exports = {
             '108': '27rem',
             '150': '37.5rem',
           },
+        maxWidth: {
+            'xxs': '10rem',
+          },
+        colors: {
+            'teknik': '#020166',
+          },
         margin: {
             '18': '4.5rem',
       },
