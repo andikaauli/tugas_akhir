@@ -208,8 +208,16 @@ Route::get('/laporan-inventarisasi', function () {
     return view('petugas/inventarisasi/laporan-inventarisasi');
 });
 
-Route::get('/home', function () {
-    return view('dashboard/dashboard');
+Route::get('/profil', function () {
+    return view('dashboard/profil');
+});
+
+Route::get('/layanan', function () {
+    return view('dashboard/layanan');
+});
+
+Route::get('/keanggotaan', function () {
+    return view('dashboard/keanggotaan');
 });
 
 // Route::resource("zzz", VisitorController::class);
