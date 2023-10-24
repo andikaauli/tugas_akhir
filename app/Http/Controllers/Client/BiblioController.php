@@ -58,6 +58,7 @@ class BiblioController extends Controller
         $pengarang = json_decode($pengarangRes);
         $publisher = json_decode($publisherRes);
 
+
         return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher]);
     }
 
@@ -73,6 +74,8 @@ class BiblioController extends Controller
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all());
         $response = app()->handle($http);
+
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
@@ -148,7 +151,7 @@ class BiblioController extends Controller
 
         $response = app()->handle($http);
 
-        // dd($http);
+        dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
