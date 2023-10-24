@@ -29,15 +29,6 @@ class MemberController extends Controller
         return response()->json($member, 200);
     }
 
-    // public function showData($id)
-    // {
-    //     $member = Member::all()->find($id);
-    //     if(is_null($member)){
-    //         return abort(422);
-    //     }
-    //     return response()->json($member, 200);
-    // }
-
     public function addData(Request $request)
     {
         $validator = Validator::make($request->all(), [
