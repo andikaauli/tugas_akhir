@@ -52,7 +52,6 @@ class MemberController extends Controller
             $storeImage = $image->storeAs('public/images', $fileName);
             $imagePath = asset(str_replace("public", "storage", $storeImage));
             $data['image'] = $imagePath;
-            // $member->image = $fileName;
         }
 
         if ($validator->fails()) {

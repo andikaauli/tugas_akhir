@@ -69,7 +69,7 @@
                  </div>
                  <div class="px-4 py-3 items-stretch flex-auto">
                      <div class="flex flex-auto items-stretch">
-                         <input  value="{{ $members->instituion}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                         <input  value="{{ $members->institution}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                      </div>
                  </div>
              </div>
