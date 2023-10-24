@@ -23,12 +23,12 @@
                     <p class="font-medium text-xl mb-3">7. Layanan akses informasi</p>
                 </div>
             </div>
-            <div class="border border-black">
+            <div class="border border-black h-fit">
                 <div class="bg-teknik py-5 text-xl font-extrabold text-white text-center">
-                    <p>Library Information</p>
+                    <p>Information</p>
                 </div>
                 <div class="p-4">
-                    <p class="font-medium text-xl text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
+                    <p class="font-medium text-xl text-justify leading-8">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
                     </p>
                 </div>
             </div>
