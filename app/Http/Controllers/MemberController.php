@@ -67,14 +67,14 @@ class MemberController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|min:14|numeric', 'unique:member',
+            'nim' => 'required|min:14|numeric', 'unique:member,id',
             'gender' => 'required',
             'birth_date' => 'required|date',
             'address' => 'required|max:255',
-            'email' => 'required|max:255|email', 'unique:member',
+            'email' => 'required|max:255|email', 'unique:member,id',
             'institution' => 'required|max:255|string',
             'image' => 'required|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'required|min:11|numeric', 'unique:member',
+            'phone' => 'required|min:11|numeric', 'unique:member,id',
         ]);
 
         if ($validator->fails()) {
