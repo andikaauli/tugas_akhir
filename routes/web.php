@@ -228,4 +228,8 @@ Route::get('/login', function () {
     return view('dashboard/login');
 });
 
+Route::get('/absen', function () {
+    return view('dashboard/absen');
+});
+
 // Route::resource("zzz", VisitorController::class);

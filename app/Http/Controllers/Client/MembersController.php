@@ -48,7 +48,7 @@ class MembersController extends Controller
         $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all(), files: $request->allFiles());
 
         $response = app()->handle($http);
-        dd($response);
+        // dd($response);
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
