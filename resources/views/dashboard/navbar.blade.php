@@ -1,6 +1,6 @@
 <nav class="fixed top-0 w-full bg-teknik">
-    <div class="flex shadow-md" id="navbar-default">
-        <ul class="flex h-18 w-full ml-64 items-center font-medium p-4 md:p-0 mt-4 md:mt-0 ">
+    <div class="flex items-center justify-center shadow-md" id="navbar-default">
+        <ul class="flex h-18 w-full items-center justify-center font-medium p-4 md:p-0 mt-4 md:mt-0 ">
           <li class="">
             <div class="flex justify-center items-center">
                 <div class="py-3">

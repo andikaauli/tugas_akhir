@@ -220,4 +220,8 @@ Route::get('/keanggotaan', function () {
     return view('dashboard/keanggotaan');
 });
 
+Route::get('/detail', function () {
+    return view('dashboard/detail');
+});
+
 // Route::resource("zzz", VisitorController::class);

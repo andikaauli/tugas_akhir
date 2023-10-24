@@ -14,7 +14,7 @@
        </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    <form action="{{ route('client.create-member') }}" method="POST" class="m-0 p-0">
+    <form action="{{ route('client.create-member') }}" method="POST" class="m-0 p-0" enctype="multipart/form-data">
         @csrf
         <div class="bg-white">
          {{-- Nama Anggota --}}
@@ -66,7 +66,7 @@
                  </div>
                  <div class="px-4 py-3 items-stretch flex-auto">
                      <div class="flex flex-auto items-stretch">
-                         <input name="instituion" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                         <input name="institution" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                      </div>
                  </div>
              </div>
@@ -128,7 +128,7 @@
                      <img id="blah" src="http://placehold.it/180" alt="your image" class="rounded-md max-w-xxs">
                      <div class="ml-3">
                          <label class="file">
-                             <input class=" border rounded text-sm" type="file" onchange="readURL(this);">
+                             <input class=" border rounded text-sm" type="file" name="image" onchange="readURL(this);">
                              <style>input[type=file]{
                                 padding:10px;
                                 background:#2d2d2d;}</style>

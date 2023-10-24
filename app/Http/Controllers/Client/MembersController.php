@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MembersController extends Controller
 {
@@ -45,8 +46,9 @@ class MembersController extends Controller
     {
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all());
+        $http->files->add([new UploadedFile($request->file('image'), $request->file('image')->getClientOriginalName())]);
         $response = app()->handle($http);
-
+        dd($response);
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
