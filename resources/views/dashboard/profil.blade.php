@@ -7,7 +7,7 @@
     {{-- End Section 1 --}}
     {{-- Setion 2 --}}
     <div class="">
-        <div class="grid gap-10 grid-cols-3 grid-rows-3 px-20">
+        <div class="grid gap-10 grid-cols-3 grid-rows-3  px-20">
             <div class="col-span-2 border border-black">
                 <div class="bg-teknik py-5 text-xl font-extrabold text-white text-center">
                     <p>Library Information</p>
@@ -24,12 +24,12 @@
                     <p class="font-medium text-xl mb-3">Istirahat     : 11:00 - 13:30 WIB</p>
                 </div>
             </div>
-            <div class="border border-black">
+            <div class="border border-black h-fit">
                 <div class="bg-teknik py-5 text-xl font-extrabold text-white text-center">
-                    <p>Library Information</p>
+                    <p>Informasi</p>
                 </div>
                 <div class="p-4">
-                    <p class="font-medium text-xl text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
+                    <p class="font-medium text-xl text-justify leading-8">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
                     </p>
                 </div>
             </div>
