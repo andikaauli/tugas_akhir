@@ -45,8 +45,8 @@ class MembersController extends Controller
     public function store(Request $request)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all());
-        $http->files->add([new UploadedFile($request->file('image'), $request->file('image')->getClientOriginalName())]);
+        $http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all(), files: $request->allFiles());
+
         $response = app()->handle($http);
         dd($response);
         if ($response->isClientError()) {
@@ -102,7 +102,7 @@ class MembersController extends Controller
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+            // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
         return redirect()->route('client.member');
@@ -118,16 +118,16 @@ class MembersController extends Controller
     {
         $deletedMemberIdList = $request->deletedMember;
 
-    if (!$deletedMemberIdList) {
-        return redirect()->back();
-    }
+        if (!$deletedMemberIdList) {
+            return redirect()->back();
+        }
 
-    foreach ($deletedMemberIdList as $memberId) {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
-        $response = app()->handle($http);
-    }
+        foreach ($deletedMemberIdList as $memberId) {
+            $http = new Request();
+            $http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
+            $response = app()->handle($http);
+        }
 
-    return redirect()->route('client.member');
+        return redirect()->route('client.member');
     }
 }

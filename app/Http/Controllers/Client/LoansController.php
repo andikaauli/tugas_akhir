@@ -13,15 +13,16 @@ class LoansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
         $response = app()->handle($http);
         $response = $response->getContent();
+
         $loans = json_decode($response);
-        dd($response);
+        // dd($loans);
 
         return view('petugas/sirkulasi/sejarah-peminjaman', ['loans' => $loans]);
     }

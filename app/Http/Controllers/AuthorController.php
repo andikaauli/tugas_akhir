@@ -29,7 +29,7 @@ class AuthorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255|string',
-            'born_date' => 'nullable|max:255|date',
+            'born_date' => 'nullable|max:255|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -46,7 +46,7 @@ class AuthorController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:255|string',
-            'born_date' => 'nullable|max:255',
+            'born_date' => 'nullable|max:255|numeric',
         ]);
 
         if ($validator->fails()) {
