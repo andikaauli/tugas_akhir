@@ -37,9 +37,3 @@
     </div>
     {{-- End Section 2 --}}
 </div>
-
-
-
-
-
-

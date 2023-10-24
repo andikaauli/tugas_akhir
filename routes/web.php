@@ -224,4 +224,8 @@ Route::get('/detail', function () {
     return view('dashboard/detail');
 });
 
+Route::get('/login', function () {
+    return view('dashboard/login');
+});
+
 // Route::resource("zzz", VisitorController::class);
