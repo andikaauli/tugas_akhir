@@ -63,8 +63,8 @@
               </div>
             </div>
             <div class="text-white pl-4">
-                <h4>Admin</h4>
-                <p class="font-bold">Pustakawan</p>
+                <h4>WELCOME TEST</h4>
+                <p class="font-bold">BUAT LOGIN</p>
             </div>
         </div>
         <div class="flex self-stretch items-start justify-self-stretch shadow-md" id="navbar-default">

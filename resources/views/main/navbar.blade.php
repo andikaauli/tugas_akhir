@@ -3,7 +3,7 @@
           <ul class="flex h-18 w-full ml-64 items-center font-medium p-4 md:p-0 mt-4 md:mt-0 ">
             <li class=" ">
               <div class="flex h-full px-4 border-b-3 text-black border-white  items-center hover:ease-in-out hover:duration-300 hover:border-blue-500 hover:text-blue-500">
-                  <a href="/bibliografi" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">Beranda</a>
+                  <a href="/beranda" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">Beranda</a>
               </div>
             </li>
             <li class="h-full">
@@ -33,7 +33,7 @@
            </li>
            <li class="h-full">
              <div class="flex h-full px-4 border-b-3 text-black border-white  items-center hover:ease-in-out hover:duration-300 hover:border-blue-500 hover:text-blue-500">
-                 <a href="#" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">Keluar</a>
+                 <a href="/logout" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">Keluar</a>
              </div>
            </li>
           </ul>

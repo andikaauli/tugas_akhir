@@ -14,7 +14,7 @@
           </li>
           <li class="h-min">
             <div class="flex h-full px-4 border-b-3 text-white border-teknik  items-center hover:ease-in-out hover:duration-300 hover:border-amber-600 hover:text-blue-500">
-                <a href="/bibliografi" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">PROFIL</a>
+                <a href="/profil" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">PROFIL</a>
             </div>
           </li>
           <li class="h-full">
@@ -24,22 +24,22 @@
          </li>
          <li class="h-full">
            <div class="flex h-full px-4 border-b-3 text-white border-teknik  items-center hover:ease-in-out hover:duration-300 hover:border-amber-600 hover:text-blue-500">
-               <a href="/mulai-transaksi" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">LAYANAN</a>
+               <a href="/layanan" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">LAYANAN</a>
            </div>
          </li>
          <li class="h-full">
            <div class="flex h-full px-4 border-b-3 text-white border-teknik  items-center hover:ease-in-out hover:duration-300 hover:border-amber-600 hover:text-blue-500">
-               <a href="/anggota" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">KEANGGOTAAN</a>
+               <a href="/keanggotaan" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">KEANGGOTAAN</a>
            </div>
          </li>
          <li class="h-full">
            <div class="flex h-full px-4 border-b-3 text-white border-teknik  items-center hover:ease-in-out hover:duration-300 hover:border-amber-600 hover:text-blue-500">
-               <a href="/publisher" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">ABSEN PENGUNJUNG</a>
+               <a href="/absen" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">ABSEN PENGUNJUNG</a>
            </div>
          </li>
          <li class="h-full">
            <div class="flex h-full px-4 border-b-3 text-white border-teknik  items-center hover:ease-in-out hover:duration-300 hover:border-amber-600 hover:text-blue-500">
-               <a href="#" class="px-4 py-4 rounded-md bg-amber-600 text-center flex items-center font-bold text-sm">LOGIN ADMIN</a>
+               <a href="/login" class="px-4 py-4 rounded-md bg-amber-600 text-center flex items-center font-bold text-sm">LOGIN ADMIN</a>
            </div>
          </li>
         </ul>

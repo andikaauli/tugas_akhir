@@ -105,7 +105,8 @@ Route::prefix("user")->group(function () {
     Route::get('', [UserController::class, "getData"]);
     Route::get('/userlogin', [UserController::class, "showData"]);
     Route::post('/add', [UserController::class, "addData"]);
-    Route::post('/login', [UserController::class, "login"]);
+    Route::get('/login', [UserController::class, "login"]);
+    Route::post('/login', [UserController::class, "authenticating"]);
     Route::post('/logout', [UserController::class, "logout"]);
     Route::post('/edit/{id}', [UserController::class, "editData"]);
 });

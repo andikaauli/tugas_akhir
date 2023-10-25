@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
+
 
 
 class UserController extends Controller
@@ -51,10 +53,10 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'username' => 'required|max:255','unique:user',
+            'username' => 'required|max:255','unique:user.id',
             'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
-            'email' => 'required|max:255|email','unique:user',
+            'email' => 'required|max:255|email','unique:user.id',
         ]);
 
         if ($validator->fails()) {
@@ -68,27 +70,31 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-
-        $validator = Validator::make($request->all(), [
+        return view('dashboard.login');
+    }
+    public function authenticating(Request $request)
+    {
+        $credentials = $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
-
-        if(!auth()->attempt(['username' => $request->username, 'password' => $request->password]))
-        {
-            return response()->json(['message' =>'Username atau password Anda salah!'], 404);
+        // dd($credentials);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('beranda');
         }
-
-        $user = User::findOrFail(auth()->user()->id);
-
-        return response()
-            ->json(['message'=>($user->name).' berhasil Login!', 'data'=>$user]);
+        Session::flash('status', 'failed');
+        Session::flash('message', 'Nama Pengguna atau Kata Sandi Salah. AKSES DITOLAK');
+        return redirect('login');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user();
-        return response()->json(['message'=>'Anda berhasil Logout!']);
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        // return response()->json(['message'=>'Anda berhasil Logout!']);
+        return redirect('login');
     }
 
 }
