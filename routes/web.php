@@ -232,4 +232,8 @@ Route::get('/absen', function () {
     return view('dashboard/absen');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 // Route::resource("zzz", VisitorController::class);

@@ -304,7 +304,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" value="{{ $bibliografi->call_number }}"
+                    <input type="text" name="call_number" id="small-input" value="{{ $bibliografi->call_number }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
