@@ -17,11 +17,6 @@ class LoanController extends Controller
         $search = $request->search;
         $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
 
-        // if ($search) {
-        //     $loan = Loan::where('member.name', 'LIKE', "%$search%")
-        //         ->orWhere('member.nim', 'LIKE', "%$search%")->get();
-        // }
-
         if ($search) {
             $loan = $loan
                 ->whereHas("member", function ($b) use ($search) {
