@@ -83,6 +83,7 @@ Route::prefix("publisher")->group(function () {
     Route::delete('/destroy/{id}', [PublisherController::class, "destroyData"]);
 });
 
+
 Route::prefix("rfidtemp")->group(function () {
     Route::get('', [RfidTempController::class, "getData"]);
     Route::post('/add', [RfidTempController::class, "addData"]);

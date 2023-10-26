@@ -4,6 +4,7 @@ use App\Models\BookStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
