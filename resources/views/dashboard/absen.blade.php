@@ -16,7 +16,7 @@
                         <p class="text-center text-base font-bold">Nama Pengunjung</p>
                     </div>
                     <div class="p-3">
-                        <input class="w-full rounded-md" type="text" name="name>
+                        <input class="w-full rounded-md" type="text" name="name">
                     </div>
                 </div>
                 <div class="">
@@ -24,7 +24,7 @@
                         <p class="text-center text-base font-bold">Institusi </p>
                     </div>
                     <div class="p-3">
-                        <input class="w-full rounded-md" type="text" name="institution>
+                        <input class="w-full rounded-md" type="text" name="institution">
                     </div>
                 </div>
                 <div class="">
