@@ -19,10 +19,9 @@ class VisitorsController extends Controller
         $http = $http->create(config('app.api_url') . '/visitor', 'GET', ['search' => $search]);
         $response = app()->handle($http);
         $response = $response->getContent();
-
         $visitors = json_decode($response);
 
-        return view('petugas/beranda/beranda', ['visitor' => $visitors]);
+        return view('petugas/beranda/beranda', ['visitors' => $visitors]);
     }
 
     /**

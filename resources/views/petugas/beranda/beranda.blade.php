@@ -76,7 +76,9 @@
         {{-- Search Bar --}}
            <div class="flex items-center ">
               <p class="mr-3">Cari</p>
-              <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+              <form class="m-0" action="{{ route('client.visitors-history') }}" method="GET">
+                <div class="flex items-center">
+                <input type="search" name="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
                  placeholder="Search"
                  aria-label="Search"
                  aria-describedby="button-addon3"/>
@@ -84,13 +86,15 @@
               <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
                  Cari
               </button>
+            </form>
               {{-- End Btn Search --}}
-           </div>
+                </div>
         {{-- End Search Bar --}}
        </div>
        {{-- End Section 4 --}}
        {{-- Section 5 --}}
-       <div class="flex mb-4 ">
+       <form action="{{ route('client.visitors-history') }}">
+        <div class="flex mb-4 ">
            <table class="table-auto w-full">
               <thead class="p-3 border-y border-solid border-gray-400">
                  <tr class="text-sm">
@@ -100,16 +104,19 @@
                     <th class="text-left p-3">WAKTU KUNJUNGAN</th>
                  </tr>
               </thead>
+              @foreach ($visitors as $visitor)
               <tbody>
                  <tr class="border-b border-solid border-gray-400">
-                    <td class="p-3 leading-6 w-auto">Andika Auli Ahbab Mahasin</td>
-                    <td class="p-3 leading-6 w-auto">Teknik Komputer</td>
-                    <td class="p-3 leading-6 w-40">Mahasiswa</td>
-                    <td class="p-3 leading-6 w-52">Senin, 14 Oktober 2023</td>
+                    <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
+                    <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
+                    <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
+                    <td class="p-3 leading-6 w-80">{{ Carbon\Carbon::parse($visitor->created_at)->format('l, d F Y H:i') }}</td>
                  </tr>
               </tbody>
+              @endforeach
            </table>
        </div>
+    </form>
        <div class="flex justify-end">
             <div class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">Sebelumnya</p>
