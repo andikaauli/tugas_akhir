@@ -27,6 +27,22 @@ class LoansController extends Controller
         return view('petugas/sirkulasi/sejarah-peminjaman', ['loans' => $loans]);
     }
 
+    public function overdue(Request $request)
+    {
+        $search = $request->search;
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+        $loans = json_decode($response);
+        $loans = array_filter($loans, function ($loan) {
+            return $loan->return_status == '2';
+        });
+        // dd($loans);
+
+        return view('petugas/sirkulasi/daftar-keterlambatan', ['loans' => $loans]);
+    }
     /**
      * Show the form for creating a new resource.
      *

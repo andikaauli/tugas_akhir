@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('due_date');
             $table->dateTime('return_date')->nullable();
             $table->string('loan_status')->nullable();
+            $table->string('return_status')->nullable();
             $table->timestamps();
             $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
             $table->foreignUuid('member_id')->constrained('members');

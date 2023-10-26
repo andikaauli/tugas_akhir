@@ -118,30 +118,7 @@ Route::group(['prefix'=>'/author', 'middleware' => ['auth']], function () {
     Route::put('/edit/{id}', [AuthorsController::class, 'update']);
 });
 
-// Route::get('/daftar-pengarang', function (Request $request) {
 
-// })->name('client.authors');
-
-
-// Route::delete('/daftar-pengarang/delete', function (Request $request) {
-
-// })->name('client.delete-authors');
-
-// Route::get('/create-pengarang', function () {
-
-// });
-
-// Route::post('/create-pengarang', function (Request $request) {
-
-// })->name('client.create-authors');
-
-// Route::get('/edit-pengarang/{id}', function ($id) {
-
-// })->name('client.edit-authors');
-
-// Route::put('/edit-pengarang/{id}', function (Request $request, $id) {
-
-// });
 Route::group(['prefix'=>'/publisher', 'middleware' => ['auth']], function () {
     Route::get('/', [PublishersController::class, 'index'])->name('client.publishers');
     Route::delete('/delete', [PublishersController::class, 'destroy'])->name('client.delete-publishers');
@@ -159,34 +136,10 @@ Route::group(['prefix'=>'/colltype', 'middleware' => ['auth']], function () {
     Route::get('/edit/{id}', [CollTypesController::class, 'edit'])->name('client.edit-colltypes');
     Route::put('/edit/{id}', [CollTypesController::class, 'update']);
 });
-
-Route::prefix("loan")->group(function () {
-    Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history')->middleware('auth');
+Route::group(['prefix'=>'/loan', 'middleware' => ['auth']], function () {
+    Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
+    Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
 });
-
-// Route::get('/daftar-tipe-koleksi', function (Request $request) {
-
-// })->name('client.colltypes');
-
-// Route::delete('/daftar-tipe-koleksi/delete', function () {
-
-// })->name('client.delete-colltypes');
-
-// Route::get('/create-tipe-koleksi', function () {
-
-// });
-
-// Route::post('/create-tipe-koleksi', function (Request $request) {
-
-// })->name('client.create-colltypes');
-
-// Route::get('/edit-tipe-koleksi/{id}', function ($id) {
-
-// })->name('client.edit-colltypes');
-
-// Route::put('/edit-tipe-koleksi/{id}', function (Request $request, $id) {
-
-// });
 
 Route::get('/inisialisasi', function () {
     return view('petugas/inventarisasi/inisialisasi');
