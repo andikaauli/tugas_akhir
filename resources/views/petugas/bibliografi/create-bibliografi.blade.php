@@ -52,9 +52,9 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- @error('author_id')
+                    @error('author_id')
                         <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
-                    @enderror --}}
+                    @enderror
                 </div>
             </div>
             {{-- End Pengarang --}}
