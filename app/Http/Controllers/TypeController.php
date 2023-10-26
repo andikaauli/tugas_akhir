@@ -11,7 +11,6 @@ class TypeController extends Controller
 {
     public function getData(Request $request)
     {
-        $search = $request->search;
         $type = Type::all();
         return response()->json($type, 200);
     }
