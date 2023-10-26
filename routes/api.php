@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BiblioController;
@@ -100,6 +101,10 @@ Route::prefix("stocktakeitem")->group(function () {
     Route::get('', [StockTakeItemController::class, "getData"]);
     Route::post('/edit', [StockTakeItemController::class, "editData"]);
     Route::post('/button', [StockTakeItemController::class, "editDataButton"]);
+});
+
+Route::prefix("type")->group(function () {
+    Route::get('', [TypeController::class, "getData"]);
 });
 
 Route::prefix("user")->group(function () {
