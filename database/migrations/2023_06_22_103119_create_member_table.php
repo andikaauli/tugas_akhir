@@ -17,13 +17,13 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('nim')->unique();
-            $table->enum('gender',['Laki-laki','Perempuan']);
-            $table->dateTime('birth_date');
-            $table->string('address');
-            $table->string('email')->unique();
-            $table->string('institution');
-            $table->string('image');
-            $table->string('phone')->unique();
+            $table->enum('gender',['Laki-laki','Perempuan'])->nullable();
+            $table->dateTime('birth_date')->nullable();
+            $table->string('address')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('institution')->nullable();
+            $table->string('image')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->softDeletes();  //buat softdelete
             $table->timestamps();
         });
