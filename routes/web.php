@@ -22,6 +22,7 @@ use App\Http\Controllers\Client\BiblioController;
 use App\Http\Controllers\StockTakeItemController;
 use App\Http\Controllers\Client\AuthorsController;
 use App\Http\Controllers\Client\MembersController;
+use App\Http\Controllers\client\VisitorsController;
 use App\Http\Controllers\Client\ColltypesController;
 use App\Http\Controllers\Client\EksemplarsController;
 use App\Http\Controllers\Client\PublishersController;
@@ -188,9 +189,17 @@ Route::middleware(['only_guest'])->group(function () {
         return view('dashboard/detail');
     });
 
-    Route::get('/absen', function () {
-        return view('dashboard/absen');
-    });
+    // Route::get('/absen', function () {
+    //     return view('dashboard/absen');
+    // });
+});
+
+Route::group(['prefix'=>'/absen'], function () {
+    Route::get('/', [VisitorsController::class, 'create'])->name('client.visitors');
+    Route::post('/create', [VisitorsController::class, 'store'])->name('client.create-visitors');
+});
+Route::group(['prefix'=>'/type', 'middleware' => ['auth']], function () {
+    Route::get('/', [TypeController::class, 'index'])->name('client.types');
 });
 
 //COBA LOGIN
