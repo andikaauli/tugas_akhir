@@ -14,48 +14,32 @@
                <p class="font-bold">Pustakawan</p>
            </div>
        </div>
-     {{-- Bibliografi --}}
+     {{-- Beranda --}}
      <div class="">
         <div class="text-white text-xs border-t border-white pl-4 pt-5 mt-4 pb-4">
-           <p>BIBLIOGRAFI</p>
+           <p>BERANDA</p>
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="/bibliografi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
-                 <span class="flex-1 ml-3 whitespace-nowrap">Daftar Bibliografi</span>
+              <a href="/beranda" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                 <span class="flex-1 ml-3 whitespace-nowrap">Beranda</span>
               </a>
            </li>
            <li>
-              <a href="/bibliografi/create" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
-                 <span class="flex-1 ml-3 whitespace-nowrap">Tambah Bibliografi Baru</span>
+              <a href="/" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                 <span class="flex-1 ml-3 whitespace-nowrap">Daftar Admin</span>
               </a>
            </li>
+           <li>
+            <a href="/" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+               <span class="flex-1 ml-3 whitespace-nowrap">Tambah Admin</span>
+            </a>
+            </li>
               </a>
            </li>
         </ul>
      </div>
-     {{-- End Bibliografi --}}
-     {{-- Eksemplar --}}
-     <div class="">
-        <div class="text-white text-xs border-t border-white pl-4 pt-5 mt-2 pb-4">
-           <p>EKSEMPLAR</p>
-        </div>
-        <ul class="space-y-2 pl-1 font-bold text-sm">
-           <li class=" ">
-              <a href="/eksemplar" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
-                 <span class="flex-1 ml-3 whitespace-nowrap">Daftar Eksemplar</span>
-              </a>
-           </li>
-           <li>
-              <a href="/eksemplar-keluar" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
-                 <span class="flex-1 ml-3 whitespace-nowrap">Daftar Eksemplar Keluar</span>
-              </a>
-           </li>
-              </a>
-           </li>
-        </ul>
-     </div>
-     {{-- End Eksemplar --}}
+     {{-- End Beranda --}}
     </div>
  </aside>
 {{-- End Sidebar --}}
