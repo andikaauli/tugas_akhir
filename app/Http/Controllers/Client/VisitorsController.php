@@ -52,7 +52,7 @@ class VisitorsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/visitor/add', 'POST', $request->all());
         $response = app()->handle($http);
