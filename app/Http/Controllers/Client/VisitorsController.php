@@ -37,6 +37,7 @@ class VisitorsController extends Controller
         $typeReq = $typeReq->create(config('app.api_url') . '/type/');
         $typeRes = app()->handle($typeReq);
         $typeRes = $typeRes->getContent();
+        
         $type = json_decode($typeRes);
         // dd($type);
 
@@ -57,6 +58,7 @@ class VisitorsController extends Controller
         $http = $http->create(config('app.api_url') . '/visitor/add', 'POST', $request->all());
         $response = app()->handle($http);
 
+        dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));

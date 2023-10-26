@@ -32,7 +32,7 @@
                         <p class="text-center text-base font-semibold">Tipe Pengunjung</p>
                     </div>
                     <div class="p-3">
-                        <select class="w-full rounded-md text-center">
+                        <select class="w-full rounded-md text-center" name="jenis_id">
                             @foreach ($type as $option)
                                 <option value="{{ $option->id }}"
                                     {{-- {{ $bibliografi->author_id == $option->id ? 'selected' : '' }}> --}}>
