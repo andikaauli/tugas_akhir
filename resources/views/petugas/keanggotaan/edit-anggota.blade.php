@@ -26,8 +26,15 @@
                  <div class="px-4 py-3 text-sm">
                      <p class="font-bold text-sm">:</p>
                  </div>
-                 <div class="px-4 py-3 items-stretch flex-auto">
-                     <input type="text" id="small-input" value="{{ $members->name}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                 <div class="flex items-center">
+                     <div class="px-4 py-3 items-stretch flex-auto">
+                         <input type="text" id="small-input" value="{{ $members->name}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                    @error('name')
+                         <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
+                    </div>
                  </div>
              </div>
          {{-- End Nama Anggota --}}
@@ -39,8 +46,15 @@
                 <div class="px-4 py-3 text-sm">
                     <p class="font-bold text-sm">:</p>
                 </div>
-                <div class="px-4 py-3">
-                    <input value="{{ $members->nim}}" type="text" id="small-input" name="nim" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                <div class="flex items-center">
+                    <div class="px-4 py-3">
+                        <input value="{{ $members->nim}}" type="text" id="small-input" name="nim" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    </div>
+                    <div>
+                        @error('nim')
+                                <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
             </div>
         {{-- End NIM Anggota --}}
@@ -132,10 +146,11 @@
                  <div class="flex">
                      <img src="{{ $members->image}}" class="bg-gray-300 rounded-md w-32 h-32"></img>
                      <div class="ml-3">
-                         <label class="file">
-                             <input value="{{ $members->image}}" class=" border rounded text-sm" type="file" id="file" aria-label="File browser example">
-                             <span class="file-custom"></span>
-                           </label>
+                        <label class="file">
+                            <input value="{{ $members->image}}" class=" border rounded text-sm" type="file" name="image"
+                                onchange="readURL(this);">
+                            <span class="file-custom"></span>
+                        </label>
                      </div>
                  </div>
              </div>
@@ -167,3 +182,18 @@
     {{-- End Section 2 --}}
     </div>
 </div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+
+            reader.onload = function(e) {
+                document.getElementById('blah').src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
