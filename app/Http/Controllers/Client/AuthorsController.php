@@ -103,7 +103,6 @@ class AuthorsController extends Controller
         // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-
         return redirect()->route('client.authors');
     }
 

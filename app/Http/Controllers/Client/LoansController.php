@@ -43,6 +43,20 @@ class LoansController extends Controller
 
         return view('petugas/sirkulasi/daftar-keterlambatan', ['loans' => $loans]);
     }
+
+    public function fastreturn(Request $request, $id)
+    {
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/loan/pengembaliankilat' . $id, 'POST', $request->except('_method'));
+        $response = app()->handle($http);
+
+        if ($response->isClientError()) {
+            return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+        }
+
+        return redirect()->route('client.authors');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

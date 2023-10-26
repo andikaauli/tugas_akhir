@@ -112,7 +112,7 @@ Route::group(['prefix'=>'/anggota', 'middleware' => ['auth']], function () {
 Route::group(['prefix'=>'/author', 'middleware' => ['auth']], function () {
     Route::get('/', [AuthorsController::class, 'index'])->name('client.authors');
     Route::delete('/delete', [AuthorsController::class, 'destroy'])->name('client.delete-authors');
-    Route::get('/create', [AuthorsController::class, 'create'])->middleware('auth');
+    Route::get('/create', [AuthorsController::class, 'create']);
     Route::post('/create', [AuthorsController::class, 'store'])->name('client.create-authors');
     Route::get('/edit/{id}', [AuthorsController::class, 'edit'])->name('client.edit-authors');
     Route::put('/edit/{id}', [AuthorsController::class, 'update']);
@@ -139,6 +139,7 @@ Route::group(['prefix'=>'/colltype', 'middleware' => ['auth']], function () {
 Route::group(['prefix'=>'/loan', 'middleware' => ['auth']], function () {
     Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
     Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
+    Route::get('/pengembalian-kilat', [LoansController::class, 'overdue'])->name('client.loan-fastreturn');
 });
 
 Route::get('/inisialisasi', function () {
