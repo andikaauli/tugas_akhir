@@ -31,9 +31,9 @@ class VisitorController extends Controller
     public function addData(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|max:255|string',
-            'institution' => 'nullable|max:255|string',
-            'jenis_id' => ['nullable', 'exists:types,id'], //bentukan kalo ada foreign
+            'name' => 'required|max:255|string',
+            'institution' => 'required|max:255|string',
+            'jenis_id' => ['required', 'exists:types,id'], //bentukan kalo ada foreign
 
         ]);
 

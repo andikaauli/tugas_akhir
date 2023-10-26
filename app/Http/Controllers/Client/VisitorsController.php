@@ -52,17 +52,18 @@ class VisitorsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/visitor/add', 'POST', $request->all());
         $response = app()->handle($http);
-
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
         // dd($request->all());
+
 
         return redirect()->route('client.visitors');
     }
