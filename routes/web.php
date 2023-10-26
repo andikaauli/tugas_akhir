@@ -251,4 +251,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/beranda', [BerandaController::class, "getData"]);
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 // Route::resource("zzz", VisitorController::class);

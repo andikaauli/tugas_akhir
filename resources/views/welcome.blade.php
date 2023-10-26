@@ -157,7 +157,6 @@
      </div>
   </aside>
 {{-- End Sidebar --}}
-
 {{-- Content --}}
   <div class="sm:ml-64">
      <div class="mt-18">
