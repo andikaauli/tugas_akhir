@@ -18,7 +18,7 @@
             @csrf
             <div class="bg-white">
                 {{-- Nama Anggota --}}
-                <div class="flex border-b border-solid border-gray-300">
+                <div class="flex border-y border-solid border-gray-300">
                     <div class="px-4 py-3 text-sm w-60">
                         <p class="font-bold text-sm">Nama Anggota*</p>
                     </div>
@@ -39,14 +39,14 @@
                 </div>
                 {{-- End Nama Anggota --}}
                 {{-- NIM Anggota --}}
-                <div class="flex border-y border-solid border-gray-300">
+                <div class="flex border-b border-solid border-gray-300">
                     <div class="px-4 py-3 text-sm w-60">
                         <p class="font-bold text-sm">NIM Anggota*</p>
                     </div>
                     <div class="px-4 py-3 text-sm">
                         <p class="font-bold text-sm">:</p>
                     </div>
-                    <div class="felx items-center">
+                    <div class="flex items-center">
                         <div class="px-4 py-3">
                             <input type="text" name="nim" id="small-input"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
