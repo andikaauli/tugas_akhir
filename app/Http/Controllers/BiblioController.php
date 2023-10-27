@@ -107,8 +107,8 @@ class BiblioController extends Controller
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
-        $data = $request->all();
-        $imagePath = null;
+        // $data = $request->all();
+        // $imagePath = null;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

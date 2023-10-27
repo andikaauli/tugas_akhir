@@ -40,7 +40,7 @@ class MemberController extends Controller
             'email' => 'nullable|max:255|email', 'unique:member',
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|min:11|numeric', 'unique:member',
+            'phone' => 'nullable|min:11|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member',
         ]);
 
         $data = $request->all();
@@ -74,12 +74,8 @@ class MemberController extends Controller
             'email' => 'nullable|max:255|email', 'unique:member,id',
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|min:11|numeric', 'unique:member,id',
+            'phone' => 'nullable|min:11|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member,id',
         ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -91,9 +87,12 @@ class MemberController extends Controller
                 Storage::delete('public/images/' . $memberImage);
             }
         }
-
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $member = Member::find($id);
         $member->update($request->all());
+
         return response()
             ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $member]);
     }

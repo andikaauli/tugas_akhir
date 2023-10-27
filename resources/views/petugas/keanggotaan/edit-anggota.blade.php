@@ -143,7 +143,7 @@
              </div>
              <div class="px-4 py-3">
                  <div class="flex">
-                     <img id="blah" src="{{ $members->image}}" class="rounded-md h-36 w-36"></img>
+                     <img id="blah" src="{{ $members->image}}" class="rounded-md h-36 w-36" ></img>
                      <div class="ml-3">
                         <label class="file">
                             <input value="{{ $members->image}}" class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
