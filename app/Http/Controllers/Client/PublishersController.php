@@ -19,9 +19,23 @@ class PublishersController extends Controller
         $http = $http->create(config('app.api_url') . '/publisher', 'GET', ['search' => $search]);
         $response = app()->handle($http);
         $response = $response->getContent();
-
         $publishers = json_decode($response);
+        $publishers = collect($publishers)->paginate(5);
 
+        // $publishers = collect($publishers);
+        // $publishers['page_list'] = collect([]);
+        // for ($i = $publishers["current_page"]; $i <= $publishers["current_page"] + 2; $i++) {
+        //     if ($i > $publishers['last_page']) {
+        //         break;
+        //     }
+
+
+        //     $array = [
+        //         "page" => $i,
+        //         "url" => $publishers['path'] . "?page=" . $i
+        //     ];
+        //     $publishers['page_list']->push($array);
+        // }
 
         return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);
     }
