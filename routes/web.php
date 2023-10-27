@@ -195,7 +195,7 @@ Route::middleware(['only_guest'])->group(function () {
 });
 
 Route::group(['prefix'=>'/absen'], function () {
-    Route::get('/', [VisitorsController::class, 'create'])->name('client.visitors');
+    Route::get('/', [VisitorsController::class, 'create']);
     Route::post('/create', [VisitorsController::class, 'store'])->name('client.create-visitors');
 });
 Route::group(['prefix'=>'/type', 'middleware' => ['auth']], function () {
@@ -211,7 +211,7 @@ Route::middleware(['only_guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, "logout"]);
-    Route::get('/beranda', [BerandaController::class, "getData"]);
+    Route::get('/beranda', [BerandaController::class, "index","getData"])->name('client.visitors-history');
 });
 
 Route::get('/test', function () {

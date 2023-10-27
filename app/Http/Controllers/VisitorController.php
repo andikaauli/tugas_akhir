@@ -13,11 +13,15 @@ class VisitorController extends Controller
     public function getData(Request $request)
     {
         $search = $request->search;
-        $visitor = Visitor::all();
+        $visitor = Visitor::with(['type']);
+
         if ($search) {
-            $visitor = Visitor::where('name', 'LIKE', "%$search%")
-            ->orWhere('type.name', 'LIKE', "%$search%")->get();
+            $visitor = $visitor->whereHas("type", function ($b) use ($search) {
+                $b->where('name', 'LIKE', "%$search%");
+            })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%");
         }
+        $visitor = $visitor->get();
+
         return response()->json($visitor, 200);
     }
 

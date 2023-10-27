@@ -19,10 +19,9 @@ class VisitorsController extends Controller
         $http = $http->create(config('app.api_url') . '/visitor', 'GET', ['search' => $search]);
         $response = app()->handle($http);
         $response = $response->getContent();
-
         $visitors = json_decode($response);
 
-        return view('petugas/beranda/beranda', ['visitor' => $visitors]);
+        return view('petugas/beranda/beranda', ['visitors' => $visitors]);
     }
 
     /**
@@ -37,6 +36,7 @@ class VisitorsController extends Controller
         $typeReq = $typeReq->create(config('app.api_url') . '/type/');
         $typeRes = app()->handle($typeReq);
         $typeRes = $typeRes->getContent();
+
         $type = json_decode($typeRes);
         // dd($type);
 
@@ -56,7 +56,7 @@ class VisitorsController extends Controller
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/visitor/add', 'POST', $request->all());
         $response = app()->handle($http);
-        dd($response);
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));

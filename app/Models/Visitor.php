@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Models\Type;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
 
 class Visitor extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     // protected $table = 'visitor'; //utk deklarasi perubahan nama sesuai keinginan
 
@@ -18,6 +20,7 @@ class Visitor extends Model
     protected $guarded = [
         'id',
     ];
+
     protected $fillable = [
         'name', 'institution', 'jenis_id'
 
