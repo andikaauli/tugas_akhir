@@ -97,10 +97,10 @@
              </div>
              <div class="flex text-sm px-4 py-3">
                  <div class="flex items-center justify-center">
-                     <input class="mr-2" type="radio" name="gender" id=""
+                     <input class="mr-2" type="radio" name="gender" id=""  value="Laki-laki"
                         {{ $members->gender == 'Laki-laki' ? 'checked' : '' }}>
                      <label class="mr-3" for="">Laki-Laki</label>
-                     <input class="mr-2" type="radio" name="gender" id=""
+                     <input class="mr-2" type="radio" name="gender" id="" value="Perempuan"
                         @if ($members->gender == 'Perempuan') checked @endif>
                      <label for="">Perempuan</label>
                  </div>
