@@ -28,7 +28,7 @@
                  </div>
                  <div class="flex items-center">
                      <div class="px-4 py-3 items-stretch flex-auto">
-                         <input type="text" id="small-input" value="{{ $members->name}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                         <input name="name" type="text" id="small-input" value="{{ $members->name}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                     <div>
                     @error('name')
@@ -68,8 +68,7 @@
                  </div>
                  <div class="px-4 py-3">
                      <input class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                     type="date" id="dateofbirth" value="{{ Carbon\Carbon::parse($members->birth_date)->format('Y-m-d') }}">
-                     {{ Carbon\Carbon::parse($members->created_at)->format('Y-m-d') }}
+                     type="date" id="dateofbirth" name="birth_date" value="{{ Carbon\Carbon::parse($members->birth_date)->format('Y-m-d') }}">
                  </div>
              </div>
          {{-- End Tanggal Lahir --}}
@@ -83,7 +82,7 @@
                  </div>
                  <div class="px-4 py-3 items-stretch flex-auto">
                      <div class="flex flex-auto items-stretch">
-                         <input  value="{{ $members->institution}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                         <input name="institution" value="{{ $members->institution}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                      </div>
                  </div>
              </div>
@@ -98,10 +97,10 @@
              </div>
              <div class="flex text-sm px-4 py-3">
                  <div class="flex items-center justify-center">
-                     <input class="mr-2" type="radio" name="" id=""
+                     <input class="mr-2" type="radio" name="gender" id=""
                         {{ $members->gender == 'Laki-laki' ? 'checked' : '' }}>
                      <label class="mr-3" for="">Laki-Laki</label>
-                     <input class="mr-2" type="radio" name="" id=""
+                     <input class="mr-2" type="radio" name="gender" id=""
                         @if ($members->gender == 'Perempuan') checked @endif>
                      <label for="">Perempuan</label>
                  </div>
@@ -117,7 +116,7 @@
                  <p class="font-bold text-sm">:</p>
              </div>
              <div class="flex flex-auto items-stretch px-4 py-3">
-                 <textarea type="text"  class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300" name="" id="" cols="30" rows="2">{{ $members->address}}</textarea>
+                 <textarea type="text" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300" name="address" id="" cols="30" rows="2">{{ $members->address}}</textarea>
              </div>
          </div>
          {{-- End Alamat --}}
@@ -130,7 +129,7 @@
                  <p class="font-bold text-sm">:</p>
              </div>
              <div class="px-4 py-3">
-                 <input value="{{ $members->phone}}" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                 <input name="phone" value="{{ $members->phone}}" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
              </div>
          </div>
          {{-- End Nomor Telepon --}}
@@ -144,10 +143,10 @@
              </div>
              <div class="px-4 py-3">
                  <div class="flex">
-                     <img src="{{ $members->image}}" class="bg-gray-300 rounded-md w-32 h-32"></img>
+                     <img id="blah" src="{{ $members->image}}" class="rounded-md h-36 w-36"></img>
                      <div class="ml-3">
                         <label class="file">
-                            <input value="{{ $members->image}}" class=" border rounded text-sm" type="file" name="image"
+                            <input value="{{ $members->image}}" class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
                                 onchange="readURL(this);">
                             <span class="file-custom"></span>
                         </label>
@@ -165,7 +164,7 @@
                  <p class="font-bold text-sm">:</p>
              </div>
              <div class="px-4 py-3">
-                 <input value="{{ $members->email}}" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                 <input value="{{ $members->email}}" type="text" name="email" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
              </div>
          </div>
          {{-- End Surel --}}

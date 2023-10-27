@@ -93,7 +93,7 @@
            </div>
            {{-- End Section 4 --}}
         </form>
-        <!-- Pagination -->
+        {{-- <!-- Pagination -->
         <nav aria-label="Page navigation">
             <ul class="flex justify-center py-4">
                 <form action="" method="get">
@@ -134,7 +134,7 @@
 
             </ul>
         </nav>
-        <!-- End Pagination -->
+        <!-- End Pagination --> --}}
     </div>
 </div>
 

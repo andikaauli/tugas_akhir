@@ -22,6 +22,29 @@ class PublishersController extends Controller
         $publishers = json_decode($response);
         $publishers = collect($publishers)->paginate(5);
 
+        // if ($response->ok()) {
+        //     $data = collect($response->collect()["data"]);
+        // } else {
+        //     $data = null;
+        // }
+
+        // $total = $data !== null ? $data->count() : 0;
+        // $data = collect($data)->paginate(10);
+        // $data = collect($data);
+        // $data['page_list'] = collect([]);
+        // for ($i = $data["current_page"]; $i <= $data["current_page"] + 2; $i++) {
+        //     if ($i > $data['last_page']) {
+        //         break;
+        //     }
+
+
+        //     $array = [
+        //         "page" => $i,
+        //         "url" => $data['path'] . "?page=" . $i
+        //     ];
+        //     $data['page_list']->push($array);
+        // }
+
         // $publishers = collect($publishers);
         // $publishers['page_list'] = collect([]);
         // for ($i = $publishers["current_page"]; $i <= $publishers["current_page"] + 2; $i++) {

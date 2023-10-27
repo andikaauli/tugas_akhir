@@ -66,8 +66,8 @@ class MemberController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'nullable|max:255|string',
-            'nim' => 'nullable|min:14|numeric', 'unique:member,id',
+            'name' => 'required|max:255|string',
+            'nim' => 'required|min:14|numeric', 'unique:member,id',
             'gender' => 'nullable',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|max:255',

@@ -41,18 +41,17 @@
        <form action="{{ route('client.delete-member') }}" method="POST">
         @csrf
         @method('DELETE')
-           <div class="bg-white">
-            <div class="flex mb-4 py-3 px-4">
-                <button type="submit"
-                    class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Hapus Data
-                    Terpilih</button>
-                <button type="button" id="select-all"
-                    class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tandai
-                    Semua</button>
-                <button type="button" id="deselect-all"
-                    class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500">Hilangkan Semua
-                    Tanda</button>
-                </div>
+        <div class="flex mb-4 py-3 px-4">
+            <button type="submit"
+                class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Hapus Data
+                Terpilih</button>
+            <button type="button" id="select-all"
+                class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tandai
+                Semua</button>
+            <button type="button" id="deselect-all"
+                class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500">Hilangkan Semua
+                Tanda</button>
+            </div>
             <div class="flex mb-4">
                 <table class="table-auto w-full">
                    <thead class="p-3 border-y border-solid border-gray-400">
@@ -71,7 +70,7 @@
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">
-                             <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4  border-black rounded">
+                             <input id="default-checkbox"  name="deletedMember[]" type="checkbox" value="{{$member->id}}" class="w-4 h-4  border-black rounded">
                          </div>
                        </td>
                        <td class="p-3 w-20">
