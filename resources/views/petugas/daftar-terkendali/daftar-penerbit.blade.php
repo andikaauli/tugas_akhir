@@ -93,6 +93,7 @@
            </div>
            {{-- End Section 4 --}}
         </form>
+        {{$publishers->links()}}
     </div>
 </div>
 
