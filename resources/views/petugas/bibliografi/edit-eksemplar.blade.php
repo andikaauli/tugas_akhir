@@ -89,7 +89,7 @@
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
 
                                     @foreach ($status as $option)
-                                    <option name="id" value="{{ $option->id }}"
+                                    <option value="{{ $option->id }}"
                                         {{ $eksemplar->book_status_id == $option->id ? 'selected' : '' }}>
                                         {{ $option->name }}
                                     </option>

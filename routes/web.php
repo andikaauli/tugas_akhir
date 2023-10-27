@@ -26,6 +26,8 @@ use App\Http\Controllers\client\VisitorsController;
 use App\Http\Controllers\Client\ColltypesController;
 use App\Http\Controllers\Client\EksemplarsController;
 use App\Http\Controllers\Client\PublishersController;
+use App\Http\Controllers\Client\StockOpnamesController;
+use App\Http\Controllers\Client\StockTakeItemsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,34 +145,23 @@ Route::group(['prefix'=>'/loan', 'middleware' => ['auth']], function () {
     Route::get('/pengembalian-kilat', [LoansController::class, 'overdue'])->name('client.loan-fastreturn');
 });
 
-Route::get('/inisialisasi', function () {
-    return view('petugas/inventarisasi/inisialisasi');
-})->middleware('auth');
-
-Route::get('/rekaman-inventarisasi', function () {
-    return view('petugas/inventarisasi/rekaman-inventarisasi');
-})->middleware('auth');
-
-Route::get('/inventarisasi-aktif', function () {
-    return view('petugas/inventarisasi/inventarisasi-aktif');
-})->middleware('auth');
-
-Route::get('/eksemplar-hilang', function () {
-    return view('petugas/inventarisasi/eksemplar-hilang');
-})->middleware('auth');
-
-Route::get('/end-inventarisasi', function () {
-    return view('petugas/inventarisasi/end-inventarisasi');
-})->middleware('auth');
-
-Route::get('/hasil-inventarisasi', function () {
-    return view('petugas/inventarisasi/hasil-inventarisasi');
-})->middleware('auth');
-
-Route::get('/laporan-inventarisasi', function () {
-    return view('petugas/inventarisasi/laporan-inventarisasi');
-})->middleware('auth');
-
+Route::group(['prefix'=>'/inventarisasi', 'middleware' => ['auth']], function () {
+    Route::get('/inisialisasi', [StockOpnamesController::class, 'create']);
+    Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
+    Route::get('/rekaman', [StockOpnamesController::class, 'index'])->name('client.stockOpnameRecord');
+    Route::get('/laporan', function () {
+        return view('petugas/inventarisasi/laporan-inventarisasi');
+    });
+    Route::get('/end', function () {
+        return view('petugas/inventarisasi/end-inventarisasi');
+    });
+    Route::get('/aktif', function () {
+        return view('petugas/inventarisasi/inventarisasi-aktif');
+    });
+    Route::get('/eksemplar-hilang', function () {
+        return view('petugas/inventarisasi/eksemplar-hilang');
+    });
+});
 
 Route::middleware(['only_guest'])->group(function () {
     Route::get('/profil', function () {

@@ -21,32 +21,32 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="/rekaman-inventarisasi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/inventarisasi/rekaman" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Rekaman Inventarisasi</span>
               </a>
            </li>
            <li>
-            <a href="/inisialisasi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/inventarisasi/inisialisasi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Inisialisasi</span>
             </a>
          </li>
            <li>
-              <a href="/inventarisasi-aktif" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/inventarisasi/aktif" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                  <span class="flex-1 ml-3 whitespace-nowrap">Inventarisasi Aktif</span>
               </a>
            </li>
            <li>
-            <a href="/laporan-inventarisasi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/inventarisasi/laporan" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Laporan Inventarisasi</span>
             </a>
          </li>
          <li>
-            <a href="/eksemplar-hilang" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/inventarisasi/eksemplar-hilang" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Eksemplar Hilang Saat Ini</span>
             </a>
          </li>
          <li>
-            <a href="/end-inventarisasi" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+            <a href="/inventarisasi/end" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Selesaikan Inventarisasi</span>
             </a>
          </li>

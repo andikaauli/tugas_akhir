@@ -22,7 +22,6 @@ class EksemplarsController extends Controller
 
         $eksemplar = json_decode($response);
 
-        // dd($eksemplar);
         // ! Nyoba BookStatus
         // ! Dari API
         $bs = new Request();
@@ -62,6 +61,7 @@ class EksemplarsController extends Controller
         $http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
         $response = app()->handle($http);
 
+
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
@@ -94,6 +94,8 @@ class EksemplarsController extends Controller
         $response = app()->handle($http);
         $response = $response->getContent();
 
+        // dd($response);
+
     // ! Dari API
         $bs = new Request();
         $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
@@ -102,6 +104,8 @@ class EksemplarsController extends Controller
         $bsApi = json_decode($bsres);
 
         $eksemplar = json_decode($response);
+
+        // dd($eksemplar);
 
         return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
     }
@@ -118,6 +122,8 @@ class EksemplarsController extends Controller
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
+
+        dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));

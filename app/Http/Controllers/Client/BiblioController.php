@@ -137,6 +137,7 @@ class BiblioController extends Controller
         $publisher = json_decode($publisherRes);
         $collType = json_decode($collTypeRes);
 
+        dd($bibliografi);
 
         return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes'=> $collType]);
     }
