@@ -20,7 +20,7 @@ class PublishersController extends Controller
         $response = app()->handle($http);
         $response = $response->getContent();
         $publishers = json_decode($response);
-        $publishers = collect($publishers)->paginate(5);
+        $publishers = collect($publishers)->paginate(2);
 
         // if ($response->ok()) {
         //     $data = collect($response->collect()["data"]);

@@ -40,9 +40,9 @@ class EksemplarController extends Controller
     public function addData(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'item_code' => 'required|max:255|numeric',
-            'rfid_code' => 'required|max:255',
-            'order_number' => 'nullable|numeric|max:255',
+            'item_code' => 'required|numeric',
+            'rfid_code' => 'required',
+            'order_number' => 'nullable|numeric',
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
             'agent' => 'nullable|max:255|string',

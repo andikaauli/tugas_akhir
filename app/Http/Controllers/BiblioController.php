@@ -107,22 +107,21 @@ class BiblioController extends Controller
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+        $data = $request->all();
+        $imagePath = null;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $fileName);
-            $biblio->image = $fileName;
-
-            if ($biblio->image && Storage::exists('public/images/' . $biblioImage)) {
-                Storage::delete('public/images/' . $biblioImage);
-            }
+            $storeImage = $image->storeAs('public/images', $fileName);
+            $imagePath = asset(str_replace("public", "storage", $storeImage));
+            $data['image'] = $imagePath;
+        }
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
 
-        $biblio = Biblio::find($id);
+        $biblio = Biblio::create($data);
         $biblio->update($request->all());
         return response()
             ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
