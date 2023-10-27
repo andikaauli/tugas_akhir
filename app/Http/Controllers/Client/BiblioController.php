@@ -55,11 +55,17 @@ class BiblioController extends Controller
         $publisherRes = app()->handle($publisherReq);
         $publisherRes = $publisherRes->getContent();
 
+        $collTypeReq = new Request();
+        $collTypeReq = $collTypeReq->create(config('app.api_url') . '/colltype/');
+        $collTypeRes = app()->handle($collTypeReq);
+        $collTypeRes = $collTypeRes->getContent();
+
         $pengarang = json_decode($pengarangRes);
         $publisher = json_decode($publisherRes);
+        $collType = json_decode($collTypeRes);
 
 
-        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher]);
+        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes"=> $collType]);
     }
 
     /**
@@ -75,7 +81,7 @@ class BiblioController extends Controller
         $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all());
         $response = app()->handle($http);
 
-        dd($response);
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
@@ -109,6 +115,8 @@ class BiblioController extends Controller
         $response = app()->handle($http);
         $response = $response->getContent();
 
+        // dd($response);
+
         $pengarangReq = new Request();
         $pengarangReq = $pengarangReq->create(config('app.api_url') . '/author/');
         $pengarangRes = app()->handle($pengarangReq);
@@ -119,12 +127,18 @@ class BiblioController extends Controller
         $publisherRes = app()->handle($publisherReq);
         $publisherRes = $publisherRes->getContent();
 
+        $collTypeReq = new Request();
+        $collTypeReq = $collTypeReq->create(config('app.api_url') . '/colltype/');
+        $collTypeRes = app()->handle($collTypeReq);
+        $collTypeRes = $collTypeRes->getContent();
+
         $bibliografi = json_decode($response);
         $pengarang = json_decode($pengarangRes);
         $publisher = json_decode($publisherRes);
+        $collType = json_decode($collTypeRes);
 
 
-        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher]);
+        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes'=> $collType]);
     }
 
     /**
@@ -151,7 +165,7 @@ class BiblioController extends Controller
 
         $response = app()->handle($http);
 
-        // dd($response);
+        dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
@@ -170,8 +184,9 @@ class BiblioController extends Controller
      */
     public function destroy(Request $request)
     {
+        // dd($request);
         $deletedBiblioIdList = $request->deletedBiblio;
-
+        // dd($deletedBiblioIdList);
         if (!$deletedBiblioIdList) {
             return redirect()->back();
         }

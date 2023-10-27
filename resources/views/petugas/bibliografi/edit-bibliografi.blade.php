@@ -14,7 +14,7 @@
         </div>
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.edit-bibliografi', ['id' => $bibliografi->id]) }}" method="POST" class="h-full">
+        <form action="{{ route('client.edit-bibliografi', ['id' => $bibliografi->id]) }}" method="POST" class="h-full" enctype="multipart/form-data">
             {{-- @dd($bibliografi) --}}
             @method('PUT')
             @csrf
@@ -30,6 +30,9 @@
                     <textarea type="text" name="title"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                          id="" cols="30" rows="2">{{ $bibliografi->title }}</textarea>
+                    @error('title')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             {{-- End Judul --}}
@@ -41,7 +44,7 @@
                 <div class="px-4 py-3 text-sm">
                     <p>:</p>
                 </div>
-                <div class="flex flex-auto items-stretch px-4 py-3">
+                <div class="flex items-center px-4 py-3">
                     <div class="" style="width:200px;">
                         <select name="author_id" required
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
@@ -56,9 +59,11 @@
                             @endforeach
                         </select>
                     </div>
-                    @error('author_id')
-                        <p class="text-red-500 animate-pulse">{{ $message }}</p>
-                    @enderror
+                    <div class="ml-4">
+                        @error('author_id')
+                            <p class="flex items-center text-red-500 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
             </div>
             {{-- End Pengarang --}}
@@ -238,6 +243,29 @@
                 </div>
             </div>
             {{-- End Penerbit --}}
+            {{-- Tipe Koleksi --}}
+            <div class="flex border-b border-solid border-gray-300">
+                <div class="px-4 py-3 text-sm w-60">
+                    <p>Tipe Koleksi</p>
+                </div>
+                <div class="px-4 py-3 text-sm">
+                    <p>:</p>
+                </div>
+                <div class="flex flex-auto items-stretch px-4 py-3">
+                    <div class="" style="width:200px;">
+                        <select name="colltype_id"
+                            class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
+                            @foreach ($colltypes as $colltype)
+                                <option value="{{ $colltype->id }}"
+                                    {{ $bibliografi->coll_type_id == $colltype->id ? 'selected' : '' }}>
+                                    {{ $colltype->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            {{-- End Tipe Koleksi --}}
             {{-- Tempat Terbit --}}
             <div class="flex border-b border-solid border-gray-300">
                 <div class="px-4 py-3 text-sm w-60">
@@ -348,13 +376,13 @@
                 </div>
                 <div class="px-4 py-3">
                     <div class="flex">
-                        <img src="{{ $bibliografi->image }}" class="bg-gray-300 rounded-md w-32 h-44"></img>
+                        <img id="blah" src="{{ $bibliografi->image}}" class="rounded-md w-32 h-44" ></img>
                         <div class="ml-3">
-                            <label class="file">
-                                <input class=" border rounded text-sm" type="file" id="file"
-                                    aria-label="File browser example">
-                                <span class="file-custom"></span>
-                            </label>
+                           <label class="file">
+                               <input class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
+                                   onchange="readURL(this);">
+                               <span class="file-custom"></span>
+                           </label>
                         </div>
                     </div>
                 </div>
@@ -372,3 +400,18 @@
         {{-- End Section 2 --}}
     </div>
 </div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+
+            reader.onload = function(e) {
+                document.getElementById('blah').src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

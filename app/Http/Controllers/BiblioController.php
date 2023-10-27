@@ -113,18 +113,37 @@ class BiblioController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
-            $storeImage = $image->storeAs('public/images', $fileName);
-            $imagePath = asset(str_replace("public", "storage", $storeImage));
-            $data['image'] = $imagePath;
+            $image->storeAs('public/images', $fileName);
+            $biblioImage = $fileName;
+
+            if ($biblioImage && Storage::exists('public/images/' . $biblioImage)) {
+                Storage::delete('public/images/' . $biblioImage);
+            }
         }
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
-        $biblio = Biblio::create($data);
+        $biblio = biblio::find($id);
         $biblio->update($request->all());
+
         return response()
-            ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
+            ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $biblio]);
+
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $fileName = time() . '_' . $image->getClientOriginalName();
+        //     $storeImage = $image->storeAs('public/images', $fileName);
+        //     $imagePath = asset(str_replace("public", "storage", $storeImage));
+        //     $data['image'] = $imagePath;
+        // }
+        // if ($validator->fails()) {
+        //     return response()->json($validator->errors(), 422);
+        // }
+
+        // $biblio = Biblio::create($id);
+        // $biblio->update($request->all());
+        // return response()
+        //     ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
     }
 
     public function destroyData(Request $request, $id)
