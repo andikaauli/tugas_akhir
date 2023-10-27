@@ -147,7 +147,7 @@
                     </div>
                     <div class="px-4 py-3">
                         <div class="flex">
-                            <img id="blah" src="http://placehold.it/180" alt="your image"
+                            <img id="blah" src="/assets/blank.png" alt="/assets/blank.png"
                                 class="rounded-md max-w-xxs">
                             <div class="ml-3">
                                 <label class="file">

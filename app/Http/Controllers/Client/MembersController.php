@@ -97,7 +97,7 @@ class MembersController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'POST', $request->except('_method'));
+        $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
         $response = app()->handle($http);
 
         dd($response);
