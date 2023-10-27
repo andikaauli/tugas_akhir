@@ -86,6 +86,7 @@
               <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
                  Cari
               </button>
+                </div>
             </form>
               {{-- End Btn Search --}}
                 </div>
@@ -110,7 +111,7 @@
                     <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
-                    <td class="p-3 leading-6 w-80">{{ Carbon\Carbon::parse($visitor->created_at)->format('l, d F Y H:i') }}</td>
+                    <td class="p-3 leading-6 w-80">{{ Carbon\Carbon::parse($visitor->created_at)->formatLocalized('%A, %d %B %Y ') }}</td>
                  </tr>
               </tbody>
               @endforeach

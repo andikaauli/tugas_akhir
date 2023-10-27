@@ -195,7 +195,7 @@ Route::middleware(['only_guest'])->group(function () {
 });
 
 Route::group(['prefix'=>'/absen'], function () {
-    Route::get('/', [VisitorsController::class, 'create']);
+    Route::get('/', [VisitorsController::class, 'create'])->name('client.visitors');
     Route::post('/create', [VisitorsController::class, 'store'])->name('client.create-visitors');
 });
 Route::group(['prefix'=>'/type', 'middleware' => ['auth']], function () {

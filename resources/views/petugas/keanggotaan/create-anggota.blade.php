@@ -151,7 +151,7 @@
                                 class="rounded-md max-w-xxs">
                             <div class="ml-3">
                                 <label class="file">
-                                    <input class=" border rounded text-sm" type="file" name="image"
+                                    <input class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
                                         onchange="readURL(this);">
                                     <span class="file-custom"></span>
                                 </label>
