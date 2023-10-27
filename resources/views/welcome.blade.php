@@ -667,6 +667,53 @@
         </div>
         {{-- End Section 7 --}}
      </div>
+     <nav aria-label="Page navigation">
+        <ul class="flex justify-center py-4">
+            <form action="" method="get">
+                {{-- @if (request('search'))
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                @endif --}}
+                {{-- @if ($transactions['current_page'] > 1) --}}
+                {{-- <button type="submit" name="page" value="{{ $transactions['current_page'] - 1 }}" --}}
+                    <button type="submit" name="page" value=""
+                        class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                clip-rule="evenodd" fill-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                {{-- @endif --}}
+
+                {{-- @foreach ($transactions['page_list'] as $d)
+                    <button type="submit"
+                        class="h-10 px-4 mx-1 text-gray-400 hover:text-primary hover:font-semibold transition-colors duration-150 rounded-10 hover:bg-blue-100 {{ $transactions['current_page'] == $d['page'] ? 'bg-blue-100 text-primary font-semibold' : 'text-gray-400 font-semibold' }}"
+                        name="page" value="{{ $d['page'] }}">
+                        {{ $d['page'] }} --}}
+
+                    <button type="submit"
+                        class="h-10 px-4 mx-1 text-gray-400 hover:text-primary hover:font-semibold transition-colors duration-150 rounded-10 hover:bg-blue-100 "
+                        name="page">
+                        1
+                    </button>
+                {{-- @endforeach --}}
+
+                {{-- @if ($transactions['current_page'] < $transactions['last_page'])
+                    <button type="submit" name="page" value="{{ $transactions['current_page'] + 1 }}"
+                        class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100"> --}}
+                    <button type="submit" name="page"
+                        class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd" fill-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                {{-- @endif --}}
+            </form>
+
+        </ul>
+    </nav>
   </div>
 @vite('resources/js/app.js')
     </body>
