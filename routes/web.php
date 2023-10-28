@@ -70,18 +70,19 @@ Route::group(['prefix' => '/eksemplar', 'middleware' => ['auth']], function () {
     Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
     Route::put('/edit/{id}', [EksemplarsController::class, 'update']);
 });
+Route::get('/eksemplar-keluar', [LoansController::class, 'copyout'])->name('client.loan-copyout')->middleware('auth');
 
-Route::get('/eksemplar-keluar', function (Request $request) {
-    $search = $request->search;
-    $http = new Request();
-    $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-    $response = app()->handle($http);
-    $response = $response->getContent();
+// Route::get('/eksemplar-keluar', function (Request $request) {
+//     // $search = $request->search;
+//     // $http = new Request();
+//     // $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
+//     // $response = app()->handle($http);
+//     // $response = $response->getContent();
 
-    $loan = json_decode($response);
+//     // $loan = json_decode($response);
 
-    return view('petugas/bibliografi/eksemplar-keluar', ['loan' => $loan]);
-})->name('client.loan')->middleware('auth');
+//     // return view('petugas/bibliografi/eksemplar-keluar', ['loan' => $loan]);
+// })->name('client.loan')->middleware('auth');
 
 Route::get('/edit-eksemplar', function () {
     return view('petugas/bibliografi/edit-eksemplar');

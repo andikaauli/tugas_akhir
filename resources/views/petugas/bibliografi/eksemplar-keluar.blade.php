@@ -19,7 +19,7 @@
         {{-- Search Bar --}}
         <div class="flex items-center ">
             <p class="mr-3">Cari</p>
-            <form class="m-0" action="{{ route('client.eksemplar') }}" method="GET">
+            <form class="m-0" action="{{ route('client.loan-copyout') }}" method="GET">
                 <div class="flex items-center">
                     <input type="search" name="search"
                         class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
@@ -38,7 +38,7 @@
     </div>
     {{-- End Section 2 --}}
        {{-- Section 3 --}}
-       <form action="{{ route('client.loan-history') }}">
+       <form action="{{ route('client.loan-copyout') }}">
         <div class="flex mb-4 p-4 bg-white">
             <table class="table-auto w-full">
                <thead class="p-3 ">
@@ -52,7 +52,7 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Status Peminjaman</th>
                   </tr>
                </thead>
-               @foreach ($loan as $loan)
+               @foreach ($loans as $loan)
                <tbody>
                   <tr class="border-b border-solid border-gray-400">
                      <td class="p-1.5 text-sm leading-6 border-x border-b w-24">{{$loan->member->nim}}</td>

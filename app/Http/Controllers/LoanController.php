@@ -69,6 +69,7 @@ class LoanController extends Controller
                     "loan_date" => now(),
                     "due_date" => now()->addDays(7),
                     "loan_status" => 'Sedang dipinjam',
+                    'return_status' => '0'
                 ]);
 
                 $eksemplar->update([
