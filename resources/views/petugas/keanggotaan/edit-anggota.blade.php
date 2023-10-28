@@ -14,7 +14,7 @@
        </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    <form action="{{ route('client.edit-member', ['id' => $members->id]) }}" method="POST" class="m-0 p-0">
+    <form action="{{ route('client.edit-member', ['id' => $members->id]) }}" method="POST" class="m-0 p-0" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="bg-white">
@@ -146,7 +146,7 @@
                      <img id="blah" src="{{ $members->image}}" class="rounded-md h-36 w-36" ></img>
                      <div class="ml-3">
                         <label class="file">
-                            <input value="{{ $members->image}}" class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
+                            <input class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
                                 onchange="readURL(this);">
                             <span class="file-custom"></span>
                         </label>

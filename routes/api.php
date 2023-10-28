@@ -92,7 +92,7 @@ Route::prefix("rfidtemp")->group(function () {
 
 Route::prefix("stockopname")->group(function () {
     Route::get('', [StockOpnameController::class, "getData"]);
-    Route::get('/{id}', [StockOpnameController::class, "showData"]);
+    Route::get('/{id}', [StockOpnameController::class, "showData"])->name('show.stockopname');
     Route::post('/finish/{id}', [StockOpnameController::class, "finishStockOpname"]);
     Route::post('/add', [StockOpnameController::class, "addData"]);
 });
@@ -100,7 +100,7 @@ Route::prefix("stockopname")->group(function () {
 Route::prefix("stocktakeitem")->group(function () {
     Route::get('', [StockTakeItemController::class, "getData"]);
     Route::post('/edit', [StockTakeItemController::class, "editData"]);
-    Route::post('/button', [StockTakeItemController::class, "editDataButton"]);
+    Route::post('/button', [StockTakeItemController::class, "editDataButton"])->name('button.stocktakeitem');
 });
 
 Route::prefix("type")->group(function () {

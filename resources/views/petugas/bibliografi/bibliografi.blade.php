@@ -38,7 +38,9 @@
         </div>
         {{-- End Section 2 --}}
         {{-- Section 3 --}}
-        <form action="">
+        <form action="{{ route('client.delete-bibliografi') }}" method="POST">
+        @csrf
+        @method('DELETE')
             <div class="flex mb-4 py-3 px-4">
                 <button type="submit"
                     class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Hapus Data
@@ -71,8 +73,7 @@
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">
                                     <div class="flex items-center justify-center">
-                                        <input id="default-checkbox" type="checkbox" name="deletedBiblio[]"
-                                            value="{{ $biblio->id }}" class="w-4 h-4  border-black rounded">
+                                        <input id="default-checkbox" type="checkbox" name="deletedBiblio[]" value="{{ $biblio->id }}" class="w-4 h-4  border-black rounded">
                                     </div>
                                 </td>
                                 <td class="p-3 w-20">
@@ -102,45 +103,31 @@
                                 <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at )) }}</td>
                             </tr>
                         @endforeach
-                        {{-- @foreach ($bibliografi as $biblio)
-                            <tr class="border-b border-solid border-gray-400">
-                                <td class="p-3">
-                                    <div class="flex items-center justify-center">
-                                        <input id="default-checkbox" type="checkbox" name="deletedBiblio[]"
-                                            value="{{ $biblio->id }}" class="w-4 h-4  border-black rounded">
-                                    </div>
-                                </td>
-                                <td class="p-3">
-                                    <a href="{{ route('client.edit-bibliografi', ['id' => $biblio->id]) }}"
-                                        class="flex items-center justify-center">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="24" height="24" fill="black" />
-                                            <path d="M16 4L14 6L18 10L20 8L16 4ZM12 8L4 16V20H8L16 12L12 8Z"
-                                                fill="white" />
-                                        </svg>
-                                    </a>
-                                </td>
-                                <td class="p-3">
-                                    <div class="flex">
-                                        <div class="bg-gray-500 w-12 h-16">
-
-                                        </div>
-                                        <div class="ml-4">
-                                            <p class="text-sm font-medium">{{ $biblio->title }}</p>
-                                            <p class="text-sm font-medium text-gray-500">
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="p-3">{{ $biblio->isbnissn }}</td>
-                                <td class="p-3">{{ count($biblio->eksemplar) }}</td>
-                                <td class="p-3">2023-02-22 19:09:07</td>
-                            </tr>
-                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
+            {{-- Pagination --}}
+       <div class="flex justify-end">
+        <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
+            <p class="text-white text-center font-extrabold">Sebelumnya</p>
+        </button>
+        <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
+            <p class="text-white text-center font-extrabold">1</p>
+        </button>
+        <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
+            <p class="text-white text-center font-extrabold">2</p>
+        </button>
+        <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
+            <p class="text-white text-center font-extrabold">3</p>
+        </button>
+        <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
+            <p class="text-white text-center font-extrabold">Berikutnya</p>
+        </button>
+        <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
+            <p class="text-white text-center font-extrabold">Hal. Akhir</p>
+        </button>
+   </div>
+{{-- End Pagination --}}
             {{-- End Section 4 --}}
         </form>
     </div>

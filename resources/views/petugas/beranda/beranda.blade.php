@@ -118,26 +118,28 @@
            </table>
        </div>
     </form>
+    {{-- Pagination --}}
        <div class="flex justify-end">
-            <div class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
+            <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">Sebelumnya</p>
-            </div>
-            <div class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
+            </button>
+            <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">1</p>
-            </div>
-            <div class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
+            </button>
+            <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">2</p>
-            </div>
-            <div class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
+            </button>
+            <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">3</p>
-            </div>
-            <div class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
+            </button>
+            <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">Berikutnya</p>
-            </div>
-            <div class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
+            </button>
+            <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
                 <p class="text-white text-center font-extrabold">Hal. Akhir</p>
-            </div>
+            </button>
        </div>
+    {{-- End Pagination --}}
        {{-- End Section 5 --}}
     </div>
 </div>

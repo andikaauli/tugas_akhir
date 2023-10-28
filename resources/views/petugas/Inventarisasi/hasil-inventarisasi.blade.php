@@ -15,114 +15,116 @@
        </div>
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
+    <form action="{{ route('client.stockopname', ['id' => $stockopnames->id]) }}">
         <div class="h-full">
-            <div class="">
-       {{-- Nama Inventarisasi --}}
-           <div class="flex border-y border-solid border-gray-300">
-               <div class="px-4 py-3 text-sm w-44">
-                   <p class="font-medium text-sm">Nama Inventarisasi</p>
-               </div>
-               <div class="px-4 py-3 text-sm">
-                   <p>:</p>
-               </div>
-               <div class="flex flex-auto items-stretch px-4 py-3">
-                   <p class="text-sm font-medium">Kedelapan</p>
-               </div>
-           </div>
-       {{-- End Nama Inventarisasi --}}
-           {{-- Tanggal Mulai --}}
-               <div class="flex border-b border-gray-300">
+                <div class="">
+           {{-- Nama Inventarisasi --}}
+               <div class="flex border-y border-solid border-gray-300">
                    <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Tanggal Mulai</p>
+                       <p class="font-medium text-sm">Nama Inventarisasi</p>
                    </div>
                    <div class="px-4 py-3 text-sm">
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">2023-07-10 16:33:58</p>
-                </div>
+                       <p class="text-sm font-medium">{{$stockopnames->name}}</p>
+                   </div>
                </div>
-           {{-- End Tanggal Mulai --}}
-           {{-- Tanggal Selesai --}}
-               <div class="flex border-b border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Tanggal Selesai</p>
+           {{-- End Nama Inventarisasi --}}
+               {{-- Tanggal Mulai --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Tanggal Mulai</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</p>
+                    </div>
                    </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
+               {{-- End Tanggal Mulai --}}
+               {{-- Tanggal Selesai --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Tanggal Selesai</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</p>
+                    </div>
                    </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">2023-07-17 12:34:16</p>
-                </div>
+               {{-- End Tanggal Selesai --}}
+               {{-- Yang Menginisialisasi --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Yang Menginisialisasi</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{$stockopnames->name_user}}</p>
+                    </div>
+                   </div>
+               {{-- End Yang Menginisialisasi --}}
+               {{-- Total Eksemplar Terinventarisasi --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Total Eksemplar Terinventarisasi</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{$stockopnames->total_eksemplar}}</p>
+                    </div>
+                   </div>
+               {{-- End Total Eksemplar Terinventarisasi --}}
+               {{-- Total Eksemplar Hilang --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Total Eksemplar Hilang</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{$stockopnames->total_hilang}}</p>
+                    </div>
+                   </div>
+               {{-- End Total Eksemplar Hilang --}}
+               {{-- Total Eksmplar Tersedia --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Total Eksmplar Tersedia</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
+                    </div>
+                   </div>
+               {{-- End Total Eksmplar Tersedia --}}
+               {{-- Status --}}
+                   <div class="flex border-b border-gray-300">
+                       <div class="px-4 py-3 text-sm w-44">
+                           <p class="font-medium text-sm">Status</p>
+                       </div>
+                       <div class="px-4 py-3 text-sm">
+                           <p>:</p>
+                       </div>
+                       <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{$stockopnames->status_stockopname}}</p>
+                    </div>
+                   </div>
+               {{-- End Status --}}
                </div>
-           {{-- End Tanggal Selesai --}}
-           {{-- Yang Menginisialisasi --}}
-               <div class="flex border-b border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Yang Menginisialisasi</p>
-                   </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
-                   </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">Admin</p>
-                </div>
-               </div>
-           {{-- End Yang Menginisialisasi --}}
-           {{-- Total Eksemplar Terinventarisasi --}}
-               <div class="flex border-b border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Total Eksemplar Terinventarisasi</p>
-                   </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
-                   </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">5</p>
-                </div>
-               </div>
-           {{-- End Total Eksemplar Terinventarisasi --}}
-           {{-- Total Eksemplar Hilang --}}
-               <div class="flex border-b border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Total Eksemplar Hilang</p>
-                   </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
-                   </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">0</p>
-                </div>
-               </div>
-           {{-- End Total Eksemplar Hilang --}}
-           {{-- Total Eksmplar Tersedia --}}
-               <div class="flex border-b border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Total Eksmplar Tersedia</p>
-                   </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
-                   </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">0</p>
-                </div>
-               </div>
-           {{-- End Total Eksmplar Tersedia --}}
-           {{-- Status --}}
-               <div class="flex border-b border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Status</p>
-                   </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
-                   </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">Selesai</p>
-                </div>
-               </div>
-           {{-- End Status --}}
-           </div>
-      </div>
+        </div>
+    </form>
    {{-- End Section 2 --}}
     </div>
 </div>

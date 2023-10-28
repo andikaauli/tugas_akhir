@@ -43,7 +43,7 @@ class BiblioController extends Controller
             'responsibility' => 'nullable|max:255',
             'edition' => 'nullable|max:255',
             'spec_detail' => 'nullable|max:255',
-            'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
+            'coll_type_id' => ['nullable', 'max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'gmd' => 'nullable|max:255',
             'content_type' => 'nullable|max:255',
             'media_type' => 'nullable|max:255',
@@ -90,7 +90,7 @@ class BiblioController extends Controller
             'responsibility' => 'nullable|max:255',
             'edition' => 'nullable|max:255',
             'spec_detail' => 'nullable|max:255',
-            'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
+            'coll_type_id' => ['nullable', 'max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'gmd' => 'nullable|max:255',
             'content_type' => 'nullable|max:255',
             'carrier_type' => 'nullable|max:255',
@@ -107,8 +107,9 @@ class BiblioController extends Controller
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
-        // $data = $request->all();
-        // $imagePath = null;
+        $data = $request->all();
+        $imagePath = null;
+        $biblio = biblio::find($id);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -116,15 +117,37 @@ class BiblioController extends Controller
             $storeImage = $image->storeAs('public/images', $fileName);
             $imagePath = asset(str_replace("public", "storage", $storeImage));
             $data['image'] = $imagePath;
+
+            // http://127.0.0.1:8000/storage/images/1618531176_1618531176_eksemplar.jpg
+            // public/images/1618531176_1618531176_eksemplar.jpg
+
+            if ($biblio->image && Storage::exists(str_replace(asset('storage'), 'public', $biblio->image))) {
+                Storage::delete(str_replace(asset('storage'), 'public', $biblio->image));
+            }
         }
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+        $biblio->update($data);
 
-        $biblio = Biblio::create($data);
-        $biblio->update($request->all());
         return response()
-            ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
+            ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $biblio]);
+
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $fileName = time() . '_' . $image->getClientOriginalName();
+        //     $storeImage = $image->storeAs('public/images', $fileName);
+        //     $imagePath = asset(str_replace("public", "storage", $storeImage));
+        //     $data['image'] = $imagePath;
+        // }
+        // if ($validator->fails()) {
+        //     return response()->json($validator->errors(), 422);
+        // }
+
+        // $biblio = Biblio::create($id);
+        // $biblio->update($request->all());
+        // return response()
+        //     ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
     }
 
     public function destroyData(Request $request, $id)
