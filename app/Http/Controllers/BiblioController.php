@@ -131,7 +131,7 @@ class BiblioController extends Controller
         $biblio->update($data);
 
         return response()
-            ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $biblio]);
+            ->json(['message' => 'Data Biblio berhasil diubah!', 'data' => $biblio]);
 
         // if ($request->hasFile('image')) {
         //     $image = $request->file('image');
