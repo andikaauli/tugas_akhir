@@ -107,24 +107,28 @@ class BiblioController extends Controller
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
-        // $data = $request->all();
-        // $imagePath = null;
+        $data = $request->all();
+        $imagePath = null;
+        $biblio = biblio::find($id);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $fileName);
-            $biblioImage = $fileName;
+            $storeImage = $image->storeAs('public/images', $fileName);
+            $imagePath = asset(str_replace("public", "storage", $storeImage));
+            $data['image'] = $imagePath;
 
-            if ($biblioImage && Storage::exists('public/images/' . $biblioImage)) {
-                Storage::delete('public/images/' . $biblioImage);
+            // http://127.0.0.1:8000/storage/images/1618531176_1618531176_eksemplar.jpg
+            // public/images/1618531176_1618531176_eksemplar.jpg
+
+            if ($biblio->image && Storage::exists(str_replace(asset('storage'), 'public', $biblio->image))) {
+                Storage::delete(str_replace(asset('storage'), 'public', $biblio->image));
             }
         }
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        $biblio = biblio::find($id);
-        $biblio->update($request->all());
+        $biblio->update($data);
 
         return response()
             ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $biblio]);
