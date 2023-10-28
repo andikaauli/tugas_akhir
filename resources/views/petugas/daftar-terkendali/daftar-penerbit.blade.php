@@ -90,6 +90,8 @@
                     @endforeach
                   </tbody>
                </table>
+               {{-- {{$publishers->links()}} --}}
+
            </div>
            {{-- End Section 4 --}}
         </form>
