@@ -78,7 +78,7 @@ class BiblioController extends Controller
     {
         // dd($request);
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all());
+        $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all(), files: $request->allFiles());
         $response = app()->handle($http);
 
         // dd($response);
@@ -137,7 +137,7 @@ class BiblioController extends Controller
         $publisher = json_decode($publisherRes);
         $collType = json_decode($collTypeRes);
 
-        dd($bibliografi);
+        // dd($bibliografi);
 
         return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes'=> $collType]);
     }
@@ -152,7 +152,7 @@ class BiblioController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'POST', $request->except('_method'));
+        $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
 
 
         // ? 2 Cara filter request

@@ -43,7 +43,7 @@ class BiblioController extends Controller
             'responsibility' => 'nullable|max:255',
             'edition' => 'nullable|max:255',
             'spec_detail' => 'nullable|max:255',
-            'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
+            'coll_type_id' => ['nullable', 'max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'gmd' => 'nullable|max:255',
             'content_type' => 'nullable|max:255',
             'media_type' => 'nullable|max:255',
@@ -90,7 +90,7 @@ class BiblioController extends Controller
             'responsibility' => 'nullable|max:255',
             'edition' => 'nullable|max:255',
             'spec_detail' => 'nullable|max:255',
-            'coll_type_id' => ['nullable|max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
+            'coll_type_id' => ['nullable', 'max:255', 'exists:coll_type,id'], //bentukan kalo ada foreign
             'gmd' => 'nullable|max:255',
             'content_type' => 'nullable|max:255',
             'carrier_type' => 'nullable|max:255',
