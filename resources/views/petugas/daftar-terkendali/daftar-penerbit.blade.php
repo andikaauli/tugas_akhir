@@ -90,7 +90,7 @@
                     @endforeach
                   </tbody>
                </table>
-               {{-- {{$publishers->links()}} --}}
+               {{ $publishers->links('pagination.custom') }}
 
            </div>
            {{-- End Section 4 --}}
