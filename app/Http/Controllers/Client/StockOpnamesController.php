@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\client;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class StockOpnamesController extends Controller
 {
@@ -51,6 +52,10 @@ class StockOpnamesController extends Controller
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         }
+
+        $response = json_decode($response->getContent());
+
+        session(["active_inventarisasi" => $response->id]);
 
         return redirect()->route('client.stockOpnameRecord');
     }

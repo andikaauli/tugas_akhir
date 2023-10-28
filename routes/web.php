@@ -44,7 +44,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'/bibliografi', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/bibliografi', 'middleware' => ['auth']], function () {
     Route::get('/', [BiblioController::class, 'getBiblio'])->name('client.bibliografi');
     Route::delete('/delete', [BiblioController::class, 'destroy'])->name('client.delete-bibliografi');
     Route::get('/create', [BiblioController::class, 'create']);
@@ -62,7 +62,7 @@ Route::group(['prefix'=>'/bibliografi', 'middleware' => ['auth']], function () {
 //     Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar')->middleware('auth');
 //     Route::put('/edit/{id}', [EksemplarsController::class, 'update'])->middleware('auth');
 // });
-Route::group(['prefix'=>'/eksemplar', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/eksemplar', 'middleware' => ['auth']], function () {
     Route::get('/', [EksemplarsController::class, 'index'])->name('client.eksemplar');
     Route::delete('/delete', [EksemplarsController::class, 'destroy'])->name('client.delete-eksemplar');
     Route::get('/create', [EksemplarsController::class, 'create'])->middleware('auth');
@@ -103,7 +103,7 @@ Route::get('/daftar-keterlambatan', function () {
     return view('petugas/sirkulasi/daftar-keterlambatan');
 })->middleware('auth');
 
-Route::group(['prefix'=>'/anggota', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/anggota', 'middleware' => ['auth']], function () {
     Route::get('/', [MembersController::class, 'index'])->name('client.member');
     Route::delete('/delete', [MembersController::class, 'destroy'])->name('client.delete-member');
     Route::get('/create', [MembersController::class, 'create']);
@@ -112,7 +112,7 @@ Route::group(['prefix'=>'/anggota', 'middleware' => ['auth']], function () {
     Route::put('/edit/{id}', [MembersController::class, 'update']);
 });
 
-Route::group(['prefix'=>'/author', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/author', 'middleware' => ['auth']], function () {
     Route::get('/', [AuthorsController::class, 'index'])->name('client.authors');
     Route::delete('/delete', [AuthorsController::class, 'destroy'])->name('client.delete-authors');
     Route::get('/create', [AuthorsController::class, 'create']);
@@ -122,7 +122,7 @@ Route::group(['prefix'=>'/author', 'middleware' => ['auth']], function () {
 });
 
 
-Route::group(['prefix'=>'/publisher', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/publisher', 'middleware' => ['auth']], function () {
     Route::get('/', [PublishersController::class, 'index'])->name('client.publishers');
     Route::delete('/delete', [PublishersController::class, 'destroy'])->name('client.delete-publishers');
     Route::get('/create', [PublishersController::class, 'create']);
@@ -131,7 +131,7 @@ Route::group(['prefix'=>'/publisher', 'middleware' => ['auth']], function () {
     Route::put('/edit/{id}', [PublishersController::class, 'update']);
 });
 
-Route::group(['prefix'=>'/colltype', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/colltype', 'middleware' => ['auth']], function () {
     Route::get('/', [CollTypesController::class, 'index'])->name('client.colltypes');
     Route::delete('/delete', [CollTypesController::class, 'destroy'])->name('client.delete-colltypes');
     Route::get('/create', [CollTypesController::class, 'create']);
@@ -139,13 +139,13 @@ Route::group(['prefix'=>'/colltype', 'middleware' => ['auth']], function () {
     Route::get('/edit/{id}', [CollTypesController::class, 'edit'])->name('client.edit-colltypes');
     Route::put('/edit/{id}', [CollTypesController::class, 'update']);
 });
-Route::group(['prefix'=>'/loan', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
     Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
     Route::get('/pengembalian-kilat', [LoansController::class, 'overdue'])->name('client.loan-fastreturn');
 });
 
-Route::group(['prefix'=>'/inventarisasi', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/inventarisasi'], function () {
     Route::get('/inisialisasi', [StockOpnamesController::class, 'create']);
     Route::post('/inisialisasi', [StockOpnamesController::class, 'store'])->name('client.create-stockopname');
     Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
@@ -157,7 +157,20 @@ Route::group(['prefix'=>'/inventarisasi', 'middleware' => ['auth']], function ()
         return view('petugas/inventarisasi/end-inventarisasi');
     });
     Route::get('/aktif', function () {
-        return view('petugas/inventarisasi/inventarisasi-aktif');
+        if (empty(session('active_inventarisasi'))) {
+            $http = new Request();
+            $http = $http->create(config('app.api_url') . '/stockopname', 'GET');
+            $response = app()->handle($http);
+            $response = $response->getContent();
+
+            $stockopname = json_decode($response);
+
+            session(['active_inventarisasi' => $stockopname[0]->id]);
+        };
+
+        $inventarisasiId = session()->get('active_inventarisasi');
+
+        return view('petugas/inventarisasi/inventarisasi-aktif', ['inventarisasiId' => $inventarisasiId]);
     });
     Route::get('/eksemplar-hilang', function () {
         return view('petugas/inventarisasi/eksemplar-hilang');
@@ -186,24 +199,24 @@ Route::middleware(['only_guest'])->group(function () {
     // });
 });
 
-Route::group(['prefix'=>'/absen'], function () {
+Route::group(['prefix' => '/absen'], function () {
     Route::get('/', [VisitorsController::class, 'create'])->name('client.visitors');
     Route::post('/create', [VisitorsController::class, 'store'])->name('client.create-visitors');
 });
-Route::group(['prefix'=>'/type', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/type', 'middleware' => ['auth']], function () {
     Route::get('/', [TypeController::class, 'index'])->name('client.types');
 });
 
 //COBA LOGIN
 
 Route::middleware(['only_guest'])->group(function () {
-    Route::get('/login',[UserController::class, "login"])->name('login');
+    Route::get('/login', [UserController::class, "login"])->name('login');
     Route::post('/sesi/login', [UserController::class, "authenticating"]);
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, "logout"]);
-    Route::get('/beranda', [BerandaController::class, "index","getData"])->name('client.visitors-history');
+    Route::get('/beranda', [BerandaController::class, "index", "getData"])->name('client.visitors-history');
 });
 
 Route::get('/test', function () {

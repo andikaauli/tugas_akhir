@@ -32,6 +32,7 @@ class StockTakeItemController extends Controller
         //if status 3 menjadi 2 dan if status 2 akan error
         //bikin seperti peminjaman eksemplar
 
+
         $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
 
         if ($eksemplar) {
@@ -39,14 +40,13 @@ class StockTakeItemController extends Controller
                 return $query->where('item_code', $request->item_code);
             })->where('stock_opname_id', $request->stock_opname_id)->first();
 
-            if($stocktakeitem['book_status_id'] == '1'){
+            if ($stocktakeitem['book_status_id'] == '1') {
                 return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' sedang Dipinjam!'], 422);
-
-            } else{
+            } else {
                 $stocktakeitem->update([
-                'book_status_id' => 2
-            ]);
-            return response()->json($stocktakeitem, 200);
+                    'book_status_id' => 2
+                ]);
+                return response()->json($stocktakeitem, 200);
             }
         }
 
