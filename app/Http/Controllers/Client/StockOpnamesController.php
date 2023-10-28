@@ -112,4 +112,23 @@ class StockOpnamesController extends Controller
     {
         //
     }
+
+    function end()
+    {
+        $active_inventarisasi = Session::get('active_inventarisasi');
+
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/stockopname/finish/' . $active_inventarisasi, 'POST');
+        $response = app()->handle($http);
+
+
+
+        if ($response->isClientError()) {
+            return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+        }
+
+        Session::forget('active_inventarisasi');
+
+        return redirect()->route('client.stockOpnameRecord');
+    }
 }

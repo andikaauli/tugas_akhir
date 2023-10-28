@@ -39,6 +39,11 @@ class StockOpnameController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        if (StockOpname::whereNull('end_date')->count() > 0) {
+            return response()->json(['message' => 'Inventarisasi sedang berlangsung'], 422);
+        }
+
         $stockopname = StockOpname::create([
             "name" => $request->name,
             "name_user" => $request->name_user,

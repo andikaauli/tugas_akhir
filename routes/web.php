@@ -145,35 +145,38 @@ Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/pengembalian-kilat', [LoansController::class, 'overdue'])->name('client.loan-fastreturn');
 });
 
-Route::group(['prefix' => '/inventarisasi'], function () {
-    Route::get('/inisialisasi', [StockOpnamesController::class, 'create']);
-    Route::post('/inisialisasi', [StockOpnamesController::class, 'store'])->name('client.create-stockopname');
-    Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
-    Route::get('/rekaman', [StockOpnamesController::class, 'index'])->name('client.stockOpnameRecord');
-    Route::get('/laporan', function () {
-        return view('petugas/inventarisasi/laporan-inventarisasi');
+Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']], function () {
+    Route::get('/', function () {
+        if (session('active_inventarisasi')) {
+            return redirect(route('client.active-inventarisasi'));
+        } else {
+            return redirect(route('client.stockOpnameRecord'));
+        }
     });
-    Route::get('/end', function () {
-        return view('petugas/inventarisasi/end-inventarisasi');
+    Route::middleware('inven_is_active:false')->group(function () {
+        Route::get('/inisialisasi', [StockOpnamesController::class, 'create']);
+        Route::post('/inisialisasi', [StockOpnamesController::class, 'store'])->name('client.create-stockopname');
+        Route::get('/rekaman', [StockOpnamesController::class, 'index'])->name('client.stockOpnameRecord');
     });
-    Route::get('/aktif', function () {
-        if (empty(session('active_inventarisasi'))) {
-            $http = new Request();
-            $http = $http->create(config('app.api_url') . '/stockopname', 'GET');
-            $response = app()->handle($http);
-            $response = $response->getContent();
 
-            $stockopname = json_decode($response);
+    Route::middleware('inven_is_active:true')->group(function () {
+        Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
+        Route::get('/laporan', function () {
+            return view('petugas/inventarisasi/laporan-inventarisasi');
+        });
+        Route::get('/end', function () {
+            return view('petugas/inventarisasi/end-inventarisasi');
+        });
+        Route::post('/end', [StockOpnamesController::class, 'end'])->name('client.end-stockopname');
 
-            session(['active_inventarisasi' => $stockopname[0]->id]);
-        };
+        Route::get('/aktif', function () {
+            $inventarisasiId = session()->get('active_inventarisasi');
 
-        $inventarisasiId = session()->get('active_inventarisasi');
-
-        return view('petugas/inventarisasi/inventarisasi-aktif', ['inventarisasiId' => $inventarisasiId]);
-    });
-    Route::get('/eksemplar-hilang', function () {
-        return view('petugas/inventarisasi/eksemplar-hilang');
+            return view('petugas/inventarisasi/inventarisasi-aktif', ['inventarisasiId' => $inventarisasiId]);
+        })->name('client.active-inventarisasi');
+        Route::get('/eksemplar-hilang', function () {
+            return view('petugas/inventarisasi/eksemplar-hilang');
+        });
     });
 });
 
