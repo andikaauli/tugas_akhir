@@ -18,7 +18,7 @@ class VisitorController extends Controller
         if ($search) {
             $visitor = $visitor->whereHas("type", function ($b) use ($search) {
                 $b->where('name', 'LIKE', "%$search%");
-            })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%");
+            })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('updated_at', 'LIKE', "%$search%");
         }
         $visitor = $visitor->get();
 
