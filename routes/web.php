@@ -147,6 +147,7 @@ Route::group(['prefix'=>'/loan', 'middleware' => ['auth']], function () {
 
 Route::group(['prefix'=>'/inventarisasi', 'middleware' => ['auth']], function () {
     Route::get('/inisialisasi', [StockOpnamesController::class, 'create']);
+    Route::post('/inisialisasi', [StockOpnamesController::class, 'store'])->name('client.create-stockopname');
     Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
     Route::get('/rekaman', [StockOpnamesController::class, 'index'])->name('client.stockOpnameRecord');
     Route::get('/laporan', function () {
