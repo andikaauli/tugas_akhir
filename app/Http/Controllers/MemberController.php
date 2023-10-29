@@ -77,21 +77,28 @@ class MemberController extends Controller
             'phone' => 'nullable|min:11|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member,id',
         ]);
 
+        $data = $request->all();
+        $imagePath = null;
+        $member = Member::find($id);
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $fileName);
-            $memberImage = $fileName;
+            $storeImage = $image->storeAs('public/images', $fileName);
+            $imagePath = asset(str_replace("public", "storage", $storeImage));
+            $data['image'] = $imagePath;
 
-            if ($memberImage && Storage::exists('public/images/' . $memberImage)) {
-                Storage::delete('public/images/' . $memberImage);
+            // http://127.0.0.1:8000/storage/images/1618531176_1618531176_eksemplar.jpg
+            // public/images/1618531176_1618531176_eksemplar.jpg
+
+            if ($biblio->image && Storage::exists(str_replace(asset('storage'), 'public', $member->image))) {
+                Storage::delete(str_replace(asset('storage'), 'public', $member->image));
             }
         }
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        $member = Member::find($id);
-        $member->update($request->all());
+        $member->update($data);
 
         return response()
             ->json(['message' => 'Data Anggota berhasil diubah!', 'data' => $member]);

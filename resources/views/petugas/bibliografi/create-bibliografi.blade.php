@@ -208,7 +208,7 @@
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <div class="" style="width:200px;">
-                        <select name="colltype_id"
+                        <select name="coll_type_id"
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
                             @foreach ($colltypes as $colltype)
                                 <option value="{{ $colltype->id }}" >
