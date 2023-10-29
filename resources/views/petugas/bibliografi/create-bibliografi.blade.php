@@ -186,10 +186,10 @@
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <div class="" style="width:200px;">
-                        <select
+                        <select name="publisher_id"
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
                             @foreach ($publishers as $publisher)
-                                <option value="{{ $publisher->id }}" name="publisher_id">
+                                <option value="{{ $publisher->id }}" >
                                     {{ $publisher->title }}
                                 </option>
                             @endforeach
@@ -208,10 +208,10 @@
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <div class="" style="width:200px;">
-                        <select
+                        <select name="colltype_id"
                             class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 inline-flex items-center">
                             @foreach ($colltypes as $colltype)
-                                <option value="{{ $colltype->id }}" name="colltype_id">
+                                <option value="{{ $colltype->id }}" >
                                     {{ $colltype->title }}
                                 </option>
                             @endforeach
