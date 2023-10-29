@@ -144,7 +144,7 @@ Route::group(['prefix' => '/colltype', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
     Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
-    Route::get('/pengembalian-kilat', [LoansController::class, 'overdue'])->name('client.loan-fastreturn');
+    Route::put('/pengembalian-kilat', [LoansController::class, 'overdue'])->name('client.loan-fastreturn');
 });
 
 Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']], function () {
