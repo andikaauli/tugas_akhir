@@ -177,6 +177,7 @@ Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']],
 
             return view('petugas/inventarisasi/inventarisasi-aktif', ['inventarisasiId' => $inventarisasiId]);
         })->name('client.active-inventarisasi');
+
         Route::get('/eksemplar-hilang', function () {
             return view('petugas/inventarisasi/eksemplar-hilang');
         });

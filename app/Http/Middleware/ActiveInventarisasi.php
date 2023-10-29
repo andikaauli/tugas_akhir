@@ -17,23 +17,20 @@ class ActiveInventarisasi
     public function handle(Request $request, Closure $next)
     {
         if (empty(session('active_inventarisasi'))) {
-            $http = new Request();
-            $http = $http->create(config('app.api_url') . '/stockopname', 'GET');
-            $response = app()->handle($http);
-            $response = $response->getContent();
+            $response = app()->call('App\Http\Controllers\StockOpnameController@getData');
 
-            $stockopname = json_decode($response);
+            $stockopname = json_decode($response->getContent());
 
             $stockopname = array_filter($stockopname, function ($item) {
                 return !$item->end_date;
             });
-
 
             if ($stockopname) {
                 $stockopname = current($stockopname);
                 session(['active_inventarisasi' => $stockopname->id]);
             }
         };
+
         return $next($request);
     }
 }
