@@ -19,7 +19,7 @@
           </li>
           <li class="h-full">
            <div class="flex h-full px-4 border-b-3 text-white border-teknik  items-center hover:ease-in-out hover:duration-300 hover:border-amber-600 hover:text-blue-500">
-                <a href="/bibliografi" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">CARI KOLEKSI</a>
+                <a href="/detail" class="h-full w-full text-center flex items-center px-2 font-bold text-sm">CARI KOLEKSI</a>
            </div>
          </li>
          <li class="h-full">

@@ -159,10 +159,11 @@ Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']],
         Route::get('/inisialisasi', [StockOpnamesController::class, 'create']);
         Route::post('/inisialisasi', [StockOpnamesController::class, 'store'])->name('client.create-stockopname');
         Route::get('/rekaman', [StockOpnamesController::class, 'index'])->name('client.stockOpnameRecord');
+        Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
+
     });
 
     Route::middleware('inven_is_active:true')->group(function () {
-        Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
         Route::get('/laporan', function () {
             return view('petugas/inventarisasi/laporan-inventarisasi');
         });
