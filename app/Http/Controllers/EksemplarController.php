@@ -33,7 +33,7 @@ class EksemplarController extends Controller
 
     public function showData($id)
     {
-        $eksemplar = Eksemplar::with(['bookstatus', 'loan'])->findOrFail($id);
+        $eksemplar = Eksemplar::with(['bookstatus', 'loan', 'biblio'])->findOrFail($id);
         return response()->json($eksemplar, 200);
     }
 

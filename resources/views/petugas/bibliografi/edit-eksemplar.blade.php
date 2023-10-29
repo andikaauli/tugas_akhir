@@ -29,7 +29,7 @@
                         </div>
                         <div class="flex flex-auto items-stretch px-4 py-3">
                             {{-- @dd($eksemplar) --}}
-                                <p class="text-sm font-medium">Judul</p>
+                                <p class="text-sm font-medium">{{$eksemplar->biblio->title}}</p>
                         </div>
                     </div>
                     {{-- End Judul --}}
