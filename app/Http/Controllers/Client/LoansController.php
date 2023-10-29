@@ -62,6 +62,7 @@ class LoansController extends Controller
 
     public function fastreturn(Request $request, $id)
     {
+        $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan/pengembaliankilat' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);

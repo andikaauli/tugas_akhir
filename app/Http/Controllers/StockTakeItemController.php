@@ -25,7 +25,7 @@ class StockTakeItemController extends Controller
 
         $stocktakeitem->refresh();
 
-        return response()->json($stocktakeitem, 200);
+        return response()->json((['message' => 'success', 'data' => $stocktakeitem, 'eksemplar' => $stocktakeitem->eksemplar]));
     }
     public function editDataButton(Request $request)
     {
@@ -40,13 +40,19 @@ class StockTakeItemController extends Controller
                 return $query->where('item_code', $request->item_code);
             })->where('stock_opname_id', $request->stock_opname_id)->first();
 
-            if ($stocktakeitem['book_status_id'] == '1') {
+            if ($stocktakeitem['book_status_id'] == '1' ) {
                 return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' sedang Dipinjam!'], 422);
-            } else {
+            }
+
+            elseif ($stocktakeitem['book_status_id'] == '2' ) {
+                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' sudah Tersedia!'], 422);
+            }
+
+            else {
                 $stocktakeitem->update([
                     'book_status_id' => 2
                 ]);
-                return response()->json($stocktakeitem, 200);
+                return response()->json((['message' => 'success', 'data' => $stocktakeitem, 'eksemplar' => $stocktakeitem->eksemplar]));
             }
         }
 

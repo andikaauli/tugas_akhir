@@ -69,6 +69,7 @@ Route::group(['prefix' => '/eksemplar', 'middleware' => ['auth']], function () {
     Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
     Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
     Route::put('/edit/{id}', [EksemplarsController::class, 'update']);
+
 });
 Route::get('/eksemplar-keluar', [LoansController::class, 'copyout'])->name('client.loan-copyout')->middleware('auth');
 
@@ -203,7 +204,7 @@ Route::middleware(['only_guest'])->group(function () {
     // });
 });
 
-Route::group(['prefix' => '/absen'], function () {
+Route::group(['prefix' => '/absen', 'middleware' => ['only_guest']], function () {
     Route::get('/', [VisitorsController::class, 'create'])->name('client.visitors');
     Route::post('/create', [VisitorsController::class, 'store'])->name('client.create-visitors');
 });
