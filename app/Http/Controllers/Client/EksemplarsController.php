@@ -98,7 +98,7 @@ class EksemplarsController extends Controller
 
     // ! Dari API
         $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
+        $bs = $bs->create(config('app.api_url') . '/bookstatus/');
         $bsres = app()->handle($bs);
         $bsres = $bsres->getContent();
         $bsApi = json_decode($bsres);
@@ -123,7 +123,7 @@ class EksemplarsController extends Controller
         $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
-        dd($response);
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));

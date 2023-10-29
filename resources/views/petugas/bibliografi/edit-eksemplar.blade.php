@@ -85,11 +85,10 @@
                         </div>
                         <div class="px-4 py-3">
                             <div class="" style="width:200px;">
-                                <select
+                                <select name="book_status_id"
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
-
                                     @foreach ($status as $option)
-                                    <option value="{{ $option->id }}"
+                                    <option value="{{ $option->id }}" name="book_status_id"
                                         {{ $eksemplar->book_status_id == $option->id ? 'selected' : '' }}>
                                         {{ $option->name }}
                                     </option>
@@ -170,10 +169,10 @@
                         </div>
                         <div class="flex text-sm px-4 py-3">
                             <div class="flex items-center justify-center">
-                                <input class="mr-2" type="radio" name="source" id=""
+                                <input class="mr-2" type="radio" name="source" id="" value="Beli"
                                     {{ $eksemplar->source == 'Beli' ? 'checked' : '' }}>
                                 <label class="mr-3" for="">Beli</label>
-                                <input class="mr-2" type="radio" name="source" id=""
+                                <input class="mr-2" type="radio" name="source" id="" value="Hadiah"
                                     @if ($eksemplar->source == 'Hadiah') checked @endif>
                                 <label for="">Hadiah/Hibah</label>
                             </div>
