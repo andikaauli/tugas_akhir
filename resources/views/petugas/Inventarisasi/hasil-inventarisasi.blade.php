@@ -107,7 +107,7 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                  <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
              </div>
-            </div>
+                </div>
                 {{-- End Total Eksmplar Tersedia --}}
                {{-- Total Eksemplar Terpinjam --}}
                     <div class="flex border-b border-gray-300">
