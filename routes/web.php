@@ -220,6 +220,8 @@ Route::middleware(['only_guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, "logout"]);
     Route::get('/beranda', [BerandaController::class, "index", "getData"])->name('client.visitors-history');
+    Route::get('/edit/profil/{id}', [BerandaController::class, "edit"])->name('client.edit-profil');
+    Route::put('/edit/profil/{id}', [BerandaController::class, "update"]);
 });
 
 Route::get('/test', function () {
