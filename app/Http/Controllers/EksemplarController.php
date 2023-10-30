@@ -49,7 +49,7 @@ class EksemplarController extends Controller
             'source' => 'required',
             'invoice' => 'nullable',
             'price' => ['nullable', 'numeric'],
-            'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
+            'book_status_id' => ['nullable', 'exists:book_statuses,id'], //bentukan kalo ada foreign
         ]);
 
         if ($validator->fails()) {
@@ -72,7 +72,7 @@ class EksemplarController extends Controller
             'source' => 'required',
             'invoice' => 'nullable',
             'price' => ['nullable', 'numeric'],
-            'book_status_id' => ['required', 'exists:book_status,id'], //bentukan kalo ada foreign
+            'book_status_id' => ['nullable', 'exists:book_statuses,id'], //bentukan kalo ada foreign
         ]);
 
         if ($validator->fails()) {

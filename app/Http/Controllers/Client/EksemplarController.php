@@ -62,6 +62,8 @@ class EksemplarController extends Controller
         $http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
         $response = app()->handle($http);
 
+        // dd($response);
+
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
@@ -118,6 +120,8 @@ class EksemplarController extends Controller
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
+
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
