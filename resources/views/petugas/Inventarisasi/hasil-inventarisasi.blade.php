@@ -96,6 +96,19 @@
                     </div>
                    </div>
                {{-- End Total Eksemplar Hilang --}}
+               {{-- Total Eksmplar Tersedia --}}
+               <div class="flex border-b border-gray-300">
+                <div class="px-4 py-3 text-sm w-44">
+                    <p class="font-medium text-sm">Total Eksmplar Tersedia</p>
+                </div>
+                <div class="px-4 py-3 text-sm">
+                    <p>:</p>
+                </div>
+                <div class="flex flex-auto items-stretch px-4 py-3">
+                 <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
+             </div>
+            </div>
+                {{-- End Total Eksmplar Tersedia --}}
                {{-- Total Eksemplar Terpinjam --}}
                     <div class="flex border-b border-gray-300">
                         <div class="px-4 py-3 text-sm w-44">
@@ -109,19 +122,7 @@
                         </div>
                     </div>
                 {{-- End Total Eksemplar Terpinjam --}}
-               {{-- Total Eksmplar Tersedia --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Total Eksmplar Tersedia</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
-                    </div>
-                   </div>
-               {{-- End Total Eksmplar Tersedia --}}
+
                {{-- Status --}}
                    <div class="flex border-b border-gray-300">
                        <div class="px-4 py-3 text-sm w-44">
