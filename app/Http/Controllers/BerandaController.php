@@ -49,12 +49,12 @@ class BerandaController extends Controller
         $member = json_decode($memberRes);
         $profil = json_decode($profilRes);
         $visitors = json_decode($response);
-        $loans = json_decode($response);
+        $loans = json_decode($loanRes);
         $loans = array_filter($loans, function ($loan) {
             return $loan->return_status == '0';
         });
 
-        // dd($biblio);
+        // dd($loans);
 
         return view('petugas/beranda/beranda', ['visitors' => $visitors, 'profils' => $profil, 'members' => $member, 'eksemplars' => $eksemplar, 'loans' => $loans, 'biblios' => $biblio]);
     }
@@ -84,4 +84,5 @@ class BerandaController extends Controller
 
         return redirect()->route('client.visitors-history');
     }
+
 }

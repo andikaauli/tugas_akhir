@@ -61,12 +61,11 @@
                 </thead>
                 <tbody id="list-stocktakeitem">
                     <tr class="border-b border-solid border-gray-400">
-                        <td class="p-3 leading-6 w-44">B00012</td>
-                        <td class="p-3 leading-6">PostgreSQL : a comprehensive guide to building, programming, and
-                            administering PostgreSQL </td>
-                        <td class="p-3 leading-6 W-46">005.75/85-22 Kor p</td>
+                        <td class="p-3 leading-6 w-44"></td>
+                        <td class="p-3 leading-6"></td>
+                        <td class="p-3 leading-6 W-46"></td>
                         {{-- <td class="p-3 leading-6 w-28">Reference</td> --}}
-                        <td class="p-3 leading-6 w-20">Ada</td>
+                        <td class="p-3 leading-6 w-20"></td>
                     </tr>
                 </tbody>
             </table>
