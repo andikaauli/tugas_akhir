@@ -94,7 +94,7 @@
                                         </img>
                                         <div class="ml-4">
                                             <p class="text-sm font-medium">{{ $biblio->title }}</p>
-                                            <p class="text-sm font-medium text-gray-500"></p>
+                                            <p class="text-sm font-medium text-gray-500">{{$biblio->author->title}}</p>
                                         </div>
                                     </div>
                                 </td>

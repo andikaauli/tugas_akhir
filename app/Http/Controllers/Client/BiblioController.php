@@ -32,9 +32,25 @@ class BiblioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->search;
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+        $eksemplarReq = new Request();
+        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
+        $eksemplarRes = app()->handle($eksemplarReq);
+        $eksemplarRes = $eksemplarRes->getContent();
+
+        $bibliografi = json_decode($response);
+        $eksemplar = json_decode($eksemplarReq);
+
+        // dd($bibliografi);
+
+        return view('dashboard/cari-koleksi', ['bibliografi' => $bibliografi, 'eksemplars' => $eksemplar]);
     }
 
     /**
@@ -140,6 +156,29 @@ class BiblioController extends Controller
         // dd($bibliografi);
 
         return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes'=> $collType]);
+    }
+
+    public function detail($id)
+    {
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/biblio/' . $id);
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+        // dd($response);
+
+        $eksemplarReq = new Request();
+        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
+        $eksemplarRes = app()->handle($eksemplarReq);
+        $eksemplarRes = $eksemplarRes->getContent();
+
+        $bibliografi = json_decode($response);
+        $eksemplar = json_decode($eksemplarRes);
+
+        // dd($bibliografi);
+        // dd($bibliografi);
+
+        return view('dashboard/detail', ['bibliografi' => $bibliografi, "eksemplar" => $eksemplar]);
     }
 
     /**

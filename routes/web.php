@@ -197,13 +197,9 @@ Route::middleware(['only_guest'])->group(function () {
         return view('dashboard/keanggotaan');
     });
 
-    Route::get('/detail', function () {
-        return view('dashboard/detail');
-    });
+    Route::get('/detail/{id}', [BiblioController::class, 'detail'])->name('client.detail');
 
-    // Route::get('/absen', function () {
-    //     return view('dashboard/absen');
-    // });
+    Route::get('/koleksi', [BiblioController::class, 'index'])->name('client.koleksi');
 });
 
 Route::group(['prefix' => '/absen', 'middleware' => ['only_guest']], function () {
