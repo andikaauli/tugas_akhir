@@ -31,20 +31,25 @@
         </div>
         {{-- End Search Bar --}}
         {{-- Section 2 --}}
-        <div class="py-8 px-4 ">
+        <div class="py-8 px-4 mb-4">
             {{-- Search Bar --}}
-            <div class="flex items-center ">
+            <div class="flex items-center">
                 <p class="mr-3">Cari</p>
-                <input type="search"
-                    class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                    placeholder="Search" aria-label="Search" aria-describedby="button-addon3" />
-                {{-- Btn Search --}}
-                <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
-                    Cari
-                </button>
+                <form class="m-0" action="{{ route('client.bibliografi') }}" method="GET">
+                    <div class="flex items-center">
+                        <input type="search" name="search"
+                            class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                            value="{{ request('search') }}" placeholder="Search" aria-label="Search"
+                            aria-describedby="button-addon3" />
+                        {{-- Btn Search --}}
+                        <button type="submit"
+                            class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
+                            Cari
+                        </button>
+                    </div>
+                </form>
                 {{-- End Btn Search --}}
             </div>
-            {{-- End Search Bar --}}
         </div>
         {{-- End Section 2 --}}
         {{-- Section 3 --}}

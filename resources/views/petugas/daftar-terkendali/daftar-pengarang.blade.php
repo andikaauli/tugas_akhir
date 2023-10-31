@@ -72,6 +72,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @dd($authors)
                         @foreach ($authors as $author)
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">

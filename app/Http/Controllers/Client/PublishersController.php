@@ -20,20 +20,23 @@ class PublishersController extends Controller
         $response = app()->handle($http);
         $response = $response->getContent();
         $publishers = json_decode($response);
-        $publishers = collect($publishers)->paginate(1);
 
-        // $publishers = collect($publishers);
-        // $publishers['page_list'] = collect([]);
-        // for ($i = $publishers["current_page"]; $i <= $publishers["current_page"] + 2; $i++) {
-        //     if ($i > $publishers['last_page']) {
-        //         break;
-        //     }
-        //     $array = [
-        //         "page" => $i,
-        //         "url" => $publishers['path'] . "?page=" . $i
-        //     ];
-        //     $publishers['page_list']->push($array);
-        // }
+        // $total = $publishers !== null ? count($publishers) : 0;
+        $publishers = collect($publishers)->paginate(5);
+        $publishers = collect($publishers);
+        $publishers['page_list'] = collect([]);
+        for ($i = $publishers["current_page"]; $i <= $publishers["current_page"] + 2; $i++) {
+            if ($i > $publishers['last_page']) {
+                break;
+            }
+
+            $array = [
+                "page" => $i,
+                "url" => $publishers['path'] . "?page=" . $i
+            ];
+            $publishers['page_list']->push($array);
+        }
+
         // dd($publishers);
 
         return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);

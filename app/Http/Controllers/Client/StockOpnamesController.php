@@ -79,6 +79,21 @@ class StockOpnamesController extends Controller
         return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
     }
 
+    public function laporan(Request $request)
+    {
+        // $active_inventarisasi = Session::get('active_inventarisasi');
+
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'POST');
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+        $stockopname = json_decode($response);
+
+        // dd($stockopname);
+        return view('petugas/inventarisasi/laporan-inventarisasi', ['stockopnames' => $stockopname]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

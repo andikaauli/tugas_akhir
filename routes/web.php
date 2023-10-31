@@ -164,9 +164,7 @@ Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']],
     });
 
     Route::middleware('inven_is_active:true')->group(function () {
-        Route::get('/laporan', function () {
-            return view('petugas/inventarisasi/laporan-inventarisasi');
-        });
+        Route::get('/laporan', [StockOpnamesController::class, 'laporan'])->name('client.report-stockopname');
         Route::get('/end', function () {
             return view('petugas/inventarisasi/end-inventarisasi');
         });
