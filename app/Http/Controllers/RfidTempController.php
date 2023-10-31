@@ -12,9 +12,9 @@ class RfidTempController extends Controller
     {
 
         $rfidtemp = Rfidtemp::first();
-        // if ($rfidtemp){
-        //     $rfidtemp->forceDelete();
-        // }
+        if ($rfidtemp){
+            $rfidtemp->forceDelete();
+        }
 
         return response()->json($rfidtemp, 200);
     }
