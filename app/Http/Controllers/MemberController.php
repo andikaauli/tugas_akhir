@@ -91,7 +91,7 @@ class MemberController extends Controller
             // http://127.0.0.1:8000/storage/images/1618531176_1618531176_eksemplar.jpg
             // public/images/1618531176_1618531176_eksemplar.jpg
 
-            if ($biblio->image && Storage::exists(str_replace(asset('storage'), 'public', $member->image))) {
+            if ($member->image && Storage::exists(str_replace(asset('storage'), 'public', $member->image))) {
                 Storage::delete(str_replace(asset('storage'), 'public', $member->image));
             }
         }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('return_status')->nullable();
             $table->timestamps();
             $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
-            $table->foreignUuid('member_id')->constrained('members');
+            $table->foreignUuid('member_id')->constrained('members')->restrictOnDelete();
         });
     }
 
