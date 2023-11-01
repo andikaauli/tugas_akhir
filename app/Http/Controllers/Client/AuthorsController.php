@@ -22,7 +22,7 @@ class AuthorsController extends Controller
         // $response = $response->getContent();
 
         // $authors = json_decode($response);
-        $authors = Author::paginate(5);
+        $authors = Author::where('title', 'LIKE', "%$search%")->paginate(5);
         // dd($authors);
 
 

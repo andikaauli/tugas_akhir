@@ -11,11 +11,8 @@ class AuthorController extends Controller
 {
     public function getData(Request $request)
     {
-        $search = $request->search;
         $author = Author::all();
-        if ($search) {
-            $author = Author::where('title', 'LIKE', "%$search%")->get();
-        }
+
         return response()->json($author, 200);
     }
 
