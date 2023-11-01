@@ -104,7 +104,7 @@
                 </table>
             </div>
             <div class="flex">
-                {{$authors->links('pagination::tailwind')}}
+                {{$authors->links('pagination.custom')}}
             </div>
             {{-- End Section 4 --}}
         </form>

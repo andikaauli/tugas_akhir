@@ -85,7 +85,7 @@ class StockOpnamesController extends Controller
 
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
-            "tersedia" => true
+            "hilang" => true
         ]);
         $response = app()->handle($http);
         $response = $response->getContent();
