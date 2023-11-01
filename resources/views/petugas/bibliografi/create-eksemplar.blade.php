@@ -1,33 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="<?php echo asset('style.css')?>">
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-
-        </style>
-
-        <style>
-            body {
-                font-family: 'quicksand';
-            }
-        </style>
-        @vite('resources/css/app.css')
-</head>
-<body class="">
-    <button class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-white m-5 show-modal">Tambah Eksemplar</button>
-    <div class="modal h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+    <div class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
         {{-- Modal --}}
                 {{-- Tambah Eksemplar --}}
                 <div class=" bg-white rounded-2xl">
@@ -239,6 +211,3 @@
             });
         });
     </script>
-
-</body>
-</html>

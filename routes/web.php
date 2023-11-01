@@ -164,9 +164,8 @@ Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']],
     });
 
     Route::middleware('inven_is_active:true')->group(function () {
-        Route::get('/laporan', function () {
-            return view('petugas/inventarisasi/laporan-inventarisasi');
-        });
+        Route::get('/laporan', [StockOpnamesController::class, 'laporan'])->name('client.report-stockopname');
+        Route::get('/eksemplar-hilang', [StockOpnamesController::class, 'gone'])->name('client.gone-stockopname');
         Route::get('/end', function () {
             return view('petugas/inventarisasi/end-inventarisasi');
         });
@@ -178,9 +177,7 @@ Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']],
             return view('petugas/inventarisasi/inventarisasi-aktif', ['inventarisasiId' => $inventarisasiId]);
         })->name('client.active-inventarisasi');
 
-        Route::get('/eksemplar-hilang', function () {
-            return view('petugas/inventarisasi/eksemplar-hilang');
-        });
+
     });
 });
 

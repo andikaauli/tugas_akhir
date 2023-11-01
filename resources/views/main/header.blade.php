@@ -4,6 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="<?php echo asset('style.css')?>">
 
+
 <title>Laravel</title>
 
 <!-- Fonts -->

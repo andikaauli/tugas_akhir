@@ -69,7 +69,9 @@
                      </tr>
                   </thead>
                   <tbody>
+                    {{-- @dd($colltypes) --}}
                     @foreach ($colltypes as $colltype)
+                    {{-- @dd($colltypes) --}}
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">

@@ -15,9 +15,14 @@
        </div>
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
+        {{-- @dd($stockopnames) --}}
+        {{-- @dd($stockopnames) --}}
+        @foreach ($stockopnames->['stocktakeitem'] as $item)
+        @dd($item)
+        @endforeach
         <div class="h-full">
             <div class="">
-       {{-- Nama Inventarisasi --}}
+            {{-- Nama Inventarisasi --}}
            <div class="flex border-y border-solid border-gray-300">
                <div class="px-4 py-3 text-sm w-46">
                    <p class="font-medium text-sm">Nama Inventarisasi</p>
@@ -26,10 +31,10 @@
                    <p>:</p>
                </div>
                <div class="flex flex-auto items-stretch px-4 py-3">
-                   <p class="text-sm font-medium">Kedelapan</p>
+                   <p class="text-sm font-medium">{{$stockopnames->name}}</p>
                </div>
            </div>
-       {{-- End Nama Inventarisasi --}}
+            {{-- End Nama Inventarisasi --}}
            {{-- Total Eksemplar Terinventarisasi --}}
                <div class="flex border-b border-gray-300">
                    <div class="px-4 py-3 text-sm w-46">
@@ -39,7 +44,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">1</p>
+                    <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Terinventarisasi --}}
@@ -52,7 +57,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">Tidak Ada</p>
+                    <p class="text-sm font-medium">{{$stockopnames->total_hilang}}</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Hilang --}}
@@ -65,7 +70,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">Tidak Ada</p>
+                    <p class="text-sm font-medium">{{$stockopnames->total_terpinjam}}</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Terpinjam --}}
@@ -91,7 +96,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">Admin</p>
+                    <p class="text-sm font-medium">{{$stockopnames->name_user}}</p>
                 </div>
                </div>
            {{-- End Pelaksana Inventarisasi --}}
@@ -104,7 +109,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">2023-07-10 16:33:58</p>
+                    <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</p>
                 </div>
                </div>
            {{-- End Tanggal Mulai --}}
@@ -117,7 +122,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">2023-07-17 12:34:16</p>
+                    <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</p>
                 </div>
                </div>
            {{-- End Tanggal Selesai --}}

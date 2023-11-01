@@ -89,7 +89,7 @@
                                 </td>
                                 <td class="p-3">
                                     <div class="flex">
-                                        <img src="{{ $biblio->image }}" class="w-12 h-16">
+                                        <img src="{{ $biblio->image ?? 'assets/blank-book.png' }}" class="w-12 h-16">
 
                                         </img>
                                         <div class="ml-4">

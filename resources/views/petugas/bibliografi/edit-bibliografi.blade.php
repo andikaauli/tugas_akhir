@@ -119,9 +119,9 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <button type="button" id="select-all" href="/eksemplar/add"
-                        class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tambah
-                        Eksemplar</button>
+                    <a type="button" href="#"
+                        class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2  show-modal">Tambah Eksemplar</a>
+                    @include('petugas.bibliografi.create-eksemplar')
                 </div>
             </div>
             {{-- End Tambah Eksemplar --}}
@@ -414,4 +414,17 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+    const modal = document.querySelector('.modal');
+        const showModal = document.querySelector('.show-modal');
+        const closeModal = document.querySelectorAll('.close-modal');
+
+        showModal.addEventListener('click', function (){
+            modal.classList.remove('hidden')
+        });
+
+        closeModal.forEach(close => {
+            close.addEventListener('click', function (){
+                modal.classList.add('hidden')
+            });
+        });
 </script>

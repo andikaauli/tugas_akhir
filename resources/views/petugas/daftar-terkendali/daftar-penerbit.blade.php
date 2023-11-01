@@ -69,7 +69,9 @@
                      </tr>
                   </thead>
                   <tbody>
-                    @foreach ($publishers as $publisher )
+                    {{-- @dd($publishers) --}}
+                    @foreach ($publishers['data'] as $publisher )
+                    {{-- @dd($publisher) --}}
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">
@@ -90,20 +92,19 @@
                     @endforeach
                   </tbody>
                </table>
-               {{ $publishers->links('pagination.custom') }}
 
            </div>
            {{-- End Section 4 --}}
         </form>
-        {{-- <!-- Pagination -->
+        <!-- Pagination -->
         <nav aria-label="Page navigation">
             <ul class="flex justify-center py-4">
                 <form action="" method="get">
                     @if (request('search'))
                         <input type="hidden" name="search" value="{{ request('search') }}">
                     @endif
-                    @if ($transactions['current_page'] > 1)
-                        <button type="submit" name="page" value="{{ $transactions['current_page'] - 1 }}"
+                    @if ($publishers['current_page'] > 1)
+                        <button type="submit" name="page" value="{{ $publishers['current_page'] - 1 }}"
                             class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                                 <path
@@ -113,17 +114,17 @@
                         </button>
                     @endif
 
-                    @foreach ($transactions['page_list'] as $d)
+                    @foreach ($publishers['page_list'] as $d)
                         <button type="submit"
-                            class="h-10 px-4 mx-1 text-gray-400 hover:text-primary hover:font-semibold transition-colors duration-150 rounded-10 hover:bg-blue-100 {{ $transactions['current_page'] == $d['page'] ? 'bg-blue-100 text-primary font-semibold' : 'text-gray-400 font-semibold' }}"
+                            class="h-10 px-4 mx-1 text-gray-400 hover:text-primary hover:font-semibold transition-colors duration-150 rounded-10 hover:bg-blue-100 {{ $publishers['current_page'] == $d['page'] ? 'bg-blue-100 text-primary font-semibold' : 'text-gray-400 font-semibold' }}"
                             name="page" value="{{ $d['page'] }}">
                             {{ $d['page'] }}
 
                         </button>
                     @endforeach
 
-                    @if ($transactions['current_page'] < $transactions['last_page'])
-                        <button type="submit" name="page" value="{{ $transactions['current_page'] + 1 }}"
+                    @if ($publishers['current_page'] < $publishers['last_page'])
+                        <button type="submit" name="page" value="{{ $publishers['current_page'] + 1 }}"
                             class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                                 <path
@@ -136,7 +137,7 @@
 
             </ul>
         </nav>
-        <!-- End Pagination --> --}}
+        <!-- End Pagination -->
     </div>
 </div>
 
