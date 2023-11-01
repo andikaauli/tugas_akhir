@@ -71,6 +71,7 @@
                   <tbody>
                     {{-- @dd($publishers) --}}
                     @foreach ($publishers['data'] as $publisher )
+                    {{-- @dd($publisher) --}}
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">

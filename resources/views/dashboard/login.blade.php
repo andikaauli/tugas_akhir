@@ -1,11 +1,7 @@
 @extends('dashboard.main')
 
 <div class="flex items-center justify-center pt-32">
-    @if (session('status'))
-        <div class="alert alert-danger">
-            {{ session('message') }}
-        </div>
-    @endif
+
     <form action="/sesi/login" method="POST" class="m-0 p-0">
         {{-- Section 1 --}}
         @csrf
@@ -20,6 +16,11 @@
                         <div class="mb-2">
                             <input class="w-108 rounded-md text-base" type="text" placeholder="Enter Username" name="username" required>
                         </div>
+                        @if (session('status'))
+                            <div class="alert alert-danger text-xs font-bold text-red-500 animate-pulse">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                     </div>
                     {{-- End Username --}}
                     {{-- Password --}}

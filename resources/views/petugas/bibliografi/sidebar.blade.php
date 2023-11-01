@@ -1,5 +1,5 @@
 {{-- Sidebar --}}
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-50 w-64 h-screen transition-transform -translate-x-full bg-white sm:translate-x-0 dark:bg-gray-800 " aria-label="Sidebar">
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-20 w-64 h-screen transition-transform -translate-x-full bg-white sm:translate-x-0 dark:bg-gray-800 " aria-label="Sidebar">
     <div class="h-full pb-4 overflow-y-auto bg-blue-500">
        <div class="flex w-64 bg-blue-700 bg-opacity-90 px-3 py-3">
            <div class="flex items-center ml-3">

@@ -72,8 +72,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @dd($authors)
+                        {{-- @dd($authors) --}}
                         @foreach ($authors as $author)
+                        {{-- @dd($author) --}}
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">
                                     <div class="flex items-center justify-center">
@@ -101,6 +102,9 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="flex">
+                {{$authors->links('pagination::tailwind')}}
             </div>
             {{-- End Section 4 --}}
         </form>

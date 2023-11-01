@@ -1,7 +1,7 @@
-<nav class="fixed top-0 z-40 w-full bg-white ">
+<nav class="fixed top-0 z-10 w-full bg-white ">
     <div class="flex shadow-md" id="navbar-default">
         <ul class="flex h-18 w-full ml-64 items-center font-medium p-4 md:p-0 mt-4 md:mt-0 ">
-            @dd(Request::is('beranda'))
+            {{-- @dd(Request::is('beranda')) --}}
             <li class=" ">
                 <div
                     class="flex h-full px-4 border-b-3 items-center hover:ease-in-out hover:duration-300 hover:border-blue-500 hover:text-blue-500 {{ Request::is('/beranda') ? 'text-blue-500 border-blue-500':'text-black border-white' }}">

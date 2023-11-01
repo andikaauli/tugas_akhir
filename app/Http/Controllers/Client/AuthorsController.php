@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Models\Author;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,13 @@ class AuthorsController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        // $response = app()->handle($http);
+        // $response = $response->getContent();
 
-        $authors = json_decode($response);
+        // $authors = json_decode($response);
+        $authors = Author::paginate(2);
+        // dd($authors);
+
 
         return view('petugas/daftar-terkendali/daftar-pengarang', ['authors' => $authors]);
     }
