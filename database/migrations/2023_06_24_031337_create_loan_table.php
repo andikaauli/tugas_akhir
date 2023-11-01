@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('loan_status')->nullable();
             $table->string('return_status')->nullable();
             $table->timestamps();
-            $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
-            $table->foreignUuid('member_id')->constrained('members')->restrictOnDelete();
+            $table->foreignUuid('eksemplar_id')->constrained('eksemplar')->restrictOnDelete();
+            $table->foreignUuid('member_id')->constrained('members')->restrictOnDelete(); //member gabisa dihapus ketika masih ada peminjaman
         });
     }
 
