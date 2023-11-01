@@ -84,7 +84,9 @@ class StockOpnamesController extends Controller
         $active_inventarisasi = Session::get('active_inventarisasi');
 
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET');
+        $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
+            "tersedia" => true
+        ]);
         $response = app()->handle($http);
         $response = $response->getContent();
 

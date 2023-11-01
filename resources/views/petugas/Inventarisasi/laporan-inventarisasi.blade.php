@@ -15,11 +15,6 @@
        </div>
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        {{-- @dd($stockopnames) --}}
-        {{-- @dd($stockopnames) --}}
-        @foreach ($stockopnames->['stocktakeitem'] as $item)
-        @dd($item)
-        @endforeach
         <div class="h-full">
             <div class="">
             {{-- Nama Inventarisasi --}}

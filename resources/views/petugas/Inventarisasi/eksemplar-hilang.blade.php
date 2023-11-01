@@ -49,16 +49,16 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">No. Panggil</th>
                   </tr>
                </thead>
-               {{-- @dd($stockopnames) --}}
+               {{-- @dd($stockopnames->stocktakeitem) --}}
                @foreach ($stockopnames->stocktakeitem as $data)
-               @dd($data)
+               {{-- @dd($data) --}}
                <tbody>
                 <tr class="border-b border-solid border-gray-400">
-                   <td class="p-1.5 text-sm leading-6 border-x border-b w-36">{{$stockopname->stocktakeitem}}</td>
-                   <td class="p-1.5 text-sm leading-6 border-r border-b">PostgreSQL : a comprehensive guide to building, programming, and administering PostgreSQL databases</td>
-                   <td class="p-1.5 text-sm leading-6 border-r border-b w-32">006.7/86 22</td>
-                   <td class="p-1.5 text-sm leading-6 border-r border-b w-32">Reference</td>
-                   <td class="p-1.5 text-sm leading-6 border-r border-b w-40">364.1323 Huf p</td>
+                   <td class="p-1.5 text-sm leading-6 border-x border-b w-36">{{$data->eksemplar->item_code}}</td>
+                   <td class="p-1.5 text-sm leading-6 border-r border-b">{{$data->eksemplar->biblio->title}}</td>
+                   <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$data->eksemplar->biblio->classification}}</td>
+                   <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$data->eksemplar->biblio->colltype->title}}</td>
+                   <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$data->eksemplar->biblio->call_number}}</td>
                 </tr>
                </tbody>
                @endforeach
