@@ -72,9 +72,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @dd($authors) --}}
+                        @if ($authors)
                         @foreach ($authors as $author)
-                        {{-- @dd($author) --}}
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">
                                     <div class="flex items-center justify-center">
@@ -100,10 +99,15 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <th class="pt-6 pb-3 text-center" colspan="5">TIDAK ADA DATA</th>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
-            <div class="flex">
+            <div class="flex justify-end">
                 {{$authors->links('pagination.custom')}}
             </div>
             {{-- End Section 4 --}}

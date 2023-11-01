@@ -59,14 +59,16 @@ class BerandaController extends Controller
         return view('petugas/beranda/beranda', ['visitors' => $visitors, 'profils' => $profil, 'members' => $member, 'eksemplars' => $eksemplar, 'loans' => $loans, 'biblios' => $biblio]);
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/user/' . $id);
+        $http = $http->create(config('app.api_url') . '/user/' . '9a77f60f-0538-466e-9382-73eb8bf92dd4');
         $response = app()->handle($http);
         $response = $response->getContent();
 
         $profil = json_decode($response);
+
+        dd($profil);
 
     return view('petugas/beranda/edit-profil', ['profils' => $profil]);
     }
@@ -74,7 +76,7 @@ class BerandaController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/user/edit/' . $id, 'POST', $request->except('_method'));
+        $http = $http->create(config('app.api_url') . '/user/edit/' . '9a77f60f-0538-466e-9382-73eb8bf92dd4', 'POST', $request->except('_method'));
         $response = app()->handle($http);
 
         if ($response->isClientError()) {

@@ -52,8 +52,9 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Status Peminjaman</th>
                   </tr>
                </thead>
-               @foreach ($loans as $loan)
                <tbody>
+                @if ($loans)
+                @foreach ($loans as $loan)
                   <tr class="border-b border-solid border-gray-400">
                      <td class="p-1.5 text-sm leading-6 border-x border-b w-24">{{$loan->member->nim}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->member->name}}</td>
@@ -63,8 +64,13 @@
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('Y-m-d') }}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->loan_status}}</td>
                   </tr>
+                @endforeach
+                @else
+                    <tr>
+                        <th class="pt-6 pb-3 text-center" colspan="7">TIDAK ADA DATA</th>
+                    </tr>
+                @endif
                </tbody>
-               @endforeach
             </table>
         </div>
     </form>

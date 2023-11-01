@@ -49,6 +49,7 @@
                      </tr>
                   </thead>
                   <tbody>
+                    @if ($stockopnames)
                     @foreach ($stockopnames as $stockopname)
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
@@ -63,6 +64,11 @@
                        <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date)) }}</td>
                     </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
+                    </tr>
+                    @endif
                   </tbody>
                </table>
            </div>

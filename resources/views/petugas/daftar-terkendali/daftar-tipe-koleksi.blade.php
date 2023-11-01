@@ -69,9 +69,8 @@
                      </tr>
                   </thead>
                   <tbody>
-                    {{-- @dd($colltypes) --}}
+                    @if ($colltypes)
                     @foreach ($colltypes as $colltype)
-                    {{-- @dd($colltypes) --}}
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">
@@ -91,6 +90,11 @@
                        <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($colltype->updated_at)) }}</td>
                     </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
+                    </tr>
+                    @endif
                   </tbody>
                </table>
            </div>

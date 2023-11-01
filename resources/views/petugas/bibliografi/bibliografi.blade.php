@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @if ($bibliografi)
                         @foreach ($bibliografi as $biblio)
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">
@@ -103,6 +103,11 @@
                                 <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at )) }}</td>
                             </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <th class="pt-6 pb-3 text-center" colspan="6">TIDAK ADA DATA</th>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

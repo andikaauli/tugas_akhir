@@ -68,6 +68,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($eksemplar)
                     @foreach ($eksemplar as $eks)
                         <tr class="border-b border-solid border-gray-400">
                             <td class="p-3 w-16">
@@ -101,6 +102,11 @@
                             <td class="p-3 w-28">{{$eks->bookstatus->name}}</td>
                         </tr>
                     @endforeach
+                    @else
+                    <tr>
+                        <th class="pt-6 pb-3 text-center" colspan="8">TIDAK ADA DATA</th>
+                    </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
