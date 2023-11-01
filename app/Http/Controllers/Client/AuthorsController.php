@@ -20,7 +20,6 @@ class AuthorsController extends Controller
         $http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
         // $response = app()->handle($http);
         // $response = $response->getContent();
-
         // $authors = json_decode($response);
         $authors = Author::where('title', 'LIKE', "%$search%")->paginate(5);
         // dd($authors);

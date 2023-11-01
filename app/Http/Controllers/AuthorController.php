@@ -12,7 +12,6 @@ class AuthorController extends Controller
     public function getData(Request $request)
     {
         $author = Author::all();
-
         return response()->json($author, 200);
     }
 

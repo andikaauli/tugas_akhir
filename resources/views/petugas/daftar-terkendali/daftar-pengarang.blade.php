@@ -108,7 +108,7 @@
                 </table>
             </div>
             <div class="flex justify-end">
-                {{$authors->links('pagination.custom')}}
+                {{$authors->withQueryString()->links('pagination.custom')}}
             </div>
             {{-- End Section 4 --}}
         </form>
