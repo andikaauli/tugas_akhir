@@ -106,7 +106,6 @@
                     <th class="text-left p-3">WAKTU KUNJUNGAN</th>
                  </tr>
               </thead>
-              {{-- @dd($visitors) --}}
               @if ($visitors)
               @foreach ($visitors as $visitor)
               <tbody>
@@ -125,10 +124,10 @@
               @endif
            </table>
        </div>
-       {{-- <div class="flex justify-end">
-        {{$visitors->render('pagination.custom')}}
-        </div> --}}
     </form>
+     <div class="flex justify-end">
+        {{$visitors->withQueryString()->render('pagination.custom')}}
+        </div>
        {{-- End Section 5 --}}
     </div>
 </div>
