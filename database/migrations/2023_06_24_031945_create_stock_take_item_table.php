@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('stock_take_item', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->foreignUuid('stock_opname_id')->constrained('stock_opname');
+            $table->foreignUuid('stock_opname_id')->constrained('stock_opname')->cascadeOnDelete();
             $table->foreignUuid('eksemplar_id')->constrained('eksemplar');
             $table->foreignid('book_status_id')->constrained('book_statuses'); //one to many ke status buku
         });

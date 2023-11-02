@@ -71,6 +71,7 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
+
         $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
         $loan = $loan->whereHas("member", function ($b) use ($search) {
             $b->where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%");

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Models\StockOpname;
 use Illuminate\Http\Request;
+use App\Models\StockTakeItem;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
@@ -85,16 +86,24 @@ class StockOpnamesController extends Controller
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
             "hilang" => true,
-            'search' => $search
+            // 'search' => $search
         ]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-        $stockopname = json_decode($response);
+        $stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio']);
 
+        $stockopname = $stockopname->whereHas("eksemplar", function ($b) use ($search) {
+            $b->where('item_code', 'LIKE', "%$search%");
+            })
+            ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
+                $b->where('title', 'LIKE', "%$search%");
+            });
 
+        $stockopnames = $stockopname->get();
+        $stockopnames = $stockopnames->filter( function($stockopname) {
+            return $stockopname->book_status_id == '3';
+        })->paginate(10);
 
-        // dd($stockopname);
-        return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopname]);
+        // dd($stockopnames);
+        return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);
     }
 
     public function laporan(Request $request)

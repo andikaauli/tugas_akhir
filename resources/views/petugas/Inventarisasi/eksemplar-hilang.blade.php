@@ -50,8 +50,8 @@
                   </tr>
                </thead>
                {{-- @dd($stockopnames->stocktakeitem) --}}
-               @if ($stockopnames->stocktakeitem)
-               @foreach ($stockopnames->stocktakeitem as $data)
+               @if ($stockopnames)
+               @foreach ($stockopnames as $data)
                <tbody>
                 <tr class="border-b border-solid border-gray-400">
                    <td class="p-1.5 text-sm leading-6 border-x border-b w-36">{{$data->eksemplar->item_code}}</td>
@@ -70,6 +70,9 @@
             </table>
         </div>
     </form>
+    <div class="flex justify-end">
+    {{$stockopnames->withQueryString()->render('pagination.custom')}}
+    </div>
     {{-- End Section 2 --}}
     </div>
 </div>
