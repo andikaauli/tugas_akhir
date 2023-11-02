@@ -83,9 +83,11 @@ class StockOpnamesController extends Controller
     {
         $active_inventarisasi = Session::get('active_inventarisasi');
 
+        $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
-            "hilang" => true
+            "hilang" => true,
+            'search' => $search
         ]);
         $response = app()->handle($http);
         $response = $response->getContent();
