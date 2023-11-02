@@ -111,8 +111,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="flex justify-end">
+                {{$bibliografi->withQueryString()->links('pagination.custom')}}
+            </div>
             {{-- Pagination --}}
-       <div class="flex justify-end">
+       {{-- <div class="flex justify-end">
         <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
             <p class="text-white text-center font-extrabold">Sebelumnya</p>
         </button>
@@ -131,7 +134,7 @@
         <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
             <p class="text-white text-center font-extrabold">Hal. Akhir</p>
         </button>
-   </div>
+   </div> --}}
 {{-- End Pagination --}}
             {{-- End Section 4 --}}
         </form>
