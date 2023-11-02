@@ -35,7 +35,7 @@
                     {{-- End Password --}}
                 </div>
                 <div class="py-2.5">
-                    <button  type="submit" class="bg-amber-600 text-base font-bold p-2.5 rounded-md mr-2">Masuk</button>
+                    <button  type="submit" class="bg-amber-600 text-base text-white hover:bg-blue-500 font-bold p-2.5 rounded-md mr-2">Masuk</button>
                 </div>
             </div>
         </div>

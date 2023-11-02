@@ -21,33 +21,14 @@
         </div>
     </div>
     <div class="grid gap-10 grid-cols-3 grid-rows-3 px-20">
-        <div class="col-span-2 border border-black rounded-md
-        ">
-            <div class="p-5 bg-teknik">
-                {{-- Pagination --}}
-                <div class="flex justify-start">
-                    <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
-                        <p class="text-white text-center font-extrabold">Sebelumnya</p>
-                    </button>
-                    <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
-                        <p class="text-white text-center font-extrabold">1</p>
-                    </button>
-                    <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
-                        <p class="text-white text-center font-extrabold">2</p>
-                    </button>
-                    <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
-                        <p class="text-white text-center font-extrabold">3</p>
-                    </button>
-                    <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
-                        <p class="text-white text-center font-extrabold">Berikutnya</p>
-                    </button>
-                    <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
-                        <p class="text-white text-center font-extrabold">Hal. Akhir</p>
-                    </button>
+        <div class="col-span-2 border border-black rounded-md">
+            <div class="p-5 bg-teknik rounded-t-md">
+                <div class="flex">
+                    {{$bibliografi->withQueryString()->links('pagination.custom')}}
                 </div>
-                {{-- End Pagination --}}
             </div>
             <div>
+                @if ($bibliografi)
                 @foreach ($bibliografi as $biblio)
                 <a href="{{ route('client.detail', ['id' => $biblio->id]) }}" class="flex px-5 py-3 border-b border-gray-400">
                     <img src="{{ $biblio->image }}" class="h-28 w-20 bg-slate-400 mr-4"></img>
@@ -57,10 +38,15 @@
                     </div>
                 </a>
                 @endforeach
+                @else
+                <tr>
+                    <th class="pt-6 pb-3 text-center" colspan="6">TIDAK ADA DATA</th>
+                </tr>
+                @endif
             </div>
         </div>
-        <div class="border border-black rounded-md">
-            <div class="bg-teknik py-5 text-xl font-extrabold text-white text-center">
+        <div class="border border-black rounded-md h-fit">
+            <div class="bg-teknik rounded-t-md py-5 text-xl font-extrabold text-white text-center">
                 <p>Library Information</p>
             </div>
             <div class="p-4">

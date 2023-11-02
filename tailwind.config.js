@@ -21,6 +21,7 @@ module.exports = {
             quicksand : ['Quicksand']
         },
         height: {
+            '25': '100px',
             '18': '72px',
           },
         width: {

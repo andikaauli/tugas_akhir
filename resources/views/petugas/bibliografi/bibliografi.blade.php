@@ -104,9 +104,7 @@
                             </tr>
                         @endforeach
                         @else
-                        <tr>
-                            <th class="pt-6 pb-3 text-center" colspan="6">TIDAK ADA DATA</th>
-                        </tr>
+
                         @endif
                     </tbody>
                 </table>
