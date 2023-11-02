@@ -110,6 +110,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="flex justify-end">
+            {{$eksemplar->withQueryString()->links('pagination.custom')}}
+        </div>
         {{-- End Section 4 --}}
     </div>
 </div>

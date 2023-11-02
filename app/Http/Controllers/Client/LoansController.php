@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Loan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -48,13 +49,11 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        $loans = Loan::where('loan_status', 'LIKE', "%$search%")->paginate(5);
 
-        $loans = json_decode($response);
-        $loans = array_filter($loans, function ($loan) {
-            return $loan->return_status == '0';
-        });
+        // $loans = array_filter($loans, function ($loan) {
+        //     return $loan->return_status == '0';
+        // });
         // dd($loans);
 
         return view('petugas/bibliografi/eksemplar-keluar', ['loans' => $loans]);

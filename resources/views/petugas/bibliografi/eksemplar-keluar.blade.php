@@ -73,6 +73,9 @@
                </tbody>
             </table>
         </div>
+        <div class="flex justify-end">
+            {{$loans->withQueryString()->links('pagination.custom')}}
+        </div>
     </form>
        {{-- End Section 3 --}}
     </div>

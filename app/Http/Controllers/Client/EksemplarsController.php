@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Models\Eksemplar;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,7 @@ class EksemplarsController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-
-        $eksemplar = json_decode($response);
+        $eksemplar = Eksemplar::where('item_code', 'LIKE', "%$search%")->paginate(5);
 
         // ! Nyoba BookStatus
         // ! Dari API
