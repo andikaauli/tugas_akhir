@@ -24,7 +24,7 @@ class BerandaController extends Controller
 
         $visitors = Visitor::whereHas("type", function ($b) use ($search) {
             $b->where('name', 'LIKE', "%$search%");
-        })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('updated_at', 'LIKE', "%$search%")->paginate(1);
+        })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('updated_at', 'LIKE', "%$search%")->paginate(10);
 
 
         $memberReq = new Request();
