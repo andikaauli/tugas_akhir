@@ -4,9 +4,9 @@ namespace App\Http\Controllers\client;
 
 use App\Models\StockOpname;
 use Illuminate\Http\Request;
-use App\Models\StockTakeItem;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Models\StockTakeItem;
 
 class StockOpnamesController extends Controller
 {
@@ -105,17 +105,19 @@ class StockOpnamesController extends Controller
             "hilang" => true,
             // 'search' => $search
         ]);
-        $stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio', 'stockopname']);
 
-        $stockopname = $stockopname->whereHas("eksemplar", function ($b) use ($search) {
-                $b->where('item_code', 'LIKE', "%$search%");
-            })
-            ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
-                $b->where('title', 'LIKE', "%$search%");
+        $stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio']);
+
+        $stockopname = $stockopname->whereHas('stockopname', function ($query) {
+                $query->whereNull('end_date');
+            });
+
+        $stockopname = $stockopname
+            ->whereHas("eksemplar", function ($b) use ($search) {
+            $b->where('item_code', 'LIKE', "%$search%");
             });
 
         $stockopnames = $stockopname->get();
-        // dd($stockopnames);
         $stockopnames = $stockopnames->filter( function($stockopname) {
             return $stockopname->book_status_id == '3';
         })->paginate(50);
