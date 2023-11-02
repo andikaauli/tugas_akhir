@@ -23,7 +23,7 @@ class MembersController extends Controller
         // $response = $response->getContent();
 
         // $member = json_decode($response);
-        $member = Member::where('name', 'LIKE', "%$search%")->paginate(5);
+        $member = Member::where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%")->paginate(5);
         // dd($member);
         return view('petugas/keanggotaan/daftar-anggota', ['members' => $member]);
     }

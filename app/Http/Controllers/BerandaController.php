@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loan;
+use App\Models\Biblio;
+use App\Models\Member;
+use App\Models\Visitor;
+use App\Models\Eksemplar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,47 +21,32 @@ class BerandaController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/visitor', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        $visitors = Visitor::whereHas("type", function ($b) use ($search) {
+            $b->where('name', 'LIKE', "%$search%");
+        })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('updated_at', 'LIKE', "%$search%")->paginate(1);
 
-        $profilReq = new Request();
-        $profilReq = $profilReq->create(config('app.api_url') . '/user/', 'GET' );
-        $profilRes = app()->handle($profilReq);
-        $profilRes = $profilRes->getContent();
 
         $memberReq = new Request();
-        $memberReq = $memberReq->create(config('app.api_url') . '/member/', 'GET' );
-        $memberRes = app()->handle($memberReq);
-        $memberRes = $memberRes->getContent();
+        $memberReq = $memberReq->create(config('app.api_url') . '/member/' );
+        $member = Member::get();
 
         $biblioReq = new Request();
-        $biblioReq = $biblioReq->create(config('app.api_url') . '/biblio/', 'GET' );
-        $biblioRes = app()->handle($biblioReq);
-        $biblioRes = $biblioRes->getContent();
+        $biblioReq = $biblioReq->create(config('app.api_url') . '/biblio/' );
+        $bibilio = Biblio::get();
 
         $eksemplarReq = new Request();
-        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/', 'GET' );
-        $eksemplarRes = app()->handle($eksemplarReq);
-        $eksemplarRes = $eksemplarRes->getContent();
+        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/' );
+        $eksemplar = Eksemplar::get();
 
         $loanReq = new Request();
-        $loanReq = $loanReq->create(config('app.api_url') . '/loan/', 'GET' );
-        $loanRes = app()->handle($loanReq);
-        $loanRes = $loanRes->getContent();
+        $loanReq = $loanReq->create(config('app.api_url') . '/loan/' );
 
-        $biblio = json_decode($biblioRes);
-        $eksemplar = json_decode($eksemplarRes);
-        $member = json_decode($memberRes);
-        $profil = json_decode($profilRes);
-        $visitors = json_decode($response);
-        $loans = json_decode($loanRes);
-        $loans = array_filter($loans, function ($loan) {
+        $loans = Loan::get();
+        $fillterloan = $loans ->filter(function ($loan) {
             return $loan->return_status == '0';
         });
 
-        // dd($loans);
-
-        return view('petugas/beranda/beranda', ['visitors' => $visitors, 'profils' => $profil, 'members' => $member, 'eksemplars' => $eksemplar, 'loans' => $loans, 'biblios' => $biblio]);
+        return view('petugas/beranda/beranda', ['visitors' => $visitors, 'members' => $member, 'biblios' => $bibilio, 'eksemplars' => $eksemplar, 'loans' => $loans]);
     }
 
     public function edit(Request $request)
