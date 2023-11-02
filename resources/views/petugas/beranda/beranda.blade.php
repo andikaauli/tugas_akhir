@@ -106,6 +106,7 @@
                     <th class="text-left p-3">WAKTU KUNJUNGAN</th>
                  </tr>
               </thead>
+              {{-- @dd($visitors) --}}
               @if ($visitors)
               @foreach ($visitors as $visitor)
               <tbody>
@@ -124,29 +125,10 @@
               @endif
            </table>
        </div>
+       {{-- <div class="flex justify-end">
+        {{$visitors->render('pagination.custom')}}
+        </div> --}}
     </form>
-    {{-- Pagination --}}
-       <div class="flex justify-end">
-            <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
-                <p class="text-white text-center font-extrabold">Sebelumnya</p>
-            </button>
-            <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
-                <p class="text-white text-center font-extrabold">1</p>
-            </button>
-            <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
-                <p class="text-white text-center font-extrabold">2</p>
-            </button>
-            <button class="bg-gray-500 rounded-lg w-10 py-2 mr-3">
-                <p class="text-white text-center font-extrabold">3</p>
-            </button>
-            <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
-                <p class="text-white text-center font-extrabold">Berikutnya</p>
-            </button>
-            <button class="bg-gray-500 rounded-lg px-4 py-2 mr-3">
-                <p class="text-white text-center font-extrabold">Hal. Akhir</p>
-            </button>
-       </div>
-    {{-- End Pagination --}}
        {{-- End Section 5 --}}
     </div>
 </div>

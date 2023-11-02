@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Models\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,10 +19,11 @@ class MembersController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        // $response = app()->handle($http);
+        // $response = $response->getContent();
 
-        $member = json_decode($response);
+        // $member = json_decode($response);
+        $member = Member::where('name', 'LIKE', "%$search%")->paginate(5);
         // dd($member);
         return view('petugas/keanggotaan/daftar-anggota', ['members' => $member]);
     }

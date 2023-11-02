@@ -19,10 +19,11 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        // $response = app()->handle($http);
+        // $response = $response->getContent();
 
-        $loans = json_decode($response);
+        // $loans = json_decode($response);
+        $loans = Loan::paginate(5);
         // dd($loans);
 
         return view('petugas/sirkulasi/sejarah-peminjaman', ['loans' => $loans]);
@@ -33,13 +34,14 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        // $response = app()->handle($http);
+        // $response = $response->getContent();
 
-        $loans = json_decode($response);
-        $loans = array_filter($loans, function ($loan) {
-            return $loan->return_status == '2';
-        });
+        // $loans = json_decode($response);
+        $loans = Loan::paginate(5);
+        // $loans = array_filter($loans, function ($loan) {
+        //     return $loan->return_status == '2';
+        // });
         // dd($loans);
 
         return view('petugas/sirkulasi/daftar-keterlambatan', ['loans' => $loans]);
