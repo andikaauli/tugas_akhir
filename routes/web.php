@@ -144,7 +144,7 @@ Route::group(['prefix' => '/colltype', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
     Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
-    Route::put('/pengembalian-kilat', [LoansController::class, 'fastreturn'])->name('client.loan-fastreturn');
+    Route::put('/pengembalian-kilat', [LoansController::class, 'fastreturn'])->name('client.loan-fastreturn');//ini mungkin taruh di middleware inven_is_active
 });
 
 Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']], function () {
