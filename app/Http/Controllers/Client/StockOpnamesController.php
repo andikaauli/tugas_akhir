@@ -113,8 +113,8 @@ class StockOpnamesController extends Controller
             });
 
         $stockopname = $stockopname
-            ->whereHas("eksemplar", function ($b) use ($search) {
-            $b->where('item_code', 'LIKE', "%$search%");
+            ->whereHas("eksemplar.biblio", function ($b) use ($search) {
+            $b->where('item_code', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%");
             });
 
         $stockopnames = $stockopname->get();
