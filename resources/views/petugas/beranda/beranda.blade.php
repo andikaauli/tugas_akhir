@@ -118,7 +118,7 @@
                     <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
-                    <td class="p-3 leading-6 w-80">{{ Carbon\Carbon::createFromTimestamp(strtotime($visitor->updated_at))->format('l, d M Y H:i') }}</td>
+                    <td class="p-3 leading-6 w-80">{{ \Carbon\Carbon::createFromTimestamp(strtotime($visitor->created_at))->format('l, d M Y H:i') }}</td>
                  </tr>
               </tbody>
               @endforeach
