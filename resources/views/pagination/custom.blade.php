@@ -12,7 +12,7 @@
         @endif
         @foreach ($elements as $element)
             @if (is_string($element))
-                <li class="disabled"><span>{{ $element }}</span></li>
+                <li class="disabled font-extrabold w-4 py-2 mr-3 text-center"><span>{{ $element }}</span></li>
             @endif
             @if (is_array($element))
                 @foreach ($element as $page => $url)
