@@ -14,7 +14,7 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(5);
+        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
@@ -32,7 +32,7 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->paginate(5);
+        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');

@@ -18,7 +18,7 @@ class VisitorsController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/visitor', 'GET', ['search' => $search]);
-        $visitors = Visitor::where('name', 'LIKE', "%$search%")->paginate(5);
+        $visitors = Visitor::where('name', 'LIKE', "%$search%")->paginate(10);
 
         // dd($visitors);
 

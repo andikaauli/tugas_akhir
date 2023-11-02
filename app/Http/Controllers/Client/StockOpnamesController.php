@@ -20,7 +20,7 @@ class StockOpnamesController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname', 'GET', ['search' => $search]);
-        $stockopname = StockOpname::where('name', 'LIKE', "%$search%")->paginate(1);
+        $stockopname = StockOpname::where('name', 'LIKE', "%$search%")->paginate(10);
 
         // dd($stockopname);
         return view('petugas/inventarisasi/rekaman-inventarisasi', ['stockopnames' => $stockopname]);
@@ -120,7 +120,7 @@ class StockOpnamesController extends Controller
         $stockopnames = $stockopname->get();
         $stockopnames = $stockopnames->filter( function($stockopname) {
             return $stockopname->book_status_id == '3';
-        })->paginate(50);
+        })->paginate(10);
 
         // dd($stockopnames);
         return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);

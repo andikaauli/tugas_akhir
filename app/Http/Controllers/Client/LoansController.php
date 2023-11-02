@@ -32,7 +32,7 @@ class LoansController extends Controller
                 $b->where('title', 'LIKE', "%$search%");
                 })
 
-                ->orWhere('loan_status', 'LIKE', "%$search%")->paginate(1);
+                ->orWhere('loan_status', 'LIKE', "%$search%")->paginate(19);
 
         return view('petugas/sirkulasi/sejarah-peminjaman', ['loans' => $loans]);
     }
@@ -61,7 +61,7 @@ class LoansController extends Controller
         $loans = $loan->get();
         $loans = $loans->filter( function($loan) {
             return $loan->return_status == '2';
-        })->paginate(5);
+        })->paginate(10);
 
 
         return view('petugas/sirkulasi/daftar-keterlambatan', ['loans' => $loans]);
@@ -90,7 +90,7 @@ class LoansController extends Controller
         $loans = $loan->get();
         $loans = $loans->filter( function($loan) {
             return $loan->return_status == '0';
-        })->paginate(1);
+        })->paginate(10);
 
         return view('petugas/bibliografi/eksemplar-keluar', ['loans' => $loans]);
     }
