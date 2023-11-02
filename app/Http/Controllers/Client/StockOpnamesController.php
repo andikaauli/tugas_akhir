@@ -78,6 +78,23 @@ class StockOpnamesController extends Controller
         return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
     }
 
+    // public function gone(Request $request)
+    // {
+    //     $active_inventarisasi = Session::get('active_inventarisasi');
+
+    //     $search = $request->search;
+    //     $http = new Request();
+    //     $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
+    //         "hilang" => true,
+    //         'search' => $search
+    //     ]);
+    //     $response = app()->handle($http);
+    //     $response = $response->getContent();
+    //     $stockopname = json_decode($response);
+
+    //     // dd($stockopname);
+    //     return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopname]);
+    // }
     public function gone(Request $request)
     {
         $active_inventarisasi = Session::get('active_inventarisasi');
@@ -88,19 +105,20 @@ class StockOpnamesController extends Controller
             "hilang" => true,
             // 'search' => $search
         ]);
-        $stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio']);
+        $stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio', 'stockopname']);
 
         $stockopname = $stockopname->whereHas("eksemplar", function ($b) use ($search) {
-            $b->where('item_code', 'LIKE', "%$search%");
+                $b->where('item_code', 'LIKE', "%$search%");
             })
             ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
                 $b->where('title', 'LIKE', "%$search%");
             });
 
         $stockopnames = $stockopname->get();
+        // dd($stockopnames);
         $stockopnames = $stockopnames->filter( function($stockopname) {
             return $stockopname->book_status_id == '3';
-        })->paginate(10);
+        })->paginate(50);
 
         // dd($stockopnames);
         return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);
