@@ -49,6 +49,7 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">No. Panggil</th>
                   </tr>
                </thead>
+               {{-- @dd($stockopnames->stocktakeitem) --}}
                @if ($stockopnames->stocktakeitem)
                @foreach ($stockopnames->stocktakeitem as $data)
                <tbody>

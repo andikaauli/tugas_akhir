@@ -74,5 +74,8 @@
            </div>
        </form>
        {{-- End Section 3 --}}
+       <div class="flex justify-end">
+        {{$stockopnames->withQueryString()->render('pagination.custom')}}
+        </div>
     </div>
 </div>

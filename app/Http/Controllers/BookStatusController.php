@@ -10,7 +10,7 @@ class BookStatusController extends Controller
 {
     public function getData()
     {
-        $bookstatus = Bookstatus::all();
+        $bookstatus = BookStatus::all();
         return response()->json($bookstatus, 200);
     }
 }

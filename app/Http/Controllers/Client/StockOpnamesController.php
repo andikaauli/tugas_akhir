@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Models\StockOpname;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -18,10 +19,7 @@ class StockOpnamesController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-
-        $stockopname = json_decode($response);
+        $stockopname = StockOpname::where('name', 'LIKE', "%$search%")->paginate(1);
 
         // dd($stockopname);
         return view('petugas/inventarisasi/rekaman-inventarisasi', ['stockopnames' => $stockopname]);
@@ -91,8 +89,9 @@ class StockOpnamesController extends Controller
         ]);
         $response = app()->handle($http);
         $response = $response->getContent();
-
         $stockopname = json_decode($response);
+
+
 
         // dd($stockopname);
         return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopname]);
