@@ -98,6 +98,9 @@
                   </tbody>
                </table>
            </div>
+            <div class="flex justify-end">
+            {{$colltypes->withQueryString()->links('pagination.custom')}}
+            </div>
            {{-- End Section 4 --}}
         </form>
     </div>
