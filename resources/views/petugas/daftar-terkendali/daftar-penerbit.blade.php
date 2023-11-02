@@ -69,8 +69,8 @@
                      </tr>
                   </thead>
                   <tbody>
-                    @if ($publishers['data'])
-                    @foreach ($publishers['data'] as $publisher )
+                    @if ($publishers)
+                    @foreach ($publishers as $publisher )
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
                           <div class="flex items-center justify-center">
@@ -96,52 +96,12 @@
                     @endif
                   </tbody>
                </table>
-
            </div>
+           <div class="flex justify-end">
+            {{$publishers->withQueryString()->links('pagination.custom')}}
+            </div>
            {{-- End Section 4 --}}
         </form>
-        <!-- Pagination -->
-        <nav aria-label="Page navigation">
-            <ul class="flex justify-center py-4">
-                <form action="" method="get">
-                    @if (request('search'))
-                        <input type="hidden" name="search" value="{{ request('search') }}">
-                    @endif
-                    @if ($publishers['current_page'] > 1)
-                        <button type="submit" name="page" value="{{ $publishers['current_page'] - 1 }}"
-                            class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                    @endif
-
-                    @foreach ($publishers['page_list'] as $d)
-                        <button type="submit"
-                            class="h-10 px-4 mx-1 text-gray-400 hover:text-primary hover:font-semibold transition-colors duration-150 rounded-10 hover:bg-blue-100 {{ $publishers['current_page'] == $d['page'] ? 'bg-blue-100 text-primary font-semibold' : 'text-gray-400 font-semibold' }}"
-                            name="page" value="{{ $d['page'] }}">
-                            {{ $d['page'] }}
-
-                        </button>
-                    @endforeach
-
-                    @if ($publishers['current_page'] < $publishers['last_page'])
-                        <button type="submit" name="page" value="{{ $publishers['current_page'] + 1 }}"
-                            class="h-10 pl-2 pr-3 mx-1 text-gray-400 transition-colors duration-150 rounded-10 hover:bg-blue-100">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                    @endif
-                </form>
-
-            </ul>
-        </nav>
-        <!-- End Pagination -->
     </div>
 </div>
 

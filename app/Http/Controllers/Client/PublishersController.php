@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Models\Publisher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,27 +18,7 @@ class PublishersController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/publisher', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-        $publishers = json_decode($response);
-
-        // $total = $publishers !== null ? count($publishers) : 0;
-        $publishers = collect($publishers)->paginate(5);
-        $publishers = collect($publishers);
-        $publishers['page_list'] = collect([]);
-        for ($i = $publishers["current_page"]; $i <= $publishers["current_page"] + 2; $i++) {
-            if ($i > $publishers['last_page']) {
-                break;
-            }
-
-            $array = [
-                "page" => $i,
-                "url" => $publishers['path'] . "?page=" . $i
-            ];
-            $publishers['page_list']->push($array);
-        }
-
-        // dd($publishers);
+        $publishers = Publisher::where('title', 'LIKE', "%$search%")->paginate(5);
 
         return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);
     }
