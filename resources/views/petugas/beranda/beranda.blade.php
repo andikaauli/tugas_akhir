@@ -106,22 +106,22 @@
                     <th class="text-left p-3">WAKTU KUNJUNGAN</th>
                  </tr>
               </thead>
-              @if ($visitors)
-              @foreach ($visitors as $visitor)
               <tbody>
+                  @if ($visitors)
+                  @foreach ($visitors as $visitor)
                  <tr class="border-b border-solid border-gray-400">
                     <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
                     <td class="p-3 leading-6 w-80">{{ Carbon\Carbon::createFromTimestamp(strtotime($visitor->updated_at))->format('l, d M Y H:i') }}</td>
                  </tr>
+                @endforeach
+                @else
+                <tr>
+                  <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
+                </tr>
+                @endif
               </tbody>
-              @endforeach
-              @else
-              <tr>
-                <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
-              </tr>
-              @endif
            </table>
        </div>
     </form>
