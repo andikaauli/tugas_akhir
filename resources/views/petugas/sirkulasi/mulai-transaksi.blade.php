@@ -17,190 +17,65 @@
        </div>
      {{-- End Section 1 --}}
     <div class="justify-center items-center">
+     {{-- Section 2 --}}
+     <div class="py-8 px-4 mb-4">
         {{-- Search Bar --}}
-        <div class="flex items-center p-4">
-            <p class="mr-3 text-sm font-semibold">ID Anggota</p>
-            <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="Search" aria-label="Search" aria-describedby="button-addon3"/>
-            {{-- Btn Search --}}
-            <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">Mulai Transaksi</button>
+        <div class="flex items-center">
+            <p class="mr-3">Cari</p>
+            <form class="m-0" action="{{ route('client.loan-start') }}" method="GET">
+                <div class="flex items-center">
+                    <input type="search" name="search"
+                    class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                    value="{{ request('search') }}" placeholder="Search" aria-label="Search"
+                    aria-describedby="button-addon3" />
+                {{-- Btn Search --}}
+                <button type="submit"
+                    class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
+                    Cari
+                </button>
+                </div>
+            </form>
             {{-- End Btn Search --}}
         </div>
-        {{-- End Search Bar --}}
-        <div class="bg-white mb-6">
-           <div class="p-4">
-              <button class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Selesai Transaksi</button>
-           </div>
-           <div class="grid grid-cols-2 gap-0">
-              <div class="">
-                 <div class="flex border-b border-gray-200">
-                    <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>Nama Anggota</p>
-                    </div>
-                    <div class="font-normal text-sm px-4 py-3">
-                       <p>abimanyu</p>
-                    </div>
-                 </div>
-                 <div class="flex border-b border-gray-200">
-                    <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>Surel Anggota</p>
-                    </div>
-                    <div class="font-normal text-sm px-4 py-3">
-                       <p>abndung@gmail.com</p>
-                    </div>
-                 </div>
-                 <div class="flex border-b border-gray-200">
-                    <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>Tanggal Registrasi</p>
-                    </div>
-                    <div class="font-normal text-sm px-4 py-3">
-                       <p>2023-02-22</p>
-                    </div>
-                 </div>
-              </div>
-              <div class="">
-                 <div class="flex border-b border-gray-200">
-                    <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>ID Anggota</p>
-                    </div>
-                    <div class="font-normal text-sm px-4 py-3">
-                       <p>21120119140123</p>
-                    </div>
-                 </div>
-                 <div class="flex border-b border-gray-200">
-                    <div class="font-bold text-sm w-48 px-4 py-3">
-                       <p>Berlaku Hingga</p>
-                    </div>
-                    <div class="font-normal text-sm px-4 py-3">
-                       <p>2024-02-22</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
+    </div>
+    {{-- End Section 2 --}}
+        <div class="flex mb-4 ">
+            <table class="table-auto w-full">
+               <thead class="p-3 border-y border-solid border-gray-400">
+                  <tr class="text-sm">
+                     <th class="text-left p-3">NO</th>
+                     <th class="text-left p-3">NAMA ANGGOTA</th>
+                     <th class="text-left p-3">INSTITUSI</th>
+                     <th class="text-left p-3">ID ANGGOTA</th>
+                     <th class="text-left p-3">PEMINJAMAN</th>
+                  </tr>
+               </thead>
+               @php
+                   $nomor = 1 + ($members->currentPage() - 1) * $members->perPage();
+               @endphp
+               <tbody>
+                   @foreach ($members as $member)
+                  <tr class="border-b border-solid border-gray-400">
+                     <td class="p-3 leading-6 w-10">{{$nomor++}}</td>
+                     <td class="p-3 leading-6">{{$member->name}}</td>
+                     <td class="p-3 leading-6 w-42">{{$member->institution}}</td>
+                     <td class="p-3 leading-6 w-36">{{$member->nim}}</td>
+                     <td class="p-3 leading-6 w-36">
+                        <a href="{{ route('client.loan', ['id' => $member->id]) }}" class="text-xs text-white font-bold bg-gray-500 hover:bg-blue-500 p-1.5 rounded">Mulai Transaksi</a>
+                    </td>
+                  </tr>
+                 @endforeach
+                 @if ($members->isEmpty())
+                 <tr>
+                   <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="5">Tidak Ada Data</td>
+                 </tr>
+                 @endif
+               </tbody>
+            </table>
         </div>
-        {{-- Tabs --}}
-        <div class="container ">
-            <div class="tab_box w-full flex items-center border-b border-gray-200 relative">
-            <div class="p-3"></div>
-              <button class="tab_btn w-44 text-sm font-bold px-4 py-3 actived border-slate-50 hover:border-gray-200 hover:text-blue-600 hover:rounded-t-md hover:border-x hover:border-t">Peminjaman</button>
-              <button class="tab_btn w-44 text-sm font-bold px-4 py-3 border-slate-50 hover:border-gray-200 hover:text-blue-600 hover:rounded-t-md hover:border-x hover:border-t">Peminjaman Saat Ini</button>
-              <button class="tab_btn w-44 text-sm font-bold px-4 py-3 border-slate-50 hover:border-gray-200 hover:text-blue-600 hover:rounded-t-md hover:border-x hover:border-t">Sejarah Peminjaman</button>
-              <div class="line absolute top-11 left-6 bg-white w-44 h-1"></div>
-            </div>
-            <div class="content_box">
-              <div class="content hidden bg-white animate-move duration-500 p-5 actived">
-                {{-- Search Bar --}}
-                <div class="flex items-center p-4">
-                    <p class="mr-3 text-sm font-medium">Masukkan Kode Eksemplar</p>
-                    <input type="search" class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300" placeholder="Search" aria-label="Search" aria-describedby="button-addon3"/>
-                    {{-- Btn Search --}}
-                    <button class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">Pinjam</button>
-                    {{-- End Btn Search --}}
-                </div>
-                {{-- End Search Bar --}}
-                <table class="table-auto w-full">
-                    <thead class="p-3 border-b border-solid border-gray-200">
-                       <tr class="text-sm">
-                          <th class="text-left p-3">HAPUS</th>
-                          <th class="text-left p-3">KODE EKSEMPLAR</th>
-                          <th class="text-left p-3">JUDUL</th>
-                          <th class="text-left p-3">TANGGAL PINJAM</th>
-                          <th class="text-left p-3">TERAKHIR KEMBALI</th>
-                       </tr>
-                    </thead>
-                    <tbody>
-                       <tr class="border-b border-solid text-sm font-medium border-gray-200">
-                           <td class="p-3 w-18">
-                            <button class="text-xs text-white font-bold bg-red-600 hover:bg-red-700 p-1.5 rounded">Hapus</button>
-                           </td>
-                          <td class="p-3 w-40">B00013</td>
-                          <td class="p-3">
-                                   <p class="">Corruption and development : the anti-corruption campaignss</p>
-                          </td>
-                          <td class="p-3 w-36">2023-08-09</td>
-                          <td class="p-3 w-40">2023-08-19</td>
-                       </tr>
-                    </tbody>
-                 </table>
-              </div>
-            </div>
-            <div class="content_box">
-                <div class="content hidden bg-white animate-move duration-500 p-5">
-                  <table class="table-auto w-full">
-                      <thead class="p-3 border-b border-solid border-gray-200">
-                         <tr class="text-sm">
-                            <th class="text-left p-3">KEMBALI</th>
-                            <th class="text-left p-3">PERPANJANG</th>
-                            <th class="text-left p-3">KODE EKSEMPLAR</th>
-                            <th class="text-left p-3">JUDUL</th>
-                            <th class="text-left p-3">TIPE KOLEKSI</th>
-                            <th class="text-left p-3">TANGGAL PINJAM</th>
-                            <th class="text-left p-3">TANGGAL KEMBALI</th>
-                         </tr>
-                      </thead>
-                      <tbody>
-                         <tr class="border-b border-solid text-sm font-medium border-gray-200">
-                             <td class="p-3 w-18">
-                              <button class="text-xs text-white font-bold bg-blue-600 hover:bg-blue-500 p-1.5 rounded">Kembali</button>
-                             </td>
-                             <td class="p-3 w-18">
-                              <button class="text-xs text-white font-bold bg-green-500 hover:bg-green-600 p-1.5 rounded">Perpanjang</button>
-                             </td>
-                            <td class="p-3 w-40">B00013</td>
-                            <td class="p-3">
-                                     <p class="">Corruption and development : the anti-corruption campaignss</p>
-                            </td>
-                            <td class="p-3 w-32">Reference</td>
-                            <td class="p-3 w-36">2023-08-09</td>
-                            <td class="p-3 w-40">2023-08-19</td>
-                         </tr>
-                      </tbody>
-                   </table>
-                </div>
-              </div>
-              <div class="content_box">
-                <div class="content hidden bg-white animate-move duration-500 p-5">
-                  <table class="table-auto w-full">
-                      <thead class="p-3 border-b border-solid border-gray-200">
-                         <tr class="text-sm">
-                            <th class="text-left p-3">KODE EKSEMPLAR</th>
-                            <th class="text-left p-3">JUDUL</th>
-                            <th class="text-left p-3">TANGGAL PINJAM</th>
-                            <th class="text-left p-3">TERAKHIR KEMBALI</th>
-                         </tr>
-                      </thead>
-                      <tbody>
-                         <tr class="border-b border-solid text-sm font-medium border-gray-200">
-                            <td class="p-3 w-40">B00013</td>
-                            <td class="p-3">
-                                     <p class="">Corruption and development : the anti-corruption campaignss</p>
-                            </td>
-                            <td class="p-3 w-36">2023-08-09</td>
-                            <td class="p-3 w-40">2023-08-19</td>
-                         </tr>
-                      </tbody>
-                   </table>
-                </div>
-              </div>
-          </div>
-          {{-- End Tabs --}}
-          <script>
-            const tabs= document.querySelectorAll('.tab_btn')
-            const all_content= document.querySelectorAll('.content')
-
-            tabs.forEach((tab, index)=> {
-                tab.addEventListener('click', (e)=>{
-                    tabs.forEach(tab=>{tab.classList.remove('actived')});
-                    tab.classList.add('actived');
-
-                    var line=document.querySelector('.line');
-                line.style.width = e.target.offsetWidth + "px";
-                line.style.left = e.target.offsetLeft + "px";
-
-                all_content.forEach(content=>{content.classList.remove('actived')});
-                all_content[index].classList.add('actived');
-                })
-            })
-        </script>
+        <div class="flex justify-end">
+            {{$members->withQueryString()->render('pagination.custom')}}
+        </div>
     </div>
     </div>
 </div>

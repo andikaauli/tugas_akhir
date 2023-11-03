@@ -102,7 +102,7 @@
            <table class="table-auto w-full">
               <thead class="p-3 border-y border-solid border-gray-400">
                  <tr class="text-sm">
-                    {{-- <th class="text-left p-3">NO</th> --}}
+                    <th class="text-left p-3">NO</th>
                     <th class="text-left p-3">NAMA PENGUNJUNG</th>
                     <th class="text-left p-3">INSTITUSI</th>
                     <th class="text-left p-3">TIPE PENGUNJUNG</th>
@@ -115,7 +115,7 @@
               <tbody>
                   @foreach ($visitors as $visitor)
                  <tr class="border-b border-solid border-gray-400">
-                    {{-- <td class="p-3 leading-6 w-80" >{{$nomor++}}</td> --}}
+                    <td class="p-3 leading-6 w-80" >{{$nomor++}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
@@ -124,7 +124,7 @@
                 @endforeach
                 @if ($visitors->isEmpty())
                 <tr>
-                  <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="4">Tidak Ada Data</td>
+                  <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="5">Tidak Ada Data</td>
                 </tr>
                 @endif
               </tbody>

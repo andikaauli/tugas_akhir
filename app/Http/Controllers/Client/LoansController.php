@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Member;
 use App\Models\Loan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -95,6 +96,10 @@ class LoansController extends Controller
         return view('petugas/bibliografi/eksemplar-keluar', ['loans' => $loans]);
     }
 
+    public function fastreturnIndex(Request $request)
+    {
+        return view('petugas/sirkulasi/pengembalian-kilat');
+    }
     public function fastreturn(Request $request, $id)
     {
         $search = $request->search;
@@ -114,20 +119,18 @@ class LoansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function start(Request $request)
     {
-        //
-    }
+        $search = $request->search;
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
+        // $response = app()->handle($http);
+        // $response = $response->getContent();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        // $member = json_decode($response);
+        $member = Member::where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%")->paginate(10);
+        // dd($member);
+        return view('petugas/sirkulasi/mulai-transaksi', ['members' => $member]);
     }
 
     /**
@@ -147,9 +150,17 @@ class LoansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function loan($id)
     {
-        //
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/member/' . $id);
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+
+        $member = json_decode($response);
+
+        return view('petugas/sirkulasi/peminjaman', ['members' => $member]);
     }
 
     /**
@@ -161,7 +172,18 @@ class LoansController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+        $response = app()->handle($http);
+
+        // dd($response);
+
+        if ($response->isClientError()) {
+            return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+            // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+        }
+
+        return redirect()->route('client.member');
     }
 
     /**

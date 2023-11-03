@@ -19,7 +19,7 @@
             <li class="h-full">
                 <div
                     class="flex h-full px-4 border-b-3 text-black border-white  items-center hover:ease-in-out hover:duration-300 hover:border-blue-500 hover:text-blue-500 @yield('active-sirkulasi-navbar')">
-                    <a href="/mulai-transaksi"
+                    <a href="{{route('client.loan-start')}}"
                         class="h-full w-full text-center flex items-center px-2 font-bold text-sm">Sirkulasi</a>
                 </div>
             </li>

@@ -89,13 +89,9 @@ Route::get('/edit-eksemplar', function () {
     return view('petugas/bibliografi/edit-eksemplar');
 })->middleware('auth');
 
-Route::get('/mulai-transaksi', function () {
-    return view('petugas/sirkulasi/mulai-transaksi');
-})->middleware('auth');
 
-Route::get('/pengembalian-kilat', function () {
-    return view('petugas/sirkulasi/pengembalian-kilat');
-})->middleware('auth');
+
+
 
 Route::get('/sejarah-peminjaman', function () {
     return view('petugas/sirkulasi/sejarah-peminjaman');
@@ -144,7 +140,11 @@ Route::group(['prefix' => '/colltype', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
     Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
+    Route::get('/kilat', [LoansController::class, 'fastreturnIndex'])->name('client.fastreturn');
     Route::put('/pengembalian-kilat', [LoansController::class, 'fastreturn'])->name('client.loan-fastreturn');//ini mungkin taruh di middleware inven_is_active
+    Route::get('/start', [LoansController::class, 'start'])->name('client.loan-start');
+    Route::get('/{id}', [LoansController::class, 'loan'])->name('client.loan');
+
 });
 
 Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']], function () {
@@ -224,5 +224,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/test', function () {
     return view('test');
 });
+
 
 // Route::resource("zzz", VisitorController::class);
