@@ -144,7 +144,7 @@ Route::group(['prefix' => '/colltype', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/history', [LoansController::class, 'index'])->name('client.loan-history');
     Route::get('/overdue', [LoansController::class, 'overdue'])->name('client.loan-overdue');
-    Route::put('/pengembalian-kilat', [LoansController::class, 'fastreturn'])->name('client.loan-fastreturn');
+    Route::put('/pengembalian-kilat', [LoansController::class, 'fastreturn'])->name('client.loan-fastreturn');//ini mungkin taruh di middleware inven_is_active
 });
 
 Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']], function () {
@@ -216,7 +216,7 @@ Route::middleware(['only_guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, "logout"]);
-    Route::get('/beranda', [BerandaController::class, "index", "getData"])->name('client.visitors-history');
+    Route::get('/beranda', [BerandaController::class, "index"])->name('client.visitors-history');
     Route::get('/edit/profil/9a77f60f-0538-466e-9382-73eb8bf92dd4', [BerandaController::class, "edit"])->name('client.edit-profil');
     Route::put('/edit/profil/9a77f60f-0538-466e-9382-73eb8bf92dd4', [BerandaController::class, "update"]);
 });

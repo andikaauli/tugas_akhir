@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Biblio;
-use App\Http\Controllers\Controller;
+use App\Models\Eksemplar;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class BiblioController extends Controller
 {
@@ -13,16 +14,11 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(5);
+        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
-        $eksemplarRes = app()->handle($eksemplarReq);
-        $eksemplarRes = $eksemplarRes->getContent();
-
-        $eksemplar = json_decode($eksemplarReq);
-
-
+        $eksemplar = Eksemplar::get();
 
         return view('petugas/bibliografi/bibliografi', ['bibliografi' => $bibliografi, 'eksemplars' => $eksemplar]);
     }
@@ -36,7 +32,7 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->paginate(5);
+        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');

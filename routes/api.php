@@ -63,7 +63,7 @@ Route::prefix("loan")->group(function () {
     Route::get('/{id}', [LoanController::class, "showData"]);
     Route::post('/add/{id}', [LoanController::class, "peminjaman"]);
     Route::post('/pengembalian/{id}', [LoanController::class, "pengembalian"]);
-    Route::post('/pengembaliankilat', [LoanController::class, "pengembalianButton"]);
+    Route::post('/pengembaliankilat', [LoanController::class, "pengembalianButton"])->name('button.fastreturn');
     Route::post('/perpanjang/{id}', [LoanController::class, "perpanjang"]);
     Route::delete('/destroy/{id}', [LoanController::class, "destroyData"]);
 });

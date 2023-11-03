@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Models\StockOpname;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Models\StockTakeItem;
 
 class StockOpnamesController extends Controller
 {
@@ -18,10 +20,7 @@ class StockOpnamesController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname', 'GET', ['search' => $search]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
-
-        $stockopname = json_decode($response);
+        $stockopname = StockOpname::where('name', 'LIKE', "%$search%")->paginate(10);
 
         // dd($stockopname);
         return view('petugas/inventarisasi/rekaman-inventarisasi', ['stockopnames' => $stockopname]);
@@ -79,6 +78,23 @@ class StockOpnamesController extends Controller
         return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
     }
 
+    // public function gone(Request $request)
+    // {
+    //     $active_inventarisasi = Session::get('active_inventarisasi');
+
+    //     $search = $request->search;
+    //     $http = new Request();
+    //     $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
+    //         "hilang" => true,
+    //         'search' => $search
+    //     ]);
+    //     $response = app()->handle($http);
+    //     $response = $response->getContent();
+    //     $stockopname = json_decode($response);
+
+    //     // dd($stockopname);
+    //     return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopname]);
+    // }
     public function gone(Request $request)
     {
         $active_inventarisasi = Session::get('active_inventarisasi');
@@ -87,15 +103,27 @@ class StockOpnamesController extends Controller
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
             "hilang" => true,
-            'search' => $search
+            // 'search' => $search
         ]);
-        $response = app()->handle($http);
-        $response = $response->getContent();
 
-        $stockopname = json_decode($response);
+        $stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio']);
 
-        // dd($stockopname);
-        return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopname]);
+        $stockopname = $stockopname->whereHas('stockopname', function ($query) {
+                $query->whereNull('end_date');
+            });
+
+        $stockopname = $stockopname
+            ->whereHas("eksemplar.biblio", function ($b) use ($search) {
+            $b->where('item_code', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%");
+            });
+
+        $stockopnames = $stockopname->get();
+        $stockopnames = $stockopnames->filter( function($stockopname) {
+            return $stockopname->book_status_id == '3';
+        })->paginate(10);
+
+        // dd($stockopnames);
+        return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);
     }
 
     public function laporan(Request $request)

@@ -19,12 +19,20 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-        // $response = app()->handle($http);
-        // $response = $response->getContent();
 
-        // $loans = json_decode($response);
-        $loans = Loan::paginate(5);
-        // dd($loans);
+        $loans = Loan::whereHas("member", function ($b) use ($search) {
+                $b->where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%");
+                })
+
+                ->orWhereHas("eksemplar", function ($b) use ($search) {
+                $b->where('item_code', 'LIKE', "%$search%");
+                })
+
+                ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
+                $b->where('title', 'LIKE', "%$search%");
+                })
+
+                ->orWhere('loan_status', 'LIKE', "%$search%")->paginate(19);
 
         return view('petugas/sirkulasi/sejarah-peminjaman', ['loans' => $loans]);
     }
@@ -34,15 +42,27 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-        // $response = app()->handle($http);
-        // $response = $response->getContent();
 
-        // $loans = json_decode($response);
-        $loans = Loan::where('loan_status', 'LIKE', "%$search%")->paginate(5);
-        // $loans = array_filter($loans, function ($loan) {
-        //     return $loan->return_status == '2';
-        // });
-        // dd($loans);
+        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
+        $loan = $loan->whereHas("member", function ($b) use ($search) {
+            $b->where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%");
+            })
+
+            ->orWhereHas("eksemplar", function ($b) use ($search) {
+            $b->where('item_code', 'LIKE', "%$search%");
+            })
+
+            ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
+            $b->where('title', 'LIKE', "%$search%");
+            })
+
+            ->orWhere('loan_status', 'LIKE', "%$search%");
+
+        $loans = $loan->get();
+        $loans = $loans->filter( function($loan) {
+            return $loan->return_status == '2';
+        })->paginate(10);
+
 
         return view('petugas/sirkulasi/daftar-keterlambatan', ['loans' => $loans]);
     }
@@ -51,12 +71,26 @@ class LoansController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
-        $loans = Loan::where('loan_status', 'LIKE', "%$search%")->paginate(5);
 
-        // $loans = array_filter($loans, function ($loan) {
-        //     return $loan->return_status == '0';
-        // });
-        // dd($loans);
+        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
+        $loan = $loan->whereHas("member", function ($b) use ($search) {
+            $b->where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%");
+            })
+
+            ->orWhereHas("eksemplar", function ($b) use ($search) {
+            $b->where('item_code', 'LIKE', "%$search%");
+            })
+
+            ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
+            $b->where('title', 'LIKE', "%$search%");
+            })
+
+            ->orWhere('loan_status', 'LIKE', "%$search%");
+
+        $loans = $loan->get();
+        $loans = $loans->filter( function($loan) {
+            return $loan->return_status == '0';
+        })->paginate(10);
 
         return view('petugas/bibliografi/eksemplar-keluar', ['loans' => $loans]);
     }

@@ -100,20 +100,27 @@
            <table class="table-auto w-full">
               <thead class="p-3 border-y border-solid border-gray-400">
                  <tr class="text-sm">
+                    <th class="text-left p-3">NO</th>
                     <th class="text-left p-3">NAMA PENGUNJUNG</th>
                     <th class="text-left p-3">INSTITUSI</th>
                     <th class="text-left p-3">TIPE PENGUNJUNG</th>
                     <th class="text-left p-3">WAKTU KUNJUNGAN</th>
                  </tr>
               </thead>
+              @php
+                  $nomor = 1 + ($visitors->currentPage() - 1) * $visitors->perPage();
+              @endphp
+              @if ($visitors)
+              @foreach ($visitors as $visitor)
               <tbody>
                   @if ($visitors)
                   @foreach ($visitors as $visitor)
                  <tr class="border-b border-solid border-gray-400">
+                    <td class="p-3 leading-6 w-80" >{{$nomor++}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
-                    <td class="p-3 leading-6 w-80">{{ Carbon\Carbon::createFromTimestamp(strtotime($visitor->updated_at))->format('l, d M Y H:i') }}</td>
+                    <td class="p-3 leading-6 w-80">{{ \Carbon\Carbon::createFromTimestamp(strtotime($visitor->created_at))->format('l, d M Y H:i') }}</td>
                  </tr>
                 @endforeach
                 @else

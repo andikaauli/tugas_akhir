@@ -21,9 +21,10 @@ class BerandaController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/visitor', 'GET', ['search' => $search]);
+
         $visitors = Visitor::whereHas("type", function ($b) use ($search) {
             $b->where('name', 'LIKE', "%$search%");
-        })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('updated_at', 'LIKE', "%$search%")->paginate(1);
+        })->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('created_at', 'LIKE', "%$search%")->paginate(10);
 
 
         $memberReq = new Request();
@@ -42,11 +43,12 @@ class BerandaController extends Controller
         $loanReq = $loanReq->create(config('app.api_url') . '/loan/' );
 
         $loans = Loan::get();
+        // dd($loans);
         $fillterloan = $loans ->filter(function ($loan) {
             return $loan->return_status == '0';
         });
 
-        return view('petugas/beranda/beranda', ['visitors' => $visitors, 'members' => $member, 'biblios' => $bibilio, 'eksemplars' => $eksemplar, 'loans' => $loans]);
+        return view('petugas/beranda/beranda', ['visitors' => $visitors, 'members' => $member, 'biblios' => $bibilio, 'eksemplars' => $eksemplar, 'loans' => $fillterloan]);
     }
 
     public function edit(Request $request)

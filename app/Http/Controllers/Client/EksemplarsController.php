@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\client;
 
 use App\Models\Eksemplar;
-use App\Http\Controllers\Controller;
+use App\Models\BookStatus;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class EksemplarsController extends Controller
 {
@@ -18,21 +19,14 @@ class EksemplarsController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
-        $eksemplar = Eksemplar::where('item_code', 'LIKE', "%$search%")->paginate(5);
+        $eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
+            $b->where('title', 'LIKE', "%$search%");
+        })->orWhere('item_code', 'LIKE', "%$search%")->paginate(10);
 
-        // ! Nyoba BookStatus
-        // ! Dari API
         $bs = new Request();
         $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-        $bsres = app()->handle($bs);
-        $bsres = $bsres->getContent();
-        $bsApi = json_decode($bsres);
+        $bookstatus = BookStatus::get();
 
-        // ! Dari Model Langsung
-        // $bookstatus = BookStatus::all();
-
-        // dd($bsApi, $bookstatus->toArray());
-        // // ! Nyoba BookStatus
 
         return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
     }

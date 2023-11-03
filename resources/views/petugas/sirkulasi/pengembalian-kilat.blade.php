@@ -21,12 +21,12 @@
         {{-- Search Bar --}}
         <div class="flex items-center px-4 py-5">
             <p class="mr-3">ID Eksemplar</p>
-            <input type="search" name="search"class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                value="{{ request('search') }}" placeholder="Search"
-                aria-label="Search"
-                aria-describedby="button-addon3"/>
+            <input type="text" id="input-item-code"
+                class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                placeholder="" aria-label="Search" aria-describedby="button-addon3" />
             {{-- Btn Search --}}
-            <button type="submit" class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
+            <button id="button-ubah-status"
+                class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">
                Kembali
             </button>
             {{-- End Btn Search --}}
@@ -35,3 +35,36 @@
     </div>
     </div>
 </div>
+<script>
+    const btnUbahStatus = document.getElementById('button-ubah-status');
+    const inputItemCode = document.getElementById('input-item-code');
+
+    btnUbahStatus.addEventListener('click', function() {
+        const itemCode = inputItemCode.value
+
+        fetch(@json(route('button.fastreturn')), {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    item_code: itemCode,
+                    // stock_opname_id: idInven
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw response;
+                }
+                inputItemCode.value = ''
+            })
+            .catch(error => {
+                error.json().then((body) => {
+                    //Here is already the payload from API
+                    alert(body.message);
+                }),
+                // alert(error)
+            })
+    })
+</script>

@@ -18,7 +18,7 @@ class PublishersController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/publisher', 'GET', ['search' => $search]);
-        $publishers = Publisher::where('title', 'LIKE', "%$search%")->paginate(5);
+        $publishers = Publisher::where('title', 'LIKE', "%$search%")->paginate(10);
 
         return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);
     }

@@ -49,8 +49,9 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">No. Panggil</th>
                   </tr>
                </thead>
-               @if ($stockopnames->stocktakeitem)
-               @foreach ($stockopnames->stocktakeitem as $data)
+               {{-- @dd($stockopnames->stocktakeitem) --}}
+               @if ($stockopnames)
+               @foreach ($stockopnames as $data)
                <tbody>
                 <tr class="border-b border-solid border-gray-400">
                    <td class="p-1.5 text-sm leading-6 border-x border-b w-36">{{$data->eksemplar->item_code}}</td>
@@ -69,6 +70,9 @@
             </table>
         </div>
     </form>
+    <div class="flex justify-end">
+    {{$stockopnames->withQueryString()->render('pagination.custom')}}
+    </div>
     {{-- End Section 2 --}}
     </div>
 </div>
