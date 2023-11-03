@@ -1,4 +1,6 @@
-
+{{-- <form action=""> --}}
+    {{-- @method('POST')
+    @csrf --}}
     <div class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
         {{-- Modal --}}
                 {{-- Tambah Eksemplar --}}
@@ -195,6 +197,7 @@
                 </div>
                 {{-- End Tambah Eksemplar --}}
     </div>
+{{-- </form> --}}
 
     <script>
         const modal = document.querySelector('.modal');

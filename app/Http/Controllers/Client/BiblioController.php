@@ -198,7 +198,7 @@ class BiblioController extends Controller
 
         $response = app()->handle($http);
 
-        dd($response);
+        // dd($response);
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));

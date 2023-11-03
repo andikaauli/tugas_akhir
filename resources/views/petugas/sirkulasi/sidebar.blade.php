@@ -26,12 +26,12 @@
               </a>
            </li>
            <li>
-              <a href="{{route('client.loan-history')}}" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-pengembalian-kilat')">
+              <a href="{{route('client.fastreturn')}}" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-pengembalian-kilat')">
                  <span class="flex-1 ml-3 whitespace-nowrap">Pengembalian Kilat</span>
               </a>
            </li>
            <li>
-            <a href="{{route('client.fastreturn')}}" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-sejarah-peminjaman')">
+            <a href="{{route('client.loan-history')}}" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-sejarah-peminjaman')">
                <span class="flex-1 ml-3 whitespace-nowrap">Sejarah Peminjaman</span>
             </a>
          </li>
