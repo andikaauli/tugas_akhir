@@ -51,7 +51,6 @@
                      </tr>
                   </thead>
                   <tbody>
-                    @if ($stockopnames)
                     @foreach ($stockopnames as $stockopname)
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
@@ -62,8 +61,8 @@
                           </a>
                        </td>
                        <td class="p-3">{{$stockopname->name}}</td>
-                       <td class="p-3 W-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->start_date))->format('l, d M Y H:i') }}</td>
-                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date))->format('l, d M Y H:i') }}</td>
+                       <td class="p-3 w-72">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->start_date))->format('l, d M Y H:i') }}</td>
+                       <td class="p-3 w-72">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date))->format('l, d M Y H:i') }}</td>
                     </tr>
                     @endforeach
                     @if ($stockopnames->isEmpty())
