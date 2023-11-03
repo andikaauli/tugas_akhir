@@ -87,7 +87,7 @@
 
                        </td>
                        <td class="p-3">{{$colltype->title}}</td>
-                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($colltype->updated_at)) }}</td>
+                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($colltype->updated_at))->format('l, d M Y H:i')  }}</td>
                     </tr>
                     @endforeach
                     @if ($colltypes->isEmpty())

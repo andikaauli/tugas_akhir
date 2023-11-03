@@ -21,7 +21,14 @@ class RfidTempController extends Controller
 
     public function addData(Request $request) //abil make api ini
     {
-        $rfidtemp = Rfidtemp::create($request->all());
-        return response()->json($rfidtemp, 200);
+        // $rfidtemp = Rfidtemp::create($request->all());
+        // return response()->json($rfidtemp, 200);
+        $rfidtemp = $request->input('rfid_code');
+        $rfidtemps = Rfidtemp::first();
+        if ($rfidtemps){
+            Rfidtemp::truncate();
+        }
+        Rfidtemp::create(['rfid_code' => $rfidtemp]);
+        return response()->json(Rfidtemp::first(), 200);
     }
 }

@@ -9,7 +9,10 @@ class RfidTemp extends Model
 {
     use HasFactory;
     protected $table = 'rfidtemp';
-    protected $guarded = [
-        'id',
+    // protected $guarded = [
+    //     'id',
+    // ];
+    protected $fillable = [
+        'rfid_code',
     ];
 }

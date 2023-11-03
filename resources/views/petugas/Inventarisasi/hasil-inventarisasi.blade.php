@@ -42,7 +42,7 @@
                            <p>:</p>
                        </div>
                        <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</p>
+                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date))->format('l, d M Y H:i') }}</p>
                     </div>
                    </div>
                {{-- End Tanggal Mulai --}}
@@ -55,7 +55,7 @@
                            <p>:</p>
                        </div>
                        <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</p>
+                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date))->format('l, d M Y H:i') }}</p>
                     </div>
                    </div>
                {{-- End Tanggal Selesai --}}
@@ -72,16 +72,29 @@
                     </div>
                    </div>
                {{-- End Yang Menginisialisasi --}}
+               {{-- TTotal Eksemplar Dimiliki --}}
+               <div class="flex border-b border-gray-300">
+                <div class="px-4 py-3 text-sm w-44">
+                    <p class="font-medium text-sm">Total Eksemplar Dimiliki</p>
+                </div>
+                <div class="px-4 py-3 text-sm">
+                    <p>:</p>
+                </div>
+                <div class="flex flex-auto items-stretch px-4 py-3">
+                 <p class="text-sm font-medium">{{$stockopnames->total_eksemplar}}</p>
+             </div>
+            </div>
+        {{-- End Total Eksemplar Dimiliki --}}
                {{-- Total Eksemplar Terinventarisasi --}}
                    <div class="flex border-b border-gray-300">
                        <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Total Eksemplar Terinventarisasi</p>
+                           <p class="font-medium text-sm">Total Eksemplar yang Diperiksa</p>
                        </div>
                        <div class="px-4 py-3 text-sm">
                            <p>:</p>
                        </div>
                        <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->total_eksemplar}}</p>
+                        <p class="text-sm font-medium">{{$stockopnames->total_diperiksa}}</p>
                     </div>
                    </div>
                {{-- End Total Eksemplar Terinventarisasi --}}
@@ -124,6 +137,19 @@
                         </div>
                     </div>
                 {{-- End Total Eksemplar Terpinjam --}}
+                {{-- Progres Eksemplar Terpindai --}}
+                <div class="flex border-b border-gray-300">
+                    <div class="px-4 py-3 text-sm w-44">
+                        <p class="font-medium text-sm">Progres Eksemplar Terpindai</p>
+                    </div>
+                    <div class="px-4 py-3 text-sm">
+                        <p>:</p>
+                    </div>
+                    <div class="flex flex-auto items-stretch px-4 py-3">
+                        <p class="text-sm font-medium">{{$stockopnames->total_persen}}% / 100%</p>
+                    </div>
+                </div>
+            {{-- End Progres Eksemplar Terpindai --}}
 
                {{-- Status --}}
                    <div class="flex border-b border-gray-300">

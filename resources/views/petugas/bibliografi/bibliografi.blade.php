@@ -101,7 +101,7 @@
                                 </td>
                                 <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
                                 <td class="p-3 w-16 text-center">{{ count($biblio->eksemplar) }}</td>
-                                <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at )) }}</td>
+                                <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at ))->format('l, d M Y H:i') }}</td>
                             </tr>
                         @endforeach
                         @if ($bibliografi->isEmpty())

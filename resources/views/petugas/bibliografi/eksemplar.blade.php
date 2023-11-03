@@ -99,7 +99,7 @@
                             </td>
                             <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td>
                             <td class="p-3 w-28">{{$eks->biblio->call_number}}</td>
-                            <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime( $eks->updated_at )) }}</td>
+                            <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime( $eks->updated_at ))->format('l, d M Y H:i') }}</td>
                             <td class="p-3 w-28">{{$eks->bookstatus->name}}</td>
                         </tr>
                     @endforeach
