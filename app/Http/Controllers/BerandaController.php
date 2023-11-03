@@ -51,19 +51,19 @@ class BerandaController extends Controller
         return view('petugas/beranda/beranda', ['visitors' => $visitors, 'members' => $member, 'biblios' => $bibilio, 'eksemplars' => $eksemplar, 'loans' => $fillterloan]);
     }
 
-    public function edit(Request $request)
-    {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/user/' . '9a77f60f-0538-466e-9382-73eb8bf92dd4');
-        $response = app()->handle($http);
-        $response = $response->getContent();
+    // public function edit(Request $request)
+    // {
+    //     $http = new Request();
+    //     $http = $http->create(config('app.api_url') . '/user/' . '9a77f60f-0538-466e-9382-73eb8bf92dd4');
+    //     $response = app()->handle($http);
+    //     $response = $response->getContent();
 
-        $profil = json_decode($response);
+    //     $profil = json_decode($response);
 
-        dd($profil);
+    //     dd($profil);
 
-    return view('petugas/beranda/edit-profil', ['profils' => $profil]);
-    }
+    // return view('petugas/beranda/edit-profil', ['profils' => $profil]);
+    // }
 
     public function update(Request $request, $id)
     {
@@ -76,7 +76,7 @@ class BerandaController extends Controller
         // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.visitors-history');
+        return redirect()->route('client.edit-profil');
     }
 
 }

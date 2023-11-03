@@ -37,6 +37,7 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
             'email' => 'required|max:255|email','unique:user',
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
         if ($validator->fails()) {
@@ -57,6 +58,7 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
             'email' => 'required|max:255|email','unique:user.id',
+            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
         if ($validator->fails()) {
