@@ -71,7 +71,6 @@
                      </tr>
                   </thead>
                   <tbody>
-                    @if ($publishers)
                     @foreach ($publishers as $publisher )
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
@@ -91,9 +90,9 @@
                        <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($publisher->updated_at)) }}</td>
                     </tr>
                     @endforeach
-                    @else
+                    @if ($publishers->isEmpty())
                     <tr>
-                        <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
+                        <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="4">Tidak Ada Data</td>
                     </tr>
                     @endif
                   </tbody>

@@ -124,7 +124,7 @@
                 @endforeach
                 @if ($visitors->isEmpty())
                 <tr>
-                  <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
+                  <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="4">Tidak Ada Data</td>
                 </tr>
                 @endif
               </tbody>

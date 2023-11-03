@@ -108,6 +108,11 @@
                        <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($member->updated_at)) }}</td>
                     </tr>
                     @endforeach
+                    @if ($members->isEmpty())
+                    <tr>
+                        <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="6">Tidak Ada Data</td>
+                    </tr>
+                    @endif
                    </tbody>
                 </table>
             </div>

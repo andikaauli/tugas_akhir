@@ -70,7 +70,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($bibliografi)
                         @foreach ($bibliografi as $biblio)
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">
@@ -105,8 +104,10 @@
                                 <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at )) }}</td>
                             </tr>
                         @endforeach
-                        @else
-
+                        @if ($bibliografi->isEmpty())
+                        <tr>
+                            <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="6">Tidak Ada Data</td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>

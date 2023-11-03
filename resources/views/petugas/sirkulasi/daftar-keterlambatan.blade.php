@@ -52,7 +52,6 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Status Peminjaman</th>
                   </tr>
                </thead>
-               @if ($loans)
                @foreach ($loans as $loan)
                <tbody>
                   <tr class="border-b border-solid border-gray-400">
@@ -67,10 +66,10 @@
                   </tr>
                </tbody>
                @endforeach
-               @else
-                <tr>
-                    <th class="pt-6 pb-3 text-center" colspan="7">TIDAK ADA DATA</th>
-                </tr>
+               @if ($loans->isEmpty())
+               <tr>
+                   <td class="pt-6 pb-6 text-center border-b border-x border-gray-300 text-red-600 font-semibold" colspan="8">Tidak Ada Data</td>
+               </tr>
                @endif
             </table>
         </div>

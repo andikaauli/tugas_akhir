@@ -70,7 +70,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($eksemplar)
                     @foreach ($eksemplar as $eks)
                         <tr class="border-b border-solid border-gray-400">
                             <td class="p-3 w-16">
@@ -104,9 +103,9 @@
                             <td class="p-3 w-28">{{$eks->bookstatus->name}}</td>
                         </tr>
                     @endforeach
-                    @else
+                    @if ($eksemplar->isEmpty())
                     <tr>
-                        <th class="pt-6 pb-3 text-center" colspan="8">TIDAK ADA DATA</th>
+                        <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="8">Tidak Ada Data</td>
                     </tr>
                     @endif
                 </tbody>

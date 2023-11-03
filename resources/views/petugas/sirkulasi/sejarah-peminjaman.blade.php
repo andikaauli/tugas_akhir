@@ -52,9 +52,8 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Status Peminjaman</th>
                   </tr>
                </thead>
-               @if ($loans['item']=null)
-               @foreach ($loans as $loan)
                <tbody>
+                @foreach ($loans as $loan)
                   <tr class="border-b border-solid border-gray-400">
                      <td class="p-1.5 text-sm leading-6 border-x border-b w-24">{{$loan->member->nim}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->member->name}}</td>
@@ -70,15 +69,13 @@
                     @endif
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->loan_status}}</td>
                   </tr>
+                @endforeach
+                @if ($loans->isEmpty())
+                <tr>
+                    <td class="pt-6 pb-6 text-center border-b border-x border-gray-300 text-red-600 font-semibold" colspan="8">Tidak Ada Data</td>
+                </tr>
+                @endif
                </tbody>
-               @endforeach
-               @else
-               <tbody>
-                   <th>
-                       <th class="pt-6 pb-3 text-center" colspan="7">TIDAK ADA DATA</th>
-                   </th>
-               </tbody>
-               @endif
             </table>
         </div>
         <div class="flex justify-end">

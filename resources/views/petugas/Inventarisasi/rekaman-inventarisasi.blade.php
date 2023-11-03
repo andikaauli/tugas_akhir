@@ -66,9 +66,9 @@
                        <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date))->format('l, d M Y H:i') }}</td>
                     </tr>
                     @endforeach
-                    @else
+                    @if ($stockopnames->isEmpty())
                     <tr>
-                        <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
+                        <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="4">Tidak Ada Data</td>
                     </tr>
                     @endif
                   </tbody>

@@ -73,7 +73,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($authors)
                         @foreach ($authors as $author)
                             <tr class="border-b border-solid border-gray-400">
                                 <td class="p-3 w-16">
@@ -100,9 +99,9 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @else
+                        @if ($authors->isEmpty())
                         <tr>
-                            <th class="pt-6 pb-3 text-center" colspan="5">TIDAK ADA DATA</th>
+                            <td class="pt-6 pb-6 text-center border-b border-gray-400 text-red-600 font-semibold" colspan="5">Tidak Ada Data</td>
                         </tr>
                         @endif
                     </tbody>
