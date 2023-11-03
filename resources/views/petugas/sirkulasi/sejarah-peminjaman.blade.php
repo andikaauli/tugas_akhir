@@ -64,7 +64,7 @@
                      @if(isset($loan->return_date))
                         <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('l, d M Y')}}</td>
                     @else
-                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">-</td>
+                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32"> - </td>
                     @endif
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->loan_status}}</td>
                   </tr>
