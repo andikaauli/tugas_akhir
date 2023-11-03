@@ -60,8 +60,8 @@
                           </a>
                        </td>
                        <td class="p-3">{{$stockopname->name}}</td>
-                       <td class="p-3 W-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->start_date)) }}</td>
-                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date)) }}</td>
+                       <td class="p-3 W-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->start_date))->format('l, d M Y H:i') }}</td>
+                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date))->format('l, d M Y H:i') }}</td>
                     </tr>
                     @endforeach
                     @else
