@@ -1,6 +1,7 @@
 @extends('main.main')
 @extends('petugas.daftar-terkendali.sidebar')
-{{-- End Sidebar --}}
+@section('active-pengarang', 'bg-white bg-opacity-30')
+@section('active-daftarTerkendali-navbar', 'text-blue-500 border-blue-500')
 
 {{-- Content --}}
 <div class="sm:ml-64">

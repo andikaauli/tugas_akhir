@@ -21,12 +21,12 @@
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="/anggota" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/anggota" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-anggota')">
                  <span class="flex-1 ml-3 whitespace-nowrap">Lihat Daftar Anggota</span>
               </a>
            </li>
            <li>
-              <a href="/anggota/create" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="/anggota/create" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-create-anggota')">
                  <span class="flex-1 ml-3 whitespace-nowrap">Tambah Anggota</span>
               </a>
            </li>

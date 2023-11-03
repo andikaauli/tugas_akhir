@@ -1,4 +1,6 @@
 @extends('dashboard.main')
+@section('active-cari-koleksi-navbar', 'text-blue-500 border-amber-600')
+
 <div class="pt-32">
     {{-- Section 1 --}}
     <div>

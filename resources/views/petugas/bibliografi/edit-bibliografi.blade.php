@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.bibliografi.sidebar')
+@section('active-bibliografi', 'bg-white bg-opacity-30')
+@section('active-bibliografi-navbar', 'text-blue-500 border-blue-500')
 {{-- @dd($bibliografi) --}}
 {{-- Content --}}
 <div class="sm:ml-64">

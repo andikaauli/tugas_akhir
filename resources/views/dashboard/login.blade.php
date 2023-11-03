@@ -1,4 +1,5 @@
 @extends('dashboard.main')
+@section('active-login-navbar', 'bg-blue-500')
 
 <div class="flex items-center justify-center pt-32">
 

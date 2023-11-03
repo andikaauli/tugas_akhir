@@ -27,38 +27,38 @@
                 @if (!session()->get('active_inventarisasi'))
                     <li class=" ">
                         <a href="/inventarisasi/rekaman"
-                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-rekaman-inventarisasi')">
                             <span class="flex-1 ml-3 whitespace-nowrap">Rekaman Inventarisasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="/inventarisasi/inisialisasi"
-                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-insialisasi')">
                             <span class="flex-1 ml-3 whitespace-nowrap">Inisialisasi</span>
                         </a>
                     </li>
                 @else
                     <li>
                         <a href="/inventarisasi/aktif"
-                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-inventarisasi-aktif')">
                             <span class="flex-1 ml-3 whitespace-nowrap">Inventarisasi Aktif</span>
                         </a>
                     </li>
                     <li>
                         <a href="/inventarisasi/laporan"
-                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-laporan-inventarisasi')">
                             <span class="flex-1 ml-3 whitespace-nowrap">Laporan Inventarisasi</span>
                         </a>
                     </li>
                     <li>
                         <a href="/inventarisasi/eksemplar-hilang"
-                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-eksemplar-hilang')">
                             <span class="flex-1 ml-3 whitespace-nowrap">Eksemplar Hilang Saat Ini</span>
                         </a>
                     </li>
                     <li>
                         <a href="/inventarisasi/end"
-                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+                            class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-end-inventarisasi')">
                             <span class="flex-1 ml-3 whitespace-nowrap">Selesaikan Inventarisasi</span>
                         </a>
                     </li>

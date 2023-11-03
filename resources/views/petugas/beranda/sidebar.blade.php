@@ -16,17 +16,17 @@
        </div>
      {{-- Beranda --}}
      <div class="">
-        <div class="text-white text-xs border-t border-white pl-4 pt-5 mt-4 pb-4">
+        <div class="text-white text-xs border-t border-white pl-4 pt-5 mt-4 pb-4 ">
            <p>BERANDA</p>
         </div>
         <ul class="space-y-2 pl-1 font-bold text-sm">
            <li class=" ">
-              <a href="/beranda" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
-                 <span class="flex-1 ml-3 whitespace-nowrap">Beranda</span>
+              <a href="/beranda" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-30 group @yield('active-beranda')">
+                 <span class="flex-1 ml-3 whitespace-nowrap active:text-white">Beranda</span>
               </a>
            </li>
            <li>
-              <a href="{{route('client.edit-profil')}}" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group">
+              <a href="{{route('client.edit-profil')}}" class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-30 group  @yield('active-edit-profil')">
                  <span class="flex-1 ml-3 whitespace-nowrap">Ubah Profil Pengguna</span>
               </a>
            </li>

@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.beranda.sidebar')
+@section('active-beranda', 'bg-white bg-opacity-30')
+@section('active-beranda-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
 {{-- Content --}}
@@ -100,7 +102,7 @@
            <table class="table-auto w-full">
               <thead class="p-3 border-y border-solid border-gray-400">
                  <tr class="text-sm">
-                    <th class="text-left p-3">NO</th>
+                    {{-- <th class="text-left p-3">NO</th> --}}
                     <th class="text-left p-3">NAMA PENGUNJUNG</th>
                     <th class="text-left p-3">INSTITUSI</th>
                     <th class="text-left p-3">TIPE PENGUNJUNG</th>
@@ -110,20 +112,17 @@
               @php
                   $nomor = 1 + ($visitors->currentPage() - 1) * $visitors->perPage();
               @endphp
-              @if ($visitors)
-              @foreach ($visitors as $visitor)
               <tbody>
-                  @if ($visitors)
                   @foreach ($visitors as $visitor)
                  <tr class="border-b border-solid border-gray-400">
-                    <td class="p-3 leading-6 w-80" >{{$nomor++}}</td>
+                    {{-- <td class="p-3 leading-6 w-80" >{{$nomor++}}</td> --}}
                     <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
                     <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
                     <td class="p-3 leading-6 w-80">{{ \Carbon\Carbon::createFromTimestamp(strtotime($visitor->created_at))->format('l, d M Y H:i') }}</td>
                  </tr>
                 @endforeach
-                @else
+                @if ($visitors->isEmpty())
                 <tr>
                   <th class="pt-6 pb-3 text-center" colspan="4">TIDAK ADA DATA</th>
                 </tr>

@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.daftar-terkendali.sidebar')
+@section('active-penerbit', 'bg-white bg-opacity-30')
+@section('active-daftarTerkendali-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
 {{-- Content --}}

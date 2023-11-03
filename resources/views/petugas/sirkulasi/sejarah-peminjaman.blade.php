@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.sirkulasi.sidebar')
+@section('active-sejarah-peminjaman', 'bg-white bg-opacity-30')
+@section('active-sirkulasi-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
 {{-- Content --}}
@@ -50,7 +52,7 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Status Peminjaman</th>
                   </tr>
                </thead>
-               @if ($loans)
+               @if ($loans['item']=null)
                @foreach ($loans as $loan)
                <tbody>
                   <tr class="border-b border-solid border-gray-400">
@@ -71,9 +73,11 @@
                </tbody>
                @endforeach
                @else
-                <tr>
-                    <th class="pt-6 pb-3 text-center" colspan="7">TIDAK ADA DATA</th>
-                </tr>
+               <tbody>
+                   <th>
+                       <th class="pt-6 pb-3 text-center" colspan="7">TIDAK ADA DATA</th>
+                   </th>
+               </tbody>
                @endif
             </table>
         </div>

@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.sirkulasi.sidebar')
+@section('active-mulai-sirkulasi', 'bg-white bg-opacity-30')
+@section('active-sirkulasi-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
 {{-- Content --}}

@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.bibliografi.sidebar')
+@section('active-eksemplar', 'bg-white bg-opacity-30')
+@section('active-bibliografi-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
 {{-- Content --}}

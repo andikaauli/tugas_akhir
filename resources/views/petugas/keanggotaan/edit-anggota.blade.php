@@ -1,5 +1,7 @@
 @extends('main.main')
 @extends('petugas.keanggotaan.sidebar')
+@section('active-anggota', 'bg-white bg-opacity-30')
+@section('active-keanggotaan-navbar', 'text-blue-500 border-blue-500')
 
 {{-- Content --}}
  <div class="sm:ml-64">
