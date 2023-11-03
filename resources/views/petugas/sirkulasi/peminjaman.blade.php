@@ -19,7 +19,7 @@
     @csrf
     <div class="bg-white mb-6">
         <div class="p-4">
-           <button class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Selesai Transaksi</button>
+           <a href="{{route('client.loan-start')}}" type="submit" class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Selesai Transaksi</a>
         </div>
         <div class="grid grid-cols-2 gap-0">
            <div class="">
