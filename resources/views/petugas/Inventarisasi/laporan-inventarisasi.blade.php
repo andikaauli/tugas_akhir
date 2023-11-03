@@ -80,7 +80,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">1(100%)</p>
+                    <p class="text-sm font-medium">{{$stockopnames->total_persen}}% / 100%</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Diperiksa/Terpindai --}}

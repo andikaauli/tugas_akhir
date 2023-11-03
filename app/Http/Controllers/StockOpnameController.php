@@ -112,9 +112,10 @@ class StockOpnameController extends Controller
 
         $stockopname['total_eksemplar'] = $stocktakeitem->count();
 
-        // $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
-        //     return $s->bookstatus->id==2||$s->bookstatus->id==3;
-        // })->count();//misal ingin hitungan 2 id
+        $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
+            return $s->bookstatus->id==2||$s->bookstatus->id==3;
+        })->count();//misal ingin hitungan 2 id
+        $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
 
         return response()->json($stockopname, 200);
         //bikin filter yg diambil 2 dan 3 utk bagian laporan
