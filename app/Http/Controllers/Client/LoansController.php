@@ -38,7 +38,7 @@ class LoansController extends Controller
         // $response = $response->getContent();
 
         // $loans = json_decode($response);
-        $loans = Loan::paginate(5);
+        $loans = Loan::where('loan_status', 'LIKE', "%$search%")->paginate(5);
         // $loans = array_filter($loans, function ($loan) {
         //     return $loan->return_status == '2';
         // });
