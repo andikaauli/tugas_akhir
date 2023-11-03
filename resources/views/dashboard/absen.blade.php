@@ -5,13 +5,13 @@
     <form action="{{ route('client.create-visitors')}}" method="POST" class="m-0 p-0">
         {{-- Section 1 --}}
         @csrf
-        <div class="border-black border">
-            <div class="py-6 bg-teknik">
+        <div class="w-150">
+            <div class="py-6 bg-teknik border-x border-t border-black rounded-t-md">
                 <p class="text-center text-white text-2xl font-semibold">Penghitung Jumlah Pengunjung</p>
             </div>
-            <div class="">
+            <div class="border-x border-b border-black rounded-b-md">
                 <div class="p-4">
-                    <p class="text-sm font-semibold">Silahkan masukkan nomor anggota Anda atau masukkan nama lengkap Anda</p>
+                    <p class="text-sm font-semibold text-center">Silahkan masukkan Nama Pengunjung dan Institusi Anda</p>
                 </div>
                 <div class="">
                     <div class="py-1">

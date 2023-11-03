@@ -1,7 +1,7 @@
 @extends('dashboard.main')
 @section('active-cari-koleksi-navbar', 'text-blue-500 border-amber-600')
 
-<div class="items-center justify-center pt-32">
+<div class="items-center justify-center pt-32 mb-10">
     <div class="py-4 px-4 mb-4">
         {{-- Search Bar --}}
         <div class="flex items-center justify-center">
@@ -22,14 +22,14 @@
             {{-- End Btn Search --}}
         </div>
     </div>
-    <div class="grid gap-10 grid-cols-3 grid-rows-3 px-20">
-        <div class="col-span-2 border border-black rounded-md">
-            <div class="p-5 bg-teknik rounded-t-md">
+    <div class="grid gap-10 grid-cols-3 px-20">
+        <div class="col-span-2">
+            <div class="p-5 bg-teknik border-x border-t border-black rounded-t-md">
                 <div class="flex">
                     {{$bibliografi->withQueryString()->links('pagination.custom')}}
                 </div>
             </div>
-            <div>
+            <div class="border-x border-b rounded-b-md border-black">
                 @if ($bibliografi)
                 @foreach ($bibliografi as $biblio)
                 <a href="{{ route('client.detail', ['id' => $biblio->id]) }}" class="flex px-5 py-3 border-b border-gray-400">
@@ -47,17 +47,14 @@
                 @endif
             </div>
         </div>
-        <div class="border border-black rounded-md h-fit">
-            <div class="bg-teknik rounded-t-md py-5 text-xl font-extrabold text-white text-center">
-                <p>Library Information</p>
+        <div class="h-fit">
+            <div class="bg-teknik border-t border-x border-black rounded-t-md py-5 text-xl font-extrabold text-white text-center">
+                <p>Informasi</p>
             </div>
-            <div class="p-4">
-                <p class="font-medium text-xl text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
+            <div class="py-4 px-6 border-b border-x border-black rounded-b-md">
+                <p class="font-medium text-lg text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
                 </p>
             </div>
         </div>
-    </div>
-    <div class="border border-blackk rounded-md">
-
     </div>
 </div>

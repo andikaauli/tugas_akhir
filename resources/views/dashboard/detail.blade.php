@@ -10,11 +10,11 @@
     {{-- Setion 2 --}}
     <div class="">
         <div class="grid gap-10 grid-cols-3 px-20 mb-5">
-            <div class="col-span-2 border border-black">
-                <div class="bg-teknik py-5 text-xl font-extrabold text-white text-center">
+            <div class="col-span-2">
+                <div class="bg-teknik border-x border-t border-black rounded-t-md py-5 text-xl font-extrabold text-white text-center">
                     <p>Library Information</p>
                 </div>
-                <div class="px-12 py-10">
+                <div class="px-12 py-10 border-x border-b border-black rounded-b-md">
                     <div class="flex w-full">
                         <img src="{{$bibliografi->image}}" class="w-28 h-36"></img>
                         <div class=" ml-4">
@@ -81,12 +81,12 @@
                     </div>
                 </div>
             </div>
-            <div class="border border-black h-fit">
-                <div class="bg-teknik py-5 text-xl font-extrabold text-white text-center">
+            <div class="h-fit">
+                <div class="bg-teknik border-x border-t border-black rounded-t-md py-5 text-xl font-extrabold text-white text-center">
                     <p>Library Information</p>
                 </div>
-                <div class="py-4 px-6">
-                    <p class="font-medium text-xl text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
+                <div class="py-4 px-6 border-x border-b border-black rounded-b-md">
+                    <p class="font-medium text-lg text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
                     </p>
                 </div>
             </div>
