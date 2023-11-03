@@ -39,7 +39,7 @@
             </li>
             <li class="h-full">
                 <div
-                    class="flex h-full px-4 border-b-3 text-black border-white  items-center hover:ease-in-out hover:duration-300 hover:border-blue-500 hover:text-blue-500">
+                    class="flex h-full px-4 border-b-3 text-black border-white  items-center hover:ease-in-out hover:duration-300 hover:border-blue-500 hover:text-blue-500 @yield('active-inventarisasi-navbar')">
                     <a href="/inventarisasi"
                         class="h-full w-full text-center flex items-center px-2 font-bold text-sm">Inventarisasi</a>
                 </div>
