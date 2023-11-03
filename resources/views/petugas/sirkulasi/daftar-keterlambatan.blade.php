@@ -59,9 +59,9 @@
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->member->name}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->eksemplar->item_code}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b">{{$loan->eksemplar->biblio->title}}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->loan_date)->format('l, d M Y') }}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date)->format('l, d M Y') }}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('l, d M Y') }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->loan_date)->format('l, d M Y H:i') }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date)->format('l, d M Y H:i') }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('l, d M Y H:i') }}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->loan_status}}</td>
                   </tr>
                </tbody>
