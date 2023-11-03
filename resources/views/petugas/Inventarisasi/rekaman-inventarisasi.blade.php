@@ -51,7 +51,6 @@
                      </tr>
                   </thead>
                   <tbody>
-                    @if ($stockopnames)
                     @foreach ($stockopnames as $stockopname)
                     <tr class="border-b border-solid border-gray-400">
                        <td class="p-3 w-16">
