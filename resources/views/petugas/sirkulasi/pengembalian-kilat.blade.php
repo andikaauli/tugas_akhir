@@ -51,8 +51,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    item_code: itemCode,
-                    // stock_opname_id: idInven
+                    item_code: itemCode
                 })
             })
             .then(response => {
@@ -65,7 +64,7 @@
                 error.json().then((body) => {
                     //Here is already the payload from API
                     alert(body.message);
-                }),
+                })
                 // alert(error)
             })
     })
