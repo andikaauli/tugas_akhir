@@ -51,6 +51,7 @@ Route::group(['prefix' => '/bibliografi', 'middleware' => ['auth']], function ()
     Route::get('/create', [BiblioController::class, 'create']);
     Route::post('/create', [BiblioController::class, 'store'])->name('client.create-bibliografi');
     Route::get('/edit/{id}', [BiblioController::class, 'edit'])->name('client.edit-bibliografi');
+    Route::post('/edit/{id}', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
     Route::put('/edit/{id}', [BiblioController::class, 'update']);
 });
 

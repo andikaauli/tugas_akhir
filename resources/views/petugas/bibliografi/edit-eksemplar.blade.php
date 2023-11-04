@@ -44,8 +44,11 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input name="rfid_code" type="text" id="small-input" value="{{ $eksemplar->rfid_code }}"
+                            <input name="rfid_code" type="text" id="small-input" value="{{ $eksemplar->rfid_code }}" disabled
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        </div>
+                        <div class="py-3 items-center">
+                            <button class="bg-gray-400 hover:bg-blue-500 px-2 py-1 text-sm text-white font-semibold rounded-sm">Scan RFID</button>
                         </div>
                     </div>
                     {{-- End Kode RFID --}}

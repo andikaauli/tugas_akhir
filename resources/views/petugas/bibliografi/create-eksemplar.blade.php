@@ -1,6 +1,5 @@
-{{-- <form action=""> --}}
-{{-- @method('POST')
-    @csrf --}}
+<form action="{{ route('client.create-eksemplar')}}" method="POST" class="m-0 p-0">
+    @csrf
 <div
     class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
     {{-- Modal --}}
@@ -42,7 +41,7 @@
                         <p>Kode RFID</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="rfid-input"
+                        <input type="text" id="rfid-input" disabled
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                         <p>Kode Eksemplar</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input"
+                        <input type="text" id="small-input" name=""
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -64,7 +63,7 @@
                         <p>No. Panggil</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input"
+                        <input type="text" id="small-input" name=""
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -202,7 +201,7 @@
     </div>
     {{-- End Tambah Eksemplar --}}
 </div>
-{{-- </form> --}}
+</form>
 
 <script>
     const modal = document.querySelector('.modal');
