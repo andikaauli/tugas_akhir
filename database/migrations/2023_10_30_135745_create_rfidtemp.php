@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('rfidtemp', function (Blueprint $table) {
             $table->id();
-            $table->string('rfid_code')->nullable();
+            $table->string('rfid_code');
             $table->timestamps();
         });
     }
