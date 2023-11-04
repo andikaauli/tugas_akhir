@@ -19,6 +19,7 @@ class ActiveInventarisasi
         if (empty(session('active_inventarisasi'))) {
             $response = app()->call('App\Http\Controllers\StockOpnameController@getData');
 
+
             $stockopname = json_decode($response->getContent());
 
             $stockopname = array_filter($stockopname, function ($item) {

@@ -19,7 +19,7 @@
         {{-- Search Bar --}}
         <div class="p-4 bg-blue-100">
             <p class="mr-3 mb-2 font-medium">Kode Eksemplar</p>
-            <div class="flex">
+            <form class="flex">
                 <input type="text" id="input-item-code"
                     class="relative w-80 m-0 mr-1 mb-3 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
                     placeholder="" aria-label="Search" aria-describedby="button-addon3" />
@@ -29,7 +29,7 @@
                     Ubah Status
                 </button>
                 {{-- End Btn Filter --}}
-            </div>
+            </form>
         </div>
         {{-- End Search Bar --}}
         {{-- Section 2 --}}
@@ -37,11 +37,11 @@
             {{-- Search Bar --}}
             <div class="flex items-center">
                 <p class="mr-3">Cari</p>
-                <form class="m-0" action="{{ route('client.bibliografi') }}" method="GET">
+                <form class="m-0" action="{{ route('client.active-inventarisasi') }}" method="GET">
                     <div class="flex items-center">
-                        <input type="search" name="search"
+                        <input type="search" name="searchStock"
                             class="w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                            value="{{ request('search') }}" placeholder="Search" aria-label="Search"
+                            value="{{ request('searchStock') }}" placeholder="Search" aria-label="Search"
                             aria-describedby="button-addon3" />
                         {{-- Btn Search --}}
                         <button type="submit"
@@ -88,7 +88,9 @@
 
     // console.log(idInven);
     setInterval(() => {
-        fetch(@json(route('show.stockopname', ['id' => $inventarisasiId])))
+        fetch(@json(route('show.stockopname', ['id' => $inventarisasiId])) + "?" + new URLSearchParams({
+                searchStock: @json($searchStock) ?? ''
+            }))
             .then(response => response.json())
             .then(data => {
                 const stockTakeItem = data.stocktakeitem.filter((item) => item.book_status_id == 2)

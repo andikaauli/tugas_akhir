@@ -16,7 +16,8 @@
         </div>
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.edit-bibliografi', ['id' => $bibliografi->id]) }}" method="POST" class="h-full" enctype="multipart/form-data">
+        <form action="{{ route('client.edit-bibliografi', ['id' => $bibliografi->id]) }}" method="POST" class="h-full"
+            enctype="multipart/form-data">
             {{-- @dd($bibliografi) --}}
             @method('PUT')
             @csrf
@@ -31,9 +32,10 @@
                 <div class="flex flex-auto items-stretch px-4 py-3">
                     <textarea type="text" name="title"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                         id="" cols="30" rows="2">{{ $bibliografi->title }}</textarea>
+                        id="" cols="30" rows="2">{{ $bibliografi->title }}</textarea>
                     @error('title')
-                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                            {{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -63,7 +65,8 @@
                     </div>
                     <div class="ml-4">
                         @error('author_id')
-                            <p class="flex items-center text-red-500 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            <p class="flex items-center text-red-500 text-sm font-semibold animate-pulse">
+                                {{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -78,7 +81,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" name="responsibility" id="small-input" value="{{ $bibliografi->responsibility }}"
+                    <input type="text" name="responsibility" id="small-input"
+                        value="{{ $bibliografi->responsibility }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -92,7 +96,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text"  name="edition" id="small-input" value="{{ $bibliografi->edition }}"
+                    <input type="text" name="edition" id="small-input" value="{{ $bibliografi->edition }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -106,7 +110,7 @@
                     <p>:</p>
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
-                    <textarea type="text"  name="spec_detail"
+                    <textarea type="text" name="spec_detail"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                         name="" id="" cols="30" rows="2">{{ $bibliografi->spec_detail }}</textarea>
                 </div>
@@ -122,8 +126,8 @@
                 </div>
                 <div class="px-4 py-3">
                     <a type="button" href="#"
-                        class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2  show-modal">Tambah Eksemplar</a>
-                    @include('petugas.bibliografi.create-eksemplar')
+                        class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2  show-modal">Tambah
+                        Eksemplar</a>
                 </div>
             </div>
             {{-- End Tambah Eksemplar --}}
@@ -202,7 +206,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" name="carrier_type" id="small-input" value="{{ $bibliografi->carrier_type }}"
+                    <input type="text" name="carrier_type" id="small-input"
+                        value="{{ $bibliografi->carrier_type }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -216,7 +221,7 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" name="isbnissn"  id="small-input" value="{{ $bibliografi->isbnissn }}"
+                    <input type="text" name="isbnissn" id="small-input" value="{{ $bibliografi->isbnissn }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -291,7 +296,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" name="description" id="small-input" value="{{ $bibliografi->description }}"
+                    <input type="text" name="description" id="small-input"
+                        value="{{ $bibliografi->description }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -320,7 +326,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" name="classification" id="small-input" value="{{ $bibliografi->classification }}"
+                    <input type="text" name="classification" id="small-input"
+                        value="{{ $bibliografi->classification }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -334,7 +341,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" name="call_number" id="small-input" value="{{ $bibliografi->call_number }}"
+                    <input type="text" name="call_number" id="small-input"
+                        value="{{ $bibliografi->call_number }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
             </div>
@@ -378,13 +386,13 @@
                 </div>
                 <div class="px-4 py-3">
                     <div class="flex">
-                        <img id="blah" src="{{ $bibliografi->image}}" class="rounded-md w-32 h-44" ></img>
+                        <img id="blah" src="{{ $bibliografi->image }}" class="rounded-md w-32 h-44"></img>
                         <div class="ml-3">
-                           <label class="file">
-                               <input class=" border rounded text-sm" type="file" name="image" accept="image/png, image/jpg, image/jpeg"
-                                   onchange="readURL(this);">
-                               <span class="file-custom"></span>
-                           </label>
+                            <label class="file">
+                                <input class=" border rounded text-sm" type="file" name="image"
+                                    accept="image/png, image/jpg, image/jpeg" onchange="readURL(this);">
+                                <span class="file-custom"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -403,6 +411,8 @@
     </div>
 </div>
 
+@include('petugas.bibliografi.create-eksemplar')
+
 <script>
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -417,16 +427,16 @@
         }
     }
     const modal = document.querySelector('.modal');
-        const showModal = document.querySelector('.show-modal');
-        const closeModal = document.querySelectorAll('.close-modal');
+    const showModal = document.querySelector('.show-modal');
+    const closeModal = document.querySelectorAll('.close-modal');
 
-        showModal.addEventListener('click', function (){
-            modal.classList.remove('hidden')
-        });
+    showModal.addEventListener('click', function() {
+        modal.classList.remove('hidden')
+    });
 
-        closeModal.forEach(close => {
-            close.addEventListener('click', function (){
-                modal.classList.add('hidden')
-            });
+    closeModal.forEach(close => {
+        close.addEventListener('click', function() {
+            modal.classList.add('hidden')
         });
+    });
 </script>
