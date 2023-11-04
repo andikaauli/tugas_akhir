@@ -40,6 +40,7 @@ class EksemplarController extends Controller
     public function addData(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'biblio_id' => 'required|exists:biblio,id',
             'item_code' => 'required|numeric',
             'rfid_code' => 'required',
             'order_number' => 'nullable|numeric',

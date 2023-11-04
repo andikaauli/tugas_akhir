@@ -71,7 +71,7 @@ class StockOpnameController extends Controller
     }
     public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
-        $search = $request->search;
+        $search = $request->searchStock;
         $stockopname = Stockopname::with(['stocktakeitem' => function ($stocktakeitem) use ($request) {
             $filterstatus = [];
             if ($request->has('dipinjam')) {
@@ -87,14 +87,21 @@ class StockOpnameController extends Controller
             if (count($filterstatus)) {
                 $stocktakeitem->whereIn('book_status_id', $filterstatus);
             }
-            return $stocktakeitem->with(['bookstatus', 'eksemplar.biblio.author', 'eksemplar.biblio.colltype', 'eksemplar.biblio.publisher'])->get();
-        }])->findOrFail($id);
+            return $stocktakeitem->with(['bookstatus', 'eksemplar.biblio.author', 'eksemplar.biblio.colltype', 'eksemplar.biblio.publisher'])->orderBy('updated_at', 'desc')->get();
+        }]);
 
         //PENCARIAN
         if ($search) {
-            $stocktakeitem = Stocktakeitem::where('eksemplar.biblio.title', 'LIKE', "%$search%")
-                ->orWhere('eksemplar.biblio.colltype.title', 'LIKE', "%$search%")->get();
+            $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
+                $q->whereHas('eksemplar', function ($q) use ($search) {
+                    $q->whereHas('biblio', function ($q) use ($search) {
+                        $q->where('title', 'like', '%' . $search . '%');
+                    })->orWhere('item_code', 'like', '%' . $search . '%');
+                });
+            });
         }
+
+        $stockopname = $stockopname->findOrFail($id);
 
         //dibawah ini untuk list data laporan hitungan totaal eksemplar
         $stocktakeitem = $stockopname->stocktakeitem;
@@ -112,9 +119,9 @@ class StockOpnameController extends Controller
 
         $stockopname['total_eksemplar'] = $stocktakeitem->count();
 
-        $stockopname['total_diperiksa']=$stocktakeitem->filter(function ($s){
-            return $s->bookstatus->id==2||$s->bookstatus->id==3;
-        })->count();//misal ingin hitungan 2 id
+        $stockopname['total_diperiksa'] = $stocktakeitem->filter(function ($s) {
+            return $s->bookstatus->id == 2 || $s->bookstatus->id == 3;
+        })->count(); //misal ingin hitungan 2 id
         $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
 
         return response()->json($stockopname, 200);
