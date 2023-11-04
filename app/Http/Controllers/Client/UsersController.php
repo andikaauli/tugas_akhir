@@ -11,4 +11,8 @@ class UsersController extends Controller
     {
         return view('petugas/beranda/edit-profil');
     }
+    public function update(Request $request)
+    {
+        return view('petugas/beranda/edit-profil');
+    }
 }
