@@ -17,25 +17,13 @@
        </div>
      {{-- End Section 1 --}}
      {{-- Section 2 --}}
-    <form action="{{ route('client.edit-profil', '9a77f60f-0538-466e-9382-73eb8bf92dd4') }}" method="POST" class="m-0 p-0">
+    <form action="{{ route('client.update-profil') }}" id="form-edit-profil" method="POST" class="m-0 p-0">
         {{-- @method('PUT') --}}
-        @csrf
+         @method('PUT')
+         @csrf
         {{-- @dd($profils) --}}
         <div class="bg-white">
-         {{-- Nama Masuk Pengguna --}}
-             <div class="flex border-y border-solid border-gray-300">
-                 <div class="px-4 py-3 text-sm w-60">
-                     <p class="font-bold text-sm">Nama Masuk Pengguna*</p>
-                 </div>
-                 <div class="px-4 py-3 text-sm">
-                     <p class="font-bold text-sm">:</p>
-                 </div>
-                 <div class="px-4 py-3">
-                     <input type="text" name="title" id="small-input" value="" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
-                 </div>
-             </div>
-         {{-- End Nama Masuk Pengguna --}}
-         {{-- Nama Asli --}}
+            {{-- Nama Asli --}}
          <div class="flex border-y border-solid border-gray-300">
             <div class="px-4 py-3 text-sm w-60">
                 <p class="font-bold text-sm">Nama Asli*</p>
@@ -44,10 +32,24 @@
                 <p class="font-bold text-sm">:</p>
             </div>
             <div class="px-4 py-3">
-                <input type="text" name="title" id="small-input" value="" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                <input type="text" name="name" id="sname" value="{{(old('username'))?old('username'):$user->name}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
             </div>
         </div>
         {{-- End Nama Asli --}}
+         {{-- Nama Masuk Pengguna --}}
+             <div class="flex border-y border-solid border-gray-300">
+                 <div class="px-4 py-3 text-sm w-60">
+                     <p class="font-bold text-sm">Username*</p>
+                 </div>
+                 <div class="px-4 py-3 text-sm">
+                     <p class="font-bold text-sm">:</p>
+                 </div>
+                 <div class="px-4 py-3">
+                     <input type="text" name="username" id="username" value="{{(old('name'))?old('name'):$user->username}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                 </div>
+             </div>
+         {{-- End Nama Masuk Pengguna --}}
+
         {{-- Surel --}}
         <div class="flex border-y border-solid border-gray-300">
             <div class="px-4 py-3 text-sm w-60">
@@ -57,7 +59,7 @@
                 <p class="font-bold text-sm">:</p>
             </div>
             <div class="px-4 py-3">
-                <input type="text" name="title" id="small-input" value="" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                <input type="text" name="email" id="email" value="{{(old('email'))?old('email'):$user->email}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
             </div>
         </div>
         {{-- End Surel --}}

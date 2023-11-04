@@ -65,7 +65,7 @@ class EksemplarController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'item_code' => 'required|numeric',
-            'rfid_code' => 'required',
+            'rfid_code' => 'nullable',
             'order_number' => 'nullable|numeric',
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',

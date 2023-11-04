@@ -114,7 +114,7 @@ Route::prefix("user")->group(function () {
     Route::get('/login', [UserController::class, "login"]);
     Route::post('/login', [UserController::class, "authenticating"]);
     Route::post('/logout', [UserController::class, "logout"]);
-    Route::post('/edit/{id}', [UserController::class, "editData"]);
+    Route::post('/edit', [UserController::class, "editData"]);
 });
 
 Route::prefix("visitor")->group(function () {

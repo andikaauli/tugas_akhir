@@ -49,14 +49,15 @@ class UserController extends Controller
             ->json(['message'=>'Admin baru berhasil ditambahkan!', 'data'=>$user]);
     }
 
-    public function editData(Request $request, $id)
+    public function editData(Request $request)
     {
+        $user=auth()->user();
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
             'username' => 'required|max:255','unique:user.id',
-            'password' => 'required|min:8',
-            'password_confirm' => 'required|same:password',
+            'password' => 'nullable|min:8',
+            'password_confirm' => 'nullable|same:password',
             'email' => 'required|max:255|email','unique:user.id',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
@@ -64,7 +65,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        $user = User::find($id);
+
         $user->update($request->all());
         return response()
             ->json(['message'=>'Data Admin berhasil diubah!', 'data'=>$user]);
