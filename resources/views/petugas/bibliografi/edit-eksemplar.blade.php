@@ -43,12 +43,23 @@
                         <div class="px-4 py-3 text-sm">
                             <p>:</p>
                         </div>
-                        <div class="px-4 py-3">
-                            <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}"
-                                class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        <div class="flex modal2">
+                            <div class="px-4 py-3">
+                                <input name="" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}"
+                                    class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-red-600 focus:ring focus:ring-blue-300">
+                            </div>
+                            <div class="py-3 items-center">
+                                <button type="button"  class="bg-red-600 hover:bg-red-500 px-2 py-1 text-sm text-white font-semibold rounded-sm show-modal">Scan RFID</button>
+                            </div>
                         </div>
-                        <div class="py-3 items-center">
-                            <button type="button"  class="bg-gray-400 hover:bg-blue-500 px-2 py-1 text-sm text-white font-semibold rounded-sm start-scan">Scan RFID</button>
+                        <div class="modal hidden">
+                            <div class="px-4 py-3">
+                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}"
+                                    class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-blue-600 focus:ring focus:ring-blue-300">
+                            </div>
+                            <div class="py-3 items-center">
+                                <button type="button"  class="bg-blue-600 hover:bg-blue-500 px-2 py-1 text-sm text-white font-semibold rounded-sm close-modal">Stop Scan RFID</button>
+                            </div>
                         </div>
                     </div>
                     {{-- End Kode RFID --}}
@@ -229,7 +240,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     const showModal = document.querySelector('.start-scan');
     let getRfidCode
     showModal.addEventListener('click', function() {
@@ -243,5 +254,44 @@
                     }
                 })
         }, 1000);
+    });
+</script> --}}
+
+<script>
+    const modal = document.querySelector('.modal');
+    const modal2 = document.querySelector('.modal2');
+    const showModal = document.querySelector('.show-modal');
+    const closeModal = document.querySelectorAll('.close-modal');
+    let getRfidCode
+    showModal.addEventListener('click', function() {
+        modal.classList.remove('hidden')
+        modal.classList.add('flex')
+        modal2.classList.add('hidden')
+        modal2.classList.remove('flex')
+        getRfidCode = setInterval(() => {
+            fetch(@json(route('get.rfidtemp')))
+                .then(res => res.json())
+                .then(data => {
+                    if (data.rfid_code) {
+                        document.getElementById('rfid-input').value = data.rfid_code
+                        clearInterval(getRfidCode)
+                    }
+                })
+        }, 1000);
+    });
+
+    // closeModal.addEventListener('click', function() {
+    //     modal2.classList.remove('hidden')
+    //     modal2.classList.add('flex')
+    //     modal.classList.remove('flex')
+    //     modal.classList.add('hidden')
+    closeModal.forEach(close => {
+        close.addEventListener('click', function() {
+            modal2.classList.remove('hidden')
+        modal2.classList.add('flex')
+        modal.classList.remove('flex')
+        modal.classList.add('hidden')
+            clearInterval(getRfidCode)
+        });
     });
 </script>
