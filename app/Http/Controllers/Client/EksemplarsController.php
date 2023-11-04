@@ -59,7 +59,7 @@ class EksemplarsController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.eksemplar');
+        return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
     }
 
     /**
@@ -88,7 +88,7 @@ class EksemplarsController extends Controller
 
         // dd($response);
 
-    // ! Dari API
+        // ! Dari API
         $bs = new Request();
         $bs = $bs->create(config('app.api_url') . '/bookstatus/');
         $bsres = app()->handle($bs);
@@ -119,7 +119,7 @@ class EksemplarsController extends Controller
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-        // throw ValidationException::withMessages((array) json_decode($response->getContent()));
+            // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
         return redirect()->route('client.eksemplar');

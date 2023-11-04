@@ -86,7 +86,7 @@ Route::prefix("publisher")->group(function () {
 
 
 Route::prefix("rfidtemp")->group(function () {
-    Route::get('', [RfidTempController::class, "getData"]);
+    Route::get('', [RfidTempController::class, "getData"])->name('get.rfidtemp');
     Route::post('/add', [RfidTempController::class, "addData"]);
 });
 
