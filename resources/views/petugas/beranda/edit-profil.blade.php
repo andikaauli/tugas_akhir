@@ -17,10 +17,10 @@
        </div>
      {{-- End Section 1 --}}
      {{-- Section 2 --}}
-    {{-- <form action="{{ route('client.edit-profil', '9a77f60f-0538-466e-9382-73eb8bf92dd4') }}" method="POST" class="m-0 p-0">
-        @method('PUT')
+    <form action="{{ route('client.edit-profil', '9a77f60f-0538-466e-9382-73eb8bf92dd4') }}" method="POST" class="m-0 p-0">
+        {{-- @method('PUT') --}}
         @csrf
-        @dd($profils) --}}
+        {{-- @dd($profils) --}}
         <div class="bg-white">
          {{-- Nama Masuk Pengguna --}}
              <div class="flex border-y border-solid border-gray-300">
@@ -118,7 +118,7 @@
         </div>
         {{-- End Btn Simpan --}}
         </div>
-    {{-- </form> --}}
+    </form>
     {{-- End Section 2 --}}
     </div>
 </div>

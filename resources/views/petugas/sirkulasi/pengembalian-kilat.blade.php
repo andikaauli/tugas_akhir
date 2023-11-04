@@ -60,7 +60,7 @@
                 }
 
                 inputItemCode.value = ''
-                alert('Eksemplar Berhasil Dikembalikan')
+                alert('Eksemplar berhasil dikembalikan')
             })
             .catch(error => {
                 error.json().then((body) => {

@@ -214,6 +214,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, "logout"]);
     Route::get('/beranda', [BerandaController::class, "index"])->name('client.visitors-history');
     Route::get('/edit/profil', [UsersController::class, "index"])->name('client.edit-profil');
+    Route::put('/edit/profil', [UsersController::class, "update"])->name('client.update-profil');
     // Route::put('/edit/profil/9a77f60f-0538-466e-9382-73eb8bf92dd4', [BerandaController::class, "update"]);
 });
 
