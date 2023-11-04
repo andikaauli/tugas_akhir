@@ -145,7 +145,7 @@
                     <div class="px-4 py-3 text-sm">
                         <p>:</p>
                     </div>
-                    <div class="flex flex-auto items-stretch px-4 py-3">
+                    <div class="flexitems-stretch px-4 py-3">
                         <p class="text-sm font-medium">{{$stockopnames->total_persen}}% / 100%</p>
                     </div>
                 </div>

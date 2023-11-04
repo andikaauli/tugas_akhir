@@ -72,16 +72,28 @@
                </div>
            {{-- End Total Eksemplar Terpinjam --}}
            {{-- Progres Eksemplar Terpindai --}}
-               <div class="flex border-b border-gray-300">
+               <div class="flex flex-auto items-stretch border-b border-gray-300">
                    <div class="px-4 py-3 text-sm w-46">
                        <p class="font-medium text-sm">Progres Eksemplar Terpindai</p>
                    </div>
                    <div class="px-4 py-3 text-sm">
                        <p>:</p>
                    </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">{{$stockopnames->total_persen}}% / 100%</p>
-                </div>
+                    <div class="px-4 py-3 grow">
+                        @php
+                            $num = $stockopnames->total_persen;
+                            $formattedNum = number_format($num);
+                        @endphp
+                        <p class="text-sm font-medium">{{$formattedNum}}% / 100%</p>
+                        <div class="flex mt-1">
+                            <div class="bg-blue-600 h-4" style="width:{{$stockopnames->total_persen}}%"></div>
+                            @php
+                                $total = 100;
+                                $perhitungan = $total-$stockopnames->total_persen;
+                            @endphp
+                            <div class="bg-red-600 h-4" style="width:{{$perhitungan}}%"></div>
+                        </div>
+                    </div>
                </div>
            {{-- End Progres Eksemplar Terpindai --}}
            {{-- Pelaksana Inventarisasi --}}
