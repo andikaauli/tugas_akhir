@@ -111,6 +111,7 @@ class EksemplarsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);

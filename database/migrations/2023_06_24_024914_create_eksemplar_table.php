@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('eksemplar', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('item_code')->unique();
-            $table->string('rfid_code')->unique();
+            $table->string('rfid_code')->nullable();
             $table->string('order_number')->nullable();
             $table->date('order_date')->nullable();
             $table->date('receipt_date')->nullable();

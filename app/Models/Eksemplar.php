@@ -21,6 +21,9 @@ class Eksemplar extends Model
         'id',
 
     ];
+    protected $fillable = [
+        'rfid_code',
+    ];
 
     function biblio() {
         return $this->belongsTo(Biblio::class, 'biblio_id', 'id');

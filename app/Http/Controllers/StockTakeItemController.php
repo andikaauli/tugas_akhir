@@ -19,6 +19,7 @@ class StockTakeItemController extends Controller
         })->whereHas('stockopname', function ($query) {
             $query->whereNull('end_date');
         })->where("book_status_id", 3)->first();
+        
         $stocktakeitem->update([
             'book_status_id' => 2
         ]);

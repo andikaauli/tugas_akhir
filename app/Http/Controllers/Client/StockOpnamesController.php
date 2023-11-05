@@ -67,12 +67,19 @@ class StockOpnamesController extends Controller
      */
     public function show($id)
     {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/stockopname/' . $id);
-        $response = app()->handle($http);
-        $response = $response->getContent();
+        $search = $request->search;
 
-        $stockopname = json_decode($response);
+        $http = new Request();
+        $http = $http->create(config('app.api_url') . '/stockopname/' . $id,'GET', ['search' => $search]);
+        if ($search) {
+            $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
+                $q->whereHas('eksemplar', function ($q) use ($search) {
+                    $q->whereHas('biblio', function ($q) use ($search) {
+                        $q->where('title', 'like', '%' . $search . '%');
+                    })->orWhere('item_code', 'like', '%' . $search . '%');
+                });
+            });
+        }
 
         // dd($stockopname);
         return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);

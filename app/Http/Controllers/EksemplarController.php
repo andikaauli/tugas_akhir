@@ -70,7 +70,7 @@ class EksemplarController extends Controller
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
             'agent' => 'nullable|max:255|string',
-            'source' => 'required',
+            'source' => 'nullable',
             'invoice' => 'nullable',
             'price' => ['nullable', 'numeric'],
             'book_status_id' => ['nullable', 'exists:book_statuses,id'], //bentukan kalo ada foreign
