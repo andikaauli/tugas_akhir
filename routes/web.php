@@ -223,9 +223,9 @@ Route::middleware(['auth'])->group(function () {
     // Route::put('/edit/profil/9a77f60f-0538-466e-9382-73eb8bf92dd4', [BerandaController::class, "update"]);
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
 
 // Route::resource("zzz", VisitorController::class);

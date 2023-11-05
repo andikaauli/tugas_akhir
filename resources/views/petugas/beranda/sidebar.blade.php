@@ -10,7 +10,7 @@
              </div>
            </div>
            <div class="text-white pl-4">
-               <h4>Admin</h4>
+               <h4> {{ Auth::user()->name }}</h4>
                <p class="font-bold">Pustakawan</p>
            </div>
        </div>

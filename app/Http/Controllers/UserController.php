@@ -85,6 +85,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('beranda');
+            // return redirect()->intended('beranda');
         }
         Session::flash('status', 'failed');
         Session::flash('message', 'Nama Pengguna atau Kata Sandi Salah. AKSES DITOLAK');

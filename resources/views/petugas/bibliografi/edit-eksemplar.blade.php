@@ -18,7 +18,7 @@
         {{-- Section 2 --}}
         <form action="{{ route('client.edit-eksemplar', ['id' => $eksemplar->id]) }}" method="POST" class="h-full">
             @method('PUT')
-            @csrf
+            @csrf {{ csrf_field() }}
             <div class="h-full">
                 <div class="">
                     {{-- Judul --}}
@@ -45,22 +45,22 @@
                         </div>
                         <div class="flex modal2">
                             <div class="px-4 py-3">
-                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}"
+                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}" disabled
                                     class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-red-600 focus:ring focus:ring-blue-300">
                             </div>
                             <div class="py-3 items-center">
                                 <button type="button"  class="bg-red-600 hover:bg-red-500 px-2 py-1 text-sm text-white font-semibold rounded-sm show-modal">Scan RFID</button>
                             </div>
                         </div>
-                        {{-- <div class="modal hidden">
+                        <div class="modal hidden">
                             <div class="px-4 py-3">
-                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}"
+                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}" disabled
                                     class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-blue-600 focus:ring focus:ring-blue-300">
                             </div>
                             <div class="py-3 items-center">
                                 <button type="button"  class="bg-blue-600 hover:bg-blue-500 px-2 py-1 text-sm text-white font-semibold rounded-sm close-modal">Stop Scan RFID</button>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                     {{-- End Kode RFID --}}
                     {{-- Kode Eksemplar --}}
