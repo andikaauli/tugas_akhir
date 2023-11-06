@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\Client;
 
 use App\Models\Eksemplar;
 use App\Models\BookStatus;
@@ -9,143 +9,143 @@ use App\Http\Controllers\Controller;
 
 class EksemplarsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $search = $request->search;
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
-        $eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
-            $b->where('title', 'LIKE', "%$search%");
-        })->orWhere('item_code', 'LIKE', "%$search%")->paginate(10);
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request)
+	{
+		$search = $request->search;
+		$http = new Request();
+		$http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
+		$eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
+			$b->where('title', 'LIKE', "%$search%");
+		})->orWhere('item_code', 'LIKE', "%$search%")->paginate(10);
 
-        $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
-        $bookstatus = BookStatus::get();
-
-
-        return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        return view('petugas/bibliografi/create-eksemplar');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
-        $response = app()->handle($http);
+		$bs = new Request();
+		$bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
+		$bookstatus = BookStatus::get();
 
 
-        if ($response->isClientError()) {
-            return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-            // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-        }
+		return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);
+	}
 
-        return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create(Request $request)
+	{
+		return view('petugas/bibliografi/create-eksemplar');
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		$http = new Request();
+		$http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
+		$response = app()->handle($http);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar/' . $id);
-        $response = app()->handle($http);
-        $response = $response->getContent();
 
-        // dd($response);
+		if ($response->isClientError()) {
+			return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
+		}
 
-        // ! Dari API
-        $bs = new Request();
-        $bs = $bs->create(config('app.api_url') . '/bookstatus/');
-        $bsres = app()->handle($bs);
-        $bsres = $bsres->getContent();
-        $bsApi = json_decode($bsres);
+		return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
+	}
 
-        $eksemplar = json_decode($response);
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		//
+	}
 
-        // dd($eksemplar);
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id)
+	{
+		$http = new Request();
+		$http = $http->create(config('app.api_url') . '/eksemplar/' . $id);
+		$response = app()->handle($http);
+		$response = $response->getContent();
 
-        return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
-    }
+		// dd($response);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+		// ! Dari API
+		$bs = new Request();
+		$bs = $bs->create(config('app.api_url') . '/bookstatus/');
+		$bsres = app()->handle($bs);
+		$bsres = $bsres->getContent();
+		$bsApi = json_decode($bsres);
 
-        $http = new Request();
-        $http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
-        $response = app()->handle($http);
+		$eksemplar = json_decode($response);
 
-        dd($response);
+		// dd($eksemplar);
 
-        if ($response->isClientError()) {
-            return redirect()->back()->withErrors((array) json_decode($response->getContent()));
-            // throw ValidationException::withMessages((array) json_decode($response->getContent()));
-        }
+		return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
+	}
 
-        return redirect()->route('client.eksemplar');
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id)
+	{
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
-    {
-        $deletedEksemplarIdList = $request->deletedEksemplar;
+		$http = new Request();
+		$http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
+		$response = app()->handle($http);
 
-        if (!$deletedEksemplarIdList) {
-            return redirect()->back();
-        }
+		dd($response);
 
-        foreach ($deletedEksemplarIdList as $eksemplarId) {
-            $http = new Request();
-            $http = $http->create(config('app.api_url') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
-            $response = app()->handle($http);
-        }
+		if ($response->isClientError()) {
+			return redirect()->back()->withErrors((array) json_decode($response->getContent()));
+			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
+		}
 
-        return redirect()->route('client.eksemplar');
-    }
+		return redirect()->route('client.eksemplar');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Request $request)
+	{
+		$deletedEksemplarIdList = $request->deletedEksemplar;
+
+		if (!$deletedEksemplarIdList) {
+			return redirect()->back();
+		}
+
+		foreach ($deletedEksemplarIdList as $eksemplarId) {
+			$http = new Request();
+			$http = $http->create(config('app.api_url') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
+			$response = app()->handle($http);
+		}
+
+		return redirect()->route('client.eksemplar');
+	}
 }

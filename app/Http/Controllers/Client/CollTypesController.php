@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\Client;
 
 use App\Models\CollType;
 use App\Http\Controllers\Controller;
