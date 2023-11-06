@@ -146,7 +146,11 @@
                         <p>:</p>
                     </div>
                     <div class="flexitems-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->total_persen}}% / 100%</p>
+                        @php
+                            $num = $stockopnames->total_persen;
+                            $formattedNum = number_format($num);
+                        @endphp
+                        <p class="text-sm font-medium">{{$formattedNum}}% / 100%</p>
                     </div>
                 </div>
             {{-- End Progres Eksemplar Terpindai --}}
