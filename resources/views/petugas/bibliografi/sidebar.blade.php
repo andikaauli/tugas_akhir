@@ -5,7 +5,7 @@
            <div class="flex items-center ml-3">
              <div>
                <button type="button" class="flex text-sm bg-gray-800 rounded-full" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                 <img class="w-12 h-12 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                 <img class="w-12 h-12 rounded-full" src="assets/blank.png" alt="user photo">
                </button>
              </div>
            </div>

@@ -11,7 +11,7 @@
        <div class="px-4 pt-4 flex my-5">
           <div class="flex items-center">
              <p class="text-3xl text-black font-bold">
-                Administrasi Perpustakaan
+                Ubah Profil Pengguna
              </p>
           </div>
        </div>

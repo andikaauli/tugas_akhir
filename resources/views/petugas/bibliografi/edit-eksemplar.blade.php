@@ -31,7 +31,7 @@
                         </div>
                         <div class="flex flex-auto items-stretch px-4 py-3">
                             {{-- @dd($eksemplar) --}}
-                                <p class="text-sm font-medium">{{$eksemplar->biblio->title}}</p>
+                            <p class="text-sm font-medium">{{ $eksemplar->biblio->title }}</p>
                         </div>
                     </div>
                     {{-- End Judul --}}
@@ -45,20 +45,26 @@
                         </div>
                         <div class="flex modal2">
                             <div class="px-4 py-3">
-                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}" disabled
+                                <input name="rfid_code" type="text" id="rfid-input"
+                                    value="{{ $eksemplar->rfid_code }}" disabled
                                     class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-red-600 focus:ring focus:ring-blue-300">
                             </div>
                             <div class="py-3 items-center">
-                                <button type="button"  class="bg-red-600 hover:bg-red-500 px-2 py-1 text-sm text-white font-semibold rounded-sm show-modal">Scan RFID</button>
+                                <button type="button"
+                                    class="bg-red-600 hover:bg-red-500 px-2 py-1 text-sm text-white font-semibold rounded-sm show-modal">Scan
+                                    RFID</button>
                             </div>
                         </div>
                         <div class="modal hidden">
                             <div class="px-4 py-3">
-                                <input name="rfid_code" type="text" id="rfid-input" value="{{ $eksemplar->rfid_code }}" disabled
+                                <input name="rfid_code" type="text" id="rfid-input"
+                                    value="{{ $eksemplar->rfid_code }}"
                                     class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-blue-600 focus:ring focus:ring-blue-300">
                             </div>
                             <div class="py-3 items-center">
-                                <button type="button"  class="bg-blue-600 hover:bg-blue-500 px-2 py-1 text-sm text-white font-semibold rounded-sm close-modal">Stop Scan RFID</button>
+                                <button type="button"
+                                    class="bg-blue-600 hover:bg-blue-500 px-2 py-1 text-sm text-white font-semibold rounded-sm close-modal">Stop
+                                    Scan RFID</button>
                             </div>
                         </div>
                     </div>
@@ -72,7 +78,8 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input name="item_code" type="text" id="rfid-input" value="{{ $eksemplar->item_code }}"
+                            <input name="item_code" type="text" id="item-code-input"
+                                value="{{ $eksemplar->item_code }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -104,11 +111,11 @@
                                 <select name="book_status_id"
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
                                     @foreach ($status as $option)
-                                    <option value="{{ $option->id }}"
-                                        {{ $eksemplar->book_status_id == $option->id ? 'selected' : '' }}>
-                                        {{ $option->name }}
-                                    </option>
-                                @endforeach
+                                        <option value="{{ $option->id }}"
+                                            {{ $eksemplar->book_status_id == $option->id ? 'selected' : '' }}>
+                                            {{ $option->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -123,7 +130,8 @@
                             <p>:</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input name="order_number" type="text" id="small-input" value="{{ $eksemplar->order_number }}"
+                            <input name="order_number" type="text" id="small-input"
+                                value="{{ $eksemplar->order_number }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -157,7 +165,8 @@
                         <div class="px-4 py-3">
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                                type="date" name="recipt_date" id="dateofbirth" value="{{ $eksemplar->receipt_date }}">
+                                type="date" name="recipt_date" id="dateofbirth"
+                                value="{{ $eksemplar->receipt_date }}">
                         </div>
                     </div>
                     {{-- End Tanggal Penerimaan --}}
@@ -273,7 +282,12 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.rfid_code) {
-                        document.getElementById('rfid-input').value = data.rfid_code
+                        const rfidInput = document.querySelectorAll("#rfid-input");
+
+                        rfidInput.forEach(rfid => {
+                            rfid.value = data.rfid_code
+                        })
+                        // document.getElementById('rfid-input').value = data.rfid_code
                         clearInterval(getRfidCode)
                     }
                 })
@@ -288,9 +302,9 @@
     closeModal.forEach(close => {
         close.addEventListener('click', function() {
             modal2.classList.remove('hidden')
-        modal2.classList.add('flex')
-        modal.classList.remove('flex')
-        modal.classList.add('hidden')
+            modal2.classList.add('flex')
+            modal.classList.remove('flex')
+            modal.classList.add('hidden')
             clearInterval(getRfidCode)
         });
     });
