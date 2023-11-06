@@ -65,21 +65,25 @@ class StockOpnamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $search = $request->search;
 
         $http = new Request();
         $http = $http->create(config('app.api_url') . '/stockopname/' . $id,'GET', ['search' => $search]);
-        if ($search) {
-            $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
-                $q->whereHas('eksemplar', function ($q) use ($search) {
-                    $q->whereHas('biblio', function ($q) use ($search) {
-                        $q->where('title', 'like', '%' . $search . '%');
-                    })->orWhere('item_code', 'like', '%' . $search . '%');
-                });
-            });
-        }
+        // if ($search) {
+        //     $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
+        //         $q->whereHas('eksemplar', function ($q) use ($search) {
+        //             $q->whereHas('biblio', function ($q) use ($search) {
+        //                 $q->where('title', 'like', '%' . $search . '%');
+        //             })->orWhere('item_code', 'like', '%' . $search . '%');
+        //         });
+        //     });
+        // }
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+        $stockopname = json_decode($response);
 
         // dd($stockopname);
         return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
