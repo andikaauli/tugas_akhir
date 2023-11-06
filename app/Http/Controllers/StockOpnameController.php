@@ -71,8 +71,50 @@ class StockOpnameController extends Controller
     }
     public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
-        $search = $request->searchStock;
-        $stockopname = Stockopname::with(['stocktakeitem' => function ($stocktakeitem) use ($request) {
+        // $search = $request->searchStock;
+        // $stockopname = Stockopname::with(['stocktakeitem' => function ($stocktakeitem) use ($request) {
+        //     $filterstatus = [];
+        //     if ($request->has('dipinjam')) {
+        //         $filterstatus[] = 1;
+        //     }
+        //     if ($request->has('tersedia')) {
+        //         $filterstatus[] = 2;
+        //     }
+        //     if ($request->has('hilang')) {
+        //         $filterstatus[] = 3;
+        //     }
+
+        //     if (count($filterstatus)) {
+        //         $stocktakeitem->whereIn('book_status_id', $filterstatus);
+        //     }
+
+        //     // .biblio.author', 'eksemplar.biblio.colltype', 'eksemplar.biblio.publisher'
+        //     $search = $request->searchEksemplar;
+        //     return $stocktakeitem->with(['bookstatus', 'eksemplar' => function ($eksemplar) use ($request) {
+        //         return $eksemplar->with(['biblio.author', 'biblio.colltype', 'biblio.publisher']);
+        //     }])->whereHas('eksemplar', function ($q) use ($search) {
+        //         $q->where('item_code', "LIKE", "%$search%");
+        //     })->orderBy('updated_at', 'desc');
+        // }]);
+
+        // // PENCARIAN
+        // if ($search) {
+        //     $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
+        //         $q->whereHas('eksemplar', function ($q) use ($search) {
+        //             $q->whereHas('biblio', function ($q) use ($search) {
+        //                 $q->where('title', 'like', '%' . $search . '%');
+        //             })->orWhere('item_code', 'like', '%' . $search . '%');
+        //         });
+        //     });
+        // }
+
+        // $stockopname = $stockopname->findOrFail($id);
+
+        $stockopname = StockOpname::with(['stocktakeitem' => function ($stocktakeitem) use ($request) {
+            $stocktakeitem->with(["bookstatus", 'eksemplar' => function ($eksemplar) use ($request) {
+                return $eksemplar->with(['biblio.author', 'biblio.colltype', 'biblio.publisher']);
+            }]);
+
             $filterstatus = [];
             if ($request->has('dipinjam')) {
                 $filterstatus[] = 1;
@@ -87,21 +129,12 @@ class StockOpnameController extends Controller
             if (count($filterstatus)) {
                 $stocktakeitem->whereIn('book_status_id', $filterstatus);
             }
-            return $stocktakeitem->with(['bookstatus', 'eksemplar.biblio.author', 'eksemplar.biblio.colltype', 'eksemplar.biblio.publisher'])->orderBy('updated_at', 'desc')->get();
-        }]);
 
-        //PENCARIAN
-        if ($search) {
-            $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
-                $q->whereHas('eksemplar', function ($q) use ($search) {
-                    $q->whereHas('biblio', function ($q) use ($search) {
-                        $q->where('title', 'like', '%' . $search . '%');
-                    })->orWhere('item_code', 'like', '%' . $search . '%');
-                });
-            });
-        }
+            $stocktakeitem->whereHas('eksemplar', function ($q) use ($request) {
+                $q->where('item_code', "LIKE", "%$request->searchStock%");
+            })->orderBy('updated_at', 'desc');
+        }])->findOrFail($id);
 
-        $stockopname = $stockopname->findOrFail($id);
 
         //dibawah ini untuk list data laporan hitungan totaal eksemplar
         $stocktakeitem = $stockopname->stocktakeitem;

@@ -88,61 +88,61 @@
 
     // console.log(idInven);
     // setInterval(() => {
-        fetch(@json(route('show.stockopname', ['id' => $inventarisasiId])) + "?" + new URLSearchParams({
-                searchStock: @json($searchStock) ?? ''
-            }))
-            .then(response => response.json())
-            .then(data => {
-                const stockTakeItem = data.stocktakeitem.filter((item) => item.book_status_id == 2)
+    fetch(@json(route('show.stockopname', ['id' => $inventarisasiId])) + "?" + new URLSearchParams({
+            searchStock: @json($searchStock) ?? ''
+        }))
+        .then(response => response.json())
+        .then(data => {
+            const stockTakeItem = data.stocktakeitem.filter((item) => item.book_status_id == 2)
 
 
-                if (stockTakeItem.length > 0) {
-                    stockTakeItemContainer.innerHTML = ''
-                    stockTakeItem.forEach((item) => {
-                        const tr = document.createElement('tr')
-                        tr.classList.add('border-b', 'border-solid', 'border-gray-400')
+            if (stockTakeItem.length > 0) {
+                stockTakeItemContainer.innerHTML = ''
+                stockTakeItem.forEach((item) => {
+                    const tr = document.createElement('tr')
+                    tr.classList.add('border-b', 'border-solid', 'border-gray-400')
 
-                        const eksemplar = item.eksemplar
+                    const eksemplar = item.eksemplar
 
-                        // Cara 1
-                        const itemCode = document.createElement('td')
-                        itemCode.classList.add('p-3', 'leading-6', 'w-44')
-                        itemCode.textContent = eksemplar.item_code
+                    // Cara 1
+                    const itemCode = document.createElement('td')
+                    itemCode.classList.add('p-3', 'leading-6', 'w-44')
+                    itemCode.textContent = eksemplar.item_code
 
-                        const title = document.createElement('td')
-                        title.classList.add('p-3', 'leading-6')
-                        title.textContent = eksemplar.biblio.title
+                    const title = document.createElement('td')
+                    title.classList.add('p-3', 'leading-6')
+                    title.textContent = eksemplar.biblio.title
 
-                        const classification = document.createElement('td')
-                        classification.classList.add('p-3', 'leading-6', 'W-46')
-                        classification.textContent = eksemplar.biblio.classification
+                    const classification = document.createElement('td')
+                    classification.classList.add('p-3', 'leading-6', 'W-46')
+                    classification.textContent = eksemplar.biblio.classification
 
-                        const status = document.createElement("td")
-                        status.classList.add('p-3', 'leading-6', 'w-20')
-                        status.textContent = item.bookstatus.name
+                    const status = document.createElement("td")
+                    status.classList.add('p-3', 'leading-6', 'w-20')
+                    status.textContent = item.bookstatus.name
 
-                        tr.appendChild(itemCode)
-                        tr.appendChild(title)
-                        tr.appendChild(classification)
-                        tr.appendChild(status)
+                    tr.appendChild(itemCode)
+                    tr.appendChild(title)
+                    tr.appendChild(classification)
+                    tr.appendChild(status)
 
-                        stockTakeItemContainer.appendChild(tr)
+                    stockTakeItemContainer.appendChild(tr)
 
-                        // Cara 2
-                        // const string = `
-                        //     <tr class="border-b border-solid border-gray-400">
-                        //     <td class="p-3 leading-6 w-44">${eksemplar.item_code}</td>
-                        //     <td class="p-3 leading-6">${eksemplar.biblio.title}</td>
-                        //     <td class="p-3 leading-6 W-46">${eksemplar.biblio.classification}</td>
-                        //     <td class="p-3 leading-6 w-20">${item.bookstatus.name}</td>
-                        // </tr>`
+                    // Cara 2
+                    // const string = `
+                    //     <tr class="border-b border-solid border-gray-400">
+                    //     <td class="p-3 leading-6 w-44">${eksemplar.item_code}</td>
+                    //     <td class="p-3 leading-6">${eksemplar.biblio.title}</td>
+                    //     <td class="p-3 leading-6 W-46">${eksemplar.biblio.classification}</td>
+                    //     <td class="p-3 leading-6 w-20">${item.bookstatus.name}</td>
+                    // </tr>`
 
-                        //     stockTakeItemContainer.innerHTML += string
-                    });
+                    //     stockTakeItemContainer.innerHTML += string
+                });
 
-                }
-                // stockTakeItemContainer.appendChild(tr)
-            })
+            }
+            // stockTakeItemContainer.appendChild(tr)
+        })
     // }, 1000);
 
     const btnUbahStatus = document.getElementById('button-ubah-status');
