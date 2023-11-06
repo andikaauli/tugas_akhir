@@ -147,7 +147,7 @@ Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
 	Route::get('/{id}', [LoansController::class, 'loan'])->name('client.loan');
 });
 
-Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven']], function () {
+Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven' , 'auth']], function () {
 	Route::get('/', function () {
 		if (session('active_inventarisasi')) {
 			return redirect(route('client.active-inventarisasi'));

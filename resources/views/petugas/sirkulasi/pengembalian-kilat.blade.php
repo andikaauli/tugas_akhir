@@ -58,7 +58,6 @@
                 if (!response.ok) {
                     throw response;
                 }
-
                 inputItemCode.value = ''
             })
             .catch(error => {
