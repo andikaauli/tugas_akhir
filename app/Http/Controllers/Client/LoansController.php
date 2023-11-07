@@ -33,7 +33,7 @@ class LoansController extends Controller
                 $b->where('title', 'LIKE', "%$search%");
                 })
 
-                ->orWhere('loan_status', 'LIKE', "%$search%")->paginate(19);
+                ->orWhere('loan_status', 'LIKE', "%$search%")->paginate(10);
 
         return view('petugas/sirkulasi/sejarah-peminjaman', ['loans' => $loans]);
     }
