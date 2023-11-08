@@ -10,7 +10,7 @@
         <div class="px-4 pt-4 flex my-5">
             <div class="flex items-center">
                 <p class="text-3xl text-black font-bold">
-                    Memulai Proses Inventariasi
+                    Akhiri Proses Inventariasi
                 </p>
             </div>
         </div>

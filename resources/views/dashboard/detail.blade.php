@@ -83,7 +83,7 @@
             </div>
             <div class="h-fit">
                 <div class="bg-teknik border-x border-t border-black rounded-t-md py-5 text-xl font-extrabold text-white text-center">
-                    <p>Library Information</p>
+                    <p>Informasi</p>
                 </div>
                 <div class="py-4 px-6 border-x border-b border-black rounded-b-md">
                     <p class="font-medium text-lg text-justify">Akses Katalog Publik Daring - Gunakan fasilitas pencarian untuk mempercepat penemuan data katalog
