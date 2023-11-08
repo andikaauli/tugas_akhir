@@ -87,7 +87,7 @@
     const idInven = @json($inventarisasiId);
 
     // console.log(idInven);
-    // setInterval(() => {
+    setInterval(() => {
     fetch(@json(route('show.stockopname', ['id' => $inventarisasiId])) + "?" + new URLSearchParams({
             searchStock: @json($searchStock) ?? ''
         }))
@@ -143,7 +143,7 @@
             }
             // stockTakeItemContainer.appendChild(tr)
         })
-    // }, 1000);
+    }, 1000);
 
     const btnUbahStatus = document.getElementById('button-ubah-status');
     const inputItemCode = document.getElementById('input-item-code');
