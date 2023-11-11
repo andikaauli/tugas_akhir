@@ -29,14 +29,14 @@ class UserController extends Controller
     }
 
     public function addData(Request $request)
-    {//jika dibutuhkan tambah data
+    { //jika dibutuhkan tambah data
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'username' => 'required|max:255','unique:user',
+            'username' => 'required|max:255', 'unique:user',
             'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
-            'email' => 'required|max:255|email','unique:user',
+            'email' => 'required|max:255|email', 'unique:user',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
 
@@ -46,29 +46,31 @@ class UserController extends Controller
 
         $user = User::create($request->all());
         return response()
-            ->json(['message'=>'Admin baru berhasil ditambahkan!', 'data'=>$user]);
+            ->json(['message' => 'Admin baru berhasil ditambahkan!', 'data' => $user]);
     }
 
     public function editData(Request $request)
     {
-        $user=auth()->user();
+        $user = auth()->user();
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'username' => 'required|max:255','unique:user.id',
+            'username' => 'required|max:255', 'unique:user.id',
             'password' => 'nullable|min:8',
             'password_confirm' => 'nullable|same:password',
-            'email' => 'required|max:255|email','unique:user.id',
+            'email' => 'required|max:255|email', 'unique:user.id',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
+
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
+
         $user->update($request->all());
         return response()
-            ->json(['message'=>'Data Admin berhasil diubah!', 'data'=>$user]);
+            ->json(['message' => 'Data Admin berhasil diubah!', 'data' => $user]);
     }
 
     public function login(Request $request)
@@ -100,5 +102,4 @@ class UserController extends Controller
         // return response()->json(['message'=>'Anda berhasil Logout!']);
         return redirect('login');
     }
-
 }

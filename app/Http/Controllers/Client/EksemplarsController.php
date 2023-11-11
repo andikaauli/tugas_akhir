@@ -18,7 +18,7 @@ class EksemplarsController extends Controller
 	{
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/eksemplar', 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/eksemplar', 'GET', ['search' => $search]);
 		$eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
 			$b->where('title', 'LIKE', "%$search%");
 		})->orwhereHas("bookstatus", function ($b) use ($search) {
@@ -26,7 +26,7 @@ class EksemplarsController extends Controller
 		})->orWhere('item_code', 'LIKE', "%$search%")->paginate(10);
 
 		$bs = new Request();
-		$bs = $bs->create(config('app.api_url') . '/bookstatus', 'GET');
+		$bs = $bs->create(url('api') . '/bookstatus', 'GET');
 		$bookstatus = BookStatus::get();
 
 
@@ -52,7 +52,7 @@ class EksemplarsController extends Controller
 	public function store(Request $request)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/eksemplar/add', 'POST', $request->all());
+		$http = $http->create(url('api') . '/eksemplar/add', 'POST', $request->all());
 		$response = app()->handle($http);
 
 
@@ -84,7 +84,7 @@ class EksemplarsController extends Controller
 	public function edit($id)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/eksemplar/' . $id);
+		$http = $http->create(url('api') . '/eksemplar/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
 
@@ -92,7 +92,7 @@ class EksemplarsController extends Controller
 
 		// ! Dari API
 		$bs = new Request();
-		$bs = $bs->create(config('app.api_url') . '/bookstatus/');
+		$bs = $bs->create(url('api') . '/bookstatus/');
 		$bsres = app()->handle($bs);
 		$bsres = $bsres->getContent();
 		$bsApi = json_decode($bsres);
@@ -115,7 +115,7 @@ class EksemplarsController extends Controller
 	{
 
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
+		$http = $http->create(url('api') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
 		$response = app()->handle($http);
 
 		// dd($response);
@@ -144,7 +144,7 @@ class EksemplarsController extends Controller
 
 		foreach ($deletedEksemplarIdList as $eksemplarId) {
 			$http = new Request();
-			$http = $http->create(config('app.api_url') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
+			$http = $http->create(url('api') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
 			$response = app()->handle($http);
 		}
 

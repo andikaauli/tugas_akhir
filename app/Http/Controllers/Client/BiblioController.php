@@ -13,11 +13,11 @@ class BiblioController extends Controller
     {
         $search = $request->search;
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
+        $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
         $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
-        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
+        $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
         $eksemplar = Eksemplar::get();
 
         return view('petugas/bibliografi/bibliografi', ['bibliografi' => $bibliografi, 'eksemplars' => $eksemplar]);
@@ -31,11 +31,11 @@ class BiblioController extends Controller
     {
         $search = $request->search;
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio', 'GET', ['search' => $search]);
+        $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
         $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
-        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
+        $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
         $eksemplar = Eksemplar::get();
 
         // dd($bibliografi);
@@ -52,17 +52,17 @@ class BiblioController extends Controller
     {
 
         $pengarangReq = new Request();
-        $pengarangReq = $pengarangReq->create(config('app.api_url') . '/author/');
+        $pengarangReq = $pengarangReq->create(url('api') . '/author/');
         $pengarangRes = app()->handle($pengarangReq);
         $pengarangRes = $pengarangRes->getContent();
 
         $publisherReq = new Request();
-        $publisherReq = $publisherReq->create(config('app.api_url') . '/publisher/');
+        $publisherReq = $publisherReq->create(url('api') . '/publisher/');
         $publisherRes = app()->handle($publisherReq);
         $publisherRes = $publisherRes->getContent();
 
         $collTypeReq = new Request();
-        $collTypeReq = $collTypeReq->create(config('app.api_url') . '/colltype/');
+        $collTypeReq = $collTypeReq->create(url('api') . '/colltype/');
         $collTypeRes = app()->handle($collTypeReq);
         $collTypeRes = $collTypeRes->getContent();
 
@@ -71,7 +71,7 @@ class BiblioController extends Controller
         $collType = json_decode($collTypeRes);
 
 
-        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes"=> $collType]);
+        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes" => $collType]);
     }
 
     /**
@@ -84,7 +84,7 @@ class BiblioController extends Controller
     {
         // dd($request);
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/add', 'POST', $request->all(), files: $request->allFiles());
+        $http = $http->create(url('api') . '/biblio/add', 'POST', $request->all(), files: $request->allFiles());
         $response = app()->handle($http);
 
         // dd($response);
@@ -117,24 +117,22 @@ class BiblioController extends Controller
     public function edit($id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/' . $id);
+        $http = $http->create(url('api') . '/biblio/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
 
-        // dd($response);
-
         $pengarangReq = new Request();
-        $pengarangReq = $pengarangReq->create(config('app.api_url') . '/author/');
+        $pengarangReq = $pengarangReq->create(url('api') . '/author/');
         $pengarangRes = app()->handle($pengarangReq);
         $pengarangRes = $pengarangRes->getContent();
 
         $publisherReq = new Request();
-        $publisherReq = $publisherReq->create(config('app.api_url') . '/publisher/');
+        $publisherReq = $publisherReq->create(url('api') . '/publisher/');
         $publisherRes = app()->handle($publisherReq);
         $publisherRes = $publisherRes->getContent();
 
         $collTypeReq = new Request();
-        $collTypeReq = $collTypeReq->create(config('app.api_url') . '/colltype/');
+        $collTypeReq = $collTypeReq->create(url('api') . '/colltype/');
         $collTypeRes = app()->handle($collTypeReq);
         $collTypeRes = $collTypeRes->getContent();
 
@@ -145,20 +143,20 @@ class BiblioController extends Controller
 
         // dd($bibliografi);
 
-        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes'=> $collType]);
+        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes' => $collType]);
     }
 
     public function detail($id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/' . $id);
+        $http = $http->create(url('api') . '/biblio/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
 
         // dd($response);
 
         $eksemplarReq = new Request();
-        $eksemplarReq = $eksemplarReq->create(config('app.api_url') . '/eksemplar/');
+        $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
         $eksemplarRes = app()->handle($eksemplarReq);
         $eksemplarRes = $eksemplarRes->getContent();
 
@@ -181,7 +179,7 @@ class BiblioController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/biblio/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+        $http = $http->create(url('api') . '/biblio/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
 
 
         // ? 2 Cara filter request
@@ -223,7 +221,7 @@ class BiblioController extends Controller
 
         foreach ($deletedBiblioIdList as $biblioId) {
             $http = new Request();
-            $http = $http->create(config('app.api_url') . '/biblio/destroy/' . $biblioId, 'DELETE');
+            $http = $http->create(url('api') . '/biblio/destroy/' . $biblioId, 'DELETE');
             $response = app()->handle($http);
         }
 

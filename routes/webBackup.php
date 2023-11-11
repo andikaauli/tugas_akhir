@@ -77,7 +77,7 @@ Route::get('/eksemplar-keluar', [LoansController::class, 'copyout'])->name('clie
 // Route::get('/eksemplar-keluar', function (Request $request) {
 //     // $search = $request->search;
 //     // $http = new Request();
-//     // $http = $http->create(config('app.api_url') . '/loan', 'GET', ['search' => $search]);
+//     // $http = $http->create(url('api') . '/loan', 'GET', ['search' => $search]);
 //     // $response = app()->handle($http);
 //     // $response = $response->getContent();
 

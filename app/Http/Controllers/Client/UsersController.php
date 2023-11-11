@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $user=auth()->user();
+        $user = auth()->user();
         $data['user'] = $user;
         return view('petugas/beranda/edit-profil', $data);
     }
@@ -34,8 +34,11 @@ class UsersController extends Controller
         // return redirect()->route('client.edit-profil')->with('success', 'Profile berhasil diperbaharui!');
 
         $http = new Request();
-        $http = $http->create(config('app.api_url') . '/user/edit/', 'POST', $request->except('_method'));
+        $http = $http->create(url('api') . 'user/edit/', 'POST', $request->except('_method'));
         $response = app()->handle($http);
+
+        dd($response);
+
 
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
