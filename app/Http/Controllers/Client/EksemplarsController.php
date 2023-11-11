@@ -63,7 +63,7 @@ class EksemplarsController extends Controller
         $response = app()->handle($http);
         dd($response);
 
-
+        // dd($response);
         if ($response->isClientError()) {
             return redirect($request->fullUrl())->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
