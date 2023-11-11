@@ -46,8 +46,8 @@
                         <div class="flex modal2">
                             <div class="px-4 py-3">
                                 <input name="rfid_code" type="text" id="rfid-input"
-                                    value="{{ $eksemplar->rfid_code }}" disabled
-                                    class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-red-600 focus:ring focus:ring-blue-300">
+                                    value="{{ $eksemplar->rfid_code }}"
+                                    class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-red-600 focus:ring focus:ring-blue-300" readonly>
                             </div>
                             <div class="py-3 items-center">
                                 <button type="button"
@@ -59,7 +59,7 @@
                             <div class="px-4 py-3">
                                 <input name="rfid_code" type="text" id="rfid-input"
                                     value="{{ $eksemplar->rfid_code }}"
-                                    class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-blue-600 focus:ring focus:ring-blue-300">
+                                    class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-blue-600 focus:ring focus:ring-blue-300" readonly>
                             </div>
                             <div class="py-3 items-center">
                                 <button type="button"
