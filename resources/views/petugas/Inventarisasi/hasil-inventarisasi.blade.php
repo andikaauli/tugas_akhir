@@ -42,7 +42,7 @@
                            <p>:</p>
                        </div>
                        <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date))->format('l, d M Y H:i') }}</p>
+                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</p>
                     </div>
                    </div>
                {{-- End Tanggal Mulai --}}
@@ -55,7 +55,7 @@
                            <p>:</p>
                        </div>
                        <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date))->format('l, d M Y H:i') }}</p>
+                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</p>
                     </div>
                    </div>
                {{-- End Tanggal Selesai --}}
