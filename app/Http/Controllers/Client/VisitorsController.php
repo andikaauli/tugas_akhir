@@ -17,7 +17,7 @@ class VisitorsController extends Controller
 	{
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/visitor', 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/visitor', 'GET', ['search' => $search]);
 		$visitors = Visitor::where('name', 'LIKE', "%$search%")->paginate(10);
 
 		// dd($visitors);
@@ -34,7 +34,7 @@ class VisitorsController extends Controller
 	public function create()
 	{
 		$typeReq = new Request();
-		$typeReq = $typeReq->create(config('app.api_url') . '/type/');
+		$typeReq = $typeReq->create(url('api') . '/type/');
 		$typeRes = app()->handle($typeReq);
 		$typeRes = $typeRes->getContent();
 
@@ -54,7 +54,7 @@ class VisitorsController extends Controller
 	{
 		// dd($request->all());
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/visitor/add', 'POST', $request->all());
+		$http = $http->create(url('api') . '/visitor/add', 'POST', $request->all());
 		$response = app()->handle($http);
 		// dd($response);
 

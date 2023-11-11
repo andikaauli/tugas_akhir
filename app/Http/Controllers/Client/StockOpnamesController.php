@@ -19,7 +19,7 @@ class StockOpnamesController extends Controller
 	{
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/stockopname', 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/stockopname', 'GET', ['search' => $search]);
 		$stockopname = StockOpname::where('name', 'LIKE', "%$search%")->paginate(10);
 
 		// dd($stockopname);
@@ -45,7 +45,7 @@ class StockOpnamesController extends Controller
 	public function store(Request $request)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/stockopname/add', 'POST', $request->all());
+		$http = $http->create(url('api') . '/stockopname/add', 'POST', $request->all());
 		$response = app()->handle($http);
 
 		if ($response->isClientError()) {
@@ -70,7 +70,7 @@ class StockOpnamesController extends Controller
 		$search = $request->search;
 
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/stockopname/' . $id, 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/stockopname/' . $id, 'GET', ['search' => $search]);
 		// if ($search) {
 		//     $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
 		//         $q->whereHas('eksemplar', function ($q) use ($search) {
@@ -95,7 +95,7 @@ class StockOpnamesController extends Controller
 
 	//     $search = $request->search;
 	//     $http = new Request();
-	//     $http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
+	//     $http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET', parameters:[
 	//         "hilang" => true,
 	//         'search' => $search
 	//     ]);
@@ -112,7 +112,7 @@ class StockOpnamesController extends Controller
 
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET', parameters: [
+		$http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET', parameters: [
 			"hilang" => true,
 			// 'search' => $search
 		]);
@@ -142,7 +142,7 @@ class StockOpnamesController extends Controller
 		$active_inventarisasi = Session::get('active_inventarisasi');
 
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/stockopname/' . $active_inventarisasi, 'GET');
+		$http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET');
 		$response = app()->handle($http);
 		$response = $response->getContent();
 
@@ -191,7 +191,7 @@ class StockOpnamesController extends Controller
 		$active_inventarisasi = Session::get('active_inventarisasi');
 
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/stockopname/finish/' . $active_inventarisasi, 'POST');
+		$http = $http->create(url('api') . '/stockopname/finish/' . $active_inventarisasi, 'POST');
 		$response = app()->handle($http);
 
 

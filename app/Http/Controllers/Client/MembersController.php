@@ -18,7 +18,7 @@ class MembersController extends Controller
 	{
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/member', 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/member', 'GET', ['search' => $search]);
 		// $response = app()->handle($http);
 		// $response = $response->getContent();
 
@@ -47,7 +47,7 @@ class MembersController extends Controller
 	public function store(Request $request)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/member/add', 'POST', $request->all(), files: $request->allFiles());
+		$http = $http->create(url('api') . '/member/add', 'POST', $request->all(), files: $request->allFiles());
 
 		$response = app()->handle($http);
 		// dd($response);
@@ -79,7 +79,7 @@ class MembersController extends Controller
 	public function edit($id)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/member/' . $id);
+		$http = $http->create(url('api') . '/member/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
 
@@ -99,7 +99,7 @@ class MembersController extends Controller
 	public function update(Request $request, $id)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+		$http = $http->create(url('api') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
 		$response = app()->handle($http);
 
 		// dd($response);
@@ -129,7 +129,7 @@ class MembersController extends Controller
 
 		foreach ($deletedMemberIdList as $memberId) {
 			$http = new Request();
-			$http = $http->create(config('app.api_url') . '/member/destroy/' . $memberId, 'DELETE');
+			$http = $http->create(url('api') . '/member/destroy/' . $memberId, 'DELETE');
 			$response = app()->handle($http);
 		}
 

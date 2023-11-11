@@ -17,7 +17,7 @@ class AuthorsController extends Controller
 	{
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/author', 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/author', 'GET', ['search' => $search]);
 		// $response = app()->handle($http);
 		// $response = $response->getContent();
 		// $authors = json_decode($response);
@@ -47,7 +47,7 @@ class AuthorsController extends Controller
 	public function store(Request $request)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/author/add', 'POST', $request->all());
+		$http = $http->create(url('api') . '/author/add', 'POST', $request->all());
 		$response = app()->handle($http);
 
 		if ($response->isClientError()) {
@@ -79,7 +79,7 @@ class AuthorsController extends Controller
 	public function edit($id)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/author/' . $id);
+		$http = $http->create(url('api') . '/author/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
 
@@ -98,7 +98,7 @@ class AuthorsController extends Controller
 	public function update(Request $request, $id)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/author/edit/' . $id, 'POST', $request->except('_method'));
+		$http = $http->create(url('api') . '/author/edit/' . $id, 'POST', $request->except('_method'));
 		$response = app()->handle($http);
 
 		if ($response->isClientError()) {
@@ -127,7 +127,7 @@ class AuthorsController extends Controller
 
 		foreach ($deletedAuthorsIdList as $authorsId) {
 			$http = new Request();
-			$http = $http->create(config('app.api_url') . '/author/destroy/' . $authorsId, 'DELETE');
+			$http = $http->create(url('api') . '/author/destroy/' . $authorsId, 'DELETE');
 			$response = app()->handle($http);
 		}
 

@@ -17,7 +17,7 @@ class PublishersController extends Controller
 	{
 		$search = $request->search;
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/publisher', 'GET', ['search' => $search]);
+		$http = $http->create(url('api') . '/publisher', 'GET', ['search' => $search]);
 		$publishers = Publisher::where('title', 'LIKE', "%$search%")->paginate(10);
 
 		return view('petugas/daftar-terkendali/daftar-penerbit', ['publishers' => $publishers]);
@@ -43,7 +43,7 @@ class PublishersController extends Controller
 	{
 		// dd($request);
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/publisher/add', 'POST', $request->all());
+		$http = $http->create(url('api') . '/publisher/add', 'POST', $request->all());
 		$response = app()->handle($http);
 
 		if ($response->isClientError()) {
@@ -74,7 +74,7 @@ class PublishersController extends Controller
 	public function edit(Request $request, $id)
 	{
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/publisher/' . $id);
+		$http = $http->create(url('api') . '/publisher/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
 
@@ -94,7 +94,7 @@ class PublishersController extends Controller
 	{
 
 		$http = new Request();
-		$http = $http->create(config('app.api_url') . '/publisher/edit/' . $id, 'POST', $request->except('_method'));
+		$http = $http->create(url('api') . '/publisher/edit/' . $id, 'POST', $request->except('_method'));
 		$response = app()->handle($http);
 
 		// dd($response->getContent)();
@@ -123,7 +123,7 @@ class PublishersController extends Controller
 
 		foreach ($deletedPublishersIdList as $publishersId) {
 			$http = new Request();
-			$http = $http->create(config('app.api_url') . '/publisher/destroy/' . $publishersId, 'DELETE');
+			$http = $http->create(url('api') . '/publisher/destroy/' . $publishersId, 'DELETE');
 			$response = app()->handle($http);
 		}
 
