@@ -59,11 +59,11 @@
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->member->name}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->eksemplar->item_code}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b">{{$loan->eksemplar->biblio->title}}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->loan_date)->format('l, d M Y H:i') }}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date)->format('l, d M Y H:i') }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->loan_date) }}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date) }}</td>
                      {{-- <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('l, d M Y')}}</td> --}}
                      @if(isset($loan->return_date))
-                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('l, d M Y H:i')}}</td>
+                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)}}</td>
                     @else
                         <td class="p-1.5 text-sm leading-6 border-r border-b w-32"> - </td>
                     @endif

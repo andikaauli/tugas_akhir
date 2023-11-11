@@ -95,7 +95,7 @@
                                 <td class="p-3">{{ $author->title }}</td>
                                 <td class="p-3 w-52">{{ $author->born_date }}</td>
                                 <td class="p-3 w-46">
-                                    {{ Carbon\Carbon::createFromTimestamp(strtotime($author->updated_at))->format('l, d M Y H:i')  }}
+                                    {{ Carbon\Carbon::createFromTimestamp(strtotime($author->updated_at))  }}
                                 </td>
                             </tr>
                         @endforeach

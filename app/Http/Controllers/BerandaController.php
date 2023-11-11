@@ -38,10 +38,12 @@ class BerandaController extends Controller
 		$eksemplarReq = new Request();
 		$eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
 		$eksemplar = Eksemplar::get();
+        $eksemplar = $eksemplar->filter(function ($eksemplar) {
+			return $eksemplar->book_status_id == '1'||$eksemplar->book_status_id == '2';
+		});
 
 		$loanReq = new Request();
 		$loanReq = $loanReq->create(url('api') . '/loan/');
-
 		$loans = Loan::get();
 		// dd($loans);
 		$fillterloan = $loans->filter(function ($loan) {

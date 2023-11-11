@@ -87,7 +87,7 @@
                           </a>
                        </td>
                        <td class="p-3">{{ $publisher->title }}</td>
-                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($publisher->updated_at))->format('l, d M Y H:i')  }}</td>
+                       <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime($publisher->updated_at))  }}</td>
                     </tr>
                     @endforeach
                     @if ($publishers->isEmpty())
