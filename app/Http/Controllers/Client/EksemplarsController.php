@@ -62,7 +62,7 @@ class EksemplarsController extends Controller
         $http = $http->create(url('api') . '/eksemplar/add', 'POST', $request->all());
         $response = app()->handle($http);
 
-
+        // dd($response);
         if ($response->isClientError()) {
             return redirect($request->fullUrl())->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));

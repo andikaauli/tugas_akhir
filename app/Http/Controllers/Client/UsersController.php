@@ -39,7 +39,6 @@ class UsersController extends Controller
 
         dd($response);
 
-
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         }

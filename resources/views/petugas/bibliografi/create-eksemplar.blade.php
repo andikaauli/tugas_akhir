@@ -94,10 +94,10 @@
                         </div>
                         <div class="px-4 py-3">
                             <div class="" style="width:200px;">
-                                <select name=""
+                                <select name="book_status_id"
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
                                     @foreach ($statuses as $status)
-                                        <option value="{{ $option->id }}">
+                                        <option value="{{ $status->id }}">
                                             {{ $status->name }}
 
                                         </option>
