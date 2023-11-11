@@ -40,7 +40,14 @@ class EksemplarsController extends Controller
 	 */
 	public function create(Request $request)
 	{
-		return view('petugas/bibliografi/create-eksemplar');
+        $bs = new Request();
+		$bs = $bs->create(url('api') . '/bookstatus/');
+		$bsres = app()->handle($bs);
+		$bsres = $bsres->getContent();
+
+		$bsApi = json_decode($bsres);
+
+		return view('petugas/bibliografi/create-eksemplar', ['statuses' =>  $bsApi]);
 	}
 
 	/**
@@ -61,7 +68,8 @@ class EksemplarsController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
+		// return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
+        return redirect()->route('client.bibliografi');
 	}
 
 	/**

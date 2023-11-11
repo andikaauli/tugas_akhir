@@ -8,15 +8,15 @@
 
         <div class="p-3 border-2 rounded-t-2xl border-solid border-gray-300">
             <div class="flex">
-                {{-- Btn Simpan --}}
+                {{-- Btn Batal --}}
                 <div class="m-3">
                     <button type="button"
                         class="text-sm py-2 px-3 rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold close-modal">Batal</button>
                 </div>
-                {{-- End Btn Simpan --}}
+                {{-- End Btn Batal --}}
                 {{-- Btn Simpan --}}
                 <div class="my-3">
-                    <button
+                    <button type="submit"
                         class="text-sm py-2 px-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">Simpan</button>
                 </div>
                 {{-- End Btn Simpan --}}
@@ -41,7 +41,7 @@
                         <p>Kode RFID</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="rfid-input" disabled
+                        <input type="text" id="rfid-input" disabled name="rfid_code"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -52,13 +52,13 @@
                         <p>Kode Eksemplar</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input" name=""
+                        <input type="text" id="small-input" name="item_code"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
                 {{-- End Kode Eksemplar --}}
                 {{-- No. Panggil --}}
-                <div class="flex">
+                {{-- <div class="flex">
                     <div class="px-4 py-3 font-bold text-sm w-44">
                         <p>No. Panggil</p>
                     </div>
@@ -66,10 +66,10 @@
                         <input type="text" id="small-input" name=""
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
-                </div>
+                </div> --}}
                 {{-- End No. Panggil --}}
                 {{-- Tipe Koleksi --}}
-                <div class="flex">
+                {{-- <div class="flex">
                     <div class="px-4 py-3 font-bold text-sm w-44">
                         <p>Tipe Koleksi</p>
                     </div>
@@ -85,7 +85,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{-- End Tipe Koleksi --}}
                 {{-- Status --}}
                 <div class="flex">
@@ -94,13 +94,15 @@
                     </div>
                     <div class="px-4 py-3">
                         <div class="" style="width:200px;">
-                            <select
+                            <select name=""
                                 class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
-                                <option value="0">Status Eksemplar</option>
-                                <option value="1">Audi</option>
-                                <option value="2">BMW</option>
-                                <option value="3">Citroen</option>
-                                <option value="4">Ford</option>
+                                {{-- @foreach ($statuses as $status)
+                                <option value="{{ $option->id }}"
+>
+                                    {{ $status->title }}
+
+                                </option>
+                            @endforeach --}}
                             </select>
                         </div>
                     </div>
@@ -112,7 +114,7 @@
                         <p>No. Pemesanan</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input"
+                        <input type="text" id="small-input" name="order_number"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -125,7 +127,7 @@
                     <div class="px-4 py-3">
                         <input
                             class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                            type="date" name="dateofbirth" id="dateofbirth">
+                            type="date" name="order_date" id="dateofbirth">
                     </div>
                 </div>
                 {{-- End Tanggal Pemesanan --}}
@@ -137,7 +139,7 @@
                     <div class="px-4 py-3">
                         <input
                             class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                            type="date" name="dateofbirth" id="dateofbirth">
+                            type="date" name="receipt_date" id="dateofbirth">
                     </div>
                 </div>
                 {{-- End Tanggal Penerimaan --}}
@@ -147,7 +149,7 @@
                         <p>Agen</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input"
+                        <input type="text" id="small-input" name="agent"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -159,9 +161,9 @@
                     </div>
                     <div class="flex text-sm px-4 py-3">
                         <div class="flex items-center justify-center">
-                            <input class="mr-2" type="radio" name="" id="">
+                            <input class="mr-2" type="radio" name="source" value="Beli" id="">
                             <label class="mr-3" for="">Beli</label>
-                            <input class="mr-2" type="radio" name="" id="">
+                            <input class="mr-2" type="radio" name="source" value="Hadiah" id="">
                             <label for="">Hadiah/Hibah</label>
                         </div>
                     </div>
@@ -173,7 +175,7 @@
                         <p>Faktur</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input"
+                        <input type="text" id="small-input" name="invoice"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -184,7 +186,7 @@
                         <p>Harga</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="text" id="small-input"
+                        <input type="text" id="small-input" name="price"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
