@@ -41,7 +41,7 @@
                             <p>Kode RFID</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="rfid-input" disabled name="rfid_code"
+                            <input type="text" id="rfid-input"  name="rfid_code"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
