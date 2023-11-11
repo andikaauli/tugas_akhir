@@ -141,9 +141,16 @@ class BiblioController extends Controller
         $publisher = json_decode($publisherRes);
         $collType = json_decode($collTypeRes);
 
+        $bs = new Request();
+        $bs = $bs->create(url('api') . '/bookstatus/');
+        $bsres = app()->handle($bs);
+        $bsres = $bsres->getContent();
+
+        $bsApi = json_decode($bsres);
+
         // dd($bibliografi);
 
-        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes' => $collType]);
+        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes' => $collType, 'statuses' => $bsApi]);
     }
 
     public function detail($id)

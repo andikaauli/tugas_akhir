@@ -68,7 +68,7 @@ Route::group(['prefix' => '/eksemplar', 'middleware' => ['auth']], function () {
     Route::get('/', [EksemplarsController::class, 'index'])->name('client.eksemplar');
     Route::delete('/delete', [EksemplarsController::class, 'destroy'])->name('client.delete-eksemplar');
     Route::get('/create', [EksemplarsController::class, 'create'])->middleware('auth');
-    Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
+    // Route::post('/create', [EksemplarsController::class, 'store'])->name('client.create-eksemplar');
     Route::get('/edit/{id}', [EksemplarsController::class, 'edit'])->name('client.edit-eksemplar');
     Route::put('/edit/{id}', [EksemplarsController::class, 'update']);
 });
