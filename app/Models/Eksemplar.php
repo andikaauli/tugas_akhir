@@ -24,6 +24,15 @@ class Eksemplar extends Model
     protected $fillable = [
         'rfid_code',
         'book_status_id',
+        'biblio_id',
+        'item_code',
+        'order_number',
+        'order_date',
+        'receipt_date',
+        'agent',
+        'source',
+        'invoice',
+        'price',
     ];
 
     function biblio()
