@@ -16,8 +16,6 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    // 'api_url' => env('API_URL', url('api')),
-    'api_url' => env('API_URL', 'http://localhost:8000/api'),
 
     /*
     |--------------------------------------------------------------------------

@@ -68,8 +68,8 @@ class EksemplarsController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        // return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
-        return redirect()->route('client.bibliografi');
+        return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
+        // return redirect()->route('client.bibliografi');
     }
 
     /**
