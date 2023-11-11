@@ -145,6 +145,8 @@ Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::put('/pengembalian-kilat', [LoansController::class, 'fastreturn'])->name('client.loan-fastreturn'); //ini mungkin taruh di middleware inven_is_active
     Route::get('/start', [LoansController::class, 'start'])->name('client.loan-start');
     Route::get('/{id}', [LoansController::class, 'loan'])->name('client.loan');
+    Route::post('{member}/pinjam', [LoansController::class, 'pinjam'])->name('client.loan-pinjam');
+    Route::post('{member}/transaksi', [LoansController::class, 'selesai_transaksi'])->name('client.loan-transaksi');
 });
 
 Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven', 'auth']], function () {

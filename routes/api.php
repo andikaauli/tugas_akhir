@@ -62,6 +62,7 @@ Route::prefix("loan")->group(function () {
     Route::get('', [LoanController::class, "getData"]);
     Route::get('/{id}', [LoanController::class, "showData"]);
     Route::post('/add/{id}', [LoanController::class, "peminjaman"]);
+    Route::post('/transaksi/{member}', [LoanController::class, "selesai_transaksi"]);
     Route::post('/pengembalian/{id}', [LoanController::class, "pengembalian"]);
     Route::post('/pengembaliankilat', [LoanController::class, "pengembalianButton"])->name('button.fastreturn');
     Route::post('/perpanjang/{id}', [LoanController::class, "perpanjang"]);
