@@ -141,12 +141,22 @@
                         @foreach (array_filter($loans, fn($loan) => $loan->loan_status == 'Sedang Dipinjam') as $item)
                             <tr class="border-b border-solid text-sm font-medium border-gray-200">
                                 <td class="p-3 w-18">
-                                    <button
-                                        class="text-xs text-white font-bold bg-blue-600 hover:bg-blue-500 p-1.5 rounded">Kembali</button>
+                                    <form class="m-0"
+                                        action="{{ route('client.loan-pengembalian', ['loan' => $item->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="text-xs text-white font-bold bg-blue-600 hover:bg-blue-500 p-1.5 rounded">Kembali</button>
+                                    </form>
                                 </td>
                                 <td class="p-3 w-18">
-                                    <button
-                                        class="text-xs text-white font-bold bg-green-500 hover:bg-green-600 p-1.5 rounded">Perpanjang</button>
+                                    <form class="m-0"
+                                        action="{{ route('client.loan-perpanjang', ['loan' => $item->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button
+                                            class="text-xs text-white font-bold bg-green-500 hover:bg-green-600 p-1.5 rounded">Perpanjang</button>
+                                    </form>
                                 </td>
                                 <td class="p-3 w-40">B00013</td>
                                 <td class="p-3">

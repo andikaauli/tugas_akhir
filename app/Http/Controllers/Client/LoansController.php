@@ -223,4 +223,24 @@ class LoansController extends Controller
 
         return redirect()->route('client.loan-start');
     }
+
+    public function pengembalian(Request $request, $loan)
+    {
+        $http = new Request();
+        $http = $http->create(url('api') . '/loan/pengembalian/' . $loan, 'POST');
+        $res = app()->handle($http);
+        $res = $res->getContent();
+
+        return redirect()->back();
+    }
+
+    public function perpanjang(Request $request, $loan)
+    {
+        $http = new Request();
+        $http = $http->create(url('api') . '/loan/perpanjang/' . $loan, 'POST');
+        $res = app()->handle($http);
+        $res = $res->getContent();
+
+        return redirect()->back();
+    }
 }
