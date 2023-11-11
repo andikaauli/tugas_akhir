@@ -61,6 +61,7 @@ class EksemplarsController extends Controller
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar/add', 'POST', $request->all());
         $response = app()->handle($http);
+        dd($response);
 
         // dd($response);
         if ($response->isClientError()) {

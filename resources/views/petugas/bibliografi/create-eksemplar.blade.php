@@ -41,7 +41,7 @@
                             <p>Kode RFID</p>
                         </div>
                         <div class="px-4 py-3">
-                            <input type="text" id="rfid-input"  name="rfid_code"
+                            <input type="text" id="rfid-input" readonly name="rfid_code"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                     </div>
@@ -99,7 +99,6 @@
                                     @foreach ($statuses as $status)
                                         <option value="{{ $status->id }}">
                                             {{ $status->name }}
-
                                         </option>
                                     @endforeach
                                 </select>
