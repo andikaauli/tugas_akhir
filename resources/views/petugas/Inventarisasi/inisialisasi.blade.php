@@ -10,7 +10,7 @@
        <div class="px-4 pt-4 flex my-5">
           <div class="flex items-center">
              <p class="text-3xl text-black font-bold">
-                Memulai Proses Inventariasi
+                Memulai Proses Stock Opname
              </p>
           </div>
        </div>
@@ -19,10 +19,10 @@
     <form action="{{ route('client.create-stockopname') }}" method="POST" class="m-0 p-0">
         @csrf
         <div class="bg-white">
-         {{-- Nama Inventariasi --}}
+         {{-- Nama Stock Opname --}}
              <div class="flex border-y border-solid border-gray-300">
                  <div class="px-4 py-3 text-sm w-60">
-                     <p class="font-bold text-sm">Nama Inventariasi*</p>
+                     <p class="font-bold text-sm">Nama Stock Opname*</p>
                  </div>
                  <div class="px-4 py-3 text-sm">
                      <p class="font-bold text-sm">:</p>
@@ -31,7 +31,7 @@
                      <input name="name" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                  </div>
              </div>
-         {{-- End Nama Inventariasi --}}
+         {{-- End Nama Stock Opname --}}
          {{-- Yang Menginisialisasi --}}
          <div class="flex border-y border-solid border-gray-300">
             <div class="px-4 py-3 text-sm w-60">

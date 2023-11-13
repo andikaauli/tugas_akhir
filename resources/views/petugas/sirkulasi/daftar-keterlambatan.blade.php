@@ -47,9 +47,8 @@
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Kode Eksemplar</th>
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Judul</th>
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Tanggal Pinjam</th>
-                     <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Tanggal Harus Kembali</th>
                      <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Tanggal Kembali</th>
-                     <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Status Peminjaman</th>
+                     <th class="text-left px-1.5 py-4 border-y border-r border-solid border-gray-300">Batas Kembali</th>
                   </tr>
                </thead>
                @foreach ($loans as $loan)
@@ -60,9 +59,8 @@
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$loan->eksemplar->item_code}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b">{{$loan->eksemplar->biblio->title}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->loan_date) }}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date) }}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date) }}</td>
-                     <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$loan->loan_status}}</td>
+                     <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->due_date) }}</td>
                   </tr>
                </tbody>
                @endforeach

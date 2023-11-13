@@ -28,7 +28,7 @@
                     <li class=" ">
                         <a href="/inventarisasi/rekaman"
                             class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-rekaman-inventarisasi')">
-                            <span class="flex-1 ml-3 whitespace-nowrap">Rekaman Inventarisasi</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Rekaman Stock Opname</span>
                         </a>
                     </li>
                     <li>
@@ -41,13 +41,13 @@
                     <li>
                         <a href="/inventarisasi/aktif"
                             class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-inventarisasi-aktif')">
-                            <span class="flex-1 ml-3 whitespace-nowrap">Inventarisasi Aktif</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Stock Opname Aktif</span>
                         </a>
                     </li>
                     <li>
                         <a href="/inventarisasi/laporan"
                             class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-laporan-inventarisasi')">
-                            <span class="flex-1 ml-3 whitespace-nowrap">Laporan Inventarisasi</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Laporan Stock Opname</span>
                         </a>
                     </li>
                     <li>
@@ -59,7 +59,7 @@
                     <li>
                         <a href="/inventarisasi/end"
                             class="flex items-center p-2 text-white rounded-l-full hover:bg-white hover:bg-opacity-20 group @yield('active-end-inventarisasi')">
-                            <span class="flex-1 ml-3 whitespace-nowrap">Selesaikan Inventarisasi</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Selesaikan Stock Opname</span>
                         </a>
                     </li>
                 @endif
