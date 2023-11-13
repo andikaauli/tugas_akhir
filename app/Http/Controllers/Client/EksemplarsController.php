@@ -20,7 +20,9 @@ class EksemplarsController extends Controller
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar', 'GET', ['search' => $search]);
         $eksemplar = Eksemplar::whereHas("biblio", function ($b) use ($search) {
-            $b->where('title', 'LIKE', "%$search%");
+            $b->whereHas("colltype", function ($b) use ($search) {
+                $b->where('title', 'LIKE', "%$search%");
+            })->orWhere('title', 'LIKE', "%$search%")->orWhere('call_number', 'LIKE', "%$search%");
         })->orwhereHas("bookstatus", function ($b) use ($search) {
             $b->where('name', 'LIKE', "%$search%");
         })->orWhere('item_code', 'LIKE', "%$search%")->paginate(10);

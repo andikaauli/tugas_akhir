@@ -128,7 +128,7 @@ class LoansController extends Controller
         // $response = $response->getContent();
 
         // $member = json_decode($response);
-        $member = Member::where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%")->paginate(10);
+        $member = Member::where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->paginate(10);
         // dd($member);
         return view('petugas/sirkulasi/mulai-transaksi', ['members' => $member]);
     }
@@ -211,7 +211,12 @@ class LoansController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $http = new Request();
+        $http = $http->create(url('api') . '/loan/hapus/' . $loan, 'POST');
+        $res = app()->handle($http);
+        $res = $res->getContent();
+
+        return redirect()->back();
     }
 
     public function selesai_transaksi($member)
