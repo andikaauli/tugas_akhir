@@ -24,7 +24,7 @@
                     {{-- Judul --}}
                     <div class="flex border-y border-solid border-gray-300">
                         <div class="px-4 py-3 text-sm w-44">
-                            <p class="font-bold text-sm">Judul*</p>
+                            <p class="font-bold text-sm">Judul</p>
                         </div>
                         <div class="px-4 py-3 text-sm">
                             <p>:</p>
@@ -149,7 +149,7 @@
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="order_date" id="dateofbirth" value="{{ $eksemplar->order_date }}">
 
-                            {{ Carbon\Carbon::parse($eksemplar->created_at)->format('Y-m-d') }}
+                            {{-- {{ Carbon\Carbon::parse($eksemplar->created_at)->format('Y-m-d') }} --}}
 
                         </div>
                     </div>

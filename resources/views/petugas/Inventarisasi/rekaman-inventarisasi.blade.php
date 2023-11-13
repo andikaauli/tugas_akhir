@@ -11,7 +11,7 @@
        <div class="px-4 pt-4 flex my-5">
           <div class="flex items-center">
              <p class="text-3xl text-black font-bold">
-                Inventarisasi
+                Rekaman Stock Opname
              </p>
           </div>
        </div>
@@ -45,7 +45,7 @@
                   <thead class="p-3 border-y border-solid border-gray-400">
                      <tr class="text-sm">
                         <th class="text-left p-3">LIHAT</th>
-                        <th class="text-left p-3">NAMA INVENTARISASI</th>
+                        <th class="text-left p-3">NAMA STOCK OPNAME</th>
                         <th class="text-left p-3">TANGGAL MULAI</th>
                         <th class="text-left p-3">TANGGAL SELESAI</th>
                      </tr>

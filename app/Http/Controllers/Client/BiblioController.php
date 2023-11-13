@@ -84,11 +84,9 @@ class BiblioController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $http = new Request();
         $http = $http->create(url('api') . '/biblio/add', 'POST', $request->all(), files: $request->allFiles());
         $response = app()->handle($http);
-
         // dd($response);
 
         if ($response->isClientError()) {

@@ -114,12 +114,12 @@ class LoanController extends Controller
 
         if (Carbon::now()->isAfter(Carbon::parse($loan->due_date))) {
             $loan->update([
-                'loan_status' => 'Dikembalikan Terlambat',
+                'loan_status' => 'Terlambat Kembali',
                 'return_status' => '2'
             ]);
         } else {
             $loan->update([
-                'loan_status' => 'Dikembalikan Tepat Waktu',
+                'loan_status' => 'Telah Kembali',
                 'return_status' => '1'
             ]);
         }
@@ -155,13 +155,13 @@ class LoanController extends Controller
                 ]);
                 if (Carbon::now()->isAfter(Carbon::parse($loanData->due_date))) {
                     $loanData->update([
-                        'loan_status' => 'Dikembalikan Terlambat',
+                        'loan_status' => 'Terlambat Kembali',
                         'return_status' => '2'
 
                     ]);
                 } else {
                     $loanData->update([
-                        'loan_status' => 'Dikembalikan Tepat Waktu',
+                        'loan_status' => 'Telah Kembali',
                         'return_status' => '1'
 
                     ]);

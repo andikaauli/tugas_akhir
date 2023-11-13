@@ -87,7 +87,7 @@
                     <p class="mr-3 text-sm font-medium">Masukkan Kode Eksemplar</p>
                     <input type="search" name="item_code"
                         class="relative w-80 m-0 mr-1 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                        placeholder="Search" aria-label="Search" aria-describedby="button-addon3" />
+                        placeholder="Masukkan Kode Eksemplar" aria-label="Search" aria-describedby="button-addon3" />
                     {{-- Btn Search --}}
                     <button type="submit"
                         class="px-3 h-10 rounded bg-gray-500 text-white text-sm font-semibold hover:bg-blue-500">Pinjam</button>
@@ -106,17 +106,18 @@
                     </thead>
                     <tbody>
                         @foreach (array_filter($loans, fn($loan) => $loan->loan_status == null) as $item)
+                        {{-- @dd($item) --}}
                             <tr class="border-b border-solid text-sm font-medium border-gray-200">
                                 <td class="p-3 w-18">
                                     <button
                                         class="text-xs text-white font-bold bg-red-600 hover:bg-red-700 p-1.5 rounded">Hapus</button>
                                 </td>
-                                <td class="p-3 w-40">B00013</td>
+                                <td class="p-3 w-40">{{$item->eksemplar->item_code}}</td>
                                 <td class="p-3">
-                                    <p class="">Corruption and development : the anti-corruption campaignss</p>
+                                    <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
-                                <td class="p-3 w-36">2023-08-09</td>
-                                <td class="p-3 w-40">2023-08-19</td>
+                                <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->due_date)->format('Y-m-d') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -139,6 +140,7 @@
                     </thead>
                     <tbody>
                         @foreach (array_filter($loans, fn($loan) => $loan->loan_status == 'Sedang Dipinjam') as $item)
+                        {{-- @dd($item) --}}
                             <tr class="border-b border-solid text-sm font-medium border-gray-200">
                                 <td class="p-3 w-18">
                                     <form class="m-0"
@@ -158,13 +160,13 @@
                                             class="text-xs text-white font-bold bg-green-500 hover:bg-green-600 p-1.5 rounded">Perpanjang</button>
                                     </form>
                                 </td>
-                                <td class="p-3 w-40">B00013</td>
+                                <td class="p-3 w-40">{{$item->eksemplar->item_code}}</td>
                                 <td class="p-3">
-                                    <p class="">Corruption and development : the anti-corruption campaignss</p>
+                                    <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
                                 <td class="p-3 w-32">Reference</td>
-                                <td class="p-3 w-36">2023-08-09</td>
-                                <td class="p-3 w-40">2023-08-19</td>
+                                <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->due_date)->format('Y-m-d') }}</td>
                             </tr>
                         @endforeach
 
@@ -180,18 +182,19 @@
                             <th class="text-left p-3">KODE EKSEMPLAR</th>
                             <th class="text-left p-3">JUDUL</th>
                             <th class="text-left p-3">TANGGAL PINJAM</th>
-                            <th class="text-left p-3">TERAKHIR KEMBALI</th>
+                            <th class="text-left p-3">TANGGAL DIKEMBALIKAN</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (array_filter($loans, fn($loan) => str_contains($loan->loan_status, 'Dikembalikan')) as $item)
+                        {{-- @dd($item) --}}
                             <tr class="border-b border-solid text-sm font-medium border-gray-200">
-                                <td class="p-3 w-40">B00013</td>
+                                <td class="p-3 w-40">{{$item->eksemplar->item_code}}</td>
                                 <td class="p-3">
-                                    <p class="">Corruption and development : the anti-corruption campaignss</p>
+                                    <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
-                                <td class="p-3 w-36">2023-08-09</td>
-                                <td class="p-3 w-40">2023-08-19</td>
+                                <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-52">{{ Carbon\Carbon::parse($item->return_date)->format('Y-m-d') }}</td>
                             </tr>
                         @endforeach
                     </tbody>

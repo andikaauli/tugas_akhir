@@ -6,7 +6,7 @@
 
 {{-- Content --}}
 <div class="sm:ml-64">
-    <div class="mt-18">
+    <div class="mt-18 mb-4">
         @method('DELETE')
         @csrf
         {{-- Section 1 --}}
@@ -63,10 +63,10 @@
                         <th class="text-left p-3">SUNTING</th>
                         <th class="text-left p-3">KODE EKSEMPLAR</th>
                         <th class="text-left p-3">JUDUL</th>
+                        <th class="text-left p-3">STATUS</th>
                         <th class="text-left p-3">TIPE KOLEKSI</th>
                         <th class="text-left p-3">NO. PANGGIL</th>
                         <th class="text-left p-3">PERUBAHAN TERAKHIR</th>
-                        <th class="text-left p-3">STATUS EKSEMPLAR</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,15 +92,15 @@
                             <td class="p-3 w-40">{{ $eks->item_code }}</td>
                             <td class="p-3">
                                 <div class="">
-                                    <p class="text-sm font-medium">{{ $eks->biblio->title }}</p>
+                                    <p class="text-sm font-bold">{{ $eks->biblio->title }}</p>
                                     <p class="text-sm font-medium text-gray-500">{{$eks->biblio->author->title}}
                                     </p>
                                 </div>
                             </td>
+                            <td class="p-3 w-24">{{$eks->bookstatus->name}}</td>
                             <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td>
                             <td class="p-3 w-28">{{$eks->biblio->call_number}}</td>
                             <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime( $eks->updated_at )) }}</td>
-                            <td class="p-3 w-28">{{$eks->bookstatus->name}}</td>
                         </tr>
                     @endforeach
                     @if ($eksemplar->isEmpty())

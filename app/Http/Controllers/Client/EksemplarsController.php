@@ -136,7 +136,7 @@ class EksemplarsController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.eksemplar');
+        return redirect()->route('client.eksemplar')->with('success', 'Data saved successfully!');
     }
 
     /**

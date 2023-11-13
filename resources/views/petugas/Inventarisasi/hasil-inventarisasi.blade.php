@@ -11,7 +11,7 @@
        <div class="px-4 pt-4 flex my-5">
           <div class="flex items-center">
              <p class="text-3xl text-black font-bold">
-                Inventarisasi
+                Hasil Stock Opname
              </p>
           </div>
        </div>
@@ -20,10 +20,10 @@
     <form action="{{ route('client.stockopname', ['id' => $stockopnames->id]) }}">
         <div class="h-full">
                 <div class="">
-           {{-- Nama Inventarisasi --}}
+           {{-- Nama Stock Opname --}}
                <div class="flex border-y border-solid border-gray-300">
                    <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Nama Inventarisasi</p>
+                       <p class="font-medium text-sm">Nama Stock Opname</p>
                    </div>
                    <div class="px-4 py-3 text-sm">
                        <p>:</p>
@@ -32,7 +32,7 @@
                        <p class="text-sm font-medium">{{$stockopnames->name}}</p>
                    </div>
                </div>
-           {{-- End Nama Inventarisasi --}}
+           {{-- End Nama Stock Opname --}}
                {{-- Tanggal Mulai --}}
                    <div class="flex border-b border-gray-300">
                        <div class="px-4 py-3 text-sm w-44">
