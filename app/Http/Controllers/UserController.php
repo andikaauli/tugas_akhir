@@ -44,7 +44,7 @@ class UserController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $user = User::create($request->all());
+        $user = User::create(['name' => $request->name, 'username' => $request->username, 'password' => Hash::make($request->password), 'email' => $request->email, 'image' => $request->image]);
         return response()
             ->json(['message' => 'Admin baru berhasil ditambahkan!', 'data' => $user]);
     }
@@ -56,19 +56,21 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
             'username' => 'required|max:255', 'unique:user.id',
-            'password' => 'nullable|min:8',
-            'password_confirm' => 'nullable|same:password',
-            'email' => 'required|max:255|email', 'unique:user.id',
+            'new_password' => 'nullable|min:8',
+            'password_confirm' => 'nullable|same:new_password',
+            'email' => 'nullable|max:255|email', 'unique:user.id',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
-
-
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
-
-        $user->update($request->all());
+        $user->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->new_password),
+            'email' => $request->email,
+            'image' => $request->image,
+        ]);
         return response()
             ->json(['message' => 'Data Admin berhasil diubah!', 'data' => $user]);
     }
