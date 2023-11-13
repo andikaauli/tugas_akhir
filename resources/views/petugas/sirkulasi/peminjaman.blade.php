@@ -164,7 +164,7 @@
                                 <td class="p-3">
                                     <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
-                                <td class="p-3 w-32">Reference</td>
+                                <td class="p-3 w-32">{{$item->eksemplar->biblio->colltype->title}}</td>
                                 <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
                                 <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->due_date)->format('Y-m-d') }}</td>
                             </tr>
