@@ -211,12 +211,7 @@ class LoansController extends Controller
      */
     public function destroy($id)
     {
-        $http = new Request();
-        $http = $http->create(url('api') . '/loan/hapus/' . $loan, 'POST');
-        $res = app()->handle($http);
-        $res = $res->getContent();
-
-        return redirect()->back();
+        //
     }
 
     public function selesai_transaksi($member)
