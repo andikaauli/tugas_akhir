@@ -163,6 +163,7 @@ Route::group(['prefix' => '/inventarisasi', 'middleware' => ['activate_inven', '
         Route::post('/inisialisasi', [StockOpnamesController::class, 'store'])->name('client.create-stockopname');
         Route::get('/rekaman', [StockOpnamesController::class, 'index'])->name('client.stockOpnameRecord');
         Route::get('/hasil/{id}', [StockOpnamesController::class, 'show'])->name('client.stockopname');
+        Route::get('/download/hasil/pdf/{id}', [StockOpnamesController::class, 'downloadPDF'])->name('client.download');
     });
 
     Route::middleware(['inven_is_active:true'])->group(function () {

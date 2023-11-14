@@ -1,4 +1,4 @@
-@extends('main.main')
+{{-- @extends('main.main') --}}
 @extends('petugas.inventarisasi.sidebar')
 @section('active-rekaman-inventarisasi', 'bg-white bg-opacity-30')
 @section('active-inventarisasi-navbar', 'text-blue-500 border-blue-500')
@@ -14,8 +14,6 @@
                 Hasil Stock Opname
              </p>
           </div>
-          {{-- @if (strpos(url()->current(), 'pdf') !== false) --}}
-            <a class="btn btn-primary" href="{{route('client.download',['id' => $stockopnames->id])}}">Download PDF</a>
           {{-- @endif --}}
        </div>
      {{-- End Section 1 --}}
