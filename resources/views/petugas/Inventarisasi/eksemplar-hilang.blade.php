@@ -57,7 +57,12 @@
                    <td class="p-1.5 text-sm leading-6 border-x border-b w-36">{{$data->eksemplar->item_code}}</td>
                    <td class="p-1.5 text-sm leading-6 border-r border-b">{{$data->eksemplar->biblio->title}}</td>
                    <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$data->eksemplar->biblio->classification}}</td>
-                   <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$data->eksemplar->biblio->colltype->title}}</td>
+                   {{-- <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$data->eksemplar->biblio->colltype->title}}</td> --}}
+                   @if(isset($data->eksemplar->biblio->colltype->title))
+                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{$data->eksemplar->biblio->colltype->title}}</td>
+                   @else
+                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">-</td>
+                   @endif
                    <td class="p-1.5 text-sm leading-6 border-r border-b w-40">{{$data->eksemplar->biblio->call_number}}</td>
                 </tr>
                 @endforeach

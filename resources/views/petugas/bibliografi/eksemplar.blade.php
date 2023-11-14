@@ -93,12 +93,22 @@
                             <td class="p-3">
                                 <div class="">
                                     <p class="text-sm font-bold">{{ $eks->biblio->title }}</p>
-                                    <p class="text-sm font-medium text-gray-500">{{$eks->biblio->author->title}}
+                                    {{-- <p class="text-sm font-medium text-gray-500">{{$eks->biblio->author->title}} --}}
+                                        @if(isset($eks->biblio->author->title))
+                                                <p class="text-sm font-medium text-gray-500">{{$eks->biblio->author->title}}</p>
+                                            @else
+                                                <p class="text-sm font-medium text-gray-500">-</p>
+                                            @endif
                                     </p>
                                 </div>
                             </td>
                             <td class="p-3 w-24">{{$eks->bookstatus->name}}</td>
-                            <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td>
+                            {{-- <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td> --}}
+                            @if(isset($eks->biblio->colltype->title))
+                                <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td>
+                            @else
+                                <td class="p-3 w-32">-</td>
+                            @endif
                             <td class="p-3 w-28">{{$eks->biblio->call_number}}</td>
                             <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime( $eks->updated_at )) }}</td>
                         </tr>
