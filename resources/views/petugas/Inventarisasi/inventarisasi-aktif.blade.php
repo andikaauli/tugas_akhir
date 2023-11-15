@@ -57,24 +57,34 @@
         {{-- Section 3 --}}
         <div class="flex mb-4 ">
             <table class="table-auto w-full">
-                <thead class="p-3 border-y border-solid border-gray-400">
-                    <tr class="text-sm">
-                        <th class="text-left p-3">KODE EKSEMPLAR</th>
-                        <th class="text-left p-3">JUDUL</th>
-                        <th class="text-left p-3">KLASIFIKASI</th>
-                        {{-- <th class="text-left p-3">TIPE KOLEKSI</th> --}}
-                        <th class="text-left p-3">STATUS</th>
-                    </tr>
-                </thead>
-                <tbody class="max-h-96 overflow-auto" id="list-stocktakeitem">
-                    <tr class="border-b border-solid border-gray-400">
-                        <td class="p-3 leading-6 w-44"></td>
-                        <td class="p-3 leading-6"></td>
-                        <td class="p-3 leading-6 W-46"></td>
-                        {{-- <td class="p-3 leading-6 w-28">Reference</td> --}}
-                        <td class="p-3 leading-6 w-20"></td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td>
+                        <table class="table-auto w-full">
+                            <tr class="text-sm p-3 border-y border-solid border-gray-400">
+                                <th class="text-left p-3 w-44">KODE EKSEMPLAR</th>
+                                <th class="text-left p-3">JUDUL</th>
+                                <th class="text-left p-3 W-46">KLASIFIKASI</th>
+                                {{-- <th class="text-left p-3">TIPE KOLEKSI</th> --}}
+                                <th class="text-left p-3 w-20">STATUS</th>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="max-h-96 overflow-auto">
+                            <table class="table-auto w-full"  id="list-stocktakeitem">
+                                <tr class="border-b border-solid border-gray-400">
+                                    <td class="p-3 leading-6 w-44"></td>
+                                    <td class="p-3 leading-6"></td>
+                                    <td class="p-3 leading-6 W-46"></td>
+                                    {{-- <td class="p-3 leading-6 w-28">Reference</td> --}}
+                                    <td class="p-3 leading-6 w-20"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </div>
         {{-- End Section 3 --}}
