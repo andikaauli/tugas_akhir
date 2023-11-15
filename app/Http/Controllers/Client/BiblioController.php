@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Models\Biblio;
 use App\Models\Eksemplar;
 use Illuminate\Http\Request;
+use Illuminate\Support\ViewErrorBag;
 use App\Http\Controllers\Controller;
 
 class BiblioController extends Controller
@@ -52,6 +53,7 @@ class BiblioController extends Controller
      */
     public function create(Request $request)
     {
+        $errors = session('errors') ?? new ViewErrorBag();
 
         $pengarangReq = new Request();
         $pengarangReq = $pengarangReq->create(url('api') . '/author/');
@@ -73,7 +75,7 @@ class BiblioController extends Controller
         $collType = json_decode($collTypeRes);
 
 
-        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes" => $collType]);
+        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes" => $collType, "errors"=> $errors]);
     }
 
     /**
