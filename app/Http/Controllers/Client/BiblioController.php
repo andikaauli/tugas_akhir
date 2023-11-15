@@ -93,9 +93,7 @@ class BiblioController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        session()->flash('sukses','Data berhasil ditambahkan');
-
-        return redirect()->route('client.bibliografi');
+        return redirect()->route('client.bibliografi')->with('success', 'Bibliografi berhasil ditambahkan!');
     }
 
     /**
@@ -209,7 +207,7 @@ class BiblioController extends Controller
         }
 
 
-        return redirect()->route('client.bibliografi');
+        return redirect()->route('client.bibliografi')->with('success', 'Bibliografi berhasil diperbaharui!');
     }
 
     /**
@@ -233,6 +231,6 @@ class BiblioController extends Controller
             $response = app()->handle($http);
         }
 
-        return redirect()->route('client.bibliografi');
+        return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
     }
 }

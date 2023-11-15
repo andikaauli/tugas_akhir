@@ -71,7 +71,7 @@ class EksemplarsController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id]);
+        return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id])->with('success', 'Eksemplar berhasil diperbaharui!');
         // return redirect()->route('client.bibliografi');
     }
 
@@ -136,7 +136,7 @@ class EksemplarsController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.eksemplar')->with('success', 'Data saved successfully!');
+        return redirect()->route('client.eksemplar')->with('success', 'Eksemplar berhasil diperbaharui!');
     }
 
     /**
@@ -159,6 +159,6 @@ class EksemplarsController extends Controller
             $response = app()->handle($http);
         }
 
-        return redirect()->route('client.eksemplar');
+        return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar berhasil dihapus!');
     }
 }

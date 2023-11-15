@@ -61,11 +61,10 @@ class UserController extends Controller
             'email' => 'nullable|max:255|email', 'unique:user.id',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
         ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+
         $data = $request->all();
         $imagePath = null;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = time() . '_' . $image->getClientOriginalName();
@@ -79,6 +78,10 @@ class UserController extends Controller
             if ($user->image && Storage::exists(str_replace(asset('storage'), 'public', $user->image))) {
                 Storage::delete(str_replace(asset('storage'), 'public', $user->image));
             }
+        }
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
 
         $user->update([

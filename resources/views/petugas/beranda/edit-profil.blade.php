@@ -16,19 +16,21 @@
             </div>
         </div>
         {{-- End Section 1 --}}
+          {{-- Success meesage --}}
+          @if (session('success'))
+          <div id="session" class="py-3 px-4 bg-blue-100">
+              <div class="p-4 bg-green-500">
+                  <p class="text-white">{{ session('success') }}</p>
+              </div>
+          </div>
+        @endif
+      {{-- End Succes message --}}
         {{-- Section 2 --}}
         <form action="{{ route('client.update-profil') }}" id="form-edit-profil" method="POST" class="m-0 p-0"
             enctype="multipart/form-data">
             {{-- @method('PUT') --}}
             @method('PUT')
             @csrf
-            {{-- Success meesage --}}
-            @if (session('success'))
-                <div class="fixed top-16 items-center bg-white font-semibold p-4" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-            {{-- @dd($profils) --}}
             <div class="bg-white">
                 {{-- Nama Asli --}}
                 <div class="flex border-y border-solid border-gray-300">
@@ -153,4 +155,11 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>
+
+<script>
+    setTimeout(() => {
+        const box = document.getElementById('session');
+        box.style.display = 'none';
+    }, 5000);
 </script>

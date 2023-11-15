@@ -15,6 +15,15 @@
             </div>
         </div>
         {{-- End Section 1 --}}
+        {{-- Success meesage --}}
+        @if (session('success'))
+        <div id="session" class="py-3 px-4 bg-blue-100">
+            <div class="p-4 bg-green-500">
+                <p class="text-white">{{ session('success') }}</p>
+            </div>
+        </div>
+        @endif
+        {{-- End Succes message --}}
         {{-- Section 2 --}}
         <form action="{{ route('client.edit-bibliografi', ['id' => $bibliografi->id]) }}" method="POST" class="h-full"
             enctype="multipart/form-data">
@@ -497,4 +506,11 @@
             modal.classList.add('hidden')
         });
     });
+</script>
+
+<script>
+    setTimeout(() => {
+        const box = document.getElementById('session');
+        box.style.display = 'none';
+    }, 3000);
 </script>
