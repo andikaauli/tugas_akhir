@@ -209,9 +209,14 @@ class LoansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $loan)
     {
-        //
+        $http = new Request();
+        $http = $http->create(url('api') . '/loan/destroy/' . $loan, 'DELETE');
+        $response = app()->handle($http);
+        $response = $response->getContent();
+
+        return redirect()->back();
     }
 
     public function selesai_transaksi($member)

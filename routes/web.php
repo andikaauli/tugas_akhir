@@ -150,6 +150,7 @@ Route::group(['prefix' => '/loan', 'middleware' => ['auth']], function () {
     Route::get('/{id}', [LoansController::class, 'loan'])->name('client.loan');
     Route::post('/{loan}/pengembalian', [LoansController::class, 'pengembalian'])->name('client.loan-pengembalian');
     Route::post('/{loan}/perpanjang', [LoansController::class, 'perpanjang'])->name('client.loan-perpanjang');
+    Route::post('/{loan}/hapus', [LoansController::class, 'destroy'])->name('client.loan-hapus');
     Route::post('{member}/pinjam', [LoansController::class, 'pinjam'])->name('client.loan-pinjam');
     Route::post('{member}/transaksi', [LoansController::class, 'selesai_transaksi'])->name('client.loan-transaksi');
 });
