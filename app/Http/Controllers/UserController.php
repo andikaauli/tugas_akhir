@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -83,13 +84,10 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+        $user->update($data);
 
         $user->update([
-            'name' => $request->name,
-            'username' => $request->username,
             'password' => Hash::make($request->new_password),
-            'email' => $request->email,
-            'image' => $request->image,
         ]);
         return response()
             ->json(['message' => 'Data Admin berhasil diubah!', 'data' => $user]);

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Validator;
 
+
 class UsersController extends Controller
 {
     public function index()
@@ -25,7 +26,7 @@ class UsersController extends Controller
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         }
 
-
+        // dd($response);
 
         return redirect()->route('client.edit-profil')->with('success', 'Profile berhasil diperbaharui!');
     }
