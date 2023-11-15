@@ -98,7 +98,12 @@
                                         </img>
                                         <div class="ml-4">
                                             <p class="text-sm font-medium">{{ $biblio->title }}</p>
-                                            <p class="text-sm font-medium text-gray-500">{{$biblio->author->title}}</p>
+                                            {{-- <p class="text-sm font-medium text-gray-500">{{$biblio->author->title}}</p> --}}
+                                            @if(isset($biblio->author->title))
+                                                <p class="text-sm font-medium text-gray-500">{{$biblio->author->title}}</p>
+                                            @else
+                                                <p class="text-sm font-medium text-gray-500">-</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>

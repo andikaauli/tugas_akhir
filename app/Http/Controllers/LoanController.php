@@ -16,7 +16,7 @@ class LoanController extends Controller
     {
         $search = $request->search;
         $member = $request->member;
-        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
+        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio', 'eksemplar.biblio.colltype']);
 
         if ($member) {
             $loan = $loan->where('member_id', $member);
@@ -62,7 +62,7 @@ class LoanController extends Controller
 
         $member = Member::find($id);
 
-        $eksemplar = Eksemplar::with(['bookstatus', 'biblio:id,title,author_id', 'biblio.author:id,title'])->where('item_code', $request->item_code)->first();
+        $eksemplar = Eksemplar::with(['bookstatus', 'biblio', 'biblio.colltype'])->where('item_code', $request->item_code)->first();
 
         if ($eksemplar) {
             $bookstatus = Eksemplar::where('item_code', $request->item_code)->first('book_status_id');

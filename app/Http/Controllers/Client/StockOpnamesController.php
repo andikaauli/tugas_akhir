@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Models\StockTakeItem;
+use PDF;
 
 class StockOpnamesController extends Controller
 {
@@ -86,6 +87,20 @@ class StockOpnamesController extends Controller
 		$stockopname = json_decode($response);
 
 		// dd($stockopname);
+		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
+	}
+
+    public function downloadPDF($id, Request $request)
+	{
+		$http = new Request();
+		$http = $http->create(url('api') . '/stockopname/' . $id, 'GET');
+		$response = app()->handle($http);
+		$response = $response->getContent();
+		$stockopname = json_decode($response);
+
+        $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
+        return $pdf->download($stockopname->name . '.pdf');
+        
 		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
 	}
 

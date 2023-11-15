@@ -14,7 +14,9 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
+        $bibliografi = Biblio::whereHas("author", function ($b) use ($search) {
+            $b->where('title', 'LIKE', "%$search%");
+        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->paginate(10);
 
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
