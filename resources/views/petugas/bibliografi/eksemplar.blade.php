@@ -65,10 +65,10 @@
                 <button type="submit" id=""
                     class="rounded px-3 py-2 text-white text-sm font-bold bg-red-600 hover:bg-red-800 mr-2">Hapus Data
                     Terpilih</button>
-                <button type="submit" id="select-all"
+                <button type="button" id="select-all"
                     class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Tandai
                     Semua</button>
-                <button type="submit" id="deselect-all"
+                <button type="button" id="deselect-all"
                     class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500">Hilangkan Semua
                     Tanda</button>
             </div>
