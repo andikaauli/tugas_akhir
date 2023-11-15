@@ -34,7 +34,7 @@ class UsersController extends Controller
         // return redirect()->route('client.edit-profil')->with('success', 'Profile berhasil diperbaharui!');
 
         $http = new Request();
-        $http = $http->create(url('api') . 'user/edit/', 'POST', $request->except('_method'));
+        $http = $http->create(url('api') . 'user/edit/', 'POST', $request->all());
         $response = app()->handle($http);
 
         dd($response);
@@ -42,6 +42,8 @@ class UsersController extends Controller
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         }
+
+
 
         return redirect()->route('client.edit-profil')->with('success', 'Profile berhasil diperbaharui!');
     }

@@ -140,7 +140,8 @@
                     <p>:</p>
                 </div>
                 <div class="px-4 py-3 flex-auto">
-                    <div class="flex-auto h-24 border border-gray-400 rounded px-3 py-2 overflow-auto">
+                    <div class="flex-auto max-h-24 border border-gray-400 rounded px-3 py-2 overflow-auto">
+                        @if ($bibliografi->eksemplar)
                         @foreach ($bibliografi->eksemplar as $eksemplar)
                             <div class="flex flex-row border-b border-gray-200">
                                 <div class="basis-1/2 p-2">
@@ -151,6 +152,9 @@
                                 </div>
                             </div>
                         @endforeach
+                        @else
+                            <p class="py-2 text-center 300 text-red-600 font-semibold">Tidak Ada Data</p>
+                        @endif
                     </div>
                 </div>
             </div>

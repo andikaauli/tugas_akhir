@@ -7,7 +7,7 @@ use App\Models\Eksemplar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BiblioController extends Controller
+class BibliosController extends Controller
 {
     function getBiblio(Request $request)
     {

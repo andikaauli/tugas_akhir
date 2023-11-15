@@ -73,6 +73,9 @@
                         <input
                             class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                             type="date" name="birth_date" id="dateofbirth">
+                        @error('birth_date')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 {{-- End Tanggal Lahir --}}
@@ -89,6 +92,9 @@
                             <input name="institution" type="text" id="small-input"
                                 class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
+                        @error('institution')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 {{-- End Institusi --}}
@@ -107,6 +113,9 @@
                             <input class="mr-2" type="radio" name="gender" value="Perempuan" id="">
                             <label for="">Perempuan</label>
                         </div>
+                        @error('gender')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 {{-- End Jenis Kelamin --}}
@@ -123,6 +132,9 @@
                             class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                             name="" id="" cols="30" rows="2"></textarea>
                     </div>
+                    @error('address')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- End Alamat --}}
                 {{-- Nomor Telepon --}}
@@ -137,6 +149,9 @@
                         <input type="text" name="phone" id="small-input"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
+                    @error('phone')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- End Nomor Telepon --}}
                 {{-- Foto --}}
@@ -159,6 +174,9 @@
                                 </label>
                             </div>
                         </div>
+                        @error('image')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 {{-- End Foto --}}
@@ -174,6 +192,9 @@
                         <input type="text" name="email" id="small-input"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
+                    @error('email')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- End Surel --}}
                 {{-- Btn Simpan --}}

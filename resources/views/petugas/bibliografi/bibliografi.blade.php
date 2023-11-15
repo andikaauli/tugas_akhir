@@ -6,6 +6,9 @@
 {{-- Content --}}
 <div class="sm:ml-64">
     <div class="mt-18">
+        @if (session('sukses'))
+            <div class="fixed bg-slate-700 text-white h-5">{{session('sukses')}}</div>
+        @endif
         @method('DELETE')
         @csrf
         {{-- Section 1 --}}

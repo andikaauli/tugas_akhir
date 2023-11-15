@@ -76,6 +76,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="responsibility"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('responsibility')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End Pernyataan Tanggung Jawab --}}
@@ -90,6 +93,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="edition"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('edition')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End Edisi --}}
@@ -105,6 +111,9 @@
                     <textarea type="text"
                         class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                         name="spec_detail" id="" cols="30" rows="2"></textarea>
+                        @error('spec_detail')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End Info Detal Spesifik --}}
@@ -119,6 +128,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="gmd"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    @error('gmd')
+                        <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             {{-- End GMD --}}
@@ -133,6 +145,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="content_type"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('content_type')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End Tipe Isi --}}
@@ -147,6 +162,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="media_type"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('media_type')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End Tipe Media --}}
@@ -161,6 +179,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="carrier_type"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('carrier_type')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End Tipe Pembawa --}}
@@ -175,6 +196,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="isbnissn"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('isbnissn')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             {{-- End ISBN/ISSN --}}
@@ -196,7 +220,11 @@
                                 </option>
                             @endforeach
                         </select>
+
                     </div>
+                    @error('publisher_id')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             {{-- End Penerbit --}}
@@ -219,6 +247,9 @@
                             @endforeach
                         </select>
                     </div>
+                    @error('coll_type_id')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             {{-- End Tipe Koleksi --}}
@@ -233,6 +264,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="place"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    @error('place')
+                        <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             {{-- End Tempat Terbit --}}
@@ -247,6 +281,9 @@
                 <div class="px-4 py-3">
                     <input type="text" id="small-input" name="description"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    @error('description')
+                        <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             {{-- End Deskripsi Fisik --}}

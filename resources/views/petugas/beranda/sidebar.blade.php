@@ -30,8 +30,6 @@
                  <span class="flex-1 ml-3 whitespace-nowrap">Ubah Profil Pengguna</span>
               </a>
            </li>
-              </a>
-           </li>
         </ul>
      </div>
      {{-- End Beranda --}}
