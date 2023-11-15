@@ -98,8 +98,7 @@ class EksemplarsController extends Controller
         $http = $http->create(url('api') . '/eksemplar/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
-
-        // dd($response);
+        $eksemplar = json_decode($response);
 
         // ! Dari API
         $bs = new Request();
@@ -108,11 +107,20 @@ class EksemplarsController extends Controller
         $bsres = $bsres->getContent();
         $bsApi = json_decode($bsres);
 
-        $eksemplar = json_decode($response);
+        $bookstatuss = BookStatus::all();
+        // $bss = $bookstatus->get();
 
-        // dd($eksemplar);
+        if($eksemplar->book_status_id == 1){
+            $bookstatuss = $bookstatuss->filter(function ($bookstatus) {
+                return $bookstatus->id == 1;
+            });
+        } else {
+            $bookstatuss = $bookstatuss->filter(function ($bookstatus) {
+                return $bookstatus->id == 2 || $bookstatus->id == 3;
+            });
+        }
 
-        return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bsApi]);
+        return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bookstatuss]);
     }
 
     /**

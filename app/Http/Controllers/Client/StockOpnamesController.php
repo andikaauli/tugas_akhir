@@ -99,7 +99,7 @@ class StockOpnamesController extends Controller
 		$stockopname = json_decode($response);
 
         $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
-        return $pdf->download($stockopname->name . '.pdf');
+        return $pdf->download('Laporan Hasil StockOpname '. $stockopname->name . '.pdf');
 
 		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
 	}
