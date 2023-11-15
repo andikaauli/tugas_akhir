@@ -59,6 +59,10 @@
                     throw response;
                 }
                 inputItemCode.value = ''
+                response.json().then((body) => {
+                    //Here is already the payload from API
+                    alert(body.message);
+                })
             })
             .catch(error => {
                 error.json().then((body) => {

@@ -56,6 +56,8 @@ Route::prefix("eksemplar")->group(function () {
     Route::post('/add', [EksemplarController::class, "addData"]);
     Route::post('/edit/{id}', [EksemplarController::class, "editData"]);
     Route::post('/addRFID/{rfid_code}', [EksemplarController::class, "addRFID"]);
+    Route::delete('/destroy/{id}', [EksemplarController::class, "destroyData"]);
+
 });
 
 Route::prefix("loan")->group(function () {

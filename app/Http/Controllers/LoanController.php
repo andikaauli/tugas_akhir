@@ -167,7 +167,7 @@ class LoanController extends Controller
                     ]);
                 }
                 $loanData->refresh();
-                return response()->json(['message' => 'Eksemplar berhasil dikembalikan!', 'data' => $loanData, 'eksemplar' => $eksemplar]);
+                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' berhasil dikembalikan!', 'data' => $loanData, 'eksemplar' => $eksemplar]);
             } else {
                 return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak ada di peminjaman!']);
             }
