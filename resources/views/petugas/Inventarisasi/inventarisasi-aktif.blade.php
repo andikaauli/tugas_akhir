@@ -61,12 +61,12 @@
                     <tr class="text-sm">
                         <th class="text-left p-3">KODE EKSEMPLAR</th>
                         <th class="text-left p-3">JUDUL</th>
-                        {{-- <th class="text-left p-3">TIPE KOLEKSI</th> --}}
                         <th class="text-left p-3">KLASIFIKASI</th>
+                        {{-- <th class="text-left p-3">TIPE KOLEKSI</th> --}}
                         <th class="text-left p-3">STATUS</th>
                     </tr>
                 </thead>
-                <tbody id="list-stocktakeitem">
+                <tbody class="max-h-96 overflow-auto" id="list-stocktakeitem">
                     <tr class="border-b border-solid border-gray-400">
                         <td class="p-3 leading-6 w-44"></td>
                         <td class="p-3 leading-6"></td>

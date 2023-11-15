@@ -50,7 +50,7 @@ class CollTypesController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.colltypes');
+		return redirect()->route('client.colltypes')->with('success', 'Tipe Koleksi berhasil ditambahkan!');
 	}
 
 	/**
@@ -101,7 +101,7 @@ class CollTypesController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.colltypes');
+		return redirect()->route('client.colltypes')->with('success', 'Tipe Koleksi berhasil diperbaharui!');
 	}
 
 	/**
@@ -124,6 +124,6 @@ class CollTypesController extends Controller
 			$response = app()->handle($http);
 		}
 
-		return redirect()->route('client.colltypes');
+		return redirect()->route('client.colltypes')->with('destroy', 'Tipe Koleksi berhasil dihapus!');
 	}
 }

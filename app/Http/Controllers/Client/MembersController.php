@@ -57,7 +57,7 @@ class MembersController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.member');
+		return redirect()->route('client.member')->with('success', 'Anggota berhasil ditambahkan!');
 	}
 
 	/**
@@ -110,7 +110,7 @@ class MembersController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.member');
+		return redirect()->route('client.member')->with('success', 'Anggota berhasil diperbaharui!');
 	}
 
 	/**
@@ -134,6 +134,6 @@ class MembersController extends Controller
 			$response = app()->handle($http);
 		}
 
-		return redirect()->route('client.member');
+		return redirect()->route('client.member')->with('destroy', 'Anggota berhasil dihapus!');
 	}
 }

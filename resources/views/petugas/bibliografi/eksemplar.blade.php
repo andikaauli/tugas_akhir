@@ -84,7 +84,7 @@
                             <th class="text-left p-3">JUDUL</th>
                             <th class="text-left p-3">STATUS</th>
                             <th class="text-left p-3">TIPE KOLEKSI</th>
-                            <th class="text-left p-3">NO. PANGGIL</th>
+                            {{-- <th class="text-left p-3">NO. PANGGIL</th> --}}
                             <th class="text-left p-3">PERUBAHAN TERAKHIR</th>
                         </tr>
                     </thead>
@@ -128,7 +128,7 @@
                                 @else
                                     <td class="p-3 w-32">-</td>
                                 @endif
-                                <td class="p-3 w-28">{{$eks->biblio->call_number}}</td>
+                                {{-- <td class="p-3 w-28">{{$eks->biblio->call_number}}</td> --}}
                                 <td class="p-3 w-46">{{ Carbon\Carbon::createFromTimestamp(strtotime( $eks->updated_at )) }}</td>
                             </tr>
                         @endforeach

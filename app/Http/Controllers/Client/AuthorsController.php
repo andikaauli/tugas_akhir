@@ -56,7 +56,7 @@ class AuthorsController extends Controller
 		}
 
 
-		return redirect()->route('client.authors');
+		return redirect()->route('client.authors')->with('success', 'Pengarang berhasil ditambahkan!');
 	}
 
 	/**
@@ -108,7 +108,7 @@ class AuthorsController extends Controller
 
 		// dd($response);
 
-		return redirect()->route('client.authors');
+		return redirect()->route('client.authors')->with('success', 'Pengarang berhasil diperbaharui!');
 	}
 
 	/**
@@ -131,6 +131,6 @@ class AuthorsController extends Controller
 			$response = app()->handle($http);
 		}
 
-		return redirect()->route('client.authors');
+		return redirect()->route('client.authors')->with('destroy', 'Pengarang berhasil dihapus!');
 	}
 }

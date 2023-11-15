@@ -17,6 +17,22 @@
           </div>
        </div>
      {{-- End Section 1 --}}
+             {{-- Success meesage --}}
+             @if (session('success'))
+             <div id="session" class="py-3 px-4 bg-blue-100">
+                 <div class="p-4 bg-green-500">
+                     <p class="text-white font-semibold">{{ session('success') }}</p>
+                 </div>
+             </div>
+             @endif
+             @if (session('destroy'))
+             <div id="session" class="py-3 px-4 bg-blue-100">
+                 <div class="p-4 bg-red-600">
+                     <p class="text-white font-semibold">{{ session('destroy') }}</p>
+                 </div>
+             </div>
+             @endif
+         {{-- End Succes message --}}
      {{-- Section 2 --}}
      <div class="py-8 px-4 mb-4">
         {{-- Search Bar --}}
@@ -154,4 +170,11 @@
             check.checked = false
         });
     })
+</script>
+
+<script>
+    setTimeout(() => {
+        const box = document.getElementById('session');
+        box.style.display = 'none';
+    }, 3000);
 </script>

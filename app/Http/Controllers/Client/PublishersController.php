@@ -51,7 +51,7 @@ class PublishersController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.publishers');
+		return redirect()->route('client.publishers')->with('success', 'Penerbit berhasil ditambahkan!');
 	}
 
 	/**
@@ -104,7 +104,7 @@ class PublishersController extends Controller
 			// throw ValidationException::withMessages((array) json_decode($response->getContent()));
 		}
 
-		return redirect()->route('client.publishers');
+		return redirect()->route('client.publishers')->with('success', 'Penerbit berhasil diperbaharui!');
 	}
 
 	/**
@@ -127,6 +127,6 @@ class PublishersController extends Controller
 			$response = app()->handle($http);
 		}
 
-		return redirect()->route('client.publishers');
+		return redirect()->route('client.publishers')->with('destroy', 'Penerbit berhasil dihapus!');
 	}
 }
