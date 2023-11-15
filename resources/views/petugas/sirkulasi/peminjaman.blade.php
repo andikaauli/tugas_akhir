@@ -108,9 +108,18 @@
                         @foreach (array_filter($loans, fn($loan) => $loan->loan_status == null) as $item)
                         {{-- @dd($item) --}}
                             <tr class="border-b border-solid text-sm font-medium border-gray-200">
-                                <td class="p-3 w-18">
+                                {{-- <td class="p-3 w-18">
                                     <button
                                         class="text-xs text-white font-bold bg-red-600 hover:bg-red-700 p-1.5 rounded">Hapus</button>
+                                </td> --}}
+                                <td class="p-3 w-18">
+                                    <form class="m-0"
+                                        action="{{ route('client.loan-hapus', ['loan' => $item->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="text-xs text-white font-bold bg-red-600 hover:bg-blue-500 p-1.5 rounded">Hapus</button>
+                                    </form>
                                 </td>
                                 <td class="p-3 w-40">{{$item->eksemplar->item_code}}</td>
                                 <td class="p-3">
@@ -186,15 +195,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (array_filter($loans, fn($loan) => str_contains($loan->loan_status, 'Dikembalikan')) as $item)
+                        @foreach (array_filter($loans, fn($loan) => $loan->loan_status == 'Telah Kembali') as $item)
                         {{-- @dd($item) --}}
-                            <tr class="border-b border-solid text-sm font-medium border-gray-200">
                                 <td class="p-3 w-40">{{$item->eksemplar->item_code}}</td>
                                 <td class="p-3">
                                     <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
                                 <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
-                                <td class="p-3 w-52">{{ Carbon\Carbon::parse($item->return_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->return_date)->format('Y-m-d') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
