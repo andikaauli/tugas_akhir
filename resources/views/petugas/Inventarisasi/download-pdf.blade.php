@@ -1,5 +1,5 @@
 {{-- @extends('main.main') --}}
-@extends('petugas.inventarisasi.sidebar')
+{{-- @extends('petugas.inventarisasi.sidebar') --}}
 @section('active-rekaman-inventarisasi', 'bg-white bg-opacity-30')
 @section('active-inventarisasi-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
