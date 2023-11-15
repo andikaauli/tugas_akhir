@@ -17,7 +17,8 @@
         </div>
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.update-profil') }}" id="form-edit-profil" method="POST" class="m-0 p-0">
+        <form action="{{ route('client.update-profil') }}" id="form-edit-profil" method="POST" class="m-0 p-0"
+            enctype="multipart/form-data">
             {{-- @method('PUT') --}}
             @method('PUT')
             @csrf
@@ -85,7 +86,7 @@
                     </div>
                     <div class="px-4 py-3">
                         <div class="flex">
-                            <img id="blah" src="/assets/blank.png" class="rounded-md h-36 w-36"></img>
+                            <img id="blah" src="{{$user->image}}" class="rounded-md h-36 w-36"></img>
                             <div class="ml-3">
                                 <label class="file">
                                     <input class=" border rounded text-sm" type="file" name="image"

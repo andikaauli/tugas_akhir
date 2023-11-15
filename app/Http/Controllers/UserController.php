@@ -64,6 +64,23 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+        $data = $request->all();
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = time() . '_' . $image->getClientOriginalName();
+            $storeImage = $image->storeAs('public/images', $fileName);
+            $imagePath = asset(str_replace("public", "storage", $storeImage));
+            $data['image'] = $imagePath;
+
+            // http://127.0.0.1:8000/storage/images/1618531176_1618531176_eksemplar.jpg
+            // public/images/1618531176_1618531176_eksemplar.jpg
+
+            if ($user->image && Storage::exists(str_replace(asset('storage'), 'public', $user->image))) {
+                Storage::delete(str_replace(asset('storage'), 'public', $user->image));
+            }
+        }
+
         $user->update([
             'name' => $request->name,
             'username' => $request->username,

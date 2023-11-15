@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/user/edit/', 'POST', $request->except('_method'));
+        $http = $http->create(url('api') . '/user/edit/', 'POST', $request->except('_method'), files: $request->allFiles());
         $response = app()->handle($http);
 
         if ($response->isClientError()) {
