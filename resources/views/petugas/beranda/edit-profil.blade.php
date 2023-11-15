@@ -21,6 +21,12 @@
             {{-- @method('PUT') --}}
             @method('PUT')
             @csrf
+            {{-- Success meesage --}}
+            @if (session('success'))
+                <div class="fixed top-16 items-center bg-white font-semibold p-4" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             {{-- @dd($profils) --}}
             <div class="bg-white">
                 {{-- Nama Asli --}}

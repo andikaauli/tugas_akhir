@@ -68,9 +68,18 @@
                  <div class="px-4 py-3 text-sm">
                      <p class="font-bold text-sm">:</p>
                  </div>
-                 <div class="px-4 py-3">
-                     <input class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
-                     type="date" id="dateofbirth" name="birth_date" value="{{ Carbon\Carbon::parse($members->birth_date)->format('Y-m-d') }}">
+                 <div class="flex items-center">
+                     <div class="px-4 py-3">
+                         <input class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
+                         type="date" id="dateofbirth" name="birth_date" value="{{ Carbon\Carbon::parse($members->birth_date)->format('Y-m-d') }}">
+                     </div>
+                     <div>
+                        <div>
+                            @error('birth_date')
+                                    <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
+                        </div>
+                     </div>
                  </div>
              </div>
          {{-- End Tanggal Lahir --}}
@@ -85,6 +94,11 @@
                  <div class="px-4 py-3 items-stretch flex-auto">
                      <div class="flex flex-auto items-stretch">
                          <input name="institution" value="{{ $members->institution}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                         <div>
+                            @error('nim')
+                                    <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
+                        </div>
                      </div>
                  </div>
              </div>
@@ -106,6 +120,11 @@
                         @if ($members->gender == 'Perempuan') checked @endif>
                      <label for="">Perempuan</label>
                  </div>
+                 <div>
+                    @error('nim')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
+                </div>
              </div>
          </div>
          {{-- End Jenis Kelamin --}}
@@ -119,6 +138,11 @@
              </div>
              <div class="flex flex-auto items-stretch px-4 py-3">
                  <textarea type="text" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300" name="address" id="" cols="30" rows="2">{{ $members->address}}</textarea>
+                 <div>
+                    @error('nim')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
+                </div>
              </div>
          </div>
          {{-- End Alamat --}}
@@ -132,6 +156,11 @@
              </div>
              <div class="px-4 py-3">
                  <input name="phone" value="{{ $members->phone}}" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                 <div>
+                    @error('nim')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
+                </div>
              </div>
          </div>
          {{-- End Nomor Telepon --}}
@@ -153,6 +182,11 @@
                             <span class="file-custom"></span>
                         </label>
                      </div>
+                     <div>
+                        @error('nim')
+                                <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
+                    </div>
                  </div>
              </div>
          </div>
@@ -167,6 +201,11 @@
              </div>
              <div class="px-4 py-3">
                  <input value="{{ $members->email}}" type="text" name="email" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                 <div>
+                    @error('nim')
+                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                    @enderror
+                </div>
              </div>
          </div>
          {{-- End Surel --}}

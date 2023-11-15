@@ -44,10 +44,10 @@
                     <p class="font-bold text-sm">:</p>
                 </div>
                 <div class="px-4 py-3">
-                    <input type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                    <input type="text" name="born_date" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                 </div>
-                @error('name')
-                            <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                @error('born_date')
+                    <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                 @enderror
             </div>
             {{-- End Tahun Lahir Pengarang --}}

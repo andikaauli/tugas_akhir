@@ -31,6 +31,9 @@
                     </div>
                     <div class="px-4 py-3">
                         <input name="title" type="text" id="small-input" value="{{ $colltypes->title}}" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('title')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             {{-- End Tipe Koleksi --}}

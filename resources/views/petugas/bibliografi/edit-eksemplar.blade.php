@@ -67,6 +67,9 @@
                                     Scan RFID</button>
                             </div>
                         </div>
+                        @error('rfid_code')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                     {{-- End Kode RFID --}}
                     {{-- Kode Eksemplar --}}
@@ -81,6 +84,9 @@
                             <input name="item_code" type="text" id="item-code-input"
                                 value="{{ $eksemplar->item_code }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('item_code')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Kode Eksemplar --}}
@@ -103,6 +109,9 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('book_status_id')
+                                    <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -119,6 +128,9 @@
                             <input name="order_number" type="text" id="small-input"
                                 value="{{ $eksemplar->order_number }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('order_number')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End No. Pemesanan --}}
@@ -134,6 +146,9 @@
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="order_date" id="dateofbirth" value="{{ $eksemplar->order_date }}">
+                        @error('order_date')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
 
                             {{-- {{ Carbon\Carbon::parse($eksemplar->created_at)->format('Y-m-d') }} --}}
 
@@ -153,6 +168,9 @@
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="recipt_date" id="dateofbirth"
                                 value="{{ $eksemplar->receipt_date }}">
+                        @error('recipt_date')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Tanggal Penerimaan --}}
@@ -167,6 +185,9 @@
                         <div class="px-4 py-3">
                             <input name="agent" type="text" id="small-input" value="{{ $eksemplar->agent }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('agent')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Agen --}}
@@ -187,6 +208,9 @@
                                     @if ($eksemplar->source == 'Hadiah') checked @endif>
                                 <label for="">Hadiah/Hibah</label>
                             </div>
+                        @error('source')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Sumber Perolehan --}}
@@ -201,6 +225,9 @@
                         <div class="px-4 py-3">
                             <input name="invoice" type="text" id="small-input" value="{{ $eksemplar->invoice }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('invoice')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Faktur --}}
@@ -215,6 +242,9 @@
                         <div class="px-4 py-3">
                             <input name="price" type="text" id="small-input" value="{{ $eksemplar->price }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('price')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Harga --}}

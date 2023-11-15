@@ -44,6 +44,9 @@
                             <input type="text" id="rfid-input" readonly name="rfid_code"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
+                        @error('rfid_code')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                     </div>
                     {{-- End Kode RFID --}}
                     {{-- Kode Eksemplar --}}
@@ -54,6 +57,9 @@
                         <div class="px-4 py-3">
                             <input type="text" id="small-input" name="item_code"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                            @error('item_code')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Kode Eksemplar --}}
@@ -68,27 +74,8 @@
                     </div>
                 </div> --}}
                     {{-- End No. Panggil --}}
-                    {{-- Tipe Koleksi --}}
-                    {{-- <div class="flex">
-                    <div class="px-4 py-3 font-bold text-sm w-44">
-                        <p>Tipe Koleksi</p>
-                    </div>
-                    <div class="px-4 py-3">
-                        <div class="" style="width:200px;">
-                            <select
-                                class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
-                                <option value="0">Tipe Koleksi</option>
-                                <option value="1">Audi</option>
-                                <option value="2">BMW</option>
-                                <option value="3">Citroen</option>
-                                <option value="4">Ford</option>
-                            </select>
-                        </div>
-                    </div>
-                </div> --}}
-                    {{-- End Tipe Koleksi --}}
                     {{-- Status --}}
-                    <div class="flex">
+                    <div class="hidden">
                         <div class="px-4 py-3 font-bold text-sm w-44">
                             <p>Status</p>
                         </div>
@@ -97,7 +84,7 @@
                                 <select name="book_status_id"
                                     class="w-52 min-w-fit text-black focus:ring focus:ring-blue-300 focus:border-blue-600 font-medium rounded border border-solid border-gray-400 text-sm px-2.5 py-1.5 mr-1 items-center">
                                     @foreach ($statuses as $status)
-                                        <option value="{{ $status->id }}">
+                                        <option value="2">
                                             {{ $status->name }}
                                         </option>
                                     @endforeach
@@ -114,6 +101,9 @@
                         <div class="px-4 py-3">
                             <input type="text" id="small-input" name="order_number"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                            @error('order_number')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End No. Pemesanan --}}
@@ -126,6 +116,9 @@
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="order_date" id="dateofbirth">
+                             @error('order_date')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Tanggal Pemesanan --}}
@@ -138,6 +131,9 @@
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="receipt_date" id="dateofbirth">
+                        @error('receipt_date')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Tanggal Penerimaan --}}
@@ -149,6 +145,9 @@
                         <div class="px-4 py-3">
                             <input type="text" id="small-input" name="agent"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                            @error('agent')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Agen --}}
@@ -164,6 +163,9 @@
                                 <input class="mr-2" type="radio" name="source" value="Hadiah" id="">
                                 <label for="">Hadiah/Hibah</label>
                             </div>
+                            @error('source')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Sumber Perolehan --}}
@@ -175,6 +177,9 @@
                         <div class="px-4 py-3">
                             <input type="text" id="small-input" name="invoice"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        @error('invoice')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Faktur --}}
@@ -186,6 +191,9 @@
                         <div class="px-4 py-3">
                             <input type="text" id="small-input" name="price"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                            @error('price')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Harga --}}

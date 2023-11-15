@@ -40,8 +40,12 @@ use App\Http\Controllers\Client\UsersController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/profil');
 });
 
 Route::group(['prefix' => '/bibliografi', 'middleware' => ['auth']], function () {

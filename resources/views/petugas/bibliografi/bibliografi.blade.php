@@ -94,8 +94,6 @@
                                 <td class="p-3">
                                     <div class="flex">
                                         <img src="{{ $biblio->image ?? 'assets/blank-book.png' }}" class="w-12 h-16">
-
-                                        </img>
                                         <div class="ml-4">
                                             <p class="text-sm font-medium">{{ $biblio->title }}</p>
                                             {{-- <p class="text-sm font-medium text-gray-500">{{$biblio->author->title}}</p> --}}
@@ -107,7 +105,11 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
+                                @if(isset($biblio->isbnissn))
+                                    <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
+                                @else
+                                    <td class="p-3 w-36">-</td>
+                                @endif
                                 <td class="p-3 w-16 text-center">{{ count($biblio->eksemplar) }}</td>
                                 <td class="p-3 w-52">{{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at )) }}</td>
                             </tr>

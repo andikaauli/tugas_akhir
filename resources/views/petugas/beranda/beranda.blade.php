@@ -26,6 +26,9 @@
             </div>
             <div>
                 <p class="font-semibold text-3xl">{{ count($biblios) }}</p>
+                @if ($biblios->isEmpty())
+                    <p class="font-semibold text-3xl">-</p>
+                @endif
                 <p class="font-semibold text-base">Total Koleksi</p>
             </div>
         </div>
@@ -37,6 +40,9 @@
             </div>
             <div>
                 <p class="font-semibold text-3xl">{{ count($eksemplars) }}</p>
+                @if ($eksemplars->isEmpty())
+                    <p class="font-semibold text-3xl">-</p>
+                @endif
                 <p class="font-semibold text-base">Total Eksemplar</p>
             </div>
         </div>
@@ -48,6 +54,9 @@
             </div>
             <div>
                 <p class="font-semibold text-3xl">{{ count($loans) }}</p>
+                @if ($loans->isEmpty())
+                    <p class="font-semibold text-3xl">-</p>
+                @endif
                 <p class="font-semibold text-base">Dipinjamkan</p>
             </div>
         </div>
@@ -60,6 +69,9 @@
             </div>
             <div>
                 <p class="font-semibold text-3xl">{{ count($members) }}</p>
+                @if ($members->isEmpty())
+                    <p class="font-semibold text-3xl">-</p>
+                @endif
                 <p class="font-semibold text-base">Anggota</p>
             </div>
         </div>
