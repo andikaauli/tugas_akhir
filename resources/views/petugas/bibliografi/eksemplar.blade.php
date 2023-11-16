@@ -82,6 +82,7 @@
                             <th class="text-left p-3">SUNTING</th>
                             <th class="text-left p-3">KODE EKSEMPLAR</th>
                             <th class="text-left p-3">JUDUL</th>
+                            <th class="text-left p-3">KODE RFID</th>
                             <th class="text-left p-3">STATUS</th>
                             <th class="text-left p-3">TIPE KOLEKSI</th>
                             {{-- <th class="text-left p-3">NO. PANGGIL</th> --}}
@@ -121,6 +122,7 @@
                                         </p>
                                     </div>
                                 </td>
+                                <td class="p-3 w-32">{{$eks->rfid_code}}</td>
                                 <td class="p-3 w-24">{{$eks->bookstatus->name}}</td>
                                 {{-- <td class="p-3 w-32">{{$eks->biblio->colltype->title}}</td> --}}
                                 @if(isset($eks->biblio->colltype->title))
