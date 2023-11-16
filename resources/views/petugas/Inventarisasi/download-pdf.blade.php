@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
         {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> --}}
-        <link rel="stylesheet" href="<?php echo asset('style.css')?>">
 
         <title>Laravel</title>
 
@@ -13,12 +12,51 @@
         {{-- <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"> --}}
 
-        <style>
+        {{-- <style>
             body {
                 font-family: 'quicksand';
             }
         </style>
-        @vite('resources/css/app.css')
+        @vite('resources/css/app.css') --}}
+        <style>
+            .flex {
+                display: flex;
+            }
+            .items-center {
+                align-items: center;
+            }
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .pt-4 {
+                padding-top: 1rem;
+            }
+            .my-5 {
+                margin-top: 1.25rem;
+            }
+            .text-3xl {
+                font-size: 1.875rem;
+                line-height: 2.25rem;
+            }
+            .font-bold {
+                font-weight: 700;
+            }
+            .h-full {
+                height: 100%;
+            }
+
+            .border-y {
+                border-top-width: 1px;
+                border-bottom-width: 1px;
+            }
+            .border-solid {
+                border-style: solid;
+            }
+            .table-auto {
+                table-layout: auto;
+            }
+        </style>
 </head>
 <body class="">
     {{-- Content --}}
@@ -27,167 +65,75 @@
      {{-- Section 1 --}}
        <div class="px-4 pt-4 flex my-5">
           <div class="flex items-center">
-             <p class="text-3xl text-black font-bold">
+             <h1 class="text-3xl text-black font-bold">
                 Hasil Stock Opname
-             </p>
+             </h1>
           </div>
           {{-- @endif --}}
        </div>
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
     <form action="{{ route('client.stockopname', ['id' => $stockopnames->id]) }}">
-        <div class="h-full">
-                <div class="">
-           {{-- Nama Stock Opname --}}
-               <div class="flex border-y border-solid border-gray-300">
-                   <div class="px-4 py-3 text-sm w-44">
-                       <p class="font-medium text-sm">Nama Stock Opname</p>
-                   </div>
-                   <div class="px-4 py-3 text-sm">
-                       <p>:</p>
-                   </div>
-                   <div class="flex flex-auto items-stretch px-4 py-3">
-                       <p class="text-sm font-medium">{{$stockopnames->name}}</p>
-                   </div>
-               </div>
-           {{-- End Nama Stock Opname --}}
-               {{-- Tanggal Mulai --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Tanggal Mulai</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</p>
-                    </div>
-                   </div>
-               {{-- End Tanggal Mulai --}}
-               {{-- Tanggal Selesai --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Tanggal Selesai</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</p>
-                    </div>
-                   </div>
-               {{-- End Tanggal Selesai --}}
-               {{-- Yang Menginisialisasi --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Yang Menginisialisasi</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->name_user}}</p>
-                    </div>
-                   </div>
-               {{-- End Yang Menginisialisasi --}}
-               {{-- TTotal Eksemplar Dimiliki --}}
-               <div class="flex border-b border-gray-300">
-                <div class="px-4 py-3 text-sm w-44">
-                    <p class="font-medium text-sm">Total Eksemplar Dimiliki</p>
-                </div>
-                <div class="px-4 py-3 text-sm">
-                    <p>:</p>
-                </div>
-                <div class="flex flex-auto items-stretch px-4 py-3">
-                 <p class="text-sm font-medium">{{$stockopnames->total_eksemplar}}</p>
-             </div>
-            </div>
-        {{-- End Total Eksemplar Dimiliki --}}
-               {{-- Total Eksemplar Terinventarisasi --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Total Eksemplar yang Diperiksa</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->total_diperiksa}}</p>
-                    </div>
-                   </div>
-               {{-- End Total Eksemplar Terinventarisasi --}}
-               {{-- Total Eksemplar Hilang --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Total Eksemplar Hilang</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->total_hilang}}</p>
-                    </div>
-                   </div>
-               {{-- End Total Eksemplar Hilang --}}
-               {{-- Total Eksmplar Tersedia --}}
-                <div class="flex border-b border-gray-300">
-                    <div class="px-4 py-3 text-sm w-44">
-                        <p class="font-medium text-sm">Total Eksmplar Tersedia</p>
-                    </div>
-                    <div class="px-4 py-3 text-sm">
-                        <p>:</p>
-                    </div>
-                    <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
-                    </div>
-                </div>
-                {{-- End Total Eksmplar Tersedia --}}
-               {{-- Total Eksemplar Terpinjam --}}
-                    <div class="flex border-b border-gray-300">
-                        <div class="px-4 py-3 text-sm w-44">
-                            <p class="font-medium text-sm">Total Eksemplar Terpinjam</p>
-                        </div>
-                        <div class="px-4 py-3 text-sm">
-                            <p>:</p>
-                        </div>
-                        <div class="flex flex-auto items-stretch px-4 py-3">
-                            <p class="text-sm font-medium">{{$stockopnames->total_terpinjam}}</p>
-                        </div>
-                    </div>
-                {{-- End Total Eksemplar Terpinjam --}}
-                {{-- Progres Eksemplar Terpindai --}}
-                <div class="flex border-b border-gray-300">
-                    <div class="px-4 py-3 text-sm w-44">
-                        <p class="font-medium text-sm">Progres Eksemplar Terpindai</p>
-                    </div>
-                    <div class="px-4 py-3 text-sm">
-                        <p>:</p>
-                    </div>
-                    <div class="flexitems-stretch px-4 py-3">
-                        @php
-                            $num = $stockopnames->total_persen;
-                            $formattedNum = number_format($num);
-                        @endphp
-                        <p class="text-sm font-medium">{{$formattedNum}}% / 100%</p>
-                    </div>
-                </div>
-            {{-- End Progres Eksemplar Terpindai --}}
+        <table class="table-auto">
+            <thead>
+              <tr>
+                <th>Keterangan</th>
+                <th>Data Hasil</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Nama Stock Opname</td>
+                <td>{{$stockopnames->name}}</td>
+            </tr>
+            <tr>
+                <td>Tanggal Mulai</td>
+                <td>{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</td>
+            </tr>
+            <tr>
+                <td>Tanggal Selesai</td>
+                <td>{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</td>
+            </tr>
+            <tr>
+                <td>Yang Menginisialisasi</td>
+                <td>{{$stockopnames->name_user}}</td>
+            </tr>
+            <tr>
+                <td>Total Eksemplar Dimiliki</td>
+                <td>{{$stockopnames->total_eksemplar}}</td>
+            </tr>
+            <tr>
+                <td>Total Eksemplar yang Diperiksa</td>
+                <td>{{$stockopnames->total_diperiksa}}</td>
+            </tr>
+            <tr>
+                <td>Total Eksemplar Hilang</td>
+                <td>{{$stockopnames->total_hilang}}</td>
+            </tr>
+            <tr>
+                <td>Total Eksmplar Tersedia</td>
+                <td>{{$stockopnames->total_tersedia}}</td>
+            </tr>
+            <tr>
+                <td>Total Eksemplar Terpinjam</td>
+                <td>{{$stockopnames->total_terpinjam}}</td>
+            </tr>
+            <tr>
+                <td>Progres Eksemplar Terpindai</td>
+                <td>@php
+                        $num = $stockopnames->total_persen;
+                        $formattedNum = number_format($num);
+                    @endphp
+                    {{$formattedNum}}% / 100%
+                </td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>{{$stockopnames->status_stockopname}}</td>
+            </tr>
+            </tbody>
+          </table>
 
-               {{-- Status --}}
-                   <div class="flex border-b border-gray-300">
-                       <div class="px-4 py-3 text-sm w-44">
-                           <p class="font-medium text-sm">Status</p>
-                       </div>
-                       <div class="px-4 py-3 text-sm">
-                           <p>:</p>
-                       </div>
-                       <div class="flex flex-auto items-stretch px-4 py-3">
-                        <p class="text-sm font-medium">{{$stockopnames->status_stockopname}}</p>
-                    </div>
-                   </div>
-               {{-- End Status --}}
-               </div>
-        </div>
     </form>
    {{-- End Section 2 --}}
     </div>

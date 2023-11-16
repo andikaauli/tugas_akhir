@@ -9,7 +9,7 @@
     {{-- End Section 1 --}}
     {{-- Setion 2 --}}
     <div class="mb-10">
-        <div class="grid gap-10 grid-cols-3 px-20">
+        <div class="grid gap-10 grid-cols-3 w- px-20">
             <div class="col-span-2">
                 <div class="bg-teknik py-5 text-xl border-x border-t border-black rounded-t-md font-extrabold text-white text-center">
                     <p>Library Information</p>

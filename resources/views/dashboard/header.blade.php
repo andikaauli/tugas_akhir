@@ -10,6 +10,9 @@
 <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+{{-- <link rel="shortcut icon" href="{{asset('assets/undip.png')}}"> --}}
+<link rel="icon" href="{{ asset('/assets/undip.png') }}" sizes="32x32"/>
+
 <!-- Styles -->
 <style>
 

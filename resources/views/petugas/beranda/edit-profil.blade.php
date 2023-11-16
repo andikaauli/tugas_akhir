@@ -109,8 +109,9 @@
                         <p class="font-bold text-sm">:</p>
                     </div>
                     <div class="px-4 py-3">
-                        <input type="password" name="new_password" id="small-input" value=""
+                        <input type="password" name="new_password" id="myInput" value=""
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
+                        <input type="checkbox" onclick="myFunction()">Show Password
                     </div>
                 </div>
                 {{-- End Kata Sandi Baru --}}
@@ -162,4 +163,15 @@
         const box = document.getElementById('session');
         box.style.display = 'none';
     }, 5000);
+</script>
+
+<script>
+    function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
 </script>
