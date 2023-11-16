@@ -8,16 +8,16 @@
  <div class="sm:ml-64">
     <div class="mt-18">
      {{-- Section 1 --}}
-       <div class="px-4 pt-4 flex my-5">
-          <div class="flex items-center">
-             <p class="text-3xl text-black font-bold">
+       <div class="px-4 pt-4 flex justify-between my-5">
+        <div>
+            <p class="text-3xl text-black font-bold">
                 Hasil Stock Opname
-             </p>
-          </div>
-          {{-- @if (strpos(url()->current(), 'pdf') !== false) --}}
-            <a class="btn btn-primary" href="{{route('client.download',['id' => $stockopnames->id])}}">Download PDF</a>
-          {{-- @endif --}}
-       </div>
+            </p>
+        </div>
+        <div class="flex">
+            <a href="{{route('client.download',['id' => $stockopnames->id])}}" class="rounded px-3 py-2 text-white text-sm font-bold bg-gray-500 hover:bg-blue-500 mr-2">Download PDF</a>
+        </div>
+   </div>
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
     <form action="{{ route('client.stockopname', ['id' => $stockopnames->id]) }}">
