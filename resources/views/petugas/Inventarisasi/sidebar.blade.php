@@ -9,7 +9,7 @@
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full" aria-expanded="false"
                         data-dropdown-toggle="dropdown-user">
                         <img class="w-12 h-12 rounded-full"
-                            src="assets/blank.png" alt="user photo">
+                            src="{{ Auth::user()->image }}" alt="user photo">
                     </button>
                 </div>
             </div>

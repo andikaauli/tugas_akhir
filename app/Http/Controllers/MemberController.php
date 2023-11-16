@@ -74,7 +74,7 @@ class MemberController extends Controller
             'email' => 'nullable|max:255|email', 'unique:member,id',
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|min:11|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member,id',
+            'phone' => 'nullable|min:11|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member,id',
         ]);
 
         $data = $request->all();
@@ -95,6 +95,7 @@ class MemberController extends Controller
                 Storage::delete(str_replace(asset('storage'), 'public', $member->image));
             }
         }
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
