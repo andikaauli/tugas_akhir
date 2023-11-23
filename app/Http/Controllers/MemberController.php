@@ -33,14 +33,14 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|digits_between:14,20|numeric|unique:members,nim'.$request->id,
+            'nim' => 'required|digits_between:10,20|numeric|unique:members,nim',
             'gender' => 'nullable',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|max:255',
-            'email' =>  'required|email|unique:members,email,'.$request->id,
+            'email' =>  'required|email|unique:members,email,',
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone'.$request->id,
+            'phone' => 'nullable|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone',
         ]);
 
         $data = $request->all();
@@ -67,14 +67,14 @@ class MemberController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|digits_between:14,20|numeric|unique:members,nim'.$request->id,
+            'nim' => "required|digits_between:10,20|numeric|unique:members,nim,$id",
             'gender' => 'nullable',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|max:255',
-            'email' =>  'required|email|unique:members,email,'.$request->id,
+            'email' => "required|email|unique:members,email,$id",
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone'.$request->id,
+            'phone' => "required|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone,$id",
         ]);
 
         $data = $request->all();
