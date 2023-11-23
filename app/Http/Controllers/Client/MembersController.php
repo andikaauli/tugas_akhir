@@ -103,7 +103,7 @@ class MembersController extends Controller
 		$http = $http->create(url('api') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
 		$response = app()->handle($http);
 
-		dd($response);
+		// dd($response);
 
 		if ($response->isClientError()) {
 			return redirect()->back()->withErrors((array) json_decode($response->getContent()));

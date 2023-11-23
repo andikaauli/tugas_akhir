@@ -42,7 +42,7 @@ class EksemplarController extends Controller
         $validator = Validator::make($request->all(), [
             'biblio_id' => 'required|exists:biblio,id',
             'item_code' => 'required|numeric',
-            'rfid_code' => 'nullable',
+            'rfid_code' => 'nullable|unique:eksemplar,rfid_code',
             'order_number' => 'nullable|numeric',
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
@@ -65,7 +65,7 @@ class EksemplarController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'item_code' => 'required|numeric',
-            'rfid_code' => 'nullable',
+            'rfid_code' => "nullable|unique:eksemplar,rfid_code,$id",
             'order_number' => 'nullable|numeric',
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',

@@ -95,7 +95,7 @@
                      <div class="flex flex-auto items-stretch">
                          <input name="institution" value="{{ $members->institution}}" type="text" id="small-input" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                          <div>
-                            @error('nim')
+                            @error('institution')
                                     <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                             @enderror
                         </div>
@@ -121,7 +121,7 @@
                      <label for="">Perempuan</label>
                  </div>
                  <div>
-                    @error('nim')
+                    @error('gender')
                             <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                     @enderror
                 </div>
@@ -139,7 +139,7 @@
              <div class="flex flex-auto items-stretch px-4 py-3">
                  <textarea type="text" class="flex-auto py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300" name="address" id="" cols="30" rows="2">{{ $members->address}}</textarea>
                  <div>
-                    @error('nim')
+                    @error('address')
                             <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                     @enderror
                 </div>
@@ -157,7 +157,7 @@
              <div class="px-4 py-3">
                  <input name="phone" value="{{ $members->phone}}" type="text" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                  <div>
-                    @error('nim')
+                    @error('pgone')
                             <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                     @enderror
                 </div>
@@ -183,7 +183,7 @@
                         </label>
                      </div>
                      <div>
-                        @error('nim')
+                        @error('image')
                                 <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                         @enderror
                     </div>
@@ -202,7 +202,7 @@
              <div class="px-4 py-3">
                  <input value="{{ $members->email}}" type="text" name="email" id="small-input" class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                  <div>
-                    @error('nim')
+                    @error('email')
                             <p class="flex items-center text-red-500 ml-4 text-sm font-semibold animate-pulse">{{ $message }}</p>
                     @enderror
                 </div>

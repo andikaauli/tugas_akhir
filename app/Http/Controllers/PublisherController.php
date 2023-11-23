@@ -30,7 +30,7 @@ class PublisherController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255|string',
+            'title' => "required|max:255|string|unique:publisher,title",
         ]);
 
         if ($validator->fails()) {
@@ -45,7 +45,7 @@ class PublisherController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255|string',
+            'title' => "required|max:255|string|unique:publisher,title",
         ]);
 
         if ($validator->fails()) {
