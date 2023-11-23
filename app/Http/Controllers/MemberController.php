@@ -33,14 +33,14 @@ class MemberController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|min:14|numeric', 'unique:member',
+            'nim' => 'required|digits_between:14,20|numeric|unique:members,nim'.$request->id,
             'gender' => 'nullable',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|max:255',
-            'email' => 'nullable|max:255|email', 'unique:member',
+            'email' =>  'required|email|unique:members,email,'.$request->id,
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|min:11|numeric|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member',
+            'phone' => 'nullable|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone'.$request->id,
         ]);
 
         $data = $request->all();
@@ -67,14 +67,14 @@ class MemberController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'nim' => 'required|min:14|numeric', 'unique:member,id',
+            'nim' => 'required|digits_between:14,20|numeric|unique:members,nim'.$request->id,
             'gender' => 'nullable',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|max:255',
-            'email' => 'nullable|max:255|email', 'unique:member,id',
+            'email' =>  'required|email|unique:members,email,'.$request->id,
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'phone' => 'nullable|min:11|regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:member,id',
+            'phone' => 'nullable|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone'.$request->id,
         ]);
 
         $data = $request->all();

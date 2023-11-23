@@ -111,7 +111,7 @@
                     <div class="px-4 py-3">
                         <input type="text" name="new_password" id="small-input" value=""
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
-                        <input type="checkbox" onclick="myFunction()">Show Password
+                        {{-- <input type="checkbox" onclick="myFunction()">Show Password --}}
                     </div>
                 </div>
                 {{-- End Kata Sandi Baru --}}

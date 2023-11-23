@@ -14,14 +14,14 @@ class BibliografiTest extends TestCase
      * @return void
      */
 
-    //  public function test_pengunjung_dapat_melihat_daftar_bibliografi()
-    // {
-    //     $response = $this->get('/api/biblio');
-    //     $response->assertStatus(200);
-    // }
-    // public function test_pengunjung_dapat_melihat_detail_bibliografi()
-    // {
-    //     $response = $this->get('/api/biblio/9a9f35c3-5469-4cc6-8dfa-3c36077612e6');
-    //     $response->assertStatus(200);
-    // }
+     public function test_pengunjung_dapat_melihat_daftar_bibliografi()
+    {
+        $response = $this->get('/api/biblio');
+        $response->assertStatus(200);
+    }
+    public function test_pengunjung_dapat_melihat_detail_bibliografi()
+    {
+        $response = $this->get('/api/biblio/9aab427b-c834-429b-885f-11669869b4b8');
+        $response->assertStatus(200);
+    }
 }
