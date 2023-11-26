@@ -21,7 +21,7 @@ class AuthorsController extends Controller
 		// $response = app()->handle($http);
 		// $response = $response->getContent();
 		// $authors = json_decode($response);
-		$authors = Author::where('title', 'LIKE', "%$search%")->paginate(5);
+		$authors = Author::where('title', 'LIKE', "%$search%")->paginate(10);
 		// dd($authors);
 
 

@@ -24,12 +24,13 @@
                     class="relative w-80 m-0 mr-1 mb-3 block rounded border border-solid border-gray-400 focus:ring focus:ring-blue-300"
                     placeholder="" aria-label="Search" aria-describedby="button-addon3" />
                 {{-- Btn Filter --}}
-                <button id="button-ubah-status"
+                <button id="button-ubah-status" type="button"
                     class="px-3 h-10 rounded text-white text-sm font-semibold bg-blue-600 hover:bg-blue-500">
                     Ubah Status
                 </button>
                 {{-- End Btn Filter --}}
             </form>
+            <p id='messagecode'class="mr-3 mb-2 font-medium"></p>
         </div>
         {{-- End Search Bar --}}
         {{-- Section 2 --}}
@@ -177,11 +178,16 @@
                     throw response;
                 }
                 inputItemCode.value = ''
+                response.json().then((body) => {
+                    //Here is already the payload from API
+                    document.getElementById('messagecode').innerHTML = body.message
+                })
             })
             .catch(error => {
                 error.json().then((body) => {
                     //Here is already the payload from API
-                    alert(body.message);
+                    // alert(body.message);
+                    document.getElementById('messagecode').innerHTML = body.message
                 })
                 // alert(error)
             })

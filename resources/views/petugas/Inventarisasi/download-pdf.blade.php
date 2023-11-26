@@ -58,6 +58,18 @@
             .table-auto {
                 table-layout: auto;
             }
+            h1{
+                text-align: center;
+            }
+            table, tr, td {
+                /* border: 1px solid; */
+                border: 1px solid #000000;
+                padding: 8px 20px;
+            }
+            table{
+                width: 100%;
+            }
+
         </style>
 </head>
 <body class="">

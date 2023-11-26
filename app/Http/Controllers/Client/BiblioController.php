@@ -115,8 +115,9 @@ class BiblioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $showModal = $request->has('showModal') || session()->has('showModal');
         $http = new Request();
         $http = $http->create(url('api') . '/biblio/' . $id);
         $response = app()->handle($http);
@@ -151,7 +152,8 @@ class BiblioController extends Controller
 
         // dd($bibliografi);
 
-        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher, 'colltypes' => $collType, 'statuses' => $bsApi]);
+        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher,
+        'colltypes' => $collType, 'statuses' => $bsApi, 'showModal' => $showModal]);
     }
 
     public function detail($id)

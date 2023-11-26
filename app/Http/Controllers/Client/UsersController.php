@@ -26,7 +26,7 @@ class UsersController extends Controller
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         }
 
-        dd($response);
+        // dd($response);
 
         return redirect()->route('client.edit-profil')->with('success', 'Profile berhasil diperbaharui!');
     }

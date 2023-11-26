@@ -67,7 +67,7 @@ class EksemplarsController extends Controller
 
         // dd($response);
         if ($response->isClientError()) {
-            return redirect($request->fullUrl())->withErrors((array) json_decode($response->getContent()));
+            return redirect($request->fullUrl().'?showModal')->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 

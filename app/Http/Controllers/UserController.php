@@ -84,11 +84,20 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         $user->update($data);
 
-        $user->update([
-            'password' => Hash::make($request->new_password),
-        ]);
+        //cuma bisa rubah password aja, jika ubah info lain error
+        if ($request->has('new_password') && $request->new_password) {
+            $user->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+        }
+
+        // $user->update([
+        //     'password' => Hash::make($request->new_password),
+        // ]);
+
         return response()
             ->json(['message' => 'Data Admin berhasil diubah!', 'data' => $user]);
     }
