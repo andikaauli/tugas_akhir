@@ -75,7 +75,7 @@ class BiblioController extends Controller
         $collType = json_decode($collTypeRes);
 
 
-        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes" => $collType, "errors"=> $errors]);
+        return view('petugas/bibliografi/create-bibliografi', ["pengarang" => $pengarang, "publishers" => $publisher, "colltypes" => $collType, "errors" => $errors]);
     }
 
     /**
@@ -117,6 +117,8 @@ class BiblioController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        $errors = session('errors') ?? new ViewErrorBag();
+        $page = $request->page;
         $showModal = $request->has('showModal') || session()->has('showModal');
         $http = new Request();
         $http = $http->create(url('api') . '/biblio/' . $id);
@@ -152,8 +154,10 @@ class BiblioController extends Controller
 
         // dd($bibliografi);
 
-        return view('petugas/bibliografi/edit-bibliografi', ['bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher,
-        'colltypes' => $collType, 'statuses' => $bsApi, 'showModal' => $showModal]);
+        return view('petugas/bibliografi/edit-bibliografi', [
+            'bibliografi' => $bibliografi, "pengarang" => $pengarang, "publishers" => $publisher,
+            'colltypes' => $collType, 'statuses' => $bsApi, 'showModal' => $showModal, 'page' => $page, 'errors' => $errors
+        ]);
     }
 
     public function detail($id)
@@ -211,7 +215,7 @@ class BiblioController extends Controller
         }
 
 
-        return redirect()->route('client.bibliografi')->with('success', 'Bibliografi berhasil diperbaharui!');
+        return redirect()->route('client.bibliografi', ['page' => $request->page])->with('success', 'Bibliografi berhasil diperbaharui!');
     }
 
     /**

@@ -67,7 +67,7 @@ class EksemplarsController extends Controller
 
         // dd($response);
         if ($response->isClientError()) {
-            return redirect($request->fullUrl().'?showModal')->withErrors((array) json_decode($response->getContent()));
+            return redirect($request->fullUrl() . '?showModal')->withErrors((array) json_decode($response->getContent()));
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
@@ -110,7 +110,7 @@ class EksemplarsController extends Controller
         $bookstatuss = BookStatus::all();
         // $bss = $bookstatus->get();
 
-        if($eksemplar->book_status_id == 1){
+        if ($eksemplar->book_status_id == 1) {
             $bookstatuss = $bookstatuss->filter(function ($bookstatus) {
                 return $bookstatus->id == 1;
             });
