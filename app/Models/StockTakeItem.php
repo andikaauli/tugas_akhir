@@ -25,7 +25,6 @@ class StockTakeItem extends Model
     }
     protected $guarded = [
         'id',
-
     ];
 
 }
