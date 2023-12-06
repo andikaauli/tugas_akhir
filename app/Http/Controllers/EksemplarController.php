@@ -41,8 +41,8 @@ class EksemplarController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'biblio_id' => 'required|exists:biblio,id',
-            'item_code' => 'required|numeric',
-            'rfid_code' => 'nullable',
+            'item_code' => 'required|numeric|unique:eksemplar,item_code',
+            'rfid_code' => 'nullable|unique:eksemplar,rfid_code',
             'order_number' => 'nullable|numeric',
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
@@ -64,8 +64,8 @@ class EksemplarController extends Controller
     public function editData(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'item_code' => 'required|numeric',
-            'rfid_code' => 'nullable',
+            'item_code' => "required|numeric|unique:eksemplar,item_code,$id",
+            'rfid_code' => "nullable|unique:eksemplar,rfid_code,$id",
             'order_number' => 'nullable|numeric',
             'order_date' => 'nullable|date',
             'receipt_date' => 'nullable|date',
@@ -79,6 +79,7 @@ class EksemplarController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         $eksemplar = Eksemplar::find($id);
         $eksemplar->update($request->all());
         return response()

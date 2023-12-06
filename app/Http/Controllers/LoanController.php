@@ -135,7 +135,9 @@ class LoanController extends Controller
             'item_code' => 'required|numeric',
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([$validator->errors(), 'message' => 'Masukkan Kode Eksemplar Yang Akan Dikembalikan'], 422);
+            // return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak tersedia'], 404);
+
         }
 
         $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
@@ -167,13 +169,14 @@ class LoanController extends Controller
                     ]);
                 }
                 $loanData->refresh();
-                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' berhasil dikembalikan!', 'data' => $loanData, 'eksemplar' => $eksemplar]);
+                return response()->json(['message' => 'Eksemplar berjudul '.($eksemplar->biblio->title).' dengan kode ' . ($request->item_code) . ' berhasil dikembalikan!', 'data' => $loanData, 'eksemplar' => $eksemplar]);
             } else {
                 return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak ada di peminjaman!']);
             }
         }
 
         return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak tersedia'], 404);
+
     }
 
     public function perpanjang(Request $request, $id)

@@ -42,7 +42,7 @@
                     </div>
                     <div class="px-4 py-3">
                         <input type="text" name="name" id="sname"
-                            value="{{ old('username') ? old('username') : $user->name }}"
+                            value="{{ auth()->user()->name }}"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="px-4 py-3">
                         <input type="text" name="username" id="username"
-                            value="{{ old('name') ? old('name') : $user->username }}"
+                            value="{{ auth()->user()->username }}"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="px-4 py-3">
                         <input type="text" name="email" id="email"
-                            value="{{ old('email') ? old('email') : $user->email }}"
+                            value="{{ auth()->user()->email }}"
                             class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                     </div>
                 </div>

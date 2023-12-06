@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+// use App\Models\author;
+use App\Models\Author;
+use App\Models\Colltype;
+// use App\Models\CollType;
 use App\Models\Eksemplar;
-use App\Models\author;
-use App\Models\colltype;
-use App\Models\publisher;
+use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

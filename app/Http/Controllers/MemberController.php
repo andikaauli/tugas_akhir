@@ -37,7 +37,7 @@ class MemberController extends Controller
             'gender' => 'nullable',
             'birth_date' => 'nullable|date',
             'address' => 'nullable|max:255',
-            'email' =>  'required|email|unique:members,email,',
+            'email' =>  'required|email|unique:members,email',
             'institution' => 'nullable|max:255|string',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
             'phone' => 'nullable|digits_between:11,15|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|unique:members,phone',

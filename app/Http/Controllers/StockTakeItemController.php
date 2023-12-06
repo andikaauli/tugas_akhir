@@ -19,7 +19,7 @@ class StockTakeItemController extends Controller
         })->whereHas('stockopname', function ($query) {
             $query->whereNull('end_date');
         })->where("book_status_id", 3)->first();
-        
+
         $stocktakeitem->update([
             'book_status_id' => 2
         ]);
@@ -53,7 +53,7 @@ class StockTakeItemController extends Controller
                 $stocktakeitem->update([
                     'book_status_id' => 2
                 ]);
-                return response()->json((['message' => 'success', 'data' => $stocktakeitem, 'eksemplar' => $stocktakeitem->eksemplar]));
+                return response()->json((['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' berhasil diubah ke Tersedia', 'data' => $stocktakeitem, 'eksemplar' => $stocktakeitem->eksemplar]));
             }
         }
 

@@ -28,7 +28,7 @@ class AuthorController extends Controller
     public function addData(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255|string',
+            'title' => "required|max:255|string|unique:author,title",
             'born_date' => 'nullable|numeric',
         ]);
 
@@ -45,7 +45,7 @@ class AuthorController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:255|string',
+            'title' => "required|max:255|string|unique:author,title,$id",
             'born_date' => 'nullable|numeric',
         ]);
 

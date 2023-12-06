@@ -1,7 +1,7 @@
 <form action="{{ route('client.create-eksemplar', ['id' => $bibliografi->id]) }}" method="POST" class="m-0 p-0">
     @csrf
     <div
-        class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+        class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 {{$showModal ? 'flex' : 'hidden'}}">
         {{-- Modal --}}
         {{-- Tambah Eksemplar --}}
         <div class=" bg-white rounded-2xl">

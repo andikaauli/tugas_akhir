@@ -33,6 +33,9 @@
                 </button>
                 {{-- End Btn Search --}}
             </div>
+            <div class="flex items-center px-4 py-5">
+                <p id='messagecode'class="mr-3 font-medium"></p>
+            </div>
             {{-- End Search Bar --}}
         </div>
     </div>
@@ -62,13 +65,13 @@
 
                 response.json().then((body) => {
                     //Here is already the payload from API
-                    alert(body.message);
+                    document.getElementById('messagecode').innerHTML = body.message
                 })
             })
             .catch(error => {
                 error.json().then((body) => {
                     //Here is already the payload from API
-                    alert(body.message);
+                    document.getElementById('messagecode').innerHTML = body.message
                 })
                 // alert(error)
             })
