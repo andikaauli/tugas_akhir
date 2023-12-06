@@ -115,11 +115,11 @@
               <tbody>
                   @foreach ($visitors as $visitor)
                  <tr class="border-b border-solid border-gray-400">
-                    <td class="p-3 leading-6 w-80" >{{$nomor++}}</td>
-                    <td class="p-3 leading-6 w-80">{{$visitor->name}}</td>
-                    <td class="p-3 leading-6 w-80">{{$visitor->institution}}</td>
-                    <td class="p-3 leading-6 w-80">{{$visitor->type->name}}</td>
-                    <td class="p-3 leading-6 w-80">{{ \Carbon\Carbon::createFromTimestamp(strtotime($visitor->created_at))->format('l, d M Y H:i') }}</td>
+                    <td class="p-3 leading-6 w-12" >{{$nomor++}}</td>
+                    <td class="p-3 leading-6">{{$visitor->name}}</td>
+                    <td class="p-3 leading-6 w-48">{{$visitor->institution}}</td>
+                    <td class="p-3 leading-6 w-42">{{$visitor->type->name}}</td>
+                    <td class="p-3 leading-6 w-60">{{ \Carbon\Carbon::createFromTimestamp(strtotime($visitor->created_at))->format('l, d M Y H:i') }}</td>
                  </tr>
                 @endforeach
                 @if ($visitors->isEmpty())
