@@ -6,6 +6,7 @@ use App\Models\Eksemplar;
 use App\Models\BookStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Redirect;
 
 class EksemplarsController extends Controller
 {
@@ -166,8 +167,10 @@ class EksemplarsController extends Controller
             $http = $http->create(url('api') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
             $response = app()->handle($http);
         }
-        // dd($response);
+        dd($response);
 
         return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar berhasil dihapus!');
+    //    return Redirect::back()->withErrors(['msg' => 'The Message']);
+    //    return redirect()->back();
     }
 }

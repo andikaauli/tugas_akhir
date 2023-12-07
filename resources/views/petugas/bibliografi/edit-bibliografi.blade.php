@@ -4,6 +4,7 @@
 @section('active-bibliografi-navbar', 'text-blue-500 border-blue-500')
 {{-- @dd($bibliografi) --}}
 {{-- Content --}}
+
 <div class="sm:ml-64">
     <div class="mt-18">
         {{-- Section 1 --}}
@@ -397,7 +398,7 @@
                 </div>
                 <div class="px-4 py-3">
                     <input type="text" name="call_number" id="small-input"
-                        value="{{ $bibliografi->call_number }}" 
+                        value="{{ $bibliografi->call_number }}"
                         class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         @error('call_number')
                             <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>

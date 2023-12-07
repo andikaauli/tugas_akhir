@@ -207,7 +207,7 @@ class BibliosController extends Controller
         }
 
 
-        return redirect()->route('client.bibliografi');
+        return redirect()->previous();
     }
 
     /**

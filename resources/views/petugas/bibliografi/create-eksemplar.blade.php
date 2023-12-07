@@ -33,6 +33,7 @@
                             <input type="text" id="small-input" value="{{ $bibliografi->title }}" disabled
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
+
                     </div>
                     {{-- End Judul --}}
                     {{-- Kode RFID --}}
@@ -90,6 +91,9 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @error('book_status_id')
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                        @enderror
                         </div>
                     </div>
                     {{-- End Status --}}

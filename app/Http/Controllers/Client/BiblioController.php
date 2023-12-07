@@ -211,7 +211,7 @@ class BiblioController extends Controller
         }
 
 
-        return redirect()->route('client.bibliografi')->with('success', 'Bibliografi berhasil diperbaharui!');
+        return redirect()->back();;
     }
 
     /**

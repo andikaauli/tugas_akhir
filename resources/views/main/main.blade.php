@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="eng" class="dark">
-    <head>
-       @include('main.header')
-    </head>
+    <header>
+        @include('main.header')
+    </header>
     <body class="antialiased bg-slate-50">
     <div class="relative">
 
