@@ -23,7 +23,26 @@ class Biblio extends Model
         'id',
 
     ];
-
+    protected $fillable = [
+       'title',
+       'responsibility',
+       'edition',
+       'spec_detail',
+       'gmd',
+       'content_type',
+       'media_type',
+       'carrier_type',
+       'date',
+       'isbnissn',
+       'place',
+       'description',
+       'title_series',
+       'classification',
+       'call_number',
+       'language',
+       'abstract',
+       'image',
+    ];
     function eksemplar()
     {
         return $this->hasMany(Eksemplar::class, 'biblio_id', 'id');

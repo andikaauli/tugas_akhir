@@ -1,7 +1,7 @@
 <form action="{{ route('client.create-eksemplar', ['id' => $bibliografi->id]) }}" method="POST" class="m-0 p-0">
     @csrf
     <div
-        class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 {{$showModal ? 'flex' : 'hidden'}}">
+        class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 {{ $showModal ? 'flex' : 'hidden' }}">
         {{-- Modal --}}
         {{-- Tambah Eksemplar --}}
         <div class=" bg-white rounded-2xl">
@@ -46,7 +46,8 @@
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                         </div>
                         @error('rfid_code')
-                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                {{ $message }}</p>
                         @enderror
                     </div>
                     {{-- End Kode RFID --}}
@@ -59,7 +60,8 @@
                             <input type="text" id="small-input" name="item_code"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                             @error('item_code')
-                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -106,7 +108,8 @@
                             <input type="text" id="small-input" name="order_number"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                             @error('order_number')
-                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -120,8 +123,9 @@
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="order_date" id="dateofbirth">
-                             @error('order_date')
-                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                            @error('order_date')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -135,9 +139,10 @@
                             <input
                                 class="px-2 py-1.5 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300"
                                 type="date" name="receipt_date" id="dateofbirth">
-                        @error('receipt_date')
-                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
-                        @enderror
+                            @error('receipt_date')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Tanggal Penerimaan --}}
@@ -150,7 +155,8 @@
                             <input type="text" id="small-input" name="agent"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                             @error('agent')
-                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -168,7 +174,8 @@
                                 <label for="">Hadiah/Hibah</label>
                             </div>
                             @error('source')
-                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -181,9 +188,10 @@
                         <div class="px-4 py-3">
                             <input type="text" id="small-input" name="invoice"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
-                        @error('invoice')
-                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
-                        @enderror
+                            @error('invoice')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Faktur --}}
@@ -196,7 +204,8 @@
                             <input type="text" id="small-input" name="price"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
                             @error('price')
-                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
