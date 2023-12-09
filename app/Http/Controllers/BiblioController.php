@@ -49,7 +49,7 @@ class BiblioController extends Controller
             'media_type' => 'nullable|max:255',
             'carrier_type' => 'nullable|max:255',
             'date' => 'nullable|date',
-            'isbnissn' => ['nullable', 'unique:biblio,isbnissn', 'numeric'],
+            'isbnissn' => 'nullable|unique:biblio,isbnissn|numeric|regex:/^([0-9\s\-\+\(\)]*)$/',
             'publisher_id' => ['nullable', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
             'place' => 'nullable|max:255',
             'description' => 'nullable|max:255',
@@ -96,7 +96,7 @@ class BiblioController extends Controller
             'media_type' => 'nullable|max:255',
             'carrier_type' => 'nullable|max:255',
             'date' => 'nullable|date',
-            'isbnissn' => "nullable|unique:biblio,isbnissn,$id|numeric",
+            'isbnissn' => "nullable|unique:biblio,isbnissn,$id|regex:/^([0-9\s\-\+\(\)]*)$/",
             'publisher_id' => ['nullable', 'exists:publisher,id'], //bentukan kalo ada foreign //bikin ini tidak liat model tapi liat dari migration
             'place' => 'nullable|max:255',
             'description' => 'nullable|max:255',

@@ -130,10 +130,12 @@ class BiblioController extends Controller
         $pengarangRes = app()->handle($pengarangReq);
         $pengarangRes = $pengarangRes->getContent();
 
+
         $publisherReq = new Request();
         $publisherReq = $publisherReq->create(url('api') . '/publisher/');
         $publisherRes = app()->handle($publisherReq);
         $publisherRes = $publisherRes->getContent();
+
 
         $collTypeReq = new Request();
         $collTypeReq = $collTypeReq->create(url('api') . '/colltype/');
@@ -239,6 +241,13 @@ class BiblioController extends Controller
             $response = app()->handle($http);
         }
 
-        return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
+        // return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
+        $eksemplar = Eksemplar::where('biblio_id', $biblioId)->exists();
+        if(!$eksemplar){
+            return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
+
+        }
+        return redirect()->route('client.bibliografi')->with('destroy', 'Biblio tidak dapat dihapus karena masih memiliki eksemplar');
+
     }
 }

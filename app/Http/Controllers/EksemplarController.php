@@ -90,8 +90,20 @@ class EksemplarController extends Controller
     public function destroyData(Request $request, $id)
     { //hard delete
         $eksemplar = Eksemplar::find($id);
-        $eksemplar->forceDelete();
-        return response()
-            ->json(['message' => 'Data Eksemplar ' . ($request->item_code) . ' berhasil dihapus!', 'data' => $eksemplar]);
+        //if eksemplar masih ada di loan dan status Sedang Dipinjam jgn diteruskan di delete
+        // $loan = Loan::where('eksemplar_id', $id)->first();
+        // if ($loan->loan_status == 'Sedang Dipinjam') {
+        //     return response()->json(['message' => 'Eksemplar Sedang dipinjam!'], 422);
+        // }
+        if($eksemplar->book_status_id == 1){
+            return response()->json(['message' => 'Eksemplar Sedang dipinjam!'], 422);
+        } else {
+            $eksemplar->forceDelete();
+            return response()
+                ->json(['message' => 'Data Eksemplar ' . ($request->item_code) . ' berhasil dihapus!', 'data' => $eksemplar]);
+        }
+
+
+
     }
 }

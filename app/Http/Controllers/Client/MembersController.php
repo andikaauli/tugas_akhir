@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Loan;
 use App\Models\Member;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MembersController extends Controller
@@ -134,6 +135,16 @@ class MembersController extends Controller
 			$response = app()->handle($http);
 		}
 
-		return redirect()->route('client.member')->with('destroy', 'Anggota berhasil dihapus!');
+		// return redirect()->route('client.member')->with('destroy', 'Anggota berhasil dihapus!');
+        $member = Member::find($memberId);
+        if ($member) {
+            $loan = Loan::where('member_id', $memberId)->first();
+
+            if ($loan && $loan->member_id == $member->id) {
+                return redirect()->route('client.member')->with('destroy', 'Member tidak dapat dihapus');
+            }
+        }
+
+        return redirect()->route('client.member')->with('destroy', 'Member berhasil dihapus!');
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Loan;
 use App\Models\Eksemplar;
 use App\Models\BookStatus;
 use Illuminate\Http\Request;
@@ -167,10 +168,22 @@ class EksemplarsController extends Controller
             $http = $http->create(url('api') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
             $response = app()->handle($http);
         }
-        dd($response);
+        // dd($response);
+
+        // return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar berhasil dihapus!');
+        $bookstatuss = BookStatus::all();
+        $eksemplar = Eksemplar::find($eksemplarId);
+
+        if ($eksemplar) {
+            $loan = Loan::where('eksemplar_id', $eksemplarId)->first();
+
+            if ($eksemplar->book_status_id == 1) {
+                return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar tidak dapat dihapus karena sedang dipinjam!');
+            } elseif ($loan && $loan->eksemplar_id == $eksemplar->id) {
+                return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar tidak dapat dihapus');
+            }
+        }
 
         return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar berhasil dihapus!');
-    //    return Redirect::back()->withErrors(['msg' => 'The Message']);
-    //    return redirect()->back();
-    }
+        }
 }
