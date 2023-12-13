@@ -68,8 +68,12 @@ class StockOpnamesController extends Controller
 	 */
 	public function show($id, Request $request)
 	{
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
 		$search = $request->search;
-
 		$http = new Request();
 		$http = $http->create(url('api') . '/stockopname/' . $id, 'GET', ['search' => $search]);
 		// if ($search) {

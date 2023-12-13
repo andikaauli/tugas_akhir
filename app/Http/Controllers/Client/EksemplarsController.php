@@ -96,15 +96,20 @@ class EksemplarsController extends Controller
      */
     public function edit($id)
     {
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
         $eksemplar = json_decode($response);
-        
-        if($eksemplar == null){
-            abort(404, 'Not Found');
-        }
+
+        // if($eksemplar == null){
+        //     abort(404, 'Not Found');
+        // }
 
         // ! Dari API
         $bs = new Request();
@@ -125,7 +130,6 @@ class EksemplarsController extends Controller
                 return $bookstatus->id == 2 || $bookstatus->id == 3;
             });
         }
-
         return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bookstatuss]);
     }
 
@@ -138,7 +142,11 @@ class EksemplarsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);

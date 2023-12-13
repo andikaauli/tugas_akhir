@@ -73,6 +73,11 @@ class PublishersController extends Controller
 	 */
 	public function edit(Request $request, $id)
 	{
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
 		$http = new Request();
 		$http = $http->create(url('api') . '/publisher/' . $id);
 		$response = app()->handle($http);
@@ -97,10 +102,10 @@ class PublishersController extends Controller
 	{
 
 		$http = new Request();
-		$http = $http->create(url('api') . '/publisher/edit/' . $id, 'POST', $request->except('_method'));
+		$http = $http->create(url('api') . '/publisher/edit/' . decrypt($id), 'POST', $request->except('_method'));
 		$response = app()->handle($http);
 
-		// dd($response->getContent)();
+		// dd($response);
 
 		if ($response->isClientError()) {
 			return redirect()->back()->withErrors((array) json_decode($response->getContent()));

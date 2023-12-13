@@ -51,8 +51,7 @@ class PublisherController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        // $publisher = Publisher::find($id);
-        $publisher = Publisher::where('title',$id)->first();
+        $publisher = Publisher::find($id);
         $publisher->update($request->all());
         return response()
         ->json(['message'=>'Data Penerbit berhasil diubah!', 'data'=>$publisher]);

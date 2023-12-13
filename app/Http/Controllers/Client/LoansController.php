@@ -152,6 +152,11 @@ class LoansController extends Controller
      */
     public function loan($id)
     {
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/member/' . $id);
         $response = app()->handle($http);
@@ -164,23 +169,24 @@ class LoansController extends Controller
 
         $member = json_decode($response);
 
-        if($member == null){
-            abort(404, 'Not Found');
-        }
+        // if($member == null){
+        //     abort(404, 'Not Found');
+        // }
 
         $loan = json_decode($loan);
+        // dd($loan);
 
         return view('petugas/sirkulasi/peminjaman', ['members' => $member, 'loans' => $loan]);
     }
 
     public function pinjam(Request $request, $member)
     {
-
+        // dd($request->all());
         $http = new Request();
-        $http = $http->create(url('api') . '/loan/add/' . $member, 'POST', $request->all());
+        $http = $http->create(url('api') . '/loan/add/' . decrypt($member), 'POST', $request->all());
         $res = app()->handle($http);
         $res = $res->getContent();
-
+        // dd($res);
 
         return redirect()->route('client.loan', ['id' => $member]);
     }
@@ -195,7 +201,7 @@ class LoansController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+        $http = $http->create(url('api') . '/member/edit/' . decrypt($id), 'POST', $request->except('_method'), files: $request->allFiles());
         $response = app()->handle($http);
 
         // dd($response);
@@ -227,10 +233,10 @@ class LoansController extends Controller
     public function selesai_transaksi($member)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/loan/transaksi/' . $member, 'POST');
+        $http = $http->create(url('api') . '/loan/transaksi/' . decrypt($member), 'POST');
         $res = app()->handle($http);
         $res = $res->getContent();
-
+        // dd($res);
         return redirect()->route('client.loan-start');
     }
 

@@ -121,6 +121,11 @@ class BiblioController extends Controller
         $errors = session('errors') ?? new ViewErrorBag();
         $page = $request->page;
         $showModal = $request->has('showModal') || session()->has('showModal');
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/biblio/' . $id);
         $response = app()->handle($http);
@@ -145,9 +150,9 @@ class BiblioController extends Controller
 
         $bibliografi = json_decode($response);
 
-        if($bibliografi == null){
-            abort(404, 'Not Found');
-        }
+        // if($bibliografi == null){
+        //     abort(404, 'Not Found');
+        // }
 
         $pengarang = json_decode($pengarangRes);
         $publisher = json_decode($publisherRes);
@@ -170,8 +175,13 @@ class BiblioController extends Controller
 
     public function detail($id)
     {
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
-        $http = $http->create(url('api') . '/biblio/' . decrypt($id));
+        $http = $http->create(url('api') . '/biblio/' .$id);
         $response = app()->handle($http);
         $response = $response->getContent();
 
@@ -206,7 +216,7 @@ class BiblioController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/biblio/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+        $http = $http->create(url('api') . '/biblio/edit/' . decrypt($id), 'POST', $request->except('_method'), files: $request->allFiles());
 
 
         // ? 2 Cara filter request

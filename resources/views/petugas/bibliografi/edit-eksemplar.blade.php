@@ -16,7 +16,7 @@
         </div>
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.edit-eksemplar', ['id' => $eksemplar->id]) }}" method="POST" class="h-full">
+        <form action="{{ route('client.edit-eksemplar', encrypt($eksemplar->id)) }}" method="POST" class="h-full">
             @method('PUT')
             @csrf {{ csrf_field() }}
             <div class="h-full">

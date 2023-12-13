@@ -16,7 +16,7 @@
        </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    <form action="{{ route('client.edit-colltypes', ['id' => $colltypes->id]) }}" method="POST" class="m-0 p-0">
+    <form action="{{ route('client.edit-colltypes', encrypt($colltypes->id)) }}" method="POST" class="m-0 p-0">
 
         @method('PUT')
         @csrf

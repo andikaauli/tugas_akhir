@@ -99,8 +99,8 @@
                                     </div>
                                 </td>
                                 <td class="p-3 w-20">
-                                    <a href="{{ route('client.edit-eksemplar', ['id' => $eks->id]) }}"
-                                    {{-- <a href="{{ route('client.edit-eksemplar', [encrypt($eks->id) ]) }}" --}}
+                                    {{-- <a href="{{ route('client.edit-eksemplar', ['id' => $eks->id]) }}" --}}
+                                    <a href="{{ route('client.edit-eksemplar', [encrypt($eks->id) ]) }}"
                                         class="flex items-center justify-center">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">

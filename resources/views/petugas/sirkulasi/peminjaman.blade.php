@@ -14,7 +14,7 @@
     </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    <form action="{{ route('client.loan-transaksi', ['member' => $members->id]) }}" method="POST">
+    <form action="{{ route('client.loan-transaksi', [encrypt($members->id)]) }}" method="POST">
         @csrf
         <div class="bg-white mb-6">
             <div class="p-4">
@@ -82,7 +82,7 @@
             <div class="content hidden bg-white animate-move duration-500 p-5 actived">
                 {{-- Search Bar --}}
                 <form class="flex items-center p-4"
-                    action="{{ route('client.loan-pinjam', ['member' => $members->id]) }}" method="POST">
+                    action="{{ route('client.loan-pinjam', encrypt($members->id)) }}" method="POST">
                     @csrf
                     <p class="mr-3 text-sm font-medium">Masukkan Kode Eksemplar</p>
                     <input type="search" name="item_code"
@@ -114,7 +114,7 @@
                                 </td> --}}
                                 <td class="p-3 w-18">
                                     <form class="m-0"
-                                        action="{{ route('client.loan-hapus', ['loan' => $item->id]) }}"
+                                        action="{{ route('client.loan-hapus', encrypt($item->id)) }}"
                                         method="post">
                                         @csrf
                                         <button type="submit"

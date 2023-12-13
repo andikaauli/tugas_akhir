@@ -78,8 +78,13 @@ class AuthorsController extends Controller
 	 */
 	public function edit($id)
 	{
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
 		$http = new Request();
-		$http = $http->create(url('api') . '/author/' . decrypt($id));
+		$http = $http->create(url('api') . '/author/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
 		$authors = json_decode($response);
@@ -102,7 +107,7 @@ class AuthorsController extends Controller
 	public function update(Request $request, $id)
 	{
 		$http = new Request();
-		$http = $http->create(url('api') . '/author/edit/' . $id, 'POST', $request->except('_method'));
+		$http = $http->create(url('api') . '/author/edit/' . decrypt($id), 'POST', $request->except('_method'));
 		$response = app()->handle($http);
 
 		if ($response->isClientError()) {

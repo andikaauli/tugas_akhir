@@ -80,18 +80,22 @@ class MembersController extends Controller
 	 */
 	public function edit($id)
 	{
-
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
 		$http = new Request();
-		$http = $http->create(url('api') . '/member/' . decrypt($id));
+		$http = $http->create(url('api') . '/member/' . $id);
 		// $http = $http->create(url('api') . '/member/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
         // dd($response);
 
 		$member = json_decode($response);
-        if($member == null){
-            abort(404, 'Not Found');
-        }
+        // if($member == null){
+        //     abort(404, 'Not Found');
+        // }
 		return view('petugas/keanggotaan/edit-anggota', ['members' => $member]);
 	}
 
