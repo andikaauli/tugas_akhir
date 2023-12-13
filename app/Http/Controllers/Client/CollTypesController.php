@@ -78,7 +78,9 @@ class CollTypesController extends Controller
 		$response = $response->getContent();
 
 		$colltypes = json_decode($response);
-
+        if($colltypes == null){
+            abort(404, 'Not Found');
+        }
 
 		return view('petugas/daftar-terkendali/edit-tipe-koleksi', ['colltypes' => $colltypes]);
 	}

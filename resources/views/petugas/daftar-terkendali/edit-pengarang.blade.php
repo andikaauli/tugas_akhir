@@ -16,7 +16,7 @@
         </div>
         {{-- End Section 1 --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.edit-authors', ['id' => $author->id]) }}" method="POST" class="m-0 p-0">
+        <form action="{{ route('client.edit-authors', encrypt($author->id)) }}" method="POST" class="m-0 p-0">
             @method('PUT')
             @csrf
             <div class="bg-white">

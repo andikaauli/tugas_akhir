@@ -101,6 +101,10 @@ class EksemplarsController extends Controller
         $response = app()->handle($http);
         $response = $response->getContent();
         $eksemplar = json_decode($response);
+        
+        if($eksemplar == null){
+            abort(404, 'Not Found');
+        }
 
         // ! Dari API
         $bs = new Request();

@@ -35,8 +35,9 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
-
+        $bibliografi = Biblio::whereHas("author", function ($b) use ($search) {
+            $b->where('title', 'LIKE', "%$search%");
+        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->paginate(10);
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
         $eksemplar = Eksemplar::get();
@@ -143,6 +144,11 @@ class BiblioController extends Controller
         $collTypeRes = $collTypeRes->getContent();
 
         $bibliografi = json_decode($response);
+
+        if($bibliografi == null){
+            abort(404, 'Not Found');
+        }
+
         $pengarang = json_decode($pengarangRes);
         $publisher = json_decode($publisherRes);
         $collType = json_decode($collTypeRes);
@@ -165,7 +171,7 @@ class BiblioController extends Controller
     public function detail($id)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/biblio/' . $id);
+        $http = $http->create(url('api') . '/biblio/' . decrypt($id));
         $response = app()->handle($http);
         $response = $response->getContent();
 
@@ -177,6 +183,11 @@ class BiblioController extends Controller
         $eksemplarRes = $eksemplarRes->getContent();
 
         $bibliografi = json_decode($response);
+
+        if($bibliografi == null){
+            abort(404, 'Not Found');
+        }
+
         $eksemplar = json_decode($eksemplarRes);
 
         // dd($bibliografi);

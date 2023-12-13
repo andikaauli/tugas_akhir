@@ -79,11 +79,15 @@ class AuthorsController extends Controller
 	public function edit($id)
 	{
 		$http = new Request();
-		$http = $http->create(url('api') . '/author/' . $id);
+		$http = $http->create(url('api') . '/author/' . decrypt($id));
 		$response = app()->handle($http);
 		$response = $response->getContent();
-
 		$authors = json_decode($response);
+
+        if($authors == null){
+            abort(404, 'Not Found');
+        }
+        // dd($authors);
 
 		return view('petugas/daftar-terkendali/edit-pengarang', ['author' => $authors]);
 	}

@@ -80,14 +80,18 @@ class MembersController extends Controller
 	 */
 	public function edit($id)
 	{
+
 		$http = new Request();
-		$http = $http->create(url('api') . '/member/' . $id);
+		$http = $http->create(url('api') . '/member/' . decrypt($id));
+		// $http = $http->create(url('api') . '/member/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
-
+        // dd($response);
 
 		$member = json_decode($response);
-
+        if($member == null){
+            abort(404, 'Not Found');
+        }
 		return view('petugas/keanggotaan/edit-anggota', ['members' => $member]);
 	}
 
@@ -100,8 +104,9 @@ class MembersController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+        // dd($id);
 		$http = new Request();
-		$http = $http->create(url('api') . '/member/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+		$http = $http->create(url('api') . '/member/edit/' . decrypt($id), 'POST', $request->except('_method'), files: $request->allFiles());
 		$response = app()->handle($http);
 
 		// dd($response);
@@ -144,7 +149,7 @@ class MembersController extends Controller
                 return redirect()->route('client.member')->with('destroy', 'Member tidak dapat dihapus');
             }
         }
-
+        // dd($member);
         return redirect()->route('client.member')->with('destroy', 'Member berhasil dihapus!');
 	}
 }

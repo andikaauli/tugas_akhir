@@ -2,6 +2,7 @@
 <html lang="eng" class="dark">
     <header>
         @include('main.header')
+
     </header>
     <body class="antialiased bg-slate-50">
     <div class="relative">

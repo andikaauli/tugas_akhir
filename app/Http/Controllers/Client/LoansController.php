@@ -163,6 +163,11 @@ class LoansController extends Controller
         $loan = $loan->getContent();
 
         $member = json_decode($response);
+
+        if($member == null){
+            abort(404, 'Not Found');
+        }
+
         $loan = json_decode($loan);
 
         return view('petugas/sirkulasi/peminjaman', ['members' => $member, 'loans' => $loan]);

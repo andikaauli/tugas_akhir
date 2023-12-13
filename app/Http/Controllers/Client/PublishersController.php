@@ -79,6 +79,9 @@ class PublishersController extends Controller
 		$response = $response->getContent();
 
 		$publisher = json_decode($response);
+        if($publisher == null){
+            abort(404, 'Not Found');
+        }
 
 		return view('petugas/daftar-terkendali/edit-penerbit', ['publisher' => $publisher]);
 	}
