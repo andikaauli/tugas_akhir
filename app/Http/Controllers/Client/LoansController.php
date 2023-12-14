@@ -186,6 +186,7 @@ class LoansController extends Controller
         $http = $http->create(url('api') . '/loan/add/' . decrypt($member), 'POST', $request->all());
         $res = app()->handle($http);
         $res = $res->getContent();
+
         // dd($res);
 
         return redirect()->route('client.loan', ['id' => $member]);
@@ -223,9 +224,10 @@ class LoansController extends Controller
     public function destroy(Request $request, $loan)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/loan/destroy/' . $loan, 'DELETE');
+        $http = $http->create(url('api') . '/loan/destroy/' . decrypt($loan), 'DELETE');
         $response = app()->handle($http);
         $response = $response->getContent();
+        // dd($response);
 
         return redirect()->back();
     }

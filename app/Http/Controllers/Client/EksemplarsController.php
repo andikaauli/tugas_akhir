@@ -51,7 +51,6 @@ class EksemplarsController extends Controller
         $bs = $bs->create(url('api') . '/bookstatus/');
         $bsres = app()->handle($bs);
         $bsres = $bsres->getContent();
-
         $bsApi = json_decode($bsres);
 
         return view('petugas/bibliografi/create-eksemplar', ['statuses' =>  $bsApi]);

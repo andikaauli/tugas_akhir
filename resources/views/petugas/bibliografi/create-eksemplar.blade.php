@@ -1,4 +1,4 @@
-<form action="{{ route('client.create-eksemplar', ['id' => $bibliografi->id]) }}" method="POST" class="m-0 p-0">
+<form action="{{ route('client.create-eksemplar', encrypt($bibliografi->id)) }}" method="POST" class="m-0 p-0">
     @csrf
     <div
         class="modal h-screen w-full fixed z-40 left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 {{ $showModal ? 'flex' : 'hidden' }}">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="h-96 overflow-auto">
 
-                    <input type="hidden" name="biblio_id" value="{{ $bibliografi->id }}">
+                    <input type="hidden" name="biblio_id" value="{{ encrypt($bibliografi->id) }}">
                     {{-- Judul --}}
                     <div class="flex">
                         <div class="px-4 py-3 font-bold text-sm w-44">
