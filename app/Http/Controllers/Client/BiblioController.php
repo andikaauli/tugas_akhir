@@ -216,6 +216,7 @@ class BiblioController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
+        // dd($request->all());
         $http = $http->create(url('api') . '/biblio/edit/' . decrypt($id), 'POST', $request->except('_method'), files: $request->allFiles());
 
 

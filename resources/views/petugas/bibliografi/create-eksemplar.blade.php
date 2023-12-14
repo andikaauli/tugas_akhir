@@ -23,7 +23,7 @@
                 </div>
                 <div class="h-96 overflow-auto">
 
-                    <input type="hidden" name="biblio_id" value="{{ encrypt($bibliografi->id) }}">
+                    <input type="hidden" name="biblio_id" value="{{$bibliografi->id }}">
                     {{-- Judul --}}
                     <div class="flex">
                         <div class="px-4 py-3 font-bold text-sm w-44">

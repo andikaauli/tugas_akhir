@@ -62,9 +62,11 @@ class EksemplarsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $http = new Request();
+        // $biblioid = decrypt($biblio_id);
+        // $id = $request->input('biblio_id');
         $http = $http->create(url('api') . '/eksemplar/add', 'POST', $request->all());
         $response = app()->handle($http);
         // dd($response);
@@ -75,7 +77,7 @@ class EksemplarsController extends Controller
             // throw ValidationException::withMessages((array) json_decode($response->getContent()));
         }
 
-        return redirect()->route('client.edit-bibliografi', ['id' => $request->biblio_id])->with('success', 'Eksemplar berhasil diperbaharui!');
+        return redirect()->route('client.edit-bibliografi', ['id' => $request->id])->with('success', 'Eksemplar berhasil diperbaharui!');
         // return redirect()->route('client.bibliografi');
     }
 

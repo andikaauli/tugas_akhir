@@ -185,7 +185,7 @@ class BibliosController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/biblio/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+        $http = $http->create(url('api') . '/biblio/edit/' . decrypt($id), 'POST', $request->except('_method'), files: $request->allFiles());
 
 
         // ? 2 Cara filter request
