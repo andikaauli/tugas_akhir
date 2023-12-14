@@ -235,6 +235,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/test', function () {
     return view('petugas.inventarisasi.tes');
 });
+Route::get('preview', [StockOpnamesController::class, "preview"]);
+Route::get('download', [StockOpnamesController::class, "download"])->name('download');
 
 
 // Route::resource("zzz", VisitorController::class);

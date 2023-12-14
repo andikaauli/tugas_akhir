@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Loan;
 use App\Models\Eksemplar;
 use App\Models\BookStatus;
 use Illuminate\Http\Request;
@@ -99,11 +100,20 @@ class EksemplarsController extends Controller
     public function edit($id)
     {
         $errors = session('errors') ?? new ViewErrorBag();
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar/' . $id);
         $response = app()->handle($http);
         $response = $response->getContent();
         $eksemplar = json_decode($response);
+
+        // if($eksemplar == null){
+        //     abort(404, 'Not Found');
+        // }
 
         // ! Dari API
         $bs = new Request();
@@ -137,7 +147,11 @@ class EksemplarsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar/edit/' . $id, 'POST', $request->except('_method'));
         $response = app()->handle($http);
@@ -171,10 +185,22 @@ class EksemplarsController extends Controller
             $http = $http->create(url('api') . '/eksemplar/destroy/' . $eksemplarId, 'DELETE');
             $response = app()->handle($http);
         }
-        dd($response);
+        // dd($response);
+
+        // return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar berhasil dihapus!');
+        $bookstatuss = BookStatus::all();
+        $eksemplar = Eksemplar::find($eksemplarId);
+
+        if ($eksemplar) {
+            $loan = Loan::where('eksemplar_id', $eksemplarId)->first();
+
+            if ($eksemplar->book_status_id == 1) {
+                return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar tidak dapat dihapus karena sedang dipinjam!');
+            } elseif ($loan && $loan->eksemplar_id == $eksemplar->id) {
+                return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar tidak dapat dihapus');
+            }
+        }
 
         return redirect()->route('client.eksemplar')->with('destroy', 'Eksemplar berhasil dihapus!');
-    //    return Redirect::back()->withErrors(['msg' => 'The Message']);
-    //    return redirect()->back();
-    }
+        }
 }

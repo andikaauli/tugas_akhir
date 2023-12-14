@@ -6,12 +6,12 @@
 {{-- <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png"> --}}
 
 <title>Perpustakaan Fakultas Teknik Universitas Diponegoro</title>
-<link rel="icon" type="image/png" href="{{asset('undip.png')}}">
+<link rel="icon" href="{{asset('undip.ico')}}">
 
 <!-- Fonts -->
 <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/undip.png')}}">
+{{-- <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/undip.png')}}"> --}}
 
 <!-- Styles -->
 <style>

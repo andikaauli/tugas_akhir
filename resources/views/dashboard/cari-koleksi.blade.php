@@ -32,7 +32,7 @@
             <div class="border-x border-b rounded-b-md border-black">
                 @if ($bibliografi)
                     @foreach ($bibliografi as $biblio)
-                        <a href="{{ route('client.detail', ['id' => $biblio->id]) }}"
+                        <a href="{{ route('client.detail', encrypt($biblio->id)) }}"
                             class="flex px-5 py-3 border-b border-gray-400">
                             <img src="{{ $biblio->image }}" class="h-28 w-20 bg-slate-400 mr-4"></img>
                             <div>

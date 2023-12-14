@@ -61,7 +61,7 @@
                      <td class="p-3 leading-6 w-42">{{$member->institution}}</td>
                      <td class="p-3 leading-6 w-36">{{$member->nim}}</td>
                      <td class="p-3 leading-6 w-36">
-                        <a href="{{ route('client.loan', ['id' => $member->id]) }}" class="text-xs text-white font-bold bg-blue-600 hover:bg-blue-500 p-1.5 rounded">Mulai Transaksi</a>
+                        <a href="{{ route('client.loan', encrypt($member->id)) }}" class="text-xs text-white font-bold bg-blue-600 hover:bg-blue-500 p-1.5 rounded">Mulai Transaksi</a>
                     </td>
                   </tr>
                  @endforeach

@@ -96,7 +96,7 @@
                                         </div>
                                     </td>
                                     <td class="p-3 w-20">
-                                        <a href="{{ route('client.edit-bibliografi', ['id' => $biblio->id, 'page' => request('page')]) }}"
+                                        <a href="{{ route('client.edit-bibliografi', [encrypt($biblio->id), 'page' => request('page')]) }}"
                                             class="flex items-center justify-center">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">

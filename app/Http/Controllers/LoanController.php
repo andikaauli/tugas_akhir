@@ -17,6 +17,7 @@ class LoanController extends Controller
         $search = $request->search;
         $member = $request->member;
         $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio', 'eksemplar.biblio.colltype']);
+        // $loan = Loan::with(['member']);
 
         if ($member) {
             $loan = $loan->where('member_id', $member);
@@ -76,7 +77,7 @@ class LoanController extends Controller
                     "loan_date" => now(),
                     "due_date" => now()->addDays(7),
                     "loan_status" => null,
-                    'return_status' => '0'
+                    'return_status' => '0',
                 ]);
 
                 $eksemplar->update([

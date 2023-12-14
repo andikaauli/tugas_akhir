@@ -109,6 +109,11 @@ class MemberController extends Controller
     public function destroyData(Request $request, $id)
     { //hard delete
         $member = Member::find($id);
+
+        $loan = Loan::where('member_id', $id)->first();
+        if ($loan->loan_status == 'Sedang Dipinjam') {
+            return response()->json(['message' => 'Anggota Sedang meminjam eksemplar!'], 422);
+        }
         $member->forceDelete();
         return response()
             ->json(['message' => 'Data Anggota' . ($request->name) . ' berhasil dihapus!', 'data' => $member]);

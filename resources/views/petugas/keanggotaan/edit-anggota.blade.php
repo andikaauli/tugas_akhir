@@ -16,7 +16,7 @@
        </div>
     {{-- End Section 1 --}}
     {{-- Section 2 --}}
-    <form action="{{ route('client.edit-member', ['id' => $members->id]) }}" method="POST" class="m-0 p-0" enctype="multipart/form-data">
+    <form action="{{ route('client.edit-member', [encrypt($members->id)]) }}" method="POST" class="m-0 p-0" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="bg-white">

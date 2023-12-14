@@ -26,7 +26,7 @@
         @endif
         {{-- End Succes message --}}
         {{-- Section 2 --}}
-        <form action="{{ route('client.edit-bibliografi', ['id' => $bibliografi->id]) }}" method="POST" class="h-full"
+        <form action="{{ route('client.edit-bibliografi', encrypt($bibliografi->id)) }}" method="POST" class="h-full"
             enctype="multipart/form-data">
             {{-- @dd($bibliografi) --}}
             @method('PUT')

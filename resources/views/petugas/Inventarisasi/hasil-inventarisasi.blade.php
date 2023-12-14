@@ -20,7 +20,7 @@
    </div>
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
-    <form action="{{ route('client.stockopname', ['id' => $stockopnames->id]) }}">
+    <form action="{{ route('client.stockopname', encrypt($stockopnames->id)) }}">
         <div class="h-full">
                 <div class="">
            {{-- Nama Stock Opname --}}

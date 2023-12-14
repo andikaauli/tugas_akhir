@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Models\StockOpname;
 use Illuminate\Http\Request;
+use App\Models\StockTakeItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\Models\StockTakeItem;
-use PDF;
 
 class StockOpnamesController extends Controller
 {
@@ -68,8 +68,12 @@ class StockOpnamesController extends Controller
 	 */
 	public function show($id, Request $request)
 	{
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
 		$search = $request->search;
-
 		$http = new Request();
 		$http = $http->create(url('api') . '/stockopname/' . $id, 'GET', ['search' => $search]);
 		// if ($search) {
@@ -85,7 +89,9 @@ class StockOpnamesController extends Controller
 		$response = $response->getContent();
 
 		$stockopname = json_decode($response);
-
+        if($stockopname == null){
+            abort(404, 'Not Found');
+        }
 		// dd($stockopname);
 		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
 	}
@@ -103,6 +109,31 @@ class StockOpnamesController extends Controller
 
 		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
 	}
+
+    public function preview()
+    {
+        return view('petugas/inventarisasi/chart');
+    }
+    // public function download()
+    // {
+    //     $render = view('petugas/inventarisasi/chart')->render();
+
+    //     $pdf = new Pdf;
+    //     $pdf->addPage($render);
+    //     $pdf->setOptions(['javascript-delay' => 5000]);
+    //     $pdf->saveAs(public_path('report.pdf'));
+
+    //     return response()->download(public_path('report.pdf'));
+    // }
+    public function download()
+    {
+        $pdf = PDF::loadView('petugas/inventarisasi/chart');
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 1000);
+        $pdf->setOption('no-stop-slow-scripts', true);
+        $pdf->setOption('enable-smart-shrinking', true);
+        return $pdf->stream();
+    }
 
 	// public function gone(Request $request)
 	// {

@@ -72,13 +72,20 @@ class CollTypesController extends Controller
 	 */
 	public function edit($id)
 	{
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
 		$http = new Request();
 		$http = $http->create(url('api') . '/colltype/' . $id);
 		$response = app()->handle($http);
 		$response = $response->getContent();
 
 		$colltypes = json_decode($response);
-
+        // if($colltypes == null){
+        //     abort(404, 'Not Found');
+        // }
 
 		return view('petugas/daftar-terkendali/edit-tipe-koleksi', ['colltypes' => $colltypes]);
 	}
@@ -93,7 +100,7 @@ class CollTypesController extends Controller
 	public function update(Request $request, $id)
 	{
 		$http = new Request();
-		$http = $http->create(url('api') . '/colltype/edit/' . $id, 'POST', $request->except('_method'));
+		$http = $http->create(url('api') . '/colltype/edit/' . decrypt($id), 'POST', $request->except('_method'));
 		$response = app()->handle($http);
 
 		if ($response->isClientError()) {

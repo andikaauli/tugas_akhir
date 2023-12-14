@@ -25,14 +25,14 @@ class BiblioSeeder extends Seeder
             $biblio=Biblio::create([
             'title' => $faker->word(),
             'author_id' => Author::create([
-                'title'=> $faker->word(),
+                'title'=> $faker->unique()->word(),
                 'born_date'=> $faker->randomNumber(),
             ])->id,
             'responsibility' => $faker->word(),
             'edition' => $faker->word(),
             'spec_detail' => $faker->word(),
             'coll_type_id' => CollType::create([
-                'title'=> $faker->word(),
+                'title'=> $faker->unique()->word(),
             ])->id,
             'gmd' => $faker->word(),
             'content_type' => $faker->word(),
@@ -41,7 +41,7 @@ class BiblioSeeder extends Seeder
             'date' => $faker->date(),
             'isbnissn' => $faker->randomNumber(),
             'publisher_id' => Publisher::create([
-                'title'=> $faker->word(),
+                'title'=> $faker->unique()->word(),
             ])->id,
             'place' => $faker->word(),
             'description' => $faker->word(),
@@ -57,7 +57,7 @@ class BiblioSeeder extends Seeder
             for ($i=0; $i < 20; $i++) {
                 $eksemplar=Eksemplar::create([
                 'item_code' => $faker->randomNumber(),
-                'rfid_code' => $faker->randomNumber(),
+                'rfid_code' => $faker->unique()->randomNumber(),
                 'order_number' => $faker->randomNumber(),
                 'order_date' => $faker->date(),
                 'receipt_date' => $faker->date(),
@@ -77,13 +77,13 @@ class BiblioSeeder extends Seeder
             for ($i=0; $i < 20; $i++) {
                 $member=Member::create([
                 'name' => $faker->word(),
-                'nim' => $faker->randomNumber(),
+                'nim' => $faker->unique()->randomNumber(),
                 'gender' => $faker->randomElement(['Laki-laki','Perempuan']),
                 'birth_date' => $faker->date(),
                 'address' => $faker->word(),
-                'email' => $faker->email(),
+                'email' => $faker->unique()->email(),
                 'institution' => $faker->word(),
-                'image' => $faker->imageUrl(),
+                'image' => $faker->unique()->imageUrl(),
                 'phone' => $faker->phoneNumber(),
                 ]);
             }

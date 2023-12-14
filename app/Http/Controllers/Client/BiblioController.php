@@ -35,8 +35,9 @@ class BiblioController extends Controller
         $search = $request->search;
         $http = new Request();
         $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
-        $bibliografi = Biblio::where('title', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%")->paginate(10);
-
+        $bibliografi = Biblio::whereHas("author", function ($b) use ($search) {
+            $b->where('title', 'LIKE', "%$search%");
+        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->paginate(10);
         $eksemplarReq = new Request();
         $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
         $eksemplar = Eksemplar::get();
@@ -120,6 +121,11 @@ class BiblioController extends Controller
         $errors = session('errors') ?? new ViewErrorBag();
         $page = $request->page;
         $showModal = $request->has('showModal') || session()->has('showModal');
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
         $http = $http->create(url('api') . '/biblio/' . $id);
         $response = app()->handle($http);
@@ -130,10 +136,12 @@ class BiblioController extends Controller
         $pengarangRes = app()->handle($pengarangReq);
         $pengarangRes = $pengarangRes->getContent();
 
+
         $publisherReq = new Request();
         $publisherReq = $publisherReq->create(url('api') . '/publisher/');
         $publisherRes = app()->handle($publisherReq);
         $publisherRes = $publisherRes->getContent();
+
 
         $collTypeReq = new Request();
         $collTypeReq = $collTypeReq->create(url('api') . '/colltype/');
@@ -141,6 +149,11 @@ class BiblioController extends Controller
         $collTypeRes = $collTypeRes->getContent();
 
         $bibliografi = json_decode($response);
+
+        // if($bibliografi == null){
+        //     abort(404, 'Not Found');
+        // }
+
         $pengarang = json_decode($pengarangRes);
         $publisher = json_decode($publisherRes);
         $collType = json_decode($collTypeRes);
@@ -162,8 +175,13 @@ class BiblioController extends Controller
 
     public function detail($id)
     {
+        try {
+            $id = decrypt($id);
+        } catch (\Throwable $th) {
+            abort(404, 'Not Found');
+        }
         $http = new Request();
-        $http = $http->create(url('api') . '/biblio/' . $id);
+        $http = $http->create(url('api') . '/biblio/' .$id);
         $response = app()->handle($http);
         $response = $response->getContent();
 
@@ -175,6 +193,11 @@ class BiblioController extends Controller
         $eksemplarRes = $eksemplarRes->getContent();
 
         $bibliografi = json_decode($response);
+
+        if($bibliografi == null){
+            abort(404, 'Not Found');
+        }
+
         $eksemplar = json_decode($eksemplarRes);
 
         // dd($bibliografi);
@@ -193,7 +216,7 @@ class BiblioController extends Controller
     public function update(Request $request, $id)
     {
         $http = new Request();
-        $http = $http->create(url('api') . '/biblio/edit/' . $id, 'POST', $request->except('_method'), files: $request->allFiles());
+        $http = $http->create(url('api') . '/biblio/edit/' . decrypt($id), 'POST', $request->except('_method'), files: $request->allFiles());
 
 
         // ? 2 Cara filter request
@@ -239,6 +262,13 @@ class BiblioController extends Controller
             $response = app()->handle($http);
         }
 
-        return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
+        // return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
+        $eksemplar = Eksemplar::where('biblio_id', $biblioId)->exists();
+        if(!$eksemplar){
+            return redirect()->route('client.bibliografi')->with('destroy', 'Bibliografi berhasil dihapus!');
+
+        }
+        return redirect()->route('client.bibliografi')->with('destroy', 'Biblio tidak dapat dihapus karena masih memiliki eksemplar');
+
     }
 }
