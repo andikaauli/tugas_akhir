@@ -7,6 +7,7 @@ use App\Models\BookStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Redirect;
+use Illuminate\Support\ViewErrorBag;
 
 class EksemplarsController extends Controller
 {
@@ -43,6 +44,8 @@ class EksemplarsController extends Controller
      */
     public function create(Request $request)
     {
+
+
         $bs = new Request();
         $bs = $bs->create(url('api') . '/bookstatus/');
         $bsres = app()->handle($bs);
@@ -95,6 +98,7 @@ class EksemplarsController extends Controller
      */
     public function edit($id)
     {
+        $errors = session('errors') ?? new ViewErrorBag();
         $http = new Request();
         $http = $http->create(url('api') . '/eksemplar/' . $id);
         $response = app()->handle($http);
@@ -121,7 +125,7 @@ class EksemplarsController extends Controller
             });
         }
 
-        return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar], ['status' =>  $bookstatuss]);
+        return view('petugas/bibliografi/edit-eksemplar', ['eksemplar' => $eksemplar, 'status' =>  $bookstatuss, 'errors' => $errors ]);
     }
 
     /**

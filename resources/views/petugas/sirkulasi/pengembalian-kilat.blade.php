@@ -16,6 +16,11 @@
             </div>
         </div>
         {{-- End Section 1 --}}
+        {{-- Success meesage --}}
+            <div class="p-4">
+                <p id="messagecode" class="text-white font-semibold bg-green-500"></p>
+            </div>
+    {{-- End Succes message --}}
         <div class="p-4 bg-blue-100">
             <p>Masukan kode eksemplar dengan menggunakan papan kunci</p>
         </div>

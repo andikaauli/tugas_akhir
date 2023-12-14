@@ -84,9 +84,10 @@
                             <input name="item_code" type="text" id="item-code-input"
                                 value="{{ $eksemplar->item_code }}"
                                 class="w-96 py-1 px-2 text-gray-900 border rounded text-sm border-solid border-gray-400 focus:ring focus:ring-blue-300">
-                        @error('item_code')
-                            <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">{{ $message }}</p>
-                        @enderror
+                            @error('item_code')
+                                <p class="flex items-center text-red-500 ml-3 text-sm font-semibold animate-pulse">
+                                    {{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     {{-- End Kode Eksemplar --}}

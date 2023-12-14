@@ -122,7 +122,7 @@
                                         </div>
                                     </td>
                                     @if (isset($biblio->isbnissn))
-                                        <td class="p-3 w-36">{{ $biblio->isbnissn }}</td>
+                                        <td class="p-3 w-42">{{ $biblio->isbnissn }}</td>
                                     @else
                                         <td class="p-3 w-36">-</td>
                                     @endif

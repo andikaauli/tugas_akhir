@@ -101,7 +101,7 @@
                             <th class="text-left p-3">KODE EKSEMPLAR</th>
                             <th class="text-left p-3">JUDUL</th>
                             <th class="text-left p-3">TANGGAL PINJAM</th>
-                            <th class="text-left p-3">TERAKHIR KEMBALI</th>
+                            <th class="text-left p-3">BATAS KEMBALI</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -144,7 +144,7 @@
                             <th class="text-left p-3">JUDUL</th>
                             <th class="text-left p-3">TIPE KOLEKSI</th>
                             <th class="text-left p-3">TANGGAL PINJAM</th>
-                            <th class="text-left p-3">TANGGAL KEMBALI</th>
+                            <th class="text-left p-3">BATAS KEMBALI</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -202,7 +202,7 @@
                                     <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
                                 <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
-                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->return_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-52">{{ Carbon\Carbon::parse($item->return_date)->format('Y-m-d') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
