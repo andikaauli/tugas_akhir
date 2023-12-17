@@ -19,4 +19,33 @@ class Member extends Model
         'id',
     ];
 
+    // protected $encrypt = [
+    //     'name',
+    //     'nim',
+    //     'email',
+    //     'phone',
+    //     'address',
+    //     'institution',
+
+    // ];
+
+    // public function setAttribute($key, $value){
+    //     if(in_array($key, $this->encrypt)){
+    //         $this->attributes[$key] = encrypt($value);
+    //     } else {
+    //         parent::setAttribute($key, $value);
+    //     }
+    // }
+
+    // public function getAttribute($key){
+    //     if (in_array($key, $this->encrypt) && !empty($this->attributes[$key])) {
+    //         try {
+    //             return decrypt($this->attributes[$key]);
+    //         } catch (\Throwable $th) {
+    //             return $this->attributes[$key];
+    //         }
+    //     }
+    //         return parent::getAttribute($key);
+
+    // }
 }
