@@ -30,9 +30,9 @@ class EksemplarsController extends Controller
             $b->where('name', 'LIKE', "%$search%");
         })->orWhere('item_code', 'LIKE', "%$search%")->paginate(10);
 
-        $bs = new Request();
-        $bs = $bs->create(url('api') . '/bookstatus', 'GET');
-        $bookstatus = BookStatus::get();
+        // $bs = new Request();
+        // $bs = $bs->create(url('api') . '/bookstatus', 'GET');
+        // $bookstatus = BookStatus::get();
 
 
         return view('petugas/bibliografi/eksemplar', ['eksemplar' => $eksemplar]);

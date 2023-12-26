@@ -21,7 +21,7 @@ class BiblioSeeder extends Seeder
     public function run()
     {
         $faker=fake('id_ID');
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 20; $i++) {
             $biblio=Biblio::create([
             'title' => $faker->word(),
             'author_id' => Author::create([
@@ -39,7 +39,7 @@ class BiblioSeeder extends Seeder
             'media_type' => $faker->word(),
             'carrier_type' => $faker->word(),
             'date' => $faker->date(),
-            'isbnissn' => $faker->randomNumber(),
+            'isbnissn' => $faker->unique()->randomNumber(),
             'publisher_id' => Publisher::create([
                 'title'=> $faker->unique()->word(),
             ])->id,
@@ -47,16 +47,16 @@ class BiblioSeeder extends Seeder
             'description' => $faker->word(),
             'title_series' => $faker->word(),
             'classification' => $faker->word(),
-            'call_number' => $faker->randomNumber(),
+            'call_number' => $faker->unique()->randomNumber(),
             'language' => $faker->word(),
             'abstract' => $faker->word(),
             'image' => $faker->imageUrl(),
             ]);
         }
         $faker=fake('id_ID');
-            for ($i=0; $i < 20; $i++) {
+            for ($i=0; $i < 10000; $i++) {
                 $eksemplar=Eksemplar::create([
-                'item_code' => $faker->randomNumber(),
+                'item_code' => $faker->unique()->randomNumber(),
                 'rfid_code' => $faker->unique()->randomNumber(),
                 'order_number' => $faker->randomNumber(),
                 'order_date' => $faker->date(),
@@ -65,7 +65,7 @@ class BiblioSeeder extends Seeder
                 'source' => $faker->randomElement(['Beli','Hadiah']),
                 'invoice' => $faker->word(),
                 'price' => $faker->randomNumber(),
-                'book_status_id' => $faker->randomElement([1,2,3]),
+                'book_status_id' => $faker->randomElement([2,3]),
                 'biblio_id' => $biblio->id,
                 // 'biblio_id' => Biblio::create([
                 //     'title'=> $faker->word(),

@@ -17,13 +17,15 @@ class BiblioController extends Controller
         $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
         $bibliografi = Biblio::whereHas("author", function ($b) use ($search) {
             $b->where('title', 'LIKE', "%$search%");
-        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->paginate(10);
+        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->withCount(['eksemplar'])->get()->paginate(10);
 
-        $eksemplarReq = new Request();
-        $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
-        $eksemplar = Eksemplar::get();
+        // $bibliografi = Biblio::with(['author'])->withCount(['eksemplar'])->get()->paginate(10);
 
-        return view('petugas/bibliografi/bibliografi', ['bibliografi' => $bibliografi, 'eksemplars' => $eksemplar]);
+        // $eksemplarReq = new Request();
+        // $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
+        // $eksemplar = Eksemplar::get();
+
+        return view('petugas/bibliografi/bibliografi', ['bibliografi' => $bibliografi]);
     }
     /**
      * Display a listing of the resource.
@@ -37,14 +39,14 @@ class BiblioController extends Controller
         $http = $http->create(url('api') . '/biblio', 'GET', ['search' => $search]);
         $bibliografi = Biblio::whereHas("author", function ($b) use ($search) {
             $b->where('title', 'LIKE', "%$search%");
-        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->paginate(10);
-        $eksemplarReq = new Request();
-        $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
-        $eksemplar = Eksemplar::get();
+        })->orWhere('title', 'LIKE', "%$search%")->orWhere('isbnissn', 'LIKE', "%$search%")->withCount(['eksemplar'])->get()->paginate(10);
+        // $eksemplarReq = new Request();
+        // $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
+        // $eksemplar = Eksemplar::get();
 
         // dd($bibliografi);
 
-        return view('dashboard/cari-koleksi', ['bibliografi' => $bibliografi, 'eksemplars' => $eksemplar]);
+        return view('dashboard/cari-koleksi', ['bibliografi' => $bibliografi]);
     }
 
     /**

@@ -126,7 +126,8 @@
                                     @else
                                         <td class="p-3 w-36">-</td>
                                     @endif
-                                    <td class="p-3 w-16 text-center">{{ count($biblio->eksemplar) }}</td>
+                                    {{-- <td class="p-3 w-16 text-center">{{ count($biblio->eksemplar) }}</td> --}}
+                                    <td class="p-3 w-16 text-center">{{ $biblio->eksemplar_count }}</td>
                                     <td class="p-3 w-52">
                                         {{ Carbon\Carbon::createFromTimestamp(strtotime($biblio->updated_at)) }}</td>
                                 </tr>

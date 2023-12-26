@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Eksemplar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class EksemplarController extends Controller
@@ -17,16 +19,19 @@ class EksemplarController extends Controller
 
     public function getData(Request $request)
     {
-        $search = $request->search;
-        $eksemplar = Eksemplar::with(['bookstatus', 'loan', 'stocktakeitem', 'biblio.author', 'biblio.colltype', 'biblio.publisher']);
+        // $search = $request->search;
+        // $eksemplar = Eksemplar::with(['bookstatus', 'biblio.author', 'biblio.colltype', 'biblio.publisher']);
 
-        if ($search) {
-            $eksemplar = $eksemplar->whereHas("biblio", function ($b) use ($search) {
-                $b->where('title', 'LIKE', "%$search%");
-            })->orWhere('item_code', 'LIKE', "%$search%");
-        }
+        // if ($search) {
+        //     $eksemplar = $eksemplar->whereHas("biblio", function ($b) use ($search) {
+        //         $b->where('title', 'LIKE', "%$search%");
+        //     })->orWhere('item_code', 'LIKE', "%$search%");
+        // }
 
-        $eksemplar = $eksemplar->get();
+        // $eksemplar = $eksemplar->get();
+        $eksemplar = Cache::remember('eksemplar', 60, function () {
+            return DB::table('eksemplar')->get();
+        });
 
         return response()->json($eksemplar, 200);
     }
