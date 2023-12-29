@@ -23,105 +23,123 @@
         @vite('resources/css/app.css') --}}
     <style>
         .flex {
-        display: flex;
+            display: flex;
         }
+
         .items-center {
-        align-items: center;
+            align-items: center;
         }
+
         .px-4 {
-        padding-left: 1rem;
-        padding-right: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
+
         .pt-4 {
-        padding-top: 1rem;
+            padding-top: 1rem;
         }
+
         .my-5 {
-        margin-top: 1.25rem;
+            margin-top: 1.25rem;
         }
+
         .text-3xl {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
+            font-size: 1.875rem;
+            line-height: 2.25rem;
         }
+
         .font-bold {
-        font-weight: 700;
+            font-weight: 700;
         }
+
         .h-full {
-        height: 100%;
+            height: 100%;
         }
 
         .border-y {
-        border-top-width: 1px;
-        border-bottom-width: 1px;
+            border-top-width: 1px;
+            border-bottom-width: 1px;
         }
+
         .border-solid {
-        border-style: solid;
+            border-style: solid;
         }
+
         .table-auto {
-        table-layout: auto;
+            table-layout: auto;
         }
 
-        table{
-        background-color: red;
+        table {
+            background-color: red;
         }
 
-        @property --p{
-        syntax: '<number>';
+        @property --p {
+            syntax: '<number>';
             inherits: true;
             initial-value: 0;
-            }
+        }
 
-            .pie {
-            --p:20;
-            --b:22px;
-            --c:darkred;
-            --w:150px;
+        .pie {
+            --p: 20;
+            --b: 22px;
+            --c: darkred;
+            --w: 150px;
 
-            width:var(--w);
-            aspect-ratio:1;
-            position:relative;
-            display:inline-grid;
-            margin:5px;
-            place-content:center;
-            font-size:25px;
-            font-weight:bold;
-            font-family:sans-serif;
-            }
-            .pie:before,
-            .pie:after {
-            content:"";
-            position:absolute;
-            border-radius:50%;
-            }
-            .pie:before {
-            inset:0;
+            width: var(--w);
+            aspect-ratio: 1;
+            position: relative;
+            display: inline-grid;
+            margin: 5px;
+            place-content: center;
+            font-size: 25px;
+            font-weight: bold;
+            font-family: sans-serif;
+        }
+
+        .pie:before,
+        .pie:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .pie:before {
+            inset: 0;
             background:
-            radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
-            conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
-            -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-            mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-            }
-            .pie:after {
-            inset:calc(50% - var(--b)/2);
-            background:var(--c);
-            transform:rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
-            }
-            .animate {
-            animation:p 1s .5s both;
-            }
-            .no-round:before {
-            background-size:0 0,auto;
-            }
-            .no-round:after {
-            content:none;
-            }
-            @keyframes p {
-            from{--p:0}
-            }
+                radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat,
+                conic-gradient(var(--c) calc(var(--p)*1%), #0000 0);
+            -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+            mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
+        }
 
-            body {
-            background:#f2f2f2;
+        .pie:after {
+            inset: calc(50% - var(--b)/2);
+            background: var(--c);
+            transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+        }
+
+        .animate {
+            animation: p 1s .5s both;
+        }
+
+        .no-round:before {
+            background-size: 0 0, auto;
+        }
+
+        .no-round:after {
+            content: none;
+        }
+
+        @keyframes p {
+            from {
+                --p: 0
             }
-            </style>
+        }
+
+        body {
+            background: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
@@ -139,7 +157,7 @@
             </div>
             {{-- End Section 1 --}}
             {{-- Section 2 --}}
-            <form action="{{ route('client.stockopname', ['id' => $stockopnames->id]) }}">
+            <form action="{{ route('client.stockopname', ['id' => $stockopnames[0]->id]) }}">
                 <div class="pie" style="--p:20"> 20%</div>
                 <div class="pie" style="--p:40;--c:darkblue;--b:10px"> 40%</div>
                 <div class="pie no-round" style="--p:60;--c:purple;--b:15px"> 60%</div>
@@ -190,44 +208,44 @@
                     <tbody>
                         <tr>
                             <td>Nama Stock Opname</td>
-                            <td>{{ $stockopnames->name }}</td>
+                            <td>{{ $stockopnames[0]->stockopname_name }}</td>
                         </tr>
                         <tr>
                             <td>Tanggal Mulai</td>
-                            <td>{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</td>
+                            <td>{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames[0]->start_date)) }}</td>
                         </tr>
                         <tr>
                             <td>Tanggal Selesai</td>
-                            <td>{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->end_date)) }}</td>
+                            <td>{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames[0]->end_date)) }}</td>
                         </tr>
                         <tr>
                             <td>Yang Menginisialisasi</td>
-                            <td>{{ $stockopnames->name_user }}</td>
+                            <td>{{ $stockopnames[0]->name_user }}</td>
                         </tr>
                         <tr>
                             <td>Total Eksemplar Dimiliki</td>
-                            <td>{{ $stockopnames->total_eksemplar }}</td>
+                            <td>{{ $stockopnames['total_eksemplar'] }}</td>
                         </tr>
                         <tr>
                             <td>Total Eksemplar yang Diperiksa</td>
-                            <td>{{ $stockopnames->total_diperiksa }}</td>
+                            <td>{{ $stockopnames['total_diperiksa'] }}</td>
                         </tr>
                         <tr>
                             <td>Total Eksemplar Hilang</td>
-                            <td>{{ $stockopnames->total_hilang }}</td>
+                            <td>{{ $stockopnames['total_hilang'] }}</td>
                         </tr>
                         <tr>
                             <td>Total Eksmplar Tersedia</td>
-                            <td>{{ $stockopnames->total_tersedia }}</td>
+                            <td>{{ $stockopnames['total_tersedia'] }}</td>
                         </tr>
                         <tr>
                             <td>Total Eksemplar Terpinjam</td>
-                            <td>{{ $stockopnames->total_terpinjam }}</td>
+                            <td>{{ $stockopnames['total_dipinjam'] }}</td>
                         </tr>
                         <tr>
                             <td>Progres Eksemplar Terpindai</td>
                             <td>@php
-                                $num = $stockopnames->total_persen;
+                                $num = $stockopnames['total_persen'];
                                 $formattedNum = number_format($num);
                             @endphp
                                 {{ $formattedNum }}% / 100%
@@ -235,7 +253,7 @@
                         </tr>
                         <tr>
                             <td>Status</td>
-                            <td>{{ $stockopnames->status_stockopname }}</td>
+                            <td>{{ $stockopnames[0]->status_stockopname }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -28,7 +28,7 @@
                    <p>:</p>
                </div>
                <div class="flex flex-auto items-stretch px-4 py-3">
-                   <p class="text-sm font-medium">{{$stockopnames->name}}</p>
+                   <p class="text-sm font-medium">{{$stockopnames->stockopname_name}}</p>
                </div>
            </div>
             {{-- End Nama Inventarisasi --}}

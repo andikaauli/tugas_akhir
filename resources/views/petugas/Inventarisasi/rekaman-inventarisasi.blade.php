@@ -60,7 +60,7 @@
                                </svg>
                           </a>
                        </td>
-                       <td class="p-3">{{$stockopname->name}}</td>
+                       <td class="p-3">{{ $stockopname->stockopname_name }}</td>
                        <td class="p-3 w-72">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->start_date)) }}</td>
                        <td class="p-3 w-72">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopname->end_date)) }}</td>
                     </tr>

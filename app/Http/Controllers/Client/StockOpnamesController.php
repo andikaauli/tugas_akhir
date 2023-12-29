@@ -21,7 +21,7 @@ class StockOpnamesController extends Controller
 		$search = $request->search;
 		$http = new Request();
 		$http = $http->create(url('api') . '/stockopname', 'GET', ['search' => $search]);
-		$stockopname = StockOpname::where('name', 'LIKE', "%$search%")->paginate(10);
+		$stockopname = StockOpname::where('stockopname_name', 'LIKE', "%$search%")->paginate(10);
 
 		// dd($stockopname);
 		return view('petugas/inventarisasi/rekaman-inventarisasi', ['stockopnames' => $stockopname]);
@@ -73,67 +73,78 @@ class StockOpnamesController extends Controller
         } catch (\Throwable $th) {
             abort(404, 'Not Found');
         }
-		$search = $request->search;
-		$http = new Request();
-		$http = $http->create(url('api') . '/stockopname/' . $id, 'GET', ['search' => $search]);
-		// if ($search) {
-		//     $stockopname = $stockopname->whereHas('stocktakeitem', function ($q) use ($search) {
-		//         $q->whereHas('eksemplar', function ($q) use ($search) {
-		//             $q->whereHas('biblio', function ($q) use ($search) {
-		//                 $q->where('title', 'like', '%' . $search . '%');
-		//             })->orWhere('item_code', 'like', '%' . $search . '%');
-		//         });
-		//     });
-		// }
-		$response = app()->handle($http);
-		$response = $response->getContent();
 
-		$stockopname = json_decode($response);
-        if($stockopname == null){
-            abort(404, 'Not Found');
-        }
-		// dd($stockopname);
+		// $http = new Request();
+		// $http = $http->create(url('api') . '/stockopname/' . $id, 'GET', ['search' => $search]);
+        $stockopname = StockOpname::where('id', $id)->get();
+        $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
+        $stockopname['total_hilang'] =  $stockopname[0]->stocktakeitem()->where('book_status_id', 3)->count();
+        $stockopname['total_dipinjam'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 1)->count();
+        $stockopname['total_eksemplar'] = $stockopname[0]->stocktakeitem()->count();
+        $stockopname['total_diperiksa'] = $stockopname[0]->stocktakeitem()->whereIn('book_status_id', [2, 3])->count();
+        $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
+
+
+        // $stockopname['total_tersedia'] = $stocktakeitem->where('book_status_id', 2)->count();
+
+        // $stocktakeitem = StockTakeItem::where('stock_opname_id', $id)->get();
+        // dd($stockopname);
+		// $response = app()->handle($http);
+		// $response = $response->getContent();
+
+		// $stockopname = json_decode($response);
+        // dd($stockopname);
 		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
 	}
 
     public function downloadPDF($id, Request $request)
 	{
-		$http = new Request();
-		$http = $http->create(url('api') . '/stockopname/' . $id, 'GET');
-		$response = app()->handle($http);
-		$response = $response->getContent();
-		$stockopname = json_decode($response);
+		// $http = new Request();
+		// $http = $http->create(url('api') . '/stockopname/' . $id, 'GET');
+		// $response = app()->handle($http);
+		// $response = $response->getContent();
+		// $stockopname = json_decode($response);
+        // dd($stockopname);
+        // $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
+        // return $pdf->download('Laporan Hasil StockOpname '. $stockopname->name . '.pdf');
 
-        $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
-        return $pdf->download('Laporan Hasil StockOpname '. $stockopname->name . '.pdf');
+		// return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
 
-		return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
+        $stockopname = StockOpname::where('id', $id)->get();
+        $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
+        $stockopname['total_hilang'] =  $stockopname[0]->stocktakeitem()->where('book_status_id', 3)->count();
+        $stockopname['total_dipinjam'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 1)->count();
+        $stockopname['total_eksemplar'] = $stockopname[0]->stocktakeitem()->count();
+        $stockopname['total_diperiksa'] = $stockopname[0]->stocktakeitem()->whereIn('book_status_id', [2, 3])->count();
+        $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
+
+         $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
+         $pdf->setOptions(['isHtml5ParserEnabled' => true]);
+
+         return $pdf->download('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
 	}
 
     public function preview()
     {
         return view('petugas/inventarisasi/chart');
     }
-    // public function download()
-    // {
-    //     $render = view('petugas/inventarisasi/chart')->render();
 
-    //     $pdf = new Pdf;
-    //     $pdf->addPage($render);
-    //     $pdf->setOptions(['javascript-delay' => 5000]);
-    //     $pdf->saveAs(public_path('report.pdf'));
-
-    //     return response()->download(public_path('report.pdf'));
-    // }
     public function download()
     {
-        $pdf = PDF::loadView('petugas/inventarisasi/chart');
-        $pdf->setOption('enable-javascript', true);
-        $pdf->setOption('javascript-delay', 1000);
-        $pdf->setOption('no-stop-slow-scripts', true);
-        $pdf->setOption('enable-smart-shrinking', true);
+        $chart_image_path = $this->generateChartImage(); // Replace with your image generation logic
+
+        // Create PDF
+        $pdf = PDF::loadView('petugas/inventarisasi/chart', ['chart_image_path' => $chart_image_path]);
+        $pdf->setOption('enable-javascript', false); // Disable JavaScript for PDF generation
+        // ... other PDF options (no need for JavaScript-related ones)
         return $pdf->stream();
     }
+    private function generateChartImage()
+{
+    // Use a server-side chart library (e.g., Chart.js server-side)
+    // to create the chart image and save it to a temporary path
+    // Return the path to the generated image
+}
 
 	// public function gone(Request $request)
 	// {

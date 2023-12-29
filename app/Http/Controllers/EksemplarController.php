@@ -29,8 +29,14 @@ class EksemplarController extends Controller
         // }
 
         // $eksemplar = $eksemplar->get();
+
         $eksemplar = Cache::remember('eksemplar', 60, function () {
-            return DB::table('eksemplar')->get();
+            return DB::table('eksemplar')
+            ->join('biblio', 'eksemplar.biblio_id', '=', 'biblio.id')
+            ->join('coll_type', 'biblio.coll_type_id', '=', 'coll_type.id')
+            ->join('author', 'biblio.author_id', '=', 'author.id')
+            ->join('book_statuses', 'eksemplar.book_status_id', '=', 'book_statuses.id')
+            ->get();
         });
 
         return response()->json($eksemplar, 200);

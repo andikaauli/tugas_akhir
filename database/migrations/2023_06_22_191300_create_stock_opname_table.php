@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('stock_opname', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->string('stockopname_name');
             $table->string('name_user');
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
