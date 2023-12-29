@@ -137,7 +137,7 @@
                             <p>:</p>
                         </div>
                         <div class="flex flex-auto items-stretch px-4 py-3">
-                            <p class="text-sm font-medium">{{$stockopnames['total_dipinjam']}}</p>
+                            <p class="text-sm font-medium">{{$stockopnames['total_terpinjam']}}</p>
                         </div>
                     </div>
                 {{-- End Total Eksemplar Terpinjam --}}

@@ -6,6 +6,7 @@ use App\Models\StockOpname;
 use Illuminate\Http\Request;
 use App\Models\StockTakeItem;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
@@ -76,19 +77,26 @@ class StockOpnamesController extends Controller
 
 		// $http = new Request();
 		// $http = $http->create(url('api') . '/stockopname/' . $id, 'GET', ['search' => $search]);
-        $stockopname = StockOpname::where('id', $id)->get();
-        $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
-        $stockopname['total_hilang'] =  $stockopname[0]->stocktakeitem()->where('book_status_id', 3)->count();
-        $stockopname['total_dipinjam'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 1)->count();
-        $stockopname['total_eksemplar'] = $stockopname[0]->stocktakeitem()->count();
-        $stockopname['total_diperiksa'] = $stockopname[0]->stocktakeitem()->whereIn('book_status_id', [2, 3])->count();
+
+        // //lebih lama dan queries banyak
+        // $stockopname = StockOpname::where('id', $id)->get();
+        // $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
+        // $stockopname['total_hilang'] =  $stockopname[0]->stocktakeitem()->where('book_status_id', 3)->count();
+        // $stockopname['total_dipinjam'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 1)->count();
+        // $stockopname['total_eksemplar'] = $stockopname[0]->stocktakeitem()->count();
+        // $stockopname['total_diperiksa'] = $stockopname[0]->stocktakeitem()->whereIn('book_status_id', [2, 3])->count();
+        // $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
+
+        //lebih cepat queries dikit
+        $stockopname = DB::table('stock_opname')->where('id', $id)->get();
+        $stocktakeitem = DB::table('stock_take_item')->get();
+        $stockopname['total_tersedia'] = $stocktakeitem->where('book_status_id', 2)->count();
+        $stockopname['total_hilang'] = $stocktakeitem->where('book_status_id', 3)->count();
+        $stockopname['total_terpinjam'] = $stocktakeitem->where('book_status_id', 1)->count();
+        $stockopname['total_eksemplar'] = $stocktakeitem->count();
+        $stockopname['total_diperiksa'] = $stocktakeitem->whereIn('book_status_id', [2, 3])->count();
         $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
 
-
-        // $stockopname['total_tersedia'] = $stocktakeitem->where('book_status_id', 2)->count();
-
-        // $stocktakeitem = StockTakeItem::where('stock_opname_id', $id)->get();
-        // dd($stockopname);
 		// $response = app()->handle($http);
 		// $response = $response->getContent();
 
@@ -123,6 +131,7 @@ class StockOpnamesController extends Controller
          $pdf->setOptions(['isHtml5ParserEnabled' => true]);
 
          return $pdf->download('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
+        //  return $pdf->stream();
 	}
 
     public function preview()

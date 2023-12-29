@@ -54,7 +54,7 @@ class BiblioSeeder extends Seeder
             ]);
         }
         $faker=fake('id_ID');
-            for ($i=0; $i < 10000; $i++) {
+            for ($i=0; $i < 10; $i++) {
                 $eksemplar=Eksemplar::create([
                 'item_code' => $faker->unique()->randomNumber(),
                 'rfid_code' => $faker->unique()->randomNumber(),
