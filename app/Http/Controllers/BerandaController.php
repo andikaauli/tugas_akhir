@@ -27,30 +27,32 @@ class BerandaController extends Controller
 		})->orWhere('name', 'LIKE', "%$search%")->orWhere('institution', 'LIKE', "%$search%")->orWhere('created_at', 'LIKE', "%$search%")->paginate(10);
 
 
-		$memberReq = new Request();
-		$memberReq = $memberReq->create(url('api') . '/member/');
-		$member = Member::get();
+		// $memberReq = new Request();
+		// $memberReq = $memberReq->create(url('api') . '/member/');
+		$member = Member::get()->count();
 
-		$biblioReq = new Request();
-		$biblioReq = $biblioReq->create(url('api') . '/biblio/');
-		$bibilio = Biblio::get();
+		// $biblioReq = new Request();
+		// $biblioReq = $biblioReq->create(url('api') . '/biblio/');
+		$bibilio = Biblio::get()->count();
 
-		$eksemplarReq = new Request();
-		$eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
-		$eksemplar = Eksemplar::get();
-        $eksemplar = $eksemplar->filter(function ($eksemplar) {
-			return $eksemplar->book_status_id == '1'||$eksemplar->book_status_id == '2';
-		});
+		// $eksemplarReq = new Request();
+		// $eksemplarReq = $eksemplarReq->create(url('api') . '/eksemplar/');
+		// $eksemplar = Eksemplar::get();
+        // $eksemplar = $eksemplar->filter(function ($eksemplar) {
+		// 	return $eksemplar->book_status_id == '1'||$eksemplar->book_status_id == '2';
+		// });
+        $eksemplar = Eksemplar::where('book_status_id', '1')->orWhere('book_status_id', '2')->get()->count();
 
-		$loanReq = new Request();
-		$loanReq = $loanReq->create(url('api') . '/loan/');
-		$loans = Loan::get();
-		// dd($loans);
-		$fillterloan = $loans->filter(function ($loan) {
-			return $loan->return_status == '0';
-		});
+		// $loanReq = new Request();
+		// $loanReq = $loanReq->create(url('api') . '/loan/');
+		// $loans = Loan::get();
+		// // dd($loans);
+		// $fillterloan = $loans->filter(function ($loan) {
+		// 	return $loan->return_status == '0';
+		// });
+        $loan = Loan::where('return_status', '0')->get()->count();
 
-		return view('petugas/beranda/beranda', ['visitors' => $visitors, 'members' => $member, 'biblios' => $bibilio, 'eksemplars' => $eksemplar, 'loans' => $fillterloan]);
+		return view('petugas/beranda/beranda', ['visitors' => $visitors, 'members' => $member, 'biblios' => $bibilio, 'eksemplars' => $eksemplar, 'loans' => $loan]);
 	}
 
 	// public function edit(Request $request)

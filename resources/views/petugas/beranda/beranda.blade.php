@@ -25,7 +25,7 @@
                 </svg>
             </div>
             <div>
-                <p class="font-semibold text-3xl">{{ count($biblios) }}</p>
+                <p class="font-semibold text-3xl">{{ $biblios }}</p>
                 <p class="font-semibold text-base">Total Koleksi</p>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 </svg>
             </div>
             <div>
-                <p class="font-semibold text-3xl">{{ count($eksemplars) }}</p>
+                <p class="font-semibold text-3xl">{{ $eksemplars }}</p>
                 <p class="font-semibold text-base">Total Eksemplar</p>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 </svg>
             </div>
             <div>
-                <p class="font-semibold text-3xl">{{ count($loans) }}</p>
+                <p class="font-semibold text-3xl">{{ $loans }}</p>
                 <p class="font-semibold text-base">Dipinjamkan</p>
             </div>
         </div>
@@ -59,7 +59,7 @@
                 </svg>
             </div>
             <div>
-                <p class="font-semibold text-3xl">{{ count($members) }}</p>
+                <p class="font-semibold text-3xl">{{ $members }}</p>
                 <p class="font-semibold text-base">Anggota</p>
             </div>
         </div>

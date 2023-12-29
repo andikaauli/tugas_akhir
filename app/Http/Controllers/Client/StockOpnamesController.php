@@ -109,6 +109,7 @@ class StockOpnamesController extends Controller
         // return $pdf->download('Laporan Hasil StockOpname '. $stockopname->name . '.pdf');
 
 		// return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
+         // Fetch stockopname data directly from the controller
 
         $stockopname = StockOpname::where('id', $id)->get();
         $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
@@ -128,23 +129,26 @@ class StockOpnamesController extends Controller
     {
         return view('petugas/inventarisasi/chart');
     }
+    // public function download()
+    // {
+    //     $render = view('petugas/inventarisasi/chart')->render();
 
+    //     $pdf = new Pdf;
+    //     $pdf->addPage($render);
+    //     $pdf->setOptions(['javascript-delay' => 5000]);
+    //     $pdf->saveAs(public_path('report.pdf'));
+
+    //     return response()->download(public_path('report.pdf'));
+    // }
     public function download()
     {
-        $chart_image_path = $this->generateChartImage(); // Replace with your image generation logic
-
-        // Create PDF
-        $pdf = PDF::loadView('petugas/inventarisasi/chart', ['chart_image_path' => $chart_image_path]);
-        $pdf->setOption('enable-javascript', false); // Disable JavaScript for PDF generation
-        // ... other PDF options (no need for JavaScript-related ones)
+        $pdf = PDF::loadView('petugas/inventarisasi/chart');
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 1000);
+        $pdf->setOption('no-stop-slow-scripts', true);
+        $pdf->setOption('enable-smart-shrinking', true);
         return $pdf->stream();
     }
-    private function generateChartImage()
-{
-    // Use a server-side chart library (e.g., Chart.js server-side)
-    // to create the chart image and save it to a temporary path
-    // Return the path to the generated image
-}
 
 	// public function gone(Request $request)
 	// {
