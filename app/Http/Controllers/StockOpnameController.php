@@ -53,22 +53,15 @@ class StockOpnameController extends Controller
             "start_date" => now()
         ]);
 
-        $eksemplars = Eksemplar::all();
+        // $eksemplars = Eksemplar::all();
 
-        foreach ($eksemplars as $eksemplar) {
-            if ($eksemplar->book_status_id == 1) {
-                $book_status_id = 1;
-            } else {
-                $book_status_id = 3;
-                $name = 'Hilang';
-            }
-
-            StockTakeItem::create([
-                "stock_opname_id" => $stockopname->id,
-                "eksemplar_id" => $eksemplar->id,
-                "book_status_id" => $book_status_id
-            ]);
-        }
+        // foreach ($eksemplars as $eksemplar) {
+        //     StockTakeItem::create([
+        //         "stock_opname_id" => $stockopname->id,
+        //         "eksemplar_id" => $eksemplar->id,
+        //         "book_status_id" => $eksemplar->book_status_id === 1 ? 1 : 3
+        //     ]);
+        // }
 
         return response()->json($stockopname, 200);
     }
@@ -78,26 +71,8 @@ class StockOpnameController extends Controller
         // $cacheDuration = 60; // Cache for 60 minutes
         // $stockopname = Cache::remember($cacheKey, $cacheDuration, function () use ($id, $request) {
         $stockopname = DB::table('stock_opname')
-            ->where('end_date', null)
-            // // ->select('stock_opname.*', 'stock_take_item.stock_opname_id', 'stock_take_item.eksemplar_id', 'stock_take_item.book_status_id','biblio.title','biblio.classification','book_statuses.name')
-            //     ->join('stock_take_item', 'stock_opname.id', '=', 'stock_take_item.stock_opname_id')
-            //     ->join('eksemplar', 'stock_take_item.eksemplar_id', '=', 'eksemplar.id')
-            //     ->join('biblio', 'eksemplar.biblio_id', '=', 'biblio.id')
-            //     ->join('book_statuses', 'eksemplar.book_status_id', '=', 'book_statuses.id')
-            // // ->where('stock_opname.id', $id)
-            // ->when($request->has('dipinjam'), function ($query) use ($request) {
-            //     $query->whereIn('stock_take_item.book_status_id', [1]);
-            // })
-            // ->when($request->has('tersedia'), function ($query) use ($request) {
-            //     $query->whereIn('stock_take_item.book_status_id', [2]);
-            // })
-            // ->when($request->has('hilang'), function ($query) use ($request) {
-            //     $query->whereIn('stock_take_item.book_status_id', [3]);
-            // })
-            // ->when($request->has('searchStock'), function ($query) use ($request) {
-            //     $query->where('eksemplar.item_code', 'LIKE', "%{$request->searchStock}%");
-            // })
-            // ->orderBy('stock_take_item.updated_at', 'desc')
+            ->select('stockopname_name', 'name_user', 'start_date')
+            ->where('end_date', null) //indexing
             ->get();
 
         $stocktakeitem = DB::table('stock_take_item')
@@ -121,17 +96,6 @@ class StockOpnameController extends Controller
             ->orderBy('stock_take_item.updated_at', 'desc')
             ->get();
 
-            // $stockopname = DB::table('stock_opname')->get();
-            // $stocktakeitem['stockopname_name'] = $stockopname[0]->stockopname_name;
-            // $stocktakeitem['name_user'] = $stockopname[0]->name_user;
-            // $stocktakeitem['start_date'] = $stockopname[0]->start_date;
-            // $stocktakeitem['total_diperiksa'] = $stocktakeitem->whereIn('book_status_id', [2, 3])->count();
-            // $stocktakeitem['total_tersedia'] = $stocktakeitem->where('book_status_id', 2)->count();
-            // $stocktakeitem['total_hilang'] = $stocktakeitem->where('book_status_id', 3)->count();
-            // $stocktakeitem['total_terpinjam'] = $stocktakeitem->where('book_status_id', 1)->count();
-            // $stocktakeitem['total_eksemplar'] = $stocktakeitem->whereIn('book_status_id', [1, 2, 3])->count();
-            // $stocktakeitem['total_persen'] = $stocktakeitem['total_tersedia'] / $stocktakeitem['total_eksemplar'] * 100;
-
             $stockopname['stockopname_name'] = $stockopname[0]->stockopname_name;
             $stockopname['name_user'] = $stockopname[0]->name_user;
             $stockopname['start_date'] = $stockopname[0]->start_date;
@@ -140,7 +104,7 @@ class StockOpnameController extends Controller
             $stockopname['total_hilang'] = $stocktakeitem->where('book_status_id', 3)->count();
             $stockopname['total_terpinjam'] = $stocktakeitem->where('book_status_id', 1)->count();
             $stockopname['total_eksemplar'] = $stocktakeitem->count();
-            $stockopname['total_diperiksa'] = $stocktakeitem->whereIn('book_status_id', [2, 3])->count();
+            $stockopname['total_diperiksa'] = $stocktakeitem->whereIn('book_status_id', [2, 3])->count(); //Query builder dapat menggunakan indeks untuk mempercepat pencarian data dalam kondisi ini.
             $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
             // return $stockopname;
             // });

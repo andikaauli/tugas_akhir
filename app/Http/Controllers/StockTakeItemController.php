@@ -34,7 +34,7 @@ class StockTakeItemController extends Controller
         //bikin seperti peminjaman eksemplar
 
 
-        $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
+        $eksemplar = Eksemplar::where('item_code', $request->item_code)->first();
 
         if ($eksemplar) {
             $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request) {

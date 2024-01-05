@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Models\CollType;
 use App\Models\Eksemplar;
 use App\Models\Publisher;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -53,40 +54,58 @@ class BiblioSeeder extends Seeder
             'image' => $faker->imageUrl(),
             ]);
         }
-        $faker=fake('id_ID');
-            for ($i=0; $i < 10; $i++) {
-                $eksemplar=Eksemplar::create([
-                'item_code' => $faker->unique()->randomNumber(),
-                'rfid_code' => $faker->unique()->randomNumber(),
-                'order_number' => $faker->randomNumber(),
-                'order_date' => $faker->date(),
-                'receipt_date' => $faker->date(),
-                'agent' => $faker->word(),
-                'source' => $faker->randomElement(['Beli','Hadiah']),
-                'invoice' => $faker->word(),
-                'price' => $faker->randomNumber(),
-                'book_status_id' => $faker->randomElement([2,3]),
-                'biblio_id' => $biblio->id,
-                // 'biblio_id' => Biblio::create([
-                //     'title'=> $faker->word(),
-                // ])->id,
-                ]);
+            // $faker=fake('id_ID');
+            // for ($i=0; $i < 10000; $i++) {
+            //     $eksemplar=Eksemplar::create([
+            //     'item_code' => $faker->unique()->randomNumber(),
+            //     'rfid_code' => $faker->unique()->randomNumber(),
+            //     'order_number' => $faker->randomNumber(),
+            //     'order_date' => $faker->date(),
+            //     'receipt_date' => $faker->date(),
+            //     'agent' => $faker->word(),
+            //     'source' => $faker->randomElement(['Beli','Hadiah']),
+            //     'invoice' => $faker->word(),
+            //     'price' => $faker->randomNumber(),
+            //     'book_status_id' => $faker->randomElement([2,3]),
+            //     'biblio_id' => $biblio->id,
+            //     ]);
+            // }
+            $faker=fake('id_ID');
+            for ($i=0; $i < 8000; $i++) {
+                $data[]=[
+                    'id' => Str::uuid()->toString(),
+                    'item_code' => $faker->unique()->randomNumber(),
+                    'rfid_code' => $faker->unique()->randomNumber(),
+                    'order_number' => $faker->randomNumber(),
+                    'order_date' => $faker->date(),
+                    'receipt_date' => $faker->date(),
+                    'agent' => $faker->word(),
+                    'source' => $faker->randomElement(['Beli','Hadiah']),
+                    'invoice' => $faker->word(),
+                    'price' => $faker->randomNumber(),
+                    'book_status_id' => $faker->randomElement([2,3]),
+                    'biblio_id' => $biblio->id,
+                ];
+            }
+            foreach (array_chunk($data, 1000) as $item) {
+                Eksemplar::insert($item);
             }
 
-            $faker=fake('id_ID');
-            for ($i=0; $i < 20; $i++) {
-                $member=Member::create([
-                'name' => $faker->word(),
-                'nim' => $faker->unique()->randomNumber(),
-                'gender' => $faker->randomElement(['Laki-laki','Perempuan']),
-                'birth_date' => $faker->date(),
-                'address' => $faker->word(),
-                'email' => $faker->unique()->email(),
-                'institution' => $faker->word(),
-                'image' => $faker->unique()->imageUrl(),
-                'phone' => $faker->phoneNumber(),
-                ]);
-            }
+
+                    $faker=fake('id_ID');
+                    for ($i=0; $i < 20; $i++) {
+                        $member=Member::create([
+                        'name' => $faker->word(),
+                        'nim' => $faker->unique()->randomNumber(),
+                        'gender' => $faker->randomElement(['Laki-laki','Perempuan']),
+                        'birth_date' => $faker->date(),
+                        'address' => $faker->word(),
+                        'email' => $faker->unique()->email(),
+                        'institution' => $faker->word(),
+                        'image' => $faker->unique()->imageUrl(),
+                        'phone' => $faker->phoneNumber(),
+                        ]);
+                    }
 
     }
 }
