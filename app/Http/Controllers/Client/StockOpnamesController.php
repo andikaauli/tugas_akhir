@@ -66,6 +66,8 @@ class StockOpnamesController extends Controller
                 'stock_opname_id' => $response->id,
                 'eksemplar_id' => $eksemplar->id,
                 'book_status_id' => $eksemplar->book_status_id === 1 ? 1 : 3,
+                'created_at' => now(),
+                'updated_at' => now(),
             ];
         }
 
@@ -216,13 +218,24 @@ class StockOpnamesController extends Controller
 	public function laporan(Request $request)
 	{
 		$active_inventarisasi = Session::get('active_inventarisasi');
+		// $http = new Request();
+		// $http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET');
+		// $response = app()->handle($http);
+		// $response = $response->getContent();
 
-		$http = new Request();
-		$http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET');
-		$response = app()->handle($http);
-		$response = $response->getContent();
+		// $stockopname = json_decode($response);
 
-		$stockopname = json_decode($response);
+        $stockopname = StockOpname::where('id', $active_inventarisasi)->get();
+        $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
+        $stockopname['total_hilang'] =  $stockopname[0]->stocktakeitem()->where('book_status_id', 3)->count();
+        $stockopname['total_dipinjam'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 1)->count();
+        $stockopname['total_eksemplar'] = $stockopname[0]->stocktakeitem()->count();
+        $stockopname['total_diperiksa'] = $stockopname[0]->stocktakeitem()->whereIn('book_status_id', [2, 3])->count();
+        $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
+        $stockopname['stockopname_name'] = $stockopname[0]->stockopname_name;
+        $stockopname['name_user'] = $stockopname[0]->name_user;
+        $stockopname['start_date'] = $stockopname[0]->start_date;
+
 		// dd($stockopname);
 
 		return view('petugas/inventarisasi/laporan-inventarisasi', ['stockopnames' => $stockopname]);
@@ -269,7 +282,7 @@ class StockOpnamesController extends Controller
 		$http = new Request();
 		$http = $http->create(url('api') . '/stockopname/finish/' . $active_inventarisasi, 'POST');
 		$response = app()->handle($http);
-
+        // dd($response);
 
 
 		if ($response->isClientError()) {

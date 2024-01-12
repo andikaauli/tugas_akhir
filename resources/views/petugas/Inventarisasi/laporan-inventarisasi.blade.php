@@ -15,6 +15,7 @@
              </p>
           </div>
        </div>
+       {{-- @dd($stockopnames['total_persen']) --}}
      {{-- End Section 1 --}}
         {{-- Section 2 --}}
         <div class="h-full">
@@ -28,7 +29,7 @@
                    <p>:</p>
                </div>
                <div class="flex flex-auto items-stretch px-4 py-3">
-                   <p class="text-sm font-medium">{{$stockopnames->stockopname_name}}</p>
+                   <p class="text-sm font-medium">{{$stockopnames['stockopname_name']}}</p>
                </div>
            </div>
             {{-- End Nama Inventarisasi --}}
@@ -41,7 +42,7 @@
                     <p>:</p>
                 </div>
                 <div class="flex flex-auto items-stretch px-4 py-3">
-                 <p class="text-sm font-medium">{{$stockopnames->total_eksemplar}}</p>
+                 <p class="text-sm font-medium">{{$stockopnames['total_eksemplar']}}</p>
              </div>
             </div>
         {{-- End Total Eksemplar Dimiliki --}}
@@ -54,7 +55,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">{{$stockopnames->total_tersedia}}</p>
+                    <p class="text-sm font-medium">{{$stockopnames['total_tersedia']}}</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Terinventarisasi --}}
@@ -67,7 +68,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">{{$stockopnames->total_hilang}}</p>
+                    <p class="text-sm font-medium">{{$stockopnames['total_hilang']}}</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Hilang --}}
@@ -80,7 +81,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">{{$stockopnames->total_terpinjam}}</p>
+                    <p class="text-sm font-medium">{{$stockopnames['total_dipinjam']}}</p>
                 </div>
                </div>
            {{-- End Total Eksemplar Terpinjam --}}
@@ -94,15 +95,15 @@
                    </div>
                     <div class="px-4 py-3 grow">
                         @php
-                            $num = $stockopnames->total_persen;
+                            $num = $stockopnames['total_persen'];
                             $formattedNum = number_format($num);
                         @endphp
                         <p class="text-sm font-medium">{{$formattedNum}}% / 100%</p>
                         <div class="flex mt-1">
-                            <div class="bg-blue-600 h-4" style="width:{{$stockopnames->total_persen}}%"></div>
+                            <div class="bg-blue-600 h-4" style="width:{{$stockopnames['total_persen']}}%"></div>
                             @php
                                 $total = 100;
-                                $perhitungan = $total-$stockopnames->total_persen;
+                                $perhitungan = $total-$stockopnames['total_persen'];
                             @endphp
                             <div class="bg-red-600 h-4" style="width:{{$perhitungan}}%"></div>
                         </div>
@@ -118,7 +119,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">{{$stockopnames->name_user}}</p>
+                    <p class="text-sm font-medium">{{$stockopnames['name_user']}}</p>
                 </div>
                </div>
            {{-- End Pelaksana Inventarisasi --}}
@@ -131,7 +132,7 @@
                        <p>:</p>
                    </div>
                    <div class="flex flex-auto items-stretch px-4 py-3">
-                    <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames->start_date)) }}</p>
+                    <p class="text-sm font-medium">{{ Carbon\Carbon::createFromTimestamp(strtotime($stockopnames['start_date'])) }}</p>
                 </div>
                </div>
            {{-- End Tanggal Mulai --}}
