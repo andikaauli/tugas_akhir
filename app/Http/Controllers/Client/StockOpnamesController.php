@@ -188,31 +188,25 @@ class StockOpnamesController extends Controller
 	{
 		$active_inventarisasi = Session::get('active_inventarisasi');
 
-		$search = $request->search;
-		$http = new Request();
-		$http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET', parameters: [
-			"hilang" => true,
-			// 'search' => $search
-		]);
+        $search = $request->search;
+        $http = new Request();
+        $http = $http->create(url('api') . '/stockopname/' . $active_inventarisasi, 'GET', [
+            "hilang" => true,
+            // 'search' => $search
+        ]);
 
-		$stockopname = StockTakeItem::with(['eksemplar', 'eksemplar.biblio']);
+        $stockopnames = StockTakeItem::with(['eksemplar', 'eksemplar.biblio'])
+            ->whereHas('stockopname', function ($query) {
+                $query->whereNull('end_date');
+            })
+            ->whereHas("eksemplar.biblio", function ($b) use ($search) {
+                $b->where('item_code', 'LIKE', "%$search%")
+                ->orWhere('title', 'LIKE', "%$search%");
+            })
+            ->where('book_status_id', '3') // Filter for book_status_id = 3 within the query
+            ->paginate(10);
 
-		$stockopname = $stockopname->whereHas('stockopname', function ($query) {
-			$query->whereNull('end_date');
-		});
-
-		$stockopname = $stockopname
-			->whereHas("eksemplar.biblio", function ($b) use ($search) {
-				$b->where('item_code', 'LIKE', "%$search%")->orWhere('title', 'LIKE', "%$search%");
-			});
-
-		$stockopnames = $stockopname->get();
-		$stockopnames = $stockopnames->filter(function ($stockopname) {
-			return $stockopname->book_status_id == '3';
-		})->paginate(10);
-
-		// dd($stockopnames);
-		return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);
+        return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);
 	}
 
 	public function laporan(Request $request)
