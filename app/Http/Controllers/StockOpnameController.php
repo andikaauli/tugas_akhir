@@ -69,7 +69,7 @@ class StockOpnameController extends Controller
     {
         //query builder baru fix
         $stockopname['stocktakeitem'] = DB::table('stock_opname')
-            ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stockopname_name', 'name_user', 'start_date', 'stock_take_item.book_status_id')
+            ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stock_take_item.book_status_id')
             ->where('end_date', null) //indexing
             ->join('stock_take_item', 'stock_take_item.stock_opname_id', '=', 'stock_opname.id')
             ->join('eksemplar', 'eksemplar.id', '=', 'stock_take_item.eksemplar_id')
@@ -82,15 +82,15 @@ class StockOpnameController extends Controller
             ->orderBy('stock_take_item.updated_at', 'desc')
             ->get(); // Kode ini menggunakan query chain untuk menggabungkan beberapa metode Query Builder secara berurutan. Kode ini mirip dengan kode asli, tetapi metode count() dipindahkan ke dalam query chain.
 
-            $stockopname['stockopname_name'] = $stockopname['stocktakeitem'][0]->stockopname_name;
-            $stockopname['name_user'] = $stockopname['stocktakeitem'][0]->name_user;
-            $stockopname['start_date'] = $stockopname['stocktakeitem'][0]->start_date;
-            $stockopname['total_tersedia'] = $stockopname['stocktakeitem']->where('book_status_id', 2)->count();
-            $stockopname['total_hilang'] = $stockopname['stocktakeitem']->where('book_status_id', 3)->count();
-            $stockopname['total_terpinjam'] = $stockopname['stocktakeitem']->where('book_status_id', 1)->count();
-            $stockopname['total_eksemplar'] = $stockopname['stocktakeitem']->count();
-            $stockopname['total_diperiksa'] = $stockopname['stocktakeitem']->whereIn('book_status_id', [2, 3])->count(); //count() termasuk query skalar utk hitung jmlh data
-            $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
+            // $stockopname['stockopname_name'] = $stockopname['stocktakeitem'][0]->stockopname_name;
+            // $stockopname['name_user'] = $stockopname['stocktakeitem'][0]->name_user;
+            // $stockopname['start_date'] = $stockopname['stocktakeitem'][0]->start_date;
+            // $stockopname['total_tersedia'] = $stockopname['stocktakeitem']->where('book_status_id', 2)->count();
+            // $stockopname['total_hilang'] = $stockopname['stocktakeitem']->where('book_status_id', 3)->count();
+            // $stockopname['total_terpinjam'] = $stockopname['stocktakeitem']->where('book_status_id', 1)->count();
+            // $stockopname['total_eksemplar'] = $stockopname['stocktakeitem']->count();
+            // $stockopname['total_diperiksa'] = $stockopname['stocktakeitem']->whereIn('book_status_id', [2, 3])->count(); //count() termasuk query skalar utk hitung jmlh data
+            // $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
         return response()->json($stockopname);
 
 /////////////////////////////////////////////////////////////////////////////
