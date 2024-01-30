@@ -67,6 +67,65 @@ class StockOpnameController extends Controller
     }
     public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
+        // $stocktakeitems['stocktakeitem'] = StockTakeItem::with([
+        //     'eksemplar:id,item_code,rfid_code,biblio_id',
+        //     'eksemplar.biblio:id,title',
+        //     'bookstatus:id,name',
+        // ])
+        //     ->where('stock_opname_id', $id)
+        //     ->when($request->has('searchStock'), function ($query) use ($request) {
+        //         $query->whereHas('eksemplar', function ($q) use ($request) {
+        //             $q->where('item_code', 'LIKE', "%{$request->searchStock}%");
+        //         });
+        //     })
+        //     // ->when(function ($query) use ($request) {
+        //     //     $query->when($request->has('dipinjam'), function ($q) {
+        //     //         $q->where('book_status_id', 1);
+        //     //     });
+        //     //     $query->when($request->has('tersedia'), function ($q) {
+        //     //         $q->where('book_status_id', 2);
+        //     //     });
+        //     //     $query->when($request->has('hilang'), function ($q) {
+        //     //         $q->where('book_status_id', 3);
+        //     //     });
+        //     // })
+        //     ->orderBy('updated_at', 'desc')
+        //     ->get();
+
+        // return response()->json($stocktakeitems, 200);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // //eloquent lebih ringan
+        // $stockopname = StockOpname::with([
+        //     'stocktakeitem:id,stock_opname_id,eksemplar_id,book_status_id',
+        //     'stocktakeitem.eksemplar:id,item_code,rfid_code',
+        //     'stocktakeitem.eksemplar.biblio:id,title',
+        //     'stocktakeitem.bookstatus:id,name',
+        // ])->where('id', $id)
+        //   ->when($request->has('searchStock'), function ($query) use ($request) {
+        //       $query->whereHas('stocktakeitem.eksemplar', function ($q) use ($request) {
+        //           $q->where('item_code', 'LIKE', "%{$request->searchStock}%");
+        //       });
+        //   })
+        //   ->where(function ($query) use ($request) {
+        //       $query->when($request->has('dipinjam'), function ($q) {
+        //           $q->where('book_status_id', 1);
+        //       });
+        //       $query->when($request->has('tersedia'), function ($q) {
+        //           $q->where('book_status_id', 2);
+        //       });
+        //       $query->when($request->has('hilang'), function ($q) {
+        //           $q->where('book_status_id', 3);
+        //       });
+        //   })
+        //   ->orderBy('updated_at', 'desc')
+        //   ->firstOrFail();
+
+        // return response()->json($stockopname, 200);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
         //query builder baru fix
         $stockopname['stocktakeitem'] = DB::table('stock_opname')
             ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stock_take_item.book_status_id')

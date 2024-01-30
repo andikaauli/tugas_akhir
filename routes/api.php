@@ -22,7 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix("author")->group(function () {
+// Route::prefix("author")->group(function () {
+Route::group(['prefix' => 'author', 'middleware' => ['auth']], function () {
     Route::get('', [AuthorController::class, "getData"]);
     Route::get('/{id}', [AuthorController::class, "showData"]);
     Route::post('/add', [AuthorController::class, "addData"]);
@@ -33,9 +34,9 @@ Route::prefix("author")->group(function () {
 Route::prefix("biblio")->group(function () {
     Route::get('', [BiblioController::class, "getData"]);
     Route::get('/{id}', [BiblioController::class, "showData"]);
-    Route::post('/add', [BiblioController::class, "addData"]);
-    Route::post('/edit/{id}', [BiblioController::class, "editData"]);
-    Route::delete('/destroy/{id}', [BiblioController::class, "destroyData"]);
+    Route::post('/add', [BiblioController::class, "addData"])->middleware('auth');
+    Route::post('/edit/{id}', [BiblioController::class, "editData"])->middleware('auth');
+    Route::delete('/destroy/{id}', [BiblioController::class, "destroyData"])->middleware('auth');
 });
 
 Route::prefix("bookstatus")->group(function () {
@@ -50,7 +51,8 @@ Route::prefix("colltype")->group(function () {
     Route::delete('/destroy/{id}', [CollTypeController::class, "destroyData"]);
 });
 
-Route::prefix("eksemplar")->group(function () {
+// Route::prefix("eksemplar")->group(function () {
+Route::group(['prefix' => 'eksemplar', 'middleware' => ['auth']], function () {
     Route::get('', [EksemplarController::class, "getData"]);
     Route::get('/{id}', [EksemplarController::class, "showData"]);
     Route::post('/add', [EksemplarController::class, "addData"]);
@@ -60,7 +62,8 @@ Route::prefix("eksemplar")->group(function () {
 
 });
 
-Route::prefix("loan")->group(function () {
+// Route::prefix("loan")->group(function () {
+Route::group(['prefix' => 'loan', 'middleware' => ['auth']], function () {
     Route::get('', [LoanController::class, "getData"]);
     Route::get('/{id}', [LoanController::class, "showData"]);
     Route::post('/add/{id}', [LoanController::class, "peminjaman"]);
@@ -71,7 +74,8 @@ Route::prefix("loan")->group(function () {
     Route::delete('/destroy/{id}', [LoanController::class, "destroyData"]);
 });
 
-Route::prefix("member")->group(function () {
+// Route::prefix("member")->group(function () {
+Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
     Route::get('', [MemberController::class, "getData"]);
     Route::get('/{id}', [MemberController::class, "showData"]);
     Route::post('/add', [MemberController::class, "addData"]);
@@ -79,7 +83,8 @@ Route::prefix("member")->group(function () {
     Route::delete('/destroy/{id}', [MemberController::class, "destroyData"]);
 });
 
-Route::prefix("publisher")->group(function () {
+// Route::prefix("publisher")->group(function () {
+Route::group(['prefix' => 'publisher', 'middleware' => ['auth']], function () {
     Route::get('', [PublisherController::class, "getData"]);
     Route::get('/{id}', [PublisherController::class, "showData"]);
     Route::post('/add', [PublisherController::class, "addData"]);
@@ -89,21 +94,24 @@ Route::prefix("publisher")->group(function () {
 
 
 Route::prefix("rfidtemp")->group(function () {
+// Route::group(['prefix' => 'rfidtemp', 'middleware' => ['auth']], function () {
     Route::get('', [RfidTempController::class, "getData"])->name('get.rfidtemp');
     Route::post('/add', [RfidTempController::class, "addData"]);
 });
 
-Route::prefix("stockopname")->group(function () {
+// Route::prefix("stockopname")->group(function () {
+Route::group(['prefix' => 'stockopname', 'middleware' => ['auth']], function () {
     Route::get('', [StockOpnameController::class, "getData"]);
     Route::get('/{id}', [StockOpnameController::class, "showData"])->name('show.stockopname');
     Route::post('/finish/{id}', [StockOpnameController::class, "finishStockOpname"]);
     Route::post('/add', [StockOpnameController::class, "addData"]);
 });
 
-Route::prefix("stocktakeitem")->group(function () {
+// Route::prefix("stocktakeitem")->group(function () {
+Route::group(['prefix' => 'stocktakeitem', 'middleware' => ['auth']], function () {
     Route::get('', [StockTakeItemController::class, "getData"]);
     Route::post('/edit', [StockTakeItemController::class, "editData"]);
-    Route::post('/button', [StockTakeItemController::class, "editDataButton"])->name('button.stocktakeitem');
+    Route::post('/button', [StockTakeItemController::class, "editDataButton"])->name('button.stocktakeitem')->middleware('auth');
 });
 
 Route::prefix("type")->group(function () {
@@ -111,17 +119,18 @@ Route::prefix("type")->group(function () {
 });
 
 Route::prefix("user")->group(function () {
-    Route::get('', [UserController::class, "getData"]);
-    Route::get('/userlogin', [UserController::class, "showData"]);
-    Route::post('/add', [UserController::class, "addData"]);
+// Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::get('', [UserController::class, "getData"])->middleware('auth');
+    Route::get('/userlogin', [UserController::class, "showData"])->middleware('auth');
+    Route::post('/add', [UserController::class, "addData"])->middleware('auth');
     Route::get('/login', [UserController::class, "login"]);
     Route::post('/login', [UserController::class, "authenticating"]);
-    Route::post('/logout', [UserController::class, "logout"]);
-    Route::post('/edit', [UserController::class, "editData"]);
+    Route::post('/logout', [UserController::class, "logout"])->middleware('auth');
+    Route::post('/edit', [UserController::class, "editData"])->middleware('auth');
 });
 
 Route::prefix("visitor")->group(function () {
-    Route::get('', [VisitorController::class, "getData"]);
-    Route::get('/{id}', [VisitorController::class, "showData"]);
+    Route::get('', [VisitorController::class, "getData"])->middleware('auth');
+    Route::get('/{id}', [VisitorController::class, "showData"])->middleware('auth');
     Route::post('/add', [VisitorController::class, "addData"]);
 });

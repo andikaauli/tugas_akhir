@@ -65,7 +65,8 @@ class StockOpnamesController extends Controller
                 'id'=> Str::uuid()->toString(),
                 'stock_opname_id' => $response->id,
                 'eksemplar_id' => $eksemplar->id,
-                'book_status_id' => $eksemplar->book_status_id === 1 ? 1 : 3,
+                // 'book_status_id' => $eksemplar->book_status_id === 1 ? 1 : 3,
+                'book_status_id' => $eksemplar->book_status_id == 1 ? $eksemplar->book_status_id : 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

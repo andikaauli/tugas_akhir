@@ -13,12 +13,22 @@ class StockTakeItemController extends Controller
     //contoh untuk proses stock opname
     public function editData(Request $request)
     {
-
         $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request) {
             return $query->where('rfid_code', $request->rfid_code);
         })->whereHas('stockopname', function ($query) {
             $query->whereNull('end_date');
         })->where("book_status_id", 3)->first();
+        if (!$stocktakeitem) {
+            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' tidak tersedia'], 404);
+        }
+
+        if ($stocktakeitem->book_status_id === 1) {
+            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sedang Dipinjam!'], 422);
+        }
+
+        if ($stocktakeitem->book_status_id === 2) {
+            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sudah Tersedia!'], 422);
+        }
 
         $stocktakeitem->update([
             'book_status_id' => 2
@@ -26,10 +36,15 @@ class StockTakeItemController extends Controller
 
         $stocktakeitem->refresh();
 
-        return response()->json((['message' => 'success', 'data' => $stocktakeitem, 'eksemplar' => $stocktakeitem->eksemplar]));
+        return response()->json([
+            'message' => 'Eksemplar dengan kode ' . $request->item_code . ' berhasil diubah ke Tersedia',
+            'data' => $stocktakeitem,
+            'eksemplar' => $stocktakeitem->eksemplar
+        ]);
     }
     public function editDataButton(Request $request)
     {
+
         $stocktakeitem = StockTakeItem::with('eksemplar')
         ->whereHas('eksemplar', function ($query) use ($request) {
             $query->where('item_code', $request->item_code);
