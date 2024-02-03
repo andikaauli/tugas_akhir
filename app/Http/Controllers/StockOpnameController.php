@@ -129,12 +129,13 @@ class StockOpnameController extends Controller
         //query builder baru fix
         $stockopname['stocktakeitem'] = DB::table('stock_opname')
             ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stock_take_item.book_status_id')
+            ->where('stock_take_item.stock_opname_id', $id)
             ->where('end_date', null) //indexing
+            ->whereIn('stock_take_item.book_status_id', [2, 3])
             ->join('stock_take_item', 'stock_take_item.stock_opname_id', '=', 'stock_opname.id')
             ->join('eksemplar', 'eksemplar.id', '=', 'stock_take_item.eksemplar_id')
             ->join('biblio', 'biblio.id', '=', 'eksemplar.biblio_id')
             ->join('book_statuses', 'book_statuses.id', '=', 'stock_take_item.book_status_id')
-            ->where('stock_take_item.stock_opname_id', $id)
             ->when($request->has('searchStock'), function ($query) use ($request) {
                 $query->where('eksemplar.item_code', 'LIKE', "%{$request->searchStock}%");
             })
@@ -320,4 +321,25 @@ class StockOpnameController extends Controller
         return response()
             ->json(['message' => 'Proses Inventarisasi ' . ($stockopname->name) . ' sudah selesai!', 'data' => $stockopname]);
     }
+    // public function showData($id, Request $request)
+    // {
+    //     $stockopname['stocktakeitem'] = DB::table('stock_opname')
+    //         ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stock_take_item.book_status_id')
+    //         ->where('end_date', null)
+    //         ->whereIn('stock_take_item.book_status_id', [2, 3])
+    //         ->join('stock_take_item', 'stock_take_item.stock_opname_id', '=', 'stock_opname.id')
+    //         ->join('eksemplar', 'eksemplar.id', '=', 'stock_take_item.eksemplar_id')
+    //         ->join('biblio', 'biblio.id', '=', 'eksemplar.biblio_id')
+    //         ->join('book_statuses', 'book_statuses.id', '=', 'stock_take_item.book_status_id')
+    //         ->where('stock_take_item.stock_opname_id', $id)
+    //         ->when($request->has('searchStock'), function ($query) use ($request) {
+    //             $query->where('eksemplar.item_code', 'LIKE', "%{$request->searchStock}%");
+    //         })
+    //         ->orderBy('stock_take_item.updated_at', 'desc')
+    //         ->get();
+    //     return response()->json($stockopname);
+    // }
 }
+
+
+
