@@ -18,17 +18,17 @@ class StockTakeItemController extends Controller
         })->whereHas('stockopname', function ($query) {
             $query->whereNull('end_date');
         })->where("book_status_id", 3)->first();
-        if (!$stocktakeitem) {
-            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' tidak tersedia'], 404);
-        }
+        // if (!$stocktakeitem) {
+        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' tidak tersedia'], 404);
+        // }
 
-        if ($stocktakeitem->book_status_id === 1) {
-            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sedang Dipinjam!'], 422);
-        }
+        // if ($stocktakeitem->book_status_id === 1) {
+        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sedang Dipinjam!'], 422);
+        // }
 
-        if ($stocktakeitem->book_status_id === 2) {
-            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sudah Tersedia!'], 422);
-        }
+        // if ($stocktakeitem->book_status_id === 2) {
+        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sudah Tersedia!'], 422);
+        // }
 
         $stocktakeitem->update([
             'book_status_id' => 2
@@ -45,31 +45,53 @@ class StockTakeItemController extends Controller
     public function editDataButton(Request $request)
     {
 
-        $stocktakeitem = StockTakeItem::with('eksemplar')
-        ->whereHas('eksemplar', function ($query) use ($request) {
-            $query->where('item_code', $request->item_code);
-        })
-        ->where('stock_opname_id', $request->stock_opname_id)
-        ->first();
+        // $stocktakeitem = StockTakeItem::with('eksemplar')
+        // ->whereHas('eksemplar', function ($query) use ($request) {
+        //     $query->where('item_code', $request->item_code);
+        // })
+        // ->where('stock_opname_id', $request->stock_opname_id)
+        // ->first();
 
-        if (!$stocktakeitem) {
-            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' tidak tersedia'], 404);
+        // if (!$stocktakeitem) {
+        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' tidak tersedia'], 404);
+        // }
+
+        // if ($stocktakeitem->book_status_id === 1) {
+        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' sedang Dipinjam!'], 422);
+        // }
+
+        // if ($stocktakeitem->book_status_id === 2) {
+        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' sudah Tersedia!'], 422);
+        // }
+
+        // $stocktakeitem->update(['book_status_id' => 2]);
+        // return response()->json([
+        //     'message' => 'Eksemplar dengan kode ' . $request->item_code . ' berhasil diubah ke Tersedia',
+        //     'data' => $stocktakeitem,
+        //     'eksemplar' => $stocktakeitem->eksemplar
+        // ]);
+        $eksemplar = Eksemplar::where('item_code', $request->item_code)->first();
+
+        if ($eksemplar) {
+            $stocktakeitem = StockTakeItem::whereHas('eksemplar', function ($query) use ($request) {
+                return $query->where('item_code', $request->item_code);
+            })->where('stock_opname_id', $request->stock_opname_id)->first();
+
+            if ($stocktakeitem['book_status_id'] == '1' ) {
+                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' sedang Dipinjam!'], 422);
+            }
+
+            elseif ($stocktakeitem['book_status_id'] == '2' ) {
+                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' sudah Tersedia!'], 422);
+            }
+            else {
+                $stocktakeitem->update([
+                    'book_status_id' => 2
+                ]);
+                return response()->json((['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' berhasil diubah ke Tersedia', 'data' => $stocktakeitem, 'eksemplar' => $stocktakeitem->eksemplar]));
+            }
         }
-
-        if ($stocktakeitem->book_status_id === 1) {
-            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' sedang Dipinjam!'], 422);
-        }
-
-        if ($stocktakeitem->book_status_id === 2) {
-            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' sudah Tersedia!'], 422);
-        }
-
-        $stocktakeitem->update(['book_status_id' => 2]);
-        return response()->json([
-            'message' => 'Eksemplar dengan kode ' . $request->item_code . ' berhasil diubah ke Tersedia',
-            'data' => $stocktakeitem,
-            'eksemplar' => $stocktakeitem->eksemplar
-        ]);
+            return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak tersedia'], 404);
     }
 
 

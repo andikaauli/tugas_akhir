@@ -67,33 +67,39 @@ class StockOpnameController extends Controller
     }
     public function showData($id, Request $request) //buat FE = diambil saat inven aktif, harus difetch berulang2 utk yg terbaru
     {
-        // $stocktakeitems['stocktakeitem'] = StockTakeItem::with([
-        //     'eksemplar:id,item_code,rfid_code,biblio_id',
-        //     'eksemplar.biblio:id,title',
-        //     'bookstatus:id,name',
-        // ])
-        //     ->where('stock_opname_id', $id)
+        // $stockopname = StockOpname::where('id', $id)
+        //     ->with([
+        //         'stocktakeitem:id,stock_opname_id,eksemplar_id,book_status_id',
+        //         'stocktakeitem.eksemplar:id,item_code,rfid_code,biblio_id',
+        //         'stocktakeitem.eksemplar.biblio:id,title',
+        //         'stocktakeitem.bookstatus:id,name',
+        //     ])
         //     ->when($request->has('searchStock'), function ($query) use ($request) {
-        //         $query->whereHas('eksemplar', function ($q) use ($request) {
+        //         $query->whereHas('stocktakeitem.eksemplar', function ($q) use ($request) {
         //             $q->where('item_code', 'LIKE', "%{$request->searchStock}%");
         //         });
         //     })
-        //     // ->when(function ($query) use ($request) {
-        //     //     $query->when($request->has('dipinjam'), function ($q) {
-        //     //         $q->where('book_status_id', 1);
-        //     //     });
-        //     //     $query->when($request->has('tersedia'), function ($q) {
-        //     //         $q->where('book_status_id', 2);
-        //     //     });
-        //     //     $query->when($request->has('hilang'), function ($q) {
-        //     //         $q->where('book_status_id', 3);
-        //     //     });
-        //     // })
+        //     ->where(function ($query) use ($request) {
+        //         $query->when($request->has('dipinjam'), function ($q) {
+        //             $q->whereHas('stocktakeitem', function ($q) {
+        //                 $q->where('book_status_id', 1);
+        //             });
+        //         });
+        //         $query->when($request->has('tersedia'), function ($q) {
+        //             $q->whereHas('stocktakeitem', function ($q) {
+        //                 $q->where('book_status_id', 2);
+        //             });
+        //         });
+        //         $query->when($request->has('hilang'), function ($q) {
+        //             $q->whereHas('stocktakeitem', function ($q) {
+        //                 $q->where('book_status_id', 3);
+        //             });
+        //         });
+        //     })
         //     ->orderBy('updated_at', 'desc')
         //     ->get();
 
-        // return response()->json($stocktakeitems, 200);
-
+        //     return response()->json($stockopname, 200);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // //eloquent lebih ringan
