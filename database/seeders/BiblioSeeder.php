@@ -71,7 +71,7 @@ class BiblioSeeder extends Seeder
             //     ]);
             // }
             $faker=fake('id_ID');
-            for ($i=0; $i < 10000; $i++) {
+            for ($i=0; $i < 6000; $i++) {
                 $data[]=[
                     'id' => Str::uuid()->toString(),
                     'item_code' => $faker->unique()->randomNumber(),
@@ -83,7 +83,7 @@ class BiblioSeeder extends Seeder
                     'source' => $faker->randomElement(['Beli','Hadiah']),
                     'invoice' => $faker->word(),
                     'price' => $faker->randomNumber(),
-                    'book_status_id' => $faker->randomElement([2,3]),
+                    'book_status_id' => $faker->randomElement([2]),
                     'biblio_id' => $biblio->id,
                 ];
             }

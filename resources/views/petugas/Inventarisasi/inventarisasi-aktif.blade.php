@@ -139,16 +139,6 @@
 
     //                 stockTakeItemContainer.appendChild(tr)
 
-    //                 // Cara 2
-    //                 // const string = `
-    //                 //     <tr class="border-b border-solid border-gray-400">
-    //                 //     <td class="p-3 leading-6 w-44">${eksemplar.item_code}</td>
-    //                 //     <td class="p-3 leading-6">${eksemplar.biblio.title}</td>
-    //                 //     <td class="p-3 leading-6 W-46">${eksemplar.biblio.classification}</td>
-    //                 //     <td class="p-3 leading-6 w-20">${item.bookstatus.name}</td>
-    //                 // </tr>`
-
-    //                 //     stockTakeItemContainer.innerHTML += string
     //             });
 
     //         }
