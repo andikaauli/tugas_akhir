@@ -137,10 +137,10 @@ class StockOpnamesController extends Controller
         $stockopname['total_diperiksa'] = $stockopname[0]->stocktakeitem()->whereIn('book_status_id', [2, 3])->count();
         $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
 
-         $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
-         $pdf->setOptions(['isHtml5ParserEnabled' => true]);
+        $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
+        $pdf->setOptions(['isHtml5ParserEnabled' => true]);
 
-         return $pdf->download('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
+        return $pdf->download('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
         //  return $pdf->stream();
 	}
 

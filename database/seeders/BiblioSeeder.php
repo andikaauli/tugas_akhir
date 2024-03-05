@@ -71,7 +71,7 @@ class BiblioSeeder extends Seeder
             //     ]);
             // }
             $faker=fake('id_ID');
-            for ($i=0; $i < 6000; $i++) {
+            for ($i=0; $i < 1000; $i++) {
                 $data[]=[
                     'id' => Str::uuid()->toString(),
                     'item_code' => $faker->unique()->randomNumber(),

@@ -61,7 +61,7 @@ class StockOpnameController extends Controller
         //     StockTakeItem::create([
         //         "stock_opname_id" => $stockopname->id,
         //         "eksemplar_id" => $eksemplar->id,
-        //         "book_status_id" => $eksemplar->book_status_id === 1 ? 1 : 3
+        //         "book_status_id" => $eksemplar->book_status_id == 1 ? $eksemplar->book_status_id : 3
         //     ]);
         // }
 
@@ -80,7 +80,8 @@ class StockOpnameController extends Controller
             ];
         }
 
-        DB::table('stock_take_item')->insert($data);//qb
+        DB::table('stock_take_item')->insert($data);
+
         // StockTakeItem::insert($data);//eq
 
         return response()->json($stockopname, 200);
@@ -207,24 +208,6 @@ class StockOpnameController extends Controller
 
     public function finishStockOpname($id)
     {
-        // $stockopname = StockOpname::with('stocktakeitem.eksemplar')->find($id);
-        // $stockopname->update([
-        //     'end_date' => now(),
-        //     'status_stockopname' => 'selesai',
-        // ]);
-
-        // $stocktakeitems = $stockopname->stocktakeitem;
-
-        // foreach ($stocktakeitems as $item) {
-        //     $item->eksemplar->update([
-        //         'book_status_id' => $item->book_status_id,
-        //     ]);
-        // }
-        // return response()
-        //     ->json(['message' => 'Proses Inventarisasi ' . ($stockopname->name) . ' sudah selesai!', 'data' => $stockopname]);
-
-///////////////////////////////////////////////////////////
-
         $stockopname = DB::table('stock_opname')
         ->where('id', $id)
         ->get();
@@ -234,16 +217,19 @@ class StockOpnameController extends Controller
         ->update([
             'end_date' => now(),
             'status_stockopname' => 'selesai',
+        ])
+        ->join('stock_take_item', 'stock_opname.id', '=', 'stock_take_item.stock_opname_id')
+        ->where('stock_take_item.eksemplar_id', 'eksemplar.id')
+        ->update([
+            'eksemplar.book_status_id' => 'stock_take_item.book_status_id',
         ]);
 
-        DB::table('eksemplar')
-        ->join('stock_take_item', 'eksemplar.id', '=', 'stock_take_item.eksemplar_id')
-        ->where('stock_take_item.stock_opname_id', $id)
-        ->update(['eksemplar.book_status_id' => DB::raw('stock_take_item.book_status_id')]);
-
         return response()
-            ->json(['message' => 'Proses Inventarisasi ' . ($stockopname[0]->stockopname_name) . ' sudah selesai!', 'data' => $stockopname]);
+            ->json(['message' => 'Proses Inventarisasi ' . ($stockopname[0]->stockopname_name) .
+                                 ' sudah selesai!', 'data' => $stockopname]);
     }
+
+
     // public function showData($id, Request $request)
     // {
     //     $stockopname['stocktakeitem'] = DB::table('stock_opname')
