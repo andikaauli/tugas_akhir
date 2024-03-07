@@ -145,6 +145,8 @@
                             <th class="text-left p-3">TIPE KOLEKSI</th>
                             <th class="text-left p-3">TANGGAL PINJAM</th>
                             <th class="text-left p-3">BATAS KEMBALI</th>
+                            <th class="text-left p-3">KETERLAMBATAN</th>
+                            <th class="text-left p-3">DENDA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,7 +162,7 @@
                                             class="text-xs text-white font-bold bg-blue-600 hover:bg-blue-500 p-1.5 rounded">Kembali</button>
                                     </form>
                                 </td>
-                                <td class="p-3 w-18">
+                                {{-- <td class="p-3 w-18">
                                     <form class="m-0"
                                         action="{{ route('client.loan-perpanjang', ['loan' => $item->id]) }}"
                                         method="post">
@@ -168,7 +170,19 @@
                                         <button
                                             class="text-xs text-white font-bold bg-green-500 hover:bg-green-600 p-1.5 rounded">Perpanjang</button>
                                     </form>
-                                </td>
+                                </td> --}}
+                                <td class="p-3 w-18">
+                                    @if ($item->day_overdue)
+                                      <button type="button" disabled class="text-xs text-white font-bold bg-gray-500 p-1.5 rounded">Perpanjang</button>
+                                    @else
+                                      <form class="m-0"
+                                            action="{{ route('client.loan-perpanjang', ['loan' => $item->id]) }}"
+                                            method="post">
+                                        @csrf
+                                        <button type="submit" class="text-xs text-white font-bold bg-green-500 hover:bg-green-600 p-1.5 rounded">Perpanjang</button>
+                                      </form>
+                                    @endif
+                                  </td>
                                 <td class="p-3 w-40">{{$item->eksemplar->item_code}}</td>
                                 <td class="p-3">
                                     <p class="">{{$item->eksemplar->biblio->title}}</p>
@@ -176,6 +190,16 @@
                                 <td class="p-3 w-32">{{$item->eksemplar->biblio->colltype->title}}</td>
                                 <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
                                 <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->due_date)->format('Y-m-d') }}</td>
+                                @if(isset($item->day_overdue))
+                                    <td class="p-3 text-sm leading-6 border-r border-b w-32">{{ $item->day_overdue }} hari</td>
+                                @else
+                                    <td class="p-3 text-sm leading-6 border-r border-b w-32"> - </td>
+                                @endif
+                                @if(isset($item->late_charge))
+                                    <td class="p-3 text-sm leading-6 border-r border-b w-32">Rp. {{ $item->late_charge }}</td>
+                                @else
+                                    <td class="p-3 text-sm leading-6 border-r border-b w-32"> - </td>
+                                @endif
                             </tr>
                         @endforeach
 

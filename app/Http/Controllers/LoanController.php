@@ -143,39 +143,51 @@ class LoanController extends Controller
 
         $eksemplar = Eksemplar::get()->where('item_code', $request->item_code)->first();
 
-        if ($eksemplar) {
-            $loan = Loan::whereHas('eksemplar', function ($query) use ($request) {
-                return $query->where('item_code', $request->item_code);
-            })->where('return_date', null);
-            $loanData = $loan->first();
-            $countData = $loan->count();
-            if ($countData == 1) {
-                $loanData->update([
-                    'return_date' => now(),
-                ]);
-                $eksemplar->update([
-                    'book_status_id' => 2
-                ]);
-                if (Carbon::now()->isAfter(Carbon::parse($loanData->due_date))) {
-                    $loanData->update([
-                        'loan_status' => 'Terlambat Kembali',
-                        'return_status' => '2'
-
-                    ]);
-                } else {
-                    $loanData->update([
-                        'loan_status' => 'Telah Kembali',
-                        'return_status' => '1'
-
-                    ]);
-                }
-                $loanData->refresh();
-                return response()->json(['message' => 'Eksemplar berjudul '.($eksemplar->biblio->title).' dengan kode ' . ($request->item_code) . ' berhasil dikembalikan!', 'data' => $loanData, 'eksemplar' => $eksemplar]);
-            } else {
-                return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak ada di peminjaman!']);
-            }
+        if (!$eksemplar) {
+            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' tidak tersedia'], 404);
         }
-        return response()->json(['message' => 'Eksemplar dengan kode ' . ($request->item_code) . ' tidak tersedia'], 404);
+
+        $loan = Loan::whereHas('eksemplar', function ($query) use ($request) {
+            return $query->where('item_code', $request->item_code);
+        })
+        ->where('return_date', null)
+        ->first();
+
+        if (!$loan) {
+            return response()->json(['message' => 'Eksemplar dengan kode ' . $request->item_code . ' tidak ada di peminjaman!']);
+        }
+        if($request->item_code = Carbon::parse($request->return_date)->isAfter(Carbon::parse($loan->due_date))){
+            return response()->json(['message' => 'Eksemplar terlambat! Pengembalian tidak dapat dilakukan melalui fitur ini.'], 422);
+        }
+
+        if (Carbon::now()->isAfter(Carbon::parse($loan->due_date))) {
+            $loan->update([
+                'return_date' => now(),
+                'loan_status' => 'Terlambat Kembali',
+                'return_status' => '2'
+
+            ]);
+        } else {
+            $loan->update([
+                'return_date' => now(),
+                'loan_status' => 'Telah Kembali',
+                'return_status' => '1'
+
+            ]);
+        }
+
+
+        $eksemplar->update([
+            'book_status_id' => 2,
+        ]);
+
+        $loan->refresh();
+
+        return response()->json([
+            'message' => 'Eksemplar berjudul '.($eksemplar->biblio->title).' dengan kode ' . ($request->item_code) . ' berhasil dikembalikan!',
+            'data' => $loan,
+            'eksemplar' => $eksemplar,
+        ]);
     }
 
     public function perpanjang(Request $request, $id)

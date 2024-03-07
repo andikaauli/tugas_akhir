@@ -20,6 +20,8 @@ return new class extends Migration
             $table->dateTime('return_date')->nullable();
             $table->string('loan_status')->nullable();
             $table->string('return_status')->nullable();
+            $table->string('late_charge')->nullable();
+            $table->string('day_overdue')->nullable();
             $table->string('judul')->nullable();
             $table->timestamps();
             $table->foreignUuid('eksemplar_id')->constrained('eksemplar')->restrictOnDelete();

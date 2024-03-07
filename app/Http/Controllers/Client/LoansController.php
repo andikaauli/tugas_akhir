@@ -44,25 +44,31 @@ class LoansController extends Controller
         $http = new Request();
         $http = $http->create(url('api') . '/loan', 'GET', ['search' => $search]);
 
-        $loan = Loan::with(['eksemplar', 'member', 'eksemplar.biblio']);
-        $loan = $loan->whereHas("member", function ($b) use ($search) {
-            $b->where('name', 'LIKE', "%$search%")->orWhere('nim', 'LIKE', "%$search%");
-        })
-
-            ->orWhereHas("eksemplar", function ($b) use ($search) {
+        $loans = Loan::with(['eksemplar', 'member', 'eksemplar.biblio'])
+        ->where(function ($query) use ($search) {
+            $query->whereHas('member', function ($b) use ($search) {
+                $b->where('name', 'LIKE', "%$search%")
+                    ->orWhere('nim', 'LIKE', "%$search%");
+            })
+            ->orWhereHas('eksemplar', function ($b) use ($search) {
                 $b->where('item_code', 'LIKE', "%$search%");
             })
-
-            ->orWhereHas("eksemplar.biblio", function ($b) use ($search) {
+            ->orWhereHas('eksemplar.biblio', function ($b) use ($search) {
                 $b->where('title', 'LIKE', "%$search%");
             })
-
             ->orWhere('loan_status', 'LIKE', "%$search%");
+        })
+        ->where(function ($query) {
+            $query->where('return_status', '2')
+                ->orWhere('due_date', '<', now());
+        })
+        ->paginate(10);
 
-        $loans = $loan->get();
-        $loans = $loans->filter(function ($loan) {
-            return $loan->return_status == '2';
-        })->paginate(10);
+        foreach ($loans as $loan) {
+            $loan->day_overdue = now()->diffInDays($loan->due_date) + 1;
+            $loan->late_charge = $loan->day_overdue * 2000;
+            $loan->save();
+        }
 
 
         return view('petugas/sirkulasi/daftar-keterlambatan', ['loans' => $loans]);
@@ -110,6 +116,7 @@ class LoansController extends Controller
         if ($response->isClientError()) {
             return redirect()->back()->withErrors((array) json_decode($response->getContent()));
         }
+        
 
         return redirect()->route('client.loan-fastreturn');
     }
