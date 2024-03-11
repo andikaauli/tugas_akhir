@@ -127,6 +127,9 @@ Route::prefix("user")->group(function () {
     Route::post('/login', [UserController::class, "authenticating"]);
     Route::post('/logout', [UserController::class, "logout"])->middleware('auth');
     Route::post('/edit', [UserController::class, "editData"])->middleware('auth');
+    Route::get('/forgot-password', [UserController::class, "showForgotPasswordForm"]);
+    Route::post('/forgot-password', [UserController::class, 'sendResetLinkEmail']);
+    Route::post('/password/email', [UserController::class, 'sendResetLinkEmail']);
 });
 
 Route::prefix("visitor")->group(function () {

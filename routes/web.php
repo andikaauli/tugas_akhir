@@ -224,6 +224,10 @@ Route::middleware(['only_guest'])->group(function () {
     Route::get('/login', [UserController::class, "login"])->name('login');
     Route::post('/sesi/login', [UserController::class, "authenticating"]);
 });
+    Route::get('/forgot-password', [UserController::class, 'showForgotPasswordForm'])->name('password.request');
+    Route::post('/forgot-password', [UserController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [UserController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [UserController::class, 'reset'])->name('password.update');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [UserController::class, "logout"]);
@@ -236,19 +240,11 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/test', function () {
     return view('petugas.inventarisasi.tes');
 });
-Route::get('/tes', function () {
-    $pdf = PDF::loadView('petugas/inventarisasi/chart');
-        $pdf->setOption('enable-javascript', true);
-        $pdf->setOption('javascript-delay', 1000);
-        $pdf->setOption('no-stop-slow-scripts', true);
-        $pdf->setOption('enable-smart-shrinking', true);
-        return $pdf->stream('download.pdf');
-        return view('petugas/inventarisasi/chart');
-});
 
 Route::get('preview', [StockOpnamesController::class, "preview"]);
 
 Route::get('download', [StockOpnamesController::class, "download"])->name('download');
+
 
 
 // Route::resource("zzz", VisitorController::class);

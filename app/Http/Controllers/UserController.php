@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-
-
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -112,6 +111,8 @@ class UserController extends Controller
             'password' => 'required',
         ]);
         // dd($credentials);
+        //if !email verify kkrim email utk verif
+        //else lanjut dibawha
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('beranda');
@@ -129,5 +130,64 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         // return response()->json(['message'=>'Anda berhasil Logout!']);
         return redirect('login');
+    }
+
+    public function showForgotPasswordForm(Request $request)
+    {
+        return view('dashboard.forgot-password');
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        if ($status === Password::RESET_LINK_SENT) {
+            return back()->with('status', __($status));
+        }
+
+        return back()->withErrors(['email' => __($status)]);
+    }
+
+    public function showResetForm(Request $request)
+    {
+        $token = $request->token;
+        $email = $request->email;
+
+        return view('dashboard.reset', ['token' => $token, 'email' => $email]);
+    }
+
+    public function reset(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password),
+                ])->save();
+            }
+        );
+
+
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()->route('login')->with('status', __($status));
+        }
+
+        return back()->withErrors(['email' => __($status)]);
     }
 }

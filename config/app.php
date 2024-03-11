@@ -184,6 +184,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        LaravelDaily\LaravelCharts\LaravelChartsServiceProvider::class,
 
         /*
          * Package Service Providers...
