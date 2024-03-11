@@ -189,17 +189,17 @@
                                     <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
                                 <td class="p-3 w-32">{{$item->eksemplar->biblio->colltype->title}}</td>
-                                <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
-                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->due_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->loan_date)}}</td>
+                                <td class="p-3 w-40">{{ Carbon\Carbon::parse($item->due_date)}}</td>
                                 @if(isset($item->day_overdue))
-                                    <td class="p-3 text-sm leading-6 border-r border-b w-32">{{ $item->day_overdue }} hari</td>
+                                    <td class="p-3 w-24">{{ $item->day_overdue }} hari</td>
                                 @else
-                                    <td class="p-3 text-sm leading-6 border-r border-b w-32"> - </td>
+                                    <td class="p-3 w-24"> - </td>
                                 @endif
                                 @if(isset($item->late_charge))
-                                    <td class="p-3 text-sm leading-6 border-r border-b w-32">Rp. {{ $item->late_charge }}</td>
+                                    <td class="p-3 w-24">Rp. {{ $item->late_charge }}</td>
                                 @else
-                                    <td class="p-3 text-sm leading-6 border-r border-b w-32"> - </td>
+                                    <td class="p-3 w-24"> - </td>
                                 @endif
                             </tr>
                         @endforeach

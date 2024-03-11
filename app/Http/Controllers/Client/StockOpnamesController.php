@@ -140,7 +140,7 @@ class StockOpnamesController extends Controller
         $pdf = PDF::loadView('petugas/inventarisasi/download-pdf', ['stockopnames' => $stockopname]);
         $pdf->setOptions(['isHtml5ParserEnabled' => true]);
 
-        return $pdf->download('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
+        return $pdf->stream('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
         //  return $pdf->stream();
 	}
 

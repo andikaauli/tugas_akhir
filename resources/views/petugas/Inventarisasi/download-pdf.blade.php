@@ -21,9 +21,24 @@
             }
         </style>
         @vite('resources/css/app.css') --}}
+        <style>
+
+        </style>
     <style>
         .flex {
             display: flex;
+        }
+
+        .text-center{
+            text-align: center;
+        }
+
+        .w-60{
+            width: 300px;
+        }
+
+        .w-40{
+            width: 200px;
         }
 
         .items-center {
@@ -69,72 +84,27 @@
             table-layout: auto;
         }
 
+        th{
+            height: 40px;
+        }
+
+        td{
+            padding-left: 12px;
+            padding-right: 12px;'
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+
         table {
-            background-color: red;
+            background-color: #f2f2f2;
+            border-collapse: collapse;
         }
-
-        @property --p {
-            syntax: '<number>';
-            inherits: true;
-            initial-value: 0;
-        }
-
-        .pie {
-            --p: 20;
-            --b: 22px;
-            --c: darkred;
-            --w: 150px;
-
-            width: var(--w);
-            aspect-ratio: 1;
-            position: relative;
-            display: inline-grid;
-            margin: 5px;
-            place-content: center;
-            font-size: 25px;
-            font-weight: bold;
-            font-family: sans-serif;
-        }
-
-        .pie:before,
-        .pie:after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-        }
-
-        .pie:before {
-            inset: 0;
-            background:
-                radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b) no-repeat,
-                conic-gradient(var(--c) calc(var(--p)*1%), #0000 0);
-            -webkit-mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
-            mask: radial-gradient(farthest-side, #0000 calc(99% - var(--b)), #000 calc(100% - var(--b)));
-        }
-
-        .pie:after {
-            inset: calc(50% - var(--b)/2);
-            background: var(--c);
-            transform: rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
-        }
-
-        .animate {
-            animation: p 1s .5s both;
-        }
-
-        .no-round:before {
-            background-size: 0 0, auto;
-        }
-
-        .no-round:after {
-            content: none;
-        }
-
-        @keyframes p {
-            from {
-                --p: 0
-            }
-        }
+        table, td, th {
+  border: 1px solid black;
+}
+table, td, td {
+  border: 1px solid black;
+}
 
         body {
             background: #f2f2f2;
@@ -149,8 +119,11 @@
             {{-- Section 1 --}}
             <div class="px-4 pt-4 flex my-5">
                 <div class="flex items-center">
-                    <h1 class="text-3xl text-black font-bold">
-                        Hasil Stock Opnames
+                    <h1 class="text-3xl text-black font-bold items-center text-center">
+                        Laporan Stock Opname
+                    </h1>
+                    <h1 class="text-3xl text-black font-bold items-center text-center">
+                        Perpustakaan Fakultas Teknik Universitas Dipoengoro
                     </h1>
                 </div>
                 {{-- @endif --}}
@@ -158,51 +131,11 @@
             {{-- End Section 1 --}}
             {{-- Section 2 --}}
             <form action="{{ route('client.stockopname', ['id' => $stockopnames[0]->id]) }}">
-                <div class="pie" style="--p:20"> 20%</div>
-                <div class="pie" style="--p:40;--c:darkblue;--b:10px"> 40%</div>
-                <div class="pie no-round" style="--p:60;--c:purple;--b:15px"> 60%</div>
-                <div class="pie animate no-round" style="--p:80;--c:orange;"> 80%</div>
-                <div class="pie animate" style="--p:90;--c:lightgreen"> 90%</div>
-
-                <div id="piechart"></div>
-
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-                <script type="text/javascript">
-                    // Load google charts
-                    google.charts.load('current', {
-                        'packages': ['corechart']
-                    });
-                    google.charts.setOnLoadCallback(drawChart);
-
-                    // Draw the chart and set the chart values
-                    function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
-                            ['Task', 'Hours per Day'],
-                            ['Work', 8],
-                            ['Eat', 2],
-                            ['TV', 4],
-                            ['Gym', 2],
-                            ['Sleep', 8]
-                        ]);
-
-                        // Optional; add a title and set the width and height of the chart
-                        var options = {
-                            'title': 'My Average Day',
-                            'width': 550,
-                            'height': 400
-                        };
-
-                        // Display the chart inside the <div> element with id="piechart"
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                        chart.draw(data, options);
-                    }
-                </script>
                 <table class="table-auto">
                     <thead>
                         <tr>
-                            <th>Keterangan</th>
-                            <th>Data Hasil</th>
+                            <th class="w-60">KETERANGAN</th>
+                            <th class="w-40">DATA HASIL</th>
                         </tr>
                     </thead>
                     <tbody>

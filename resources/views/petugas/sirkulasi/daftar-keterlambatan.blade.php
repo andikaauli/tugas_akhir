@@ -75,7 +75,7 @@
                @endforeach
                @if ($loans->isEmpty())
                <tr>
-                   <td class="pt-6 pb-6 text-center border-b border-x border-gray-300 text-red-600 font-semibold" colspan="8">Tidak Ada Data</td>
+                   <td class="pt-6 pb-6 text-center border-b border-x border-gray-300 text-red-600 font-semibold" colspan="9">Tidak Ada Data</td>
                </tr>
                @endif
             </table>
