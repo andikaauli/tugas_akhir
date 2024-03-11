@@ -34,18 +34,17 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|string',
-            'username' => 'required|max:255', 'unique:user',
+            'username' => 'required|max:255', 'unique:user,username',
             'password' => 'required|min:8',
             'password_confirm' => 'required|same:password',
-            'email' => 'required|max:255|email', 'unique:user',
-            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
+            'email' => 'required|max:255|email', 'unique:user,email',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $user = User::create(['name' => $request->name, 'username' => $request->username, 'password' => Hash::make($request->password), 'email' => $request->email, 'image' => $request->image]);
+        $user = User::create(['name' => $request->name, 'username' => $request->username, 'password' => Hash::make($request->password), 'email' => $request->email]);
         return response()
             ->json(['message' => 'Admin baru berhasil ditambahkan!', 'data' => $user]);
     }
