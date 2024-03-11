@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6212c67e28ff19a94a38e8dccd65062",
+    "content-hash": "24b32756ee729befbe40c99a7945bdb1",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1899,6 +1899,72 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
+            "name": "image-charts/image-charts",
+            "version": "6.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/image-charts/php.git",
+                "reference": "1cde4470cba3a90db9b19024f9c8b30b526d4b84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/image-charts/php/zipball/1cde4470cba3a90db9b19024f9c8b30b526d4b84",
+                "reference": "1cde4470cba3a90db9b19024f9c8b30b526d4b84",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François-Guillaume Ribreau",
+                    "homepage": "https://www.image-charts.com/"
+                }
+            ],
+            "description": "Official Image-Charts.com API client library",
+            "homepage": "https://github.com/",
+            "keywords": [
+                "animated",
+                "api",
+                "backend-end",
+                "bar",
+                "bubble",
+                "chart",
+                "chart url",
+                "charts",
+                "doughnut",
+                "front-end",
+                "gif",
+                "horizontal-bar",
+                "image",
+                "imagecharts",
+                "jpeg",
+                "jpg",
+                "line",
+                "pie",
+                "png",
+                "polar"
+            ],
+            "support": {
+                "issues": "https://github.com/image-charts/php/issues",
+                "source": "https://github.com/image-charts/php/tree/6.1.4"
+            },
+            "time": "2022-04-29T15:23:36+00:00"
+        },
+        {
             "name": "intervention/image",
             "version": "2.7.2",
             "source": {
@@ -2649,17 +2715,13 @@
         {
             "name": "laravel/ui",
             "version": "v4.5.0",
-            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
                 "reference": "da3811f409297d13feccd5858ce748e7474b3d11"
-                "reference": "da3811f409297d13feccd5858ce748e7474b3d11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/da3811f409297d13feccd5858ce748e7474b3d11",
-                "reference": "da3811f409297d13feccd5858ce748e7474b3d11",
                 "url": "https://api.github.com/repos/laravel/ui/zipball/da3811f409297d13feccd5858ce748e7474b3d11",
                 "reference": "da3811f409297d13feccd5858ce748e7474b3d11",
                 "shasum": ""
@@ -2672,8 +2734,6 @@
                 "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^7.35|^8.15|^9.0",
-                "phpunit/phpunit": "^9.3|^10.4|^11.0"
                 "orchestra/testbench": "^7.35|^8.15|^9.0",
                 "phpunit/phpunit": "^9.3|^10.4|^11.0"
             },
@@ -2711,9 +2771,52 @@
             ],
             "support": {
                 "source": "https://github.com/laravel/ui/tree/v4.5.0"
-                "source": "https://github.com/laravel/ui/tree/v4.5.0"
             },
             "time": "2024-03-04T13:58:27+00:00"
+        },
+        {
+            "name": "laraveldaily/laravel-charts",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelDaily/laravel-charts.git",
+                "reference": "78d2a5a74e92d65e361652360aa73f5c20583561"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelDaily/laravel-charts/zipball/78d2a5a74e92d65e361652360aa73f5c20583561",
+                "reference": "78d2a5a74e92d65e361652360aa73f5c20583561",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelDaily\\LaravelCharts\\LaravelChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelDaily\\LaravelCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Povilas Korop",
+                    "email": "povilas@laraveldaily.com"
+                }
+            ],
+            "description": "Create charts and reports from Laravel",
+            "support": {
+                "issues": "https://github.com/LaravelDaily/laravel-charts/issues",
+                "source": "https://github.com/LaravelDaily/laravel-charts/tree/0.2.3"
+            },
+            "time": "2023-06-28T10:36:53+00:00"
         },
         {
             "name": "league/commonmark",
@@ -4147,17 +4250,13 @@
         {
             "name": "nikic/php-parser",
             "version": "v5.0.2",
-            "version": "v5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
                 "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13"
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/139676794dc1e9231bf7bcd123cfc0c99182cb13",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/139676794dc1e9231bf7bcd123cfc0c99182cb13",
                 "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13",
                 "shasum": ""
@@ -4203,9 +4302,7 @@
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
                 "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.2"
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.2"
             },
-            "time": "2024-03-05T20:51:40+00:00"
             "time": "2024-03-05T20:51:40+00:00"
         },
         {
@@ -5876,17 +5973,13 @@
         {
             "name": "swagger-api/swagger-ui",
             "version": "v5.11.10",
-            "version": "v5.11.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
                 "reference": "227e94f748e67a9e2a07c1f091ebd85e876cb249"
-                "reference": "227e94f748e67a9e2a07c1f091ebd85e876cb249"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/227e94f748e67a9e2a07c1f091ebd85e876cb249",
-                "reference": "227e94f748e67a9e2a07c1f091ebd85e876cb249",
                 "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/227e94f748e67a9e2a07c1f091ebd85e876cb249",
                 "reference": "227e94f748e67a9e2a07c1f091ebd85e876cb249",
                 "shasum": ""
@@ -5935,9 +6028,7 @@
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
                 "source": "https://github.com/swagger-api/swagger-ui/tree/v5.11.10"
-                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.11.10"
             },
-            "time": "2024-03-06T15:08:08+00:00"
             "time": "2024-03-06T15:08:08+00:00"
         },
         {
@@ -8996,17 +9087,13 @@
         {
             "name": "laravel/sail",
             "version": "v1.28.2",
-            "version": "v1.28.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
                 "reference": "057777403b8ab79222dcc04983beaab10b6de6a0"
-                "reference": "057777403b8ab79222dcc04983beaab10b6de6a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/057777403b8ab79222dcc04983beaab10b6de6a0",
-                "reference": "057777403b8ab79222dcc04983beaab10b6de6a0",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/057777403b8ab79222dcc04983beaab10b6de6a0",
                 "reference": "057777403b8ab79222dcc04983beaab10b6de6a0",
                 "shasum": ""
@@ -9057,7 +9144,6 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-03-04T14:58:29+00:00"
             "time": "2024-03-04T14:58:29+00:00"
         },
         {
