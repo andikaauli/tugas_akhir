@@ -28,6 +28,7 @@ use App\Http\Controllers\Client\PublishersController;
 use App\Http\Controllers\Client\StockOpnamesController;
 use App\Http\Controllers\Client\StockTakeItemsController;
 use App\Http\Controllers\Client\UsersController;
+use Spatie\Browsershot\Browsershot;
 
 /*
 |--------------------------------------------------------------------------
@@ -235,7 +236,18 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/test', function () {
     return view('petugas.inventarisasi.tes');
 });
+Route::get('/tes', function () {
+    $pdf = PDF::loadView('petugas/inventarisasi/chart');
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 1000);
+        $pdf->setOption('no-stop-slow-scripts', true);
+        $pdf->setOption('enable-smart-shrinking', true);
+        return $pdf->stream('download.pdf');
+        return view('petugas/inventarisasi/chart');
+});
+
 Route::get('preview', [StockOpnamesController::class, "preview"]);
+
 Route::get('download', [StockOpnamesController::class, "download"])->name('download');
 
 

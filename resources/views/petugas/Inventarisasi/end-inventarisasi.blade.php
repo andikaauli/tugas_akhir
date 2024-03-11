@@ -1,10 +1,11 @@
 @extends('main.main')
-@extends('petugas.inventarisasi.sidebar')
 @section('active-end-inventarisasi', 'bg-white bg-opacity-30')
 @section('active-inventarisasi-navbar', 'text-blue-500 border-blue-500')
 
+@section('content')
 {{-- Content --}}
 <div class="sm:ml-64">
+    @include('petugas.inventarisasi.sidebar')
     <div class="mt-18">
         {{-- Section 1 --}}
         <div class="px-4 pt-4 flex my-5">
@@ -38,3 +39,5 @@
         {{-- End Section 2 --}}
     </div>
 </div>
+@endsection
+

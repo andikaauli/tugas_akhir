@@ -1,6 +1,7 @@
 @extends('dashboard.main')
 @section('active-layanan-navbar', 'text-blue-500 border-amber-600')
 
+@section('content')
 <div class="pt-32">
     {{-- Section 1 --}}
     <div>
@@ -38,6 +39,7 @@
     </div>
     {{-- End Section 2 --}}
 </div>
+@endsection
 
 
 

@@ -1,6 +1,7 @@
 @extends('dashboard.main')
 @section('active-absen-navbar', 'text-blue-500 border-amber-600')
 
+@section('content')
 <div class="flex items-center justify-center pt-32">
     <form action="{{ route('client.create-visitors')}}" method="POST" class="m-0 p-0">
         {{-- Section 1 --}}
@@ -56,3 +57,5 @@
         {{-- End Section 1 --}}
     </form>
 </div>
+
+@endsection

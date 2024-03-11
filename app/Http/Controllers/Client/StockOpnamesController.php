@@ -146,6 +146,12 @@ class StockOpnamesController extends Controller
 
     public function preview()
     {
+        $pdf = PDF::loadView('petugas/inventarisasi/chart');
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 1000);
+        $pdf->setOption('no-stop-slow-scripts', true);
+        $pdf->setOption('enable-smart-shrinking', true);
+        return $pdf->stream('download.pdf');
         return view('petugas/inventarisasi/chart');
     }
     // public function download()
@@ -161,12 +167,29 @@ class StockOpnamesController extends Controller
     // }
     public function download()
     {
-        $pdf = PDF::loadView('petugas/inventarisasi/chart');
+        // $pdf = PDF::loadView('petugas/inventarisasi/chart');
+        // $pdf->setOption('enable-javascript', true);
+        // $pdf->setOption('javascript-delay', 1000);
+        // $pdf->setOption('no-stop-slow-scripts', true);
+        // $pdf->setOption('enable-smart-shrinking', true);
+        // return $pdf->stream();
+        // $pdf = PDF::loadView('petugas.inventarisasi.chart', [
+        //     'data' => [
+        //         ['Work',     11],
+        //         ['Eat',      2],
+        //         ['Commute',  2],
+        //         ['Watch TV', 2],
+        //         ['Sleep',    7]
+        //     ]
+        // ]);
+        $pdf = PDF::loadView('petugas.inventarisasi.chart');
+
         $pdf->setOption('enable-javascript', true);
-        $pdf->setOption('javascript-delay', 1000);
+        $pdf->setOption('javascript-delay', 5000);
         $pdf->setOption('no-stop-slow-scripts', true);
         $pdf->setOption('enable-smart-shrinking', true);
         return $pdf->stream();
+        // return view('petugas/inventarisasi/chart');
     }
 
 	// public function gone(Request $request)

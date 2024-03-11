@@ -1,10 +1,11 @@
 @extends('main.main')
-@extends('petugas.daftar-terkendali.sidebar')
 @section('active-tipeKoleksi', 'bg-white bg-opacity-30')
 @section('active-daftarTerkendali-navbar', 'text-blue-500 border-blue-500')
 
+@section('content')
 {{-- Content --}}
  <div class="sm:ml-64">
+    @include('petugas.daftar-terkendali.sidebar')
     <div class="mt-18">
         @method('DELETE')
         @csrf
@@ -148,3 +149,5 @@
         box.style.display = 'none';
     }, 3000);
 </script>
+@endsection
+

@@ -1,11 +1,12 @@
 @extends('main.main')
-@extends('petugas.sirkulasi.sidebar')
 @section('active-daftar-keterlambatan', 'bg-white bg-opacity-30')
 @section('active-sirkulasi-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
+@section('content')
 {{-- Content --}}
  <div class="sm:ml-64">
+    @include('petugas.sirkulasi.sidebar')
     <div class="mt-18">
      {{-- Section 1 --}}
        <div class="px-4 pt-4 flex my-5">
@@ -62,7 +63,7 @@
                      <td class="p-1.5 text-sm leading-6 border-r border-b">{{$loan->eksemplar->biblio->title}}</td>
                      <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->loan_date) }}</td>
                      @if(isset($loan->return_date))
-                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)->format('Y-m-d')}}</td>
+                        <td class="p-1.5 text-sm leading-6 border-r border-b w-32">{{ Carbon\Carbon::parse($loan->return_date)}}</td>
                      @else
                         <td class="p-1.5 text-sm leading-6 border-r border-b w-32"> - </td>
                      @endif
@@ -86,3 +87,5 @@
     {{-- End Section 2 --}}
     </div>
 </div>
+@endsection
+

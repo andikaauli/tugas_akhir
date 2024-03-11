@@ -17,6 +17,6 @@
         "chart.js": "^4.4.1",
         "flowbite": "^1.8.1",
         "google-charts": "^2.0.0",
-        "puppeteer": "^21.6.0"
+        "puppeteer": "^21.11.0"
     }
 }

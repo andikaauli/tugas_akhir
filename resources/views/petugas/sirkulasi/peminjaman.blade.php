@@ -1,9 +1,10 @@
 @extends('main.main')
-@extends('petugas.sirkulasi.sidebar')
 @section('active-mulai-sirkulasi', 'bg-white bg-opacity-30')
 @section('active-sirkulasi-navbar', 'text-blue-500 border-blue-500')
 
+@section('content')
 <div class="mt-18 ml-64">
+    @include('petugas.sirkulasi.sidebar')
     {{-- Section 1 --}}
     <div class="px-4 pt-4 flex my-5">
         <div class="flex items-center">
@@ -208,14 +209,14 @@
             </div>
         </div>
         <div class="content_box">
-            <div class="content hidden bg-white animate-move duration-500 p-5">
+            <div class="content hidden bg-white animate-move duration-500 p-0">
                 <table class="table-auto w-full">
                     <thead class="p-3 border-b border-solid border-gray-200">
                         <tr class="text-sm">
                             <th class="text-left p-3">KODE EKSEMPLAR</th>
                             <th class="text-left p-3">JUDUL</th>
                             <th class="text-left p-3">TANGGAL PINJAM</th>
-                            <th class="text-left p-3">TANGGAL DIKEMBALIKAN</th>
+                            <th class="text-left p-3">TANGGAL KEMBALI</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -225,8 +226,8 @@
                                 <td class="p-3">
                                     <p class="">{{$item->eksemplar->biblio->title}}</p>
                                 </td>
-                                <td class="p-3 w-36">{{ Carbon\Carbon::parse($item->loan_date)->format('Y-m-d') }}</td>
-                                <td class="p-3 w-52">{{ Carbon\Carbon::parse($item->return_date)->format('Y-m-d') }}</td>
+                                <td class="p-3 w-44">{{ Carbon\Carbon::parse($item->loan_date)}}</td>
+                                <td class="p-3 w-44">{{ Carbon\Carbon::parse($item->return_date)}}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -258,3 +259,5 @@
         })
     })
 </script>
+@endsection
+

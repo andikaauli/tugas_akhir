@@ -1,6 +1,7 @@
 @extends('dashboard.main')
-@section('active-cari-koleksi-navbar', 'text-blue-500 border-amber-600')
+@section('active-cari-koleksi-navbar', 'text-blue-500 active:border-amber-600')
 
+@section('content')
 <div class="items-center justify-center pt-32 mb-10">
     <div class="py-4 px-4 mb-4">
         {{-- Search Bar --}}
@@ -66,3 +67,5 @@
         </div>
     </div>
 </div>
+
+@endsection

@@ -1,10 +1,11 @@
 @extends('main.main')
-@extends('petugas.daftar-terkendali.sidebar')
 @section('active-penerbit', 'bg-white bg-opacity-30')
 @section('active-daftarTerkendali-navbar', 'text-blue-500 border-blue-500')
 
+@section('content')
 {{-- Content --}}
  <div class="sm:ml-64">
+    @include('petugas.daftar-terkendali.sidebar')
     <div class="mt-18">
     {{-- Section 1 --}}
        <div class="px-4 pt-4 flex my-5">
@@ -46,5 +47,7 @@
     {{-- End Section 2 --}}
     </div>
 </div>
+@endsection
+
 
 

@@ -1,11 +1,13 @@
 @extends('main.main')
-@extends('petugas.beranda.sidebar')
+
 @section('active-edit-profil', 'bg-white bg-opacity-30')
 @section('active-beranda-navbar', 'text-blue-500 border-blue-500')
 {{-- End Sidebar --}}
 
+@section('content')
 {{-- Content --}}
 <div class="sm:ml-64">
+    @include('petugas.beranda.sidebar')
     <div class="mt-18">
         {{-- Section 1 --}}
         <div class="px-4 pt-4 flex my-5">
@@ -175,3 +177,4 @@
       }
     }
 </script>
+@endsection

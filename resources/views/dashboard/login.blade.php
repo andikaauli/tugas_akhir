@@ -1,6 +1,7 @@
 @extends('dashboard.main')
 @section('active-login-navbar', 'bg-blue-500')
 
+@section('content')
 <div class="flex items-center justify-center pt-32">
 
     <form action="/sesi/login" method="POST" class="m-0 p-0">
@@ -43,3 +44,5 @@
         {{-- End Section 1 --}}
     </form>
 </div>
+@endsection
+

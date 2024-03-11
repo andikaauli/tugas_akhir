@@ -1,11 +1,9 @@
 @extends('dashboard.main')
 @section('active-profil-navbar', 'text-blue-500 border-amber-600')
 
+@section('content')
 <div class="pt-32">
     {{-- Section 1 --}}
-    <div>
-
-    </div>
     {{-- End Section 1 --}}
     {{-- Setion 2 --}}
     <div class="">
@@ -39,3 +37,5 @@
     </div>
     {{-- End Section 2 --}}
 </div>
+@endsection
+

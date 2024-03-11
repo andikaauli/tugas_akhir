@@ -1,10 +1,11 @@
 @extends('main.main')
-@extends('petugas.bibliografi.sidebar')
 @section('active-create-bibliografi', 'bg-white bg-opacity-30')
 @section('active-bibliografi-navbar', 'text-blue-500 border-blue-500')
 
+@section('content')
 {{-- Content --}}
 <div class="sm:ml-64">
+    @include('petugas.bibliografi.sidebar')
     <div class="mt-18">
         {{-- Section 1 --}}
         <div class="px-4 pt-4 flex my-5">
@@ -406,3 +407,4 @@
         }
     }
 </script>
+@endsection
