@@ -129,6 +129,19 @@ class StockOpnamesController extends Controller
 		// return view('petugas/inventarisasi/hasil-inventarisasi', ['stockopnames' => $stockopname]);
          // Fetch stockopname data directly from the controller
 
+        // $stockopname['stocktakeitem'] = DB::table('stock_opname')
+        // ->where('stock_take_item.stock_opname_id', $id)
+        // ->join('stock_take_item', 'stock_take_item.stock_opname_id', '=', 'stock_opname.id')
+        // ->get();
+
+        // $stockopname['total_tersedia'] = $stockopname['stocktakeitem']->where('book_status_id', 2)->count();
+        // $stockopname['total_hilang'] =  $stockopname['stocktakeitem']->where('book_status_id', 3)->count();
+        // $stockopname['total_dipinjam'] = $stockopname['stocktakeitem']->where('book_status_id', 1)->count();
+        // $stockopname['total_eksemplar'] = $stockopname['stocktakeitem']->count();
+        // $stockopname['total_diperiksa'] = $stockopname['stocktakeitem']->whereIn('book_status_id', [2, 3])->count();
+        // $stockopname['total_persen'] = ($stockopname['total_tersedia'] / $stockopname['total_diperiksa']) * 100;
+        // dd($stockopname);
+
         $stockopname = StockOpname::where('id', $id)->get();
         $stockopname['total_tersedia'] = $stockopname[0]->stocktakeitem()->where('book_status_id', 2)->count();
         $stockopname['total_hilang'] =  $stockopname[0]->stocktakeitem()->where('book_status_id', 3)->count();
@@ -140,6 +153,7 @@ class StockOpnamesController extends Controller
         $pdf = PDF::loadView('petugas/inventarisasi/pdf/main', ['stockopnames' => $stockopname]);
         $pdf->setOptions(['isHtml5ParserEnabled' => true]);
 
+        // return $pdf->stream('Laporan Hasil StockOpname ' . $stockopname['stocktakeitem'][0]->stockopname_name . '.pdf');
         return $pdf->stream('Laporan Hasil StockOpname ' . $stockopname[0]->stockopname_name . '.pdf');
         //  return $pdf->stream();
 	}
