@@ -36,12 +36,12 @@
                     </div>
                     {{-- End Password --}}
                 </div>
-                <div class="py-2.5">
-                    <button  type="submit" class="bg-amber-600 text-base text-white hover:bg-blue-500 font-bold p-2.5 rounded-md mr-2">Masuk</button>
-                </div>
-                <div class="py-2.5">
-                    <a href="/forgot-password" class="text-white ">Lupa Password?</a>
-                </div>
+                    <div class="py-2.5">
+                        <button  type="submit" class="bg-amber-600 w-full text-base text-white hover:bg-blue-500 font-bold p-2.5 rounded-md mr-2">Masuk</button>
+                    </div>
+                    <div class="py-2.5 flex justify-center">
+                        <a href="/forgot-password" class="text-amber-600 mr-1 hover:underline hover:underline-offset-1">Klik di sini</a><p class="text-white">jika Anda lupa kata sandi</p>
+                    </div>
             </div>
         </div>
         {{-- End Section 1 --}}
