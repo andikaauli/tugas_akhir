@@ -54,7 +54,7 @@
                </thead>
                <tbody>
                 @foreach ($stockopnames as $data)
-                @dd($data)
+                {{-- @dd($data) --}}
                 <tr class="border-b border-solid border-gray-400">
                    <td class="p-1.5 text-sm leading-6 border-x border-b w-36">{{$data->eksemplar->item_code}}</td>
                    <td class="p-1.5 text-sm leading-6 border-r border-b">{{$data->eksemplar->biblio->title}}</td>

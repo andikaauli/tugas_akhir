@@ -234,30 +234,30 @@ class StockOpnamesController extends Controller
             // 'search' => $search
         ]);
 
-        // $stockopnames = StockTakeItem::with(['eksemplar', 'eksemplar.biblio'])
-        //     ->whereHas('stockopname', function ($query) {
-        //         $query->whereNull('end_date');
-        //     })
-        //     ->whereHas("eksemplar.biblio", function ($b) use ($search) {
-        //         $b->where('item_code', 'LIKE', "%$search%")
-        //         ->orWhere('title', 'LIKE', "%$search%");
-        //     })
-        //     ->where('book_status_id', '3') // Filter for book_status_id = 3 within the query
-        //     ->paginate(10);
-
-        $stockopnames = DB::table('stock_opname')
-            ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stock_take_item.book_status_id', 'call_number')
-            ->where('stock_opname_id', $active_inventarisasi)
-            ->whereIn('stock_take_item.book_status_id', [2, 3])
-            ->join('stock_take_item', 'stock_take_item.stock_opname_id', '=', 'stock_opname.id')
-            ->join('eksemplar', 'eksemplar.id', '=', 'stock_take_item.eksemplar_id')
-            ->join('biblio', 'biblio.id', '=', 'eksemplar.biblio_id')
-            ->join('book_statuses', 'book_statuses.id', '=', 'stock_take_item.book_status_id')
-            ->when($request->has('searchStock'), function ($query) use ($request) {
-                $query->where('eksemplar.item_code', 'LIKE', "%{$request->searchStock}%");
+        $stockopnames = StockTakeItem::with(['eksemplar', 'eksemplar.biblio'])
+            ->whereHas('stockopname', function ($query) {
+                $query->whereNull('end_date');
             })
-            ->orderBy('title', 'asc')
+            ->whereHas("eksemplar.biblio", function ($b) use ($search) {
+                $b->where('item_code', 'LIKE', "%$search%")
+                ->orWhere('title', 'LIKE', "%$search%");
+            })
+            ->where('book_status_id', '3') // Filter for book_status_id = 3 within the query
             ->paginate(10);
+
+        // $stockopnames = DB::table('stock_opname')
+        //     ->select('item_code', 'rfid_code', 'title', 'classification', 'name', 'stock_take_item.book_status_id', 'call_number')
+        //     ->where('stock_opname_id', $active_inventarisasi)
+        //     ->whereIn('stock_take_item.book_status_id', [2, 3])
+        //     ->join('stock_take_item', 'stock_take_item.stock_opname_id', '=', 'stock_opname.id')
+        //     ->join('eksemplar', 'eksemplar.id', '=', 'stock_take_item.eksemplar_id')
+        //     ->join('biblio', 'biblio.id', '=', 'eksemplar.biblio_id')
+        //     ->join('book_statuses', 'book_statuses.id', '=', 'stock_take_item.book_status_id')
+        //     ->when($request->has('searchStock'), function ($query) use ($request) {
+        //         $query->where('eksemplar.item_code', 'LIKE', "%{$request->searchStock}%");
+        //     })
+        //     ->orderBy('title', 'asc')
+        //     ->paginate(10);
 
         return view('petugas/inventarisasi/eksemplar-hilang', ['stockopnames' => $stockopnames]);
 	}

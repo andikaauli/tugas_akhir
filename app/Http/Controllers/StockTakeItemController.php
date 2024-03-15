@@ -18,17 +18,6 @@ class StockTakeItemController extends Controller
         })->whereHas('stockopname', function ($query) {
             $query->whereNull('end_date');
         })->where("book_status_id", 3)->first();
-        // if (!$stocktakeitem) {
-        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' tidak tersedia'], 404);
-        // }
-
-        // if ($stocktakeitem->book_status_id === 1) {
-        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sedang Dipinjam!'], 422);
-        // }
-
-        // if ($stocktakeitem->book_status_id === 2) {
-        //     return response()->json(['message' => 'Eksemplar dengan kode ' . $request->rfid_code . ' sudah Tersedia!'], 422);
-        // }
 
         $stocktakeitem->update([
             'book_status_id' => 2

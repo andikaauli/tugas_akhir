@@ -108,7 +108,7 @@ Route::group(['prefix' => 'stockopname', 'middleware' => ['auth']], function () 
 });
 
 // Route::prefix("stocktakeitem")->group(function () {
-Route::group(['prefix' => 'stocktakeitem', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'stocktakeitem'], function () {
     Route::get('', [StockTakeItemController::class, "getData"]);
     Route::post('/edit', [StockTakeItemController::class, "editData"]);
     Route::post('/button', [StockTakeItemController::class, "editDataButton"])->name('button.stocktakeitem')->middleware('auth');
