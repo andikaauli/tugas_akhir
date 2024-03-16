@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Biblio;
 use App\Models\CollType;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CollTypesController extends Controller
 {
@@ -130,6 +131,13 @@ class CollTypesController extends Controller
 			$http = $http->create(url('api') . '/colltype/destroy/' . $colltypesId, 'DELETE');
 			$response = app()->handle($http);
 		}
+
+        $colltype = CollType::find($colltypesId);
+        $biblio = Biblio::where('coll_type_id', $colltypesId)->first();
+
+        if($biblio && $biblio->coll_type_id == $colltype->id){
+            return redirect()->route('client.colltypes')->with('destroy', 'Tipe Koleksi tidak dapat dihapus');
+        }
 
 		return redirect()->route('client.colltypes')->with('destroy', 'Tipe Koleksi berhasil dihapus!');
 	}

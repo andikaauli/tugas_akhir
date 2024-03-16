@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Author;
-use App\Http\Controllers\Controller;
+use App\Models\Biblio;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AuthorsController extends Controller
 {
@@ -139,6 +140,13 @@ class AuthorsController extends Controller
 			$http = $http->create(url('api') . '/author/destroy/' . $authorsId, 'DELETE');
 			$response = app()->handle($http);
 		}
+
+        $author = Author::find($authorsId);
+        $biblio = Biblio::where('author_id', $authorsId)->first();
+
+        if($biblio && $biblio->author_id == $author->id){
+            return redirect()->route('client.authors')->with('destroy', 'Pengarang tidak dapat dihapus');
+        }
 
 		return redirect()->route('client.authors')->with('destroy', 'Pengarang berhasil dihapus!');
 	}

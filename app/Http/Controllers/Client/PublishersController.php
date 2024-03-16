@@ -135,6 +135,13 @@ class PublishersController extends Controller
 			$response = app()->handle($http);
 		}
 
+        $publisher = Publisher::find($publishersId);
+        $biblio = Biblio::where('publisher_id', $publishersId)->first();
+
+        if($biblio && $biblio->publisher_id == $publisher->id){
+            return redirect()->route('client.publishers')->with('destroy', 'Penerbit tidak dapat dihapus');
+        }
+
 		return redirect()->route('client.publishers')->with('destroy', 'Penerbit berhasil dihapus!');
 	}
 }
