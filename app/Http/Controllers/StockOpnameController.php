@@ -227,6 +227,23 @@ class StockOpnameController extends Controller
         return response()
             ->json(['message' => 'Proses Inventarisasi ' . ($stockopname[0]->stockopname_name) .
                                  ' sudah selesai!', 'data' => $stockopname]);
+
+        // $stockopname = StockOpname::with('stocktakeitem.eksemplar')->find($id);
+        // $stockopname->update([
+        //     'end_date' => now(),
+        //     'status_stockopname' => 'selesai',
+        // ]);
+
+        // $stocktakeitems = $stockopname->stocktakeitem;
+
+        // foreach ($stocktakeitems as $item) {
+        //     $item->eksemplar->update([
+        //         'book_status_id' => $item->book_status_id,
+        //     ]);
+        // }
+        // // $stockopname->refresh();
+        // return response()
+        //     ->json(['message' => 'Proses Inventarisasi ' . ($stockopname->stockopname_name) . ' sudah selesai!', 'data' => $stockopname]);
     }
 
 
